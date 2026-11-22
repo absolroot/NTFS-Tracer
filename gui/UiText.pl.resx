@@ -152,7 +152,7 @@
   <data name="LeadDocumentDeleted" xml:space="preserve"><value>Usunięte dokumenty</value></data>
   <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Znaczniki czasu poza kolejnością</value></data>
   <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Wielokrotna zmiana nazwy przed usunięciem</value></data>
-  <data name="LeadSDeleteName" xml:space="preserve"><value>Nazwy plików zgodne z SDelete</value></data>
+  <data name="LeadSDeleteRecords" xml:space="preserve"><value>Rekordy związane z SDelete</value></data>
   <data name="InvestigationTabShortcut" xml:space="preserve"><value>Tropy dochodzenia (Ctrl+4)</value></data>
   <data name="PathReferenceFilters" xml:space="preserve"><value>Ścieżka i identyfikatory</value></data>
   <data name="FilterRecordedPath" xml:space="preserve"><value>Ścieżka zawiera</value></data>

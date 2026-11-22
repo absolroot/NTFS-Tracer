@@ -152,7 +152,7 @@
   <data name="LeadDocumentDeleted" xml:space="preserve"><value>Tài liệu đã xóa</value></data>
   <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Dấu thời gian không theo thứ tự</value></data>
   <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Đổi tên nhiều lần trước khi xóa</value></data>
-  <data name="LeadSDeleteName" xml:space="preserve"><value>Tên tệp trùng với SDelete</value></data>
+  <data name="LeadSDeleteRecords" xml:space="preserve"><value>Bản ghi liên quan đến SDelete</value></data>
   <data name="InvestigationTabShortcut" xml:space="preserve"><value>Manh mối điều tra (Ctrl+4)</value></data>
   <data name="PathReferenceFilters" xml:space="preserve"><value>Đường dẫn và ID</value></data>
   <data name="FilterRecordedPath" xml:space="preserve"><value>Đường dẫn chứa</value></data>

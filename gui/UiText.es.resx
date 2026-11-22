@@ -152,7 +152,7 @@
   <data name="LeadDocumentDeleted" xml:space="preserve"><value>Documentos eliminados</value></data>
   <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Marcas de tiempo fuera de orden</value></data>
   <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Varios cambios de nombre antes de borrar</value></data>
-  <data name="LeadSDeleteName" xml:space="preserve"><value>Coincidencias de nombre con SDelete</value></data>
+  <data name="LeadSDeleteRecords" xml:space="preserve"><value>Registros relacionados con SDelete</value></data>
   <data name="InvestigationTabShortcut" xml:space="preserve"><value>Pistas de investigación (Ctrl+4)</value></data>
   <data name="ScanUsnSourceHint" xml:space="preserve"><value>Busca posibles registros USN en los datos sin procesar.&#10;También puedes examinar imágenes RAW y archivos extraídos.</value></data>
   <data name="ScanLogSourceHint" xml:space="preserve"><value>Busca posibles páginas y cabeceras de $LogFile en los datos sin procesar.&#10;También puedes examinar imágenes RAW y archivos extraídos.</value></data>

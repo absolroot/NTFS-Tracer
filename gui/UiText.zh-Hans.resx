@@ -152,7 +152,7 @@
   <data name="LeadDocumentDeleted" xml:space="preserve"><value>文档删除</value></data>
   <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>记录时间顺序异常</value></data>
   <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>多次重命名后删除</value></data>
-  <data name="LeadSDeleteName" xml:space="preserve"><value>文件名与 SDelete 匹配</value></data>
+  <data name="LeadSDeleteRecords" xml:space="preserve"><value>与 SDelete 相关的记录</value></data>
   <data name="InvestigationTabShortcut" xml:space="preserve"><value>调查线索 (Ctrl+4)</value></data>
   <data name="ScanUsnSourceHint" xml:space="preserve"><value>从原始字节中查找可能的 USN 记录。&#10;也可扫描 RAW 镜像和提取的文件。</value></data>
   <data name="ScanLogSourceHint" xml:space="preserve"><value>从原始字节中查找可能的 $LogFile 页面和记录头。&#10;也可扫描 RAW 镜像和提取的文件。</value></data>

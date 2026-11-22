@@ -152,7 +152,7 @@
   <data name="LeadDocumentDeleted" xml:space="preserve"><value>Silinen belgeler</value></data>
   <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Sırası bozuk zaman damgaları</value></data>
   <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Silmeden önce birden çok ad değişikliği</value></data>
-  <data name="LeadSDeleteName" xml:space="preserve"><value>SDelete dosya adı eşleşmeleri</value></data>
+  <data name="LeadSDeleteRecords" xml:space="preserve"><value>SDelete ile ilgili kayıtlar</value></data>
   <data name="InvestigationTabShortcut" xml:space="preserve"><value>İnceleme ipuçları (Ctrl+4)</value></data>
   <data name="PathReferenceFilters" xml:space="preserve"><value>Yol ve kimlikler</value></data>
   <data name="FilterRecordedPath" xml:space="preserve"><value>Yol şunu içerir</value></data>

@@ -152,7 +152,7 @@
   <data name="LeadDocumentDeleted" xml:space="preserve"><value>Удалённые документы</value></data>
   <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Нарушен порядок меток времени</value></data>
   <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Несколько переименований перед удалением</value></data>
-  <data name="LeadSDeleteName" xml:space="preserve"><value>Совпадения с именами файлов SDelete</value></data>
+  <data name="LeadSDeleteRecords" xml:space="preserve"><value>Записи, связанные с SDelete</value></data>
   <data name="InvestigationTabShortcut" xml:space="preserve"><value>Зацепки (Ctrl+4)</value></data>
   <data name="PathReferenceFilters" xml:space="preserve"><value>Путь и ID</value></data>
   <data name="FilterRecordedPath" xml:space="preserve"><value>Путь содержит</value></data>

@@ -152,7 +152,7 @@
   <data name="LeadDocumentDeleted" xml:space="preserve"><value>Penghapusan dokumen</value></data>
   <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Stempel waktu tidak berurutan</value></data>
   <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Beberapa kali ganti nama sebelum dihapus</value></data>
-  <data name="LeadSDeleteName" xml:space="preserve"><value>Nama file cocok dengan SDelete</value></data>
+  <data name="LeadSDeleteRecords" xml:space="preserve"><value>Catatan terkait SDelete</value></data>
   <data name="InvestigationTabShortcut" xml:space="preserve"><value>Petunjuk investigasi (Ctrl+4)</value></data>
   <data name="PathReferenceFilters" xml:space="preserve"><value>Path dan ID</value></data>
   <data name="FilterRecordedPath" xml:space="preserve"><value>Path memuat</value></data>

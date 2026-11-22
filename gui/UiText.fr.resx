@@ -152,7 +152,7 @@
   <data name="LeadDocumentDeleted" xml:space="preserve"><value>Documents supprimés</value></data>
   <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Horodatages dans le désordre</value></data>
   <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Plusieurs renommages avant suppression</value></data>
-  <data name="LeadSDeleteName" xml:space="preserve"><value>Noms de fichier SDelete</value></data>
+  <data name="LeadSDeleteRecords" xml:space="preserve"><value>Enregistrements liés à SDelete</value></data>
   <data name="InvestigationTabShortcut" xml:space="preserve"><value>Pistes d’enquête (Ctrl+4)</value></data>
   <data name="PathReferenceFilters" xml:space="preserve"><value>Chemin et ID</value></data>
   <data name="FilterRecordedPath" xml:space="preserve"><value>Le chemin contient</value></data>

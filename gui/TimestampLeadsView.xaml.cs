@@ -269,4 +269,3 @@ public partial class TimestampLeadsView : UserControl
             Raw.FocusHexColumn();
     }
 }
-
