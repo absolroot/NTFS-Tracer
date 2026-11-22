@@ -6,7 +6,7 @@
 
 <p align="center"><strong>Search NTFS changes and follow what happened to a file.</strong></p>
 
-<p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64</a></strong> · <a href="#quick-start">Quick start</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#performance">Performance</a></p>
+<p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64</a></strong> · <a href="#quick-start">Quick start</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#investigation-examples-and-tool-comparisons">Investigation examples</a></p>
 
 <p align="center"><a href="README.ko.md">한국어</a> · <a href="README.ja.md">日本語</a></p>
 
@@ -28,6 +28,8 @@ NTFS Tracer is a Windows workbench for the USN change journal, Master File Table
    - **Disk image** · Choose **Select files…**, select the NTFS volume and artifacts, then **Extract and analyze**.
    - **Tracker results** · Choose **File → Open Tracker results…**. For TSV, choose **All files** in the file picker.
 3. Search **All records**, open **File history**, or switch to **NTFS transactions**. Select an event to see its details and contributing records. **F1** opens the in-app guide.
+
+Before closing the app, choose **File → Save investigation…**. On your next launch, choose **Resume last investigation** to return to the saved sources, search settings, and selected record. NTFS Tracer checks the source SHA-256 hashes and reuses compatible indexes.
 
 ## Supported inputs
 
@@ -66,58 +68,40 @@ You can also select a folder containing extracted artifacts. The app opens evide
 | Inspect and export | Review decoded fields, [Hex](docs/media/source-hex.png), or JSON. Return to your search or export results to CSV. |
 | Examine incomplete evidence | Scan supplied files for candidate records. Check investigation leads and carving results against the source bytes. |
 
-## Compare workflows
+<a id="compare-workflows"></a>
+<a id="performance"></a>
 
-**You know the file is now called `report-final.docx`. What was it called before?** We tried this on the same USN journal in both apps.
+## Investigation examples and tool comparisons
 
-| | Steps | What appeared |
-| --- | --- | --- |
-| **NTFS Tracer** | Search for `report-final.docx` with **Include previous names** enabled, then choose **Open file history**. | The search found all five records associated with the file. The history grouped the rename into one event and displayed both names. |
-| **NTFS Log Tracker 1.9** | Search **File/Directory Name** for `report-final.docx`. Copy the **FileReferenceNumber** from a result, clear the filename filter, and search again by that reference. | The first search showed two rows containing the current name. Searching by reference returned five rows, including the old-name record. |
+### Find a previous name from the current filename
 
-Both workflows found the name change from `report-draft.docx` (USN 38648) to `report-final.docx` (USN 38744). When following a move, the same file reference also lets you trace records across parent folders. A full path depends on the available directory evidence.
+You found `report-final.docx` in the collected evidence and want to know what it used to be called. We opened the same USN journal (`$J`) in both tools. NTFS records the two names in separate entries, so the investigation has to connect records for the same file.
 
-<details>
-<summary>Cross-check against MFTECmd</summary>
-
-[MFTECmd](https://github.com/EricZimmerman/MFTECmd) 2026.11.1 exported the same five records for file reference `42-1`, with matching names, USNs, and source offsets.
-
-```powershell
-.\MFTECmd.exe -f '.\$J' --csv .\out --csvf rename.csv --co false
-```
-
-</details>
-
-[![File history showing the old and new names in one rename activity, with both USN records beneath it](docs/media/file-history.png)](docs/media/file-history.png)
-
-### Inspecting a transaction in `$LogFile`
-
-| Tool | What the documented or tested view exposes |
+| Tool | How we found the previous name |
 | --- | --- |
-| **ArtiFast Windows** | Its Windows LogFile artifact view lists entry offsets, record pages, current and previous LSNs, client Undo LSNs, and record types. Selecting a row exposes individual fields, including the transaction ID and Redo/Undo operations. |
-| **NTFS Tracer** | Open **NTFS transactions**, search for the LSN, and select the record. The overview shows the source location and related LSNs. If the payload contains file attribute timestamps, it displays creation, content modification, metadata change, and last access values side by side for Redo and Undo. |
+| **NTFS Tracer** | With **Include previous names** enabled, we searched for `report-final.docx` and chose **Open file history**. The search found five records for the file. Its history showed the old and new names together in one rename event. |
+| **NTFS Log Tracker 1.9** | We searched **File/Directory Name** for `report-final.docx` and found two records. We copied the **FileReferenceNumber**, the NTFS identifier for the file, cleared the name filter, and searched by that number. This returned five records, including the old name. |
 
-The ArtiFast row describes the published interface. [ArtiFast's Windows LogFile documentation](https://forensafe.com/blogs/windowslogfile.html)
+Both tools identified **`report-draft.docx`** as the previous name. The NTFS Tracer screenshot shows the two names and the USN records that support the rename.
 
-### Designed around the analyst's place in the investigation
+[![File history showing the rename from report-draft.docx to report-final.docx and its two USN records](docs/media/file-history.png)](docs/media/file-history.png)
 
-An analyst should be able to follow a name change without remembering a file reference between searches, and should be able to return to a selected record after closing the app. Experiments on interrupted tasks show that cues from the original task can help people resume it. That research informed these design choices. The timings below measure elapsed workflow time on the sample journal. [Altmann and Trafton, *Task Interruption: Resumption Lag and the Role of Cues*](https://interruptions.net/literature/Altmann-CogSci04.pdf)
+**Time to reach the previous name**
 
-On a build that includes investigation sessions, use **File → Save investigation…** and later **Resume last investigation** or **Open investigation…**. The saved file contains source paths and hashes, the active workspace, and the supported search and selection state. Keep the source files with the investigation. NTFS Tracer verifies their SHA-256 hashes when reopening and reuses compatible local indexes.
+We ran the same steps on a separate synthetic journal (6.1 MB, 63,007 records). The figures are medians from ten automated runs per app on the same PC. They exclude file selection, human typing, and time spent reading the results.
 
-## Performance
-
-### NTFS Tracer vs. NTFS Log Tracker
-
-We started with an extracted USN journal and two current filenames. For each name, the task was to find what the file was called before. We used the steps above, including the second search by file reference in Tracker and opening **File history** in Tracer.
-
-| What we timed | NTFS Tracer development build | NTFS Log Tracker 1.9 |
+| Result shown after starting analysis | NTFS Tracer development build | NTFS Log Tracker 1.9 |
 | --- | ---: | ---: |
-| Start analysis on a fresh database and wait for the first USN list | **1.08 s** | 3.25 s |
-| Start analysis and find both names for `report-final.docx` | **1.30 s** | 3.50 s |
-| With the same journal open, find both names for `budget-final.docx` | 127 ms | 154 ms |
+| First USN list for a fresh analysis | **1.08 s** | 3.25 s |
+| Previous name of `report-final.docx` | **1.30 s** | 3.50 s |
 
-The table shows the median of ten paired trials on one PC using a small synthetic journal (6.1 MB, 63,007 records). Tracer reached the first file’s previous name sooner in all ten. For the second file, Tracer was faster in seven runs and Tracker in three. The timings cover automated app actions from the start button or search to the results. They exclude time spent choosing files, typing, or reading the records. [Steps, result checks, and all ten timings](docs/performance.md#finding-a-previous-name-from-the-current-name)
+[Setup and all ten measurements](docs/performance.md#finding-a-previous-name-from-the-current-name) · [Verify the demo filenames, USNs, and source offsets with MFTECmd](docs/performance.md#cross-checking-the-demo-with-mftecmd)
+
+### Check file timestamps in a transaction
+
+If a transaction in `$LogFile` looks relevant, you can check whether it changed a file’s creation or modification time. In NTFS Tracer, find the record by LSN (log sequence number) under **NTFS transactions** and check **File attribute timestamps** in the overview. When both Undo and Redo contain values, compare the creation, content modification, metadata change, and last access times before and after the change.
+
+ArtiFast Windows documents a workflow in which you find the LSN in the Windows LogFile list and select the row to inspect the entry offset, transaction ID, and Redo/Undo operations. [ArtiFast's Windows LogFile example](https://forensafe.com/blogs/windowslogfile.html)
 
 ## Build from source
 

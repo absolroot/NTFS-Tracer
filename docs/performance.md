@@ -27,6 +27,18 @@ All 63,007 USN/name pairs matched in the databases in all ten pairs. The two tar
 
 For the second target, Tracer finished first in seven pairs. The median paired difference (Tracker minus Tracer) was 29.41 ms, with a sign-based interval from -41.41 to 70.76 ms using the same 97.85% method as below. The measurements leave the direction of the typical difference uncertain for this second task.
 
+## Cross-checking the demo with MFTECmd
+
+The README screenshot uses the smaller demo journal, which contains 391 records. We exported that journal with MFTECmd 2026.11.1, a separate command-line NTFS parser, and checked the five records for file reference `42-1`. The filenames, USNs, and source offsets matched. The old-name record contains `report-draft.docx` at USN 38648, and the new-name record contains `report-final.docx` at USN 38744. [MFTECmd](https://github.com/EricZimmerman/MFTECmd)
+
+```powershell
+.\MFTECmd.exe -f '.\$J' --csv .\out --csvf rename.csv --co false
+```
+
+## Design reference for resuming an investigation
+
+Saved searches and record selections give analysts cues about where they left off. Experiments on interrupted tasks found that cues from the original task can help people resume it. The NTFS Tracer measurements above record app response times. [Altmann and Trafton, *Task Interruption: Resumption Lag and the Role of Cues*](https://interruptions.net/literature/Altmann-CogSci04.pdf)
+
 ## NTFS Log Tracker comparison
 
 We used a 6,144,768-byte synthetic `$J` with **63,007 USN V2 records** on one Windows 11 x64 machine (Ryzen 9 9900X, Windows build 26200). NTFS Tracer was a v0.8.29 source build. The comparison program identified itself as [NTFS Log Tracker v1.9](https://sites.google.com/site/forensicnote/ntfs-log-tracker) in its window title. The input SHA-256 was `bc4ef1c77fbb6f5ae61311d90809589c0812821e8ccc226de60a3997a9c0bda1`. Tracker’s executable SHA-256 was `80178b865a31351aa4fc1e4ab75edc23b415fdf96921862e2277e5313d4e2bae`.
