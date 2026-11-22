@@ -20,32 +20,12 @@ NTFS Tracer는 Windows에서 NTFS 파일의 변경 이력을 조사하는 도구
 
 ## 조사 기능
 
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="docs/media/search-demo.gif"><img src="docs/media/search-demo-preview.gif" width="460" alt="파일명을 입력하면서 USN 검색 결과가 좁혀지는 화면"></a><br>
-      <strong>변경 기록 검색</strong><br>
-      현재 이름이나 이전 이름, 경로, 파일 참조 번호로 대상을 찾습니다. 기간이나 변경 사유로 USN 기록을 좁힐 수 있습니다.
-    </td>
-    <td width="50%" valign="top">
-      <a href="docs/media/investigation.gif"><img src="docs/media/investigation.gif" width="460" alt="파일 이력을 열고 이름 변경 전후의 근거 기록을 선택하는 화면"></a><br>
-      <strong>파일 하나의 변경 이력 추적</strong><br>
-      검색 결과에서 파일 이력을 엽니다. 이름이나 위치가 바뀐 경우에는 변경 전후와 각각의 근거 기록을 함께 봅니다. 수집 시점의 MFT로 경로를 보완한 경우에는 그 근거도 표시합니다.
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <a href="docs/media/transaction-timestamps.png"><img src="docs/media/transaction-timestamps-preview.png" width="460" alt="파일 시각 네 항목에 Undo와 Redo 값이 표시된 화면"></a><br>
-      <strong>트랜잭션의 변경 전후 비교</strong><br>
-      트랜잭션 로그에서 LSN으로 기록을 찾습니다. Undo와 Redo 양쪽에 값이 남아 있으면 파일 시각을 비교할 수 있습니다.
-    </td>
-    <td width="50%" valign="top">
-      <a href="docs/media/investigation-leads.png"><img src="docs/media/investigation-leads-preview.png" width="460" alt="합성 저널에서 찾은 SDelete 관련 후보와 근거 USN 기록"></a><br>
-      <strong>조사 후보와 근거 확인</strong><br>
-      반복해서 이름이 바뀐 뒤 삭제된 파일, SDelete 관련 기록, 파일 시각 변경 같은 후보를 확인합니다. 후보마다 연결된 근거 기록을 열 수 있습니다.
-    </td>
-  </tr>
-</table>
+[![앱 전체 화면에서 시작해 파일명 검색과 이름 변경의 근거 기록을 차례로 확대합니다.](docs/media/investigation-focus.gif)](docs/media/investigation-focus.gif)
+
+- **변경 기록 검색**. 현재 이름이나 이전 이름, 경로, 파일 참조 번호로 대상을 찾습니다. 기간이나 변경 사유로 USN 기록을 좁힐 수 있습니다. [화면 보기](docs/media/search-demo.gif)
+- **파일 하나의 변경 이력 추적**. 검색 결과에서 파일 이력을 엽니다. 이름이나 위치가 바뀐 경우에는 변경 전후와 각각의 근거 기록을 함께 봅니다. 수집 시점의 MFT로 경로를 보완한 경우에는 그 근거도 표시합니다.
+- **트랜잭션의 변경 전후 비교**. 트랜잭션 로그에서 LSN으로 기록을 찾습니다. Undo와 Redo 양쪽에 값이 남아 있으면 파일 시각을 비교할 수 있습니다. [화면 보기](docs/media/transaction-timestamps.png)
+- **조사 후보와 근거 확인**. 반복해서 이름이 바뀐 뒤 삭제된 파일, SDelete 관련 기록, 파일 시각 변경 같은 후보를 확인합니다. 후보마다 연결된 근거 기록을 열 수 있습니다. [화면 보기](docs/media/investigation-leads.png)
 
 개별 기록은 상세 필드, Hex, JSON으로 확인할 수 있습니다. 결과를 CSV로 저장하거나, 입력 파일에서 USN 및 트랜잭션 기록의 잔여물을 찾을 수도 있습니다.
 
