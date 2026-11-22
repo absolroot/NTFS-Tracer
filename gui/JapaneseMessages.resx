@@ -719,4 +719,34 @@ SHA-256  {2}
   <data name="Scanning the file. {0:N0} / {1:N0} bytes" xml:space="preserve"><value>ファイルをスキャンしています。{0:N0} / {1:N0} バイト</value></data>
   <data name="Could not scan the file. " xml:space="preserve"><value>ファイルをスキャンできませんでした。 </value></data>
   <data name="File offset 0x{0:X}   ·   {1:N0} header bytes before fixups" xml:space="preserve"><value>ファイル内オフセット 0x{0:X}   ·   補正前のヘッダー {1:N0} バイト</value></data>
+  <data name="Open a completed analysis before saving an investigation." xml:space="preserve"><value>調査を保存するには、解析が完了した資料を開いてください。</value></data>
+  <data name="Investigation saved. {0}" xml:space="preserve"><value>調査を保存しました。 {0}</value></data>
+  <data name="NTFS Tracer investigation (*{0})|*{0}" xml:space="preserve"><value>NTFS Tracer の調査 (*{0})|*{0}</value></data>
+  <data name="This is not a supported NTFS Tracer investigation file." xml:space="preserve"><value>このファイルは NTFS Tracer の対応する調査形式ではありません。</value></data>
+  <data name="Verifying saved investigation sources…" xml:space="preserve"><value>保存した調査の元ファイルを確認しています…</value></data>
+  <data name="Locate the moved {0} source" xml:space="preserve"><value>移動した {0} の元ファイルを選択</value></data>
+  <data name="The SHA-256 hash does not match the saved {0} source.&#10;{1}" xml:space="preserve"><value>保存した {0} の元ファイルと SHA-256 ハッシュが一致しません。&#10;{1}</value></data>
+  <data name="Before (Undo)" xml:space="preserve"><value>変更前 (Undo)</value></data>
+  <data name="After (Redo)" xml:space="preserve"><value>変更後 (Redo)</value></data>
+  <data name="Timestamp field" xml:space="preserve"><value>時刻フィールド</value></data>
+  <data name="Open LSN" xml:space="preserve"><value>LSN を開く</value></data>
+  <data name="File timestamp changes" xml:space="preserve"><value>ファイル時刻の変更</value></data>
+  <data name="Timestamp evidence" xml:space="preserve"><value>時刻変更の根拠</value></data>
+  <data name="Source byte range" xml:space="preserve"><value>元ファイル内のバイト範囲</value></data>
+  <data name="Shows a file timestamp when the log contains two different values for it. The difference is the new value minus the old value. The type of file attribute is inferred from its location and values." xml:space="preserve"><value>ログに異なる変更前後の値がそろっているファイル時刻を表示します。差は変更後から変更前を引いた値です。ファイル属性の種類は位置と値から推定しています。</value></data>
+  <data name="Reading file timestamp changes…" xml:space="preserve"><value>ファイル時刻の変更を読み込んでいます…</value></data>
+  <data name="No timestamp changes with both values available." xml:space="preserve"><value>変更前後の値がそろう時刻変更はありません。</value></data>
+  <data name="Could not read timestamp changes. " xml:space="preserve"><value>時刻変更を読み込めませんでした。 </value></data>
+  <data name="Source bytes do not match the index." xml:space="preserve"><value>元ファイルのバイトがインデックスと一致しません。</value></data>
+  <data name="Open Hex" xml:space="preserve"><value>Hex を開く</value></data>
+  <data name="Difference" xml:space="preserve"><value>差</value></data>
+  <data name="Basic information changed" xml:space="preserve"><value>基本情報の変更</value></data>
+  <data name="{0} → deleted" xml:space="preserve"><value>{0} → 削除</value></data>
+  <data name="{0} → deleted · {1:N0} basic information changes" xml:space="preserve"><value>{0} → 削除 · 基本情報の変更 {1:N0} 件</value></data>
+  <data name="Why this was flagged" xml:space="preserve"><value>候補になった理由</value></data>
+  <data name="Open original Hex" xml:space="preserve"><value>元のバイトを Hex で開く</value></data>
+  <data name="Execution-related trace" xml:space="preserve"><value>実行に関する痕跡</value></data>
+  <data name="The name matches an SDelete executable." xml:space="preserve"><value>SDelete の実行ファイル名と一致します。</value></data>
+  <data name="A Prefetch file named for SDelete was created." xml:space="preserve"><value>SDelete の名前を含む Prefetch ファイルが作成されました。</value></data>
+  <data name="A Prefetch file named for SDelete was updated." xml:space="preserve"><value>SDelete の名前を含む Prefetch ファイルの内容が変更されました。</value></data>
 </root>

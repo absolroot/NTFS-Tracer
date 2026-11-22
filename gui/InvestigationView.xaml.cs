@@ -12,7 +12,7 @@ public partial class InvestigationView : UserControl
     private const int PageSize = 100;
     private readonly Journal journal;
     private readonly string source;
-    private readonly Action<byte[], long> navigate;
+    private readonly Action<byte[], long, bool> navigate;
     private CancellationTokenSource? operation;
     private InvestigationQuery? results;
     private long start;
@@ -28,9 +28,10 @@ public partial class InvestigationView : UserControl
     }
     private Option? Selected => Rules.SelectedItem as Option;
 
-    public InvestigationView(Journal journal, string originalPath, Action<byte[], long> navigate)
+    public InvestigationView(Journal journal, string originalPath, Action<byte[], long, bool> navigate)
     {
         InitializeComponent();
+        UpdateHexLabel();
         PropertyChangedEventManager.AddHandler(DisplayTimeZone.Current, (_, _) =>
         {
             Leads.Items.Refresh();
@@ -61,6 +62,7 @@ public partial class InvestigationView : UserControl
 
     internal void FocusEvidence()
     {
+        EvidenceTab.IsSelected = true;
         if (Evidence.SelectedItem is LeadEvidence selected)
         {
             Evidence.ScrollIntoView(selected);
@@ -70,6 +72,7 @@ public partial class InvestigationView : UserControl
 
     internal void RefreshLanguage()
     {
+        UpdateHexLabel();
         SetOptions();
         Leads.Items.Refresh();
         Evidence.Items.Refresh();
@@ -78,6 +81,8 @@ public partial class InvestigationView : UserControl
         if (results != null && operation == null)
             ShowScanSummary();
     }
+
+    private void UpdateHexLabel() => GoHex.Content = L.T("원본 Hex 열기", "Open original Hex");
 
     private void SetOptions(bool selectFirstMatch = false)
     {
@@ -110,7 +115,7 @@ public partial class InvestigationView : UserControl
         Prev.IsEnabled = available && start > 0;
         Next.IsEnabled = available && start + PageSize < count;
         ExportButton.IsEnabled = available && count > 0;
-        Go.IsEnabled = available && Evidence.SelectedItem is LeadEvidence;
+        GoHex.IsEnabled = Go.IsEnabled = available && Evidence.SelectedItem is LeadEvidence;
     }
 
     private async Task Work(Func<CancellationToken, Task> action)
@@ -243,12 +248,11 @@ public partial class InvestigationView : UserControl
     private void UpdateRule(LeadRule rule)
     {
         Criterion.Text = rule.Criterion;
-        ObservationColumn.Visibility = rule.Kind == LeadKind.ToolName ? Visibility.Collapsed : Visibility.Visible;
         ObservationColumn.Header = rule.Kind switch
         {
             LeadKind.DocumentDelete => L.T("확장자", "Extension"),
             LeadKind.ClockBack => L.T("시각 차이", "Time difference"),
-            _ => L.T("이름 변경 순서", "Name sequence")
+            _ => L.T("후보로 잡힌 이유", "Why this was flagged")
         };
         if (displayedKind == rule.Kind)
             return;
@@ -286,19 +290,25 @@ public partial class InvestigationView : UserControl
         if (record != null)
         {
             e.Handled = true;
-            Jump(record);
+            Jump(record, openHex: ReferenceEquals(sender, Evidence));
         }
     }
     private void EvidenceChanged(object sender, SelectionChangedEventArgs e) => Controls();
-    private void Jump(LeadObservation row)
+    private void Jump(LeadObservation row, bool openHex = false)
     {
-        navigate(row.FileId, row.Position);
+        navigate(row.FileId, row.Position, openHex);
     }
     private void GoClick(object sender, RoutedEventArgs e)
     {
         if (Evidence.SelectedItem is LeadEvidence a)
             Jump(a.Record);
     }
+    private void GoHexClick(object sender, RoutedEventArgs e)
+    {
+        if (Evidence.SelectedItem is LeadEvidence item)
+            Jump(item.Record, openHex: true);
+    }
+
     private void LeadDoubleClick(object sender, MouseButtonEventArgs e)
     {
         if (operation == null && e.OriginalSource is DependencyObject element && ItemsControl.ContainerFromElement(Leads, element) is DataGridRow { Item: InvestigationLead lead })
@@ -307,7 +317,7 @@ public partial class InvestigationView : UserControl
     private void EvidenceDoubleClick(object sender, MouseButtonEventArgs e)
     {
         if (operation == null && e.OriginalSource is DependencyObject element && ItemsControl.ContainerFromElement(Evidence, element) is DataGridRow { Item: LeadEvidence item })
-            Jump(item.Record);
+            Jump(item.Record, openHex: true);
     }
     private async void PrevClick(object sender, RoutedEventArgs e) => await Work(token => ShowPage(Math.Max(0, start - PageSize), token));
     private async void NextClick(object sender, RoutedEventArgs e) => await Work(token => ShowPage(start + PageSize, token));

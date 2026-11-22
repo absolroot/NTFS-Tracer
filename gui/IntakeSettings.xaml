@@ -290,6 +290,10 @@
   <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource Desk.Rule}" Padding="1,12,1,16">
    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
     <StackPanel VerticalAlignment="Center" Margin="0,0,12,0">
+     <WrapPanel Visibility="{Binding Visibility, ElementName=CloseSettingsButton}">
+      <Button Content="{loc:Ui OpenInvestigation}" Style="{StaticResource Desk.EvidenceLink}" Click="OpenSavedInvestigation"/>
+      <Button Content="{loc:Ui ResumeInvestigation}" Margin="12,0,0,0" Style="{StaticResource Desk.EvidenceLink}" Click="ResumeSavedInvestigation"/>
+     </WrapPanel>
      <TextBlock x:Name="IntakeError" Visibility="Collapsed" Foreground="{DynamicResource Desk.WarnText}" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite"/>
      <Button x:Name="RetryRemaining" Visibility="Collapsed" HorizontalAlignment="Left" Style="{StaticResource Desk.EvidenceLink}" Click="RetryOtherSources"/>
      <TextBlock x:Name="StartHint" TextWrapping="Wrap" Foreground="{DynamicResource Desk.Muted}"/>

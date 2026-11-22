@@ -64,6 +64,7 @@ pub fn index(mut source: File, output: &Path) -> Result<()> {
         CREATE TABLE tx_provenance(id INTEGER PRIMARY KEY,kind TEXT NOT NULL);
         CREATE TABLE tx_names(id INTEGER,side TEXT,name TEXT,file BLOB,parent BLOB,short_name INTEGER);
         CREATE TABLE tx_times(id INTEGER,side TEXT,created INTEGER,modified INTEGER,changed INTEGER,accessed INTEGER);
+        CREATE TABLE tx_time_locations(id INTEGER, field INTEGER, before_bytes BLOB, after_bytes BLOB, PRIMARY KEY(id,field)) WITHOUT ROWID;
         CREATE TABLE tx_warnings(pos INTEGER,reason TEXT);
         CREATE TABLE tx_summary(hash TEXT,bytes INTEGER,records INTEGER,warnings INTEGER);
         CREATE TEMP TABLE named_chains(id INTEGER PRIMARY KEY,root INTEGER NOT NULL);
@@ -72,6 +73,7 @@ pub fn index(mut source: File, output: &Path) -> Result<()> {
     let mut name = tx.prepare("INSERT INTO tx_names VALUES(?,?,?,?,?,?)")?;
     let mut provenance = tx.prepare("INSERT INTO tx_provenance VALUES(?,'prior_pass_slack')")?;
     let mut stamp = tx.prepare("INSERT INTO tx_times VALUES(?,?,?,?,?,?)")?;
+    let mut location = tx.prepare("INSERT INTO tx_time_locations VALUES(?,?,?,?)")?;
     let mut chain = tx.prepare("INSERT INTO named_chains VALUES(?,?)")?;
     let mut excluded = tx.prepare("INSERT OR IGNORE INTO excluded_roots VALUES(?)")?;
     let mut parents = Vec::new();
@@ -129,6 +131,36 @@ pub fn index(mut source: File, output: &Path) -> Result<()> {
             update.and_then(|u| u.mft_record)
         ])?;
         if let Some(u) = update {
+            let before = times(u.undo_times.as_ref());
+            let after = times(u.redo_times.as_ref());
+            if !record.prior_pass_slack
+                && u.redo == Operation::UpdateResidentValue
+                && u.undo == Operation::UpdateResidentValue
+                && let Some(first) = after.iter().position(Option::is_some)
+            {
+                for field in first..4 {
+                    if before[field].is_none()
+                        || after[field].is_none()
+                        || before[field] == after[field]
+                    {
+                        continue;
+                    }
+                    let start = (field - first) * 8;
+                    let range = start..start + 8;
+                    if let (Some(old), Some(new)) = (
+                        u.undo_time_offsets.get(range.clone()),
+                        u.redo_time_offsets.get(range),
+                    ) {
+                        let pack = |offsets: &[u64]| {
+                            offsets
+                                .iter()
+                                .flat_map(|n| n.to_le_bytes())
+                                .collect::<Vec<_>>()
+                        };
+                        location.execute(params![id, field, pack(old), pack(new)])?;
+                    }
+                }
+            }
             for (side, names, dates) in [
                 ("redo", &u.redo_names, u.redo_times.as_ref()),
                 ("undo", &u.undo_names, u.undo_times.as_ref()),
@@ -144,13 +176,15 @@ pub fn index(mut source: File, output: &Path) -> Result<()> {
                     ])?;
                 }
                 if dates.is_some() {
-                    let [c, m, h, a] = times(dates);
+                    let [c, m, h, a] = if side == "undo" { before } else { after };
                     stamp.execute(params![id, side, c, m, h, a])?;
                 }
             }
         }
     }
-    drop((insert, name, stamp, provenance, chain, excluded, parents));
+    drop((
+        insert, name, stamp, location, provenance, chain, excluded, parents,
+    ));
     for p in &log.problems {
         tx.execute(
             "INSERT INTO tx_warnings VALUES(?,?)",

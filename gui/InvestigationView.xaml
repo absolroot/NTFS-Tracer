@@ -17,11 +17,11 @@
   </Border>
   <Grid><Grid.RowDefinitions>
    <RowDefinition Height="Auto"/><RowDefinition Height="*" MinHeight="88"/><RowDefinition Height="Auto"/>
-   <RowDefinition x:Name="EvidenceHeight" Height="152" MinHeight="56"/>
+   <RowDefinition x:Name="EvidenceHeight" Height="205" MinHeight="56"/>
   </Grid.RowDefinitions>
    <Border Style="{DynamicResource Desk.LogToolbar}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1">
     <StackPanel>
-     <DockPanel Margin="0,0,0,3">
+     <DockPanel>
       <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
        <Button x:Name="Retry" Click="RetryClick" Visibility="Collapsed" Style="{DynamicResource Desk.IconButton}" Content="&#xE72C;" ToolTip="{loc:Ui RefreshInvestigationLeads}" AutomationProperties.Name="{loc:Ui RefreshInvestigationLeads}"/>
        <Button x:Name="Stop" Click="StopClick" Visibility="Collapsed" Style="{DynamicResource Desk.IconButton}" Content="&#xE71A;" ToolTip="{loc:Ui CancelOperation}" AutomationProperties.Name="{loc:Ui CancelOperation}"/>
@@ -30,9 +30,6 @@
       <ComboBox x:Name="Rules" AutomationProperties.Name="{loc:Ui LeadTypesAndCounts}" DisplayMemberPath="Display" MinWidth="200" MaxWidth="340" MinHeight="30"
        HorizontalAlignment="Left" SelectionChanged="RuleChanged" ToolTip="{Binding SelectedItem.Display,RelativeSource={RelativeSource Self}}"/>
      </DockPanel>
-     <Expander x:Name="RuleDetails" Style="{DynamicResource Desk.PathEvidence}" Header="{loc:Ui LeadCriteria}">
-      <local:CopyText x:Name="Criterion" TextWrapping="Wrap" Margin="12,2,8,3" Foreground="{DynamicResource Desk.Muted}"/>
-     </Expander>
     </StackPanel>
    </Border>
    <Grid Grid.Row="1">
@@ -63,15 +60,18 @@
    </Grid>
    <GridSplitter Grid.Row="2" Style="{DynamicResource Desk.RowSplitter}" Height="4" HorizontalAlignment="Stretch"
     ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
-   <DockPanel Grid.Row="3">
+   <TabControl Grid.Row="3" Style="{DynamicResource Desk.InspectorTabs}">
+    <TabItem x:Name="EvidenceTab" Header="{loc:Ui SupportingRecords}">
+     <DockPanel>
    <DockPanel DockPanel.Dock="Top" Margin="10,2,8,3">
+    <Button DockPanel.Dock="Right" x:Name="GoHex" IsEnabled="False" Click="GoHexClick" Margin="4,0,0,0" Padding="8,3" MinHeight="26"/>
     <Button DockPanel.Dock="Right" x:Name="Go" Content="{loc:Ui OpenLeadEvidence}" IsEnabled="False" Click="GoClick" Padding="8,3" MinHeight="26"/>
     <TextBlock x:Name="EvidenceTitle" Text="{loc:Ui SupportingRecords}" FontWeight="SemiBold" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
      ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}" Margin="0,0,8,0"/>
    </DockPanel>
    <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Evidence" AutomationProperties.Name="{loc:Ui SupportingRecordList}" SelectionChanged="EvidenceChanged" MouseDoubleClick="EvidenceDoubleClick" PreviewKeyDown="OpenFromGrid">
     <DataGrid.Columns>
-     <DataGridTextColumn Header="{loc:Ui LeadEvidenceRole}" Binding="{Binding Role}" Width="110" ElementStyle="{StaticResource Desk.LogText}"/>
+     <DataGridTextColumn Header="{loc:Ui LeadEvidenceRole}" Binding="{Binding Role}" Width="165" MinWidth="151" ElementStyle="{StaticResource Desk.LogText}"/>
      <DataGridTextColumn Header="{Binding RecordedHeader,Source={x:Static loc:DisplayTimeZone.Current}}" Binding="{Binding Record.Time}" Width="226" ElementStyle="{StaticResource Desk.LogMono}"/>
      <DataGridTextColumn Header="{loc:Ui RecordedName}" Binding="{Binding Record.DisplayName}" Width="*" MinWidth="145" ElementStyle="{StaticResource Desk.LogText}"/>
      <DataGridTextColumn Header="{loc:Ui LeadSourceOffset}" Binding="{Binding Record.Offset}" Width="117" ElementStyle="{StaticResource Desk.LogMono}"/>
@@ -81,7 +81,14 @@
      <DataGridTextColumn Header="{loc:Ui FileReference}" Binding="{Binding Record.FileText}" Width="206" ElementStyle="{StaticResource Desk.LogText}"/>
     </DataGrid.Columns>
    </DataGrid>
-   </DockPanel>
+     </DockPanel>
+    </TabItem>
+    <TabItem x:Name="CriterionTab" Header="{loc:Ui LeadCriteria}">
+     <loc:CopyText x:Name="Criterion" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                   HorizontalAlignment="Left" VerticalContentAlignment="Top" MaxWidth="680" Margin="10,6" Foreground="{DynamicResource Desk.Text}"
+                   AutomationProperties.Name="{loc:Ui LeadCriteria}"/>
+    </TabItem>
+   </TabControl>
   </Grid>
  </DockPanel>
 </UserControl>

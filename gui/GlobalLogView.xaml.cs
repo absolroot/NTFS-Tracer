@@ -13,7 +13,8 @@ namespace JournalDesk;
 public partial class GlobalLogView : UserControl
 {
     private int pageSize = PageSizeOption.Preferred;
-    private readonly DispatcherTimer debounce = new() { Interval = TimeSpan.FromMilliseconds(240) };
+    private static readonly TimeSpan FilterDelay = TimeSpan.FromMilliseconds(240);
+    private readonly DispatcherTimer debounce = new(DispatcherPriority.Background);
     private GlobalLogQuery? query;
     private Journal? source;
     private JournalPathSource? rowPaths;
@@ -202,10 +203,7 @@ public partial class GlobalLogView : UserControl
             return;
         composingSearch = false;
         if (dirty && IsVisible && query != null)
-        {
-            debounce.Stop();
-            debounce.Start();
-        }
+            ScheduleSearch(fileNameChanged: true);
     }
     private void SearchKeyDown(object sender, KeyEventArgs e)
     {
@@ -312,7 +310,7 @@ public partial class GlobalLogView : UserControl
     private void SearchChanged(object sender, TextChangedEventArgs e)
     {
         focusPending = false;
-        RefreshSearch();
+        RefreshSearch(fileNameChanged: true);
     }
     private void RecordFieldsChanged(object? sender, EventArgs e) => RefreshSearch();
     private void SearchRecordId(RecordIdChoice choice)
@@ -332,14 +330,25 @@ public partial class GlobalLogView : UserControl
         LoadPage(anchor);
     }
 
-    private void RefreshSearch()
+    private void RefreshSearch(bool fileNameChanged = false)
     {
         if (!ready || editing)
             return;
         Restart();
-        debounce.Stop();
         if (IsVisible && query != null && !composingSearch)
-            debounce.Start();
+            ScheduleSearch(fileNameChanged);
+        else
+            debounce.Stop();
+    }
+
+    private void ScheduleSearch(bool fileNameChanged)
+    {
+        debounce.Stop();
+        bool needsPathResolution = PathFilters.Criteria is { Path.Length: > 0 };
+        debounce.Interval = fileNameChanged && !needsPathResolution && sort is (JournalSort.Time or JournalSort.Usn)
+            ? TimeSpan.Zero
+            : FilterDelay;
+        debounce.Start();
     }
     private void ScopeChanged(object sender, RoutedEventArgs e)
     {
@@ -864,7 +873,51 @@ public partial class GlobalLogView : UserControl
         Empty.Text = Records.HasItems ? "" : text;
         PageStatus.Text = Records.HasItems ? text : "";
     }
-    private async void LoadPage(GlobalLogRow? anchor = null)
+    internal sealed record SavedFilters(long Reasons, string Usn, DateTime? Start, DateTime? End, string StartClock,
+        string EndClock, bool StartDay, bool EndDay, JournalTimeZone TimeZone, RecordSearchFields.SavedFields Fields,
+        JournalSort Sort, bool Descending);
+
+    internal SavedFilters CaptureFilters() => new(reasonMask, ExactUsn.Text, StartDate.SelectedDate, EndDate.SelectedDate,
+        StartTime.Text, EndTime.Text, startDayOnly, endDayOnly, utc, PathFilters.CaptureFields(), sort, descending);
+
+    internal void ResumeSearch(string search, bool includePreviousNames, long? position, SavedFilters? saved)
+    {
+        ClearInputs();
+        editing = true;
+        try
+        {
+            QueryText.Text = search;
+            NameScope.IsChecked = includePreviousNames;
+            if (saved != null)
+            {
+                foreach (var check in ReasonChecks)
+                    check.IsChecked = (saved.Reasons & (long)check.Tag) != 0;
+                reasonMask = ReasonChecks.Where(check => check.IsChecked == true).Aggregate(0L, (mask, check) => mask | (long)check.Tag);
+                ExactUsn.Text = saved.Usn ?? "";
+                SetDate(StartDate, saved.Start);
+                SetDate(EndDate, saved.End);
+                StartTime.Text = saved.StartClock ?? "";
+                EndTime.Text = saved.EndClock ?? "";
+                startDayOnly = saved.StartDay;
+                endDayOnly = saved.EndDay;
+                if (saved.TimeZone != utc && saved.TimeZone.OffsetMinutes is >= -840 and <= 840)
+                {
+                    ConvertBound(StartDate, StartTime, false, saved.TimeZone, utc, startDayOnly);
+                    ConvertBound(EndDate, EndTime, true, saved.TimeZone, utc, endDayOnly);
+                }
+                PathFilters.RestoreFields(saved.Fields);
+                sort = Enum.IsDefined(saved.Sort) ? saved.Sort : JournalSort.Time;
+                descending = saved.Descending;
+            }
+        }
+        finally { editing = false; }
+        debounce.Stop();
+        Restart();
+        UpdateSortLabel();
+        LoadPage(savedPosition: position);
+    }
+
+    private async void LoadPage(GlobalLogRow? anchor = null, long? savedPosition = null)
     {
         if (!ready || !IsVisible)
             return;
@@ -956,9 +1009,9 @@ public partial class GlobalLogView : UserControl
             }
             if (anchor != null)
                 anchor = selected;
-            if (anchor != null)
+            if ((savedPosition ?? anchor?.Position) is long position)
             {
-                var starts = await backend.FindPageStarts(filter, sort, descending, order, anchor.Position, pageSize, active.Token);
+                var starts = await backend.FindPageStarts(filter, sort, descending, order, position, pageSize, active.Token);
                 active.Token.ThrowIfCancellationRequested();
                 previous.Clear();
                 foreach (var start in starts.Take(starts.Count - 1))
@@ -981,7 +1034,8 @@ public partial class GlobalLogView : UserControl
                 {
                     Items = page.Items.Select(row => row with { TimeZone = utc }).ToList()
                 };
-            var restore = anchor == null ? null : page.Items.FirstOrDefault(row => row.Position == anchor.Position);
+            var restorePosition = savedPosition ?? anchor?.Position;
+            var restore = restorePosition == null ? null : page.Items.FirstOrDefault(row => row.Position == restorePosition);
             restoringSort = restore != null && selected?.Position == restore.Position;
             try
             {

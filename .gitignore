@@ -44,6 +44,7 @@ $LogFile
 *.sqlite-*
 *.sqlite3
 *.sqlite3-*
+*.ntfs-tracer-case
 *.csv
 *.tsv
 *.dd

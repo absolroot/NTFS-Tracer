@@ -1,0 +1,78 @@
+<UserControl x:Class="JournalDesk.TimestampLeadsView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:loc="clr-namespace:JournalDesk"
+ Language="{Binding Language,Source={x:Static loc:L.Text}}" IsVisibleChanged="VisibilityChanged">
+ <UserControl.Resources>
+  <Style TargetType="DataGrid" BasedOn="{StaticResource Desk.LogTable}">
+   <Setter Property="IsReadOnly" Value="True"/><Setter Property="SelectionUnit" Value="FullRow"/>
+   <Setter Property="SelectionMode" Value="Single"/><Setter Property="AutoGenerateColumns" Value="False"/>
+   <Setter Property="CanUserSortColumns" Value="False"/><Setter Property="CanUserAddRows" Value="False"/>
+  </Style>
+  <Style x:Key="TimestampMono" TargetType="TextBlock" BasedOn="{StaticResource Desk.LogMono}">
+   <Setter Property="Padding" Value="7,0,5,0"/>
+  </Style>
+  <Style x:Key="TimestampValue" TargetType="TextBlock" BasedOn="{StaticResource TimestampMono}">
+   <Setter Property="FontSize" Value="11"/>
+  </Style>
+  <Style x:Key="TimestampText" TargetType="TextBlock" BasedOn="{StaticResource Desk.LogText}">
+   <Setter Property="Padding" Value="7,0,5,0"/>
+  </Style>
+ </UserControl.Resources>
+ <Grid>
+  <Grid.RowDefinitions><RowDefinition Height="*" MinHeight="72"/><RowDefinition Height="Auto"/><RowDefinition Height="4"/><RowDefinition Height="*" MinHeight="112"/></Grid.RowDefinitions>
+   <DataGrid x:Name="Candidates" ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" SelectionChanged="CandidateChanged">
+   <DataGrid.Columns>
+    <DataGridTextColumn Header="LSN" Binding="{Binding LsnText}" Width="146" MinWidth="146" ElementStyle="{StaticResource TimestampMono}"/>
+    <DataGridTextColumn Header="MFT" Binding="{Binding Slot}" Width="63" MinWidth="63" ElementStyle="{StaticResource TimestampMono}"/>
+    <DataGridTextColumn x:Name="FieldColumn" Binding="{Binding Field}" Width="*" MinWidth="144" ElementStyle="{StaticResource TimestampText}"/>
+    <DataGridTextColumn x:Name="BeforeColumn" Binding="{Binding Before}" Width="232" MinWidth="232" ElementStyle="{StaticResource TimestampValue}"/>
+    <DataGridTextColumn x:Name="AfterColumn" Binding="{Binding After}" Width="232" MinWidth="232" ElementStyle="{StaticResource TimestampValue}"/>
+    <DataGridTextColumn x:Name="DifferenceColumn" Binding="{Binding Difference}" Width="138" MinWidth="138" ElementStyle="{StaticResource TimestampMono}"/>
+   </DataGrid.Columns>
+  </DataGrid>
+  <TextBlock x:Name="Empty" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="18"
+             Foreground="{DynamicResource Desk.Muted}" IsHitTestVisible="False"/>
+  <Border Grid.Row="1" Padding="8,2" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0">
+   <DockPanel>
+    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+     <TextBlock x:Name="Range" VerticalAlignment="Center" Margin="0,0,8,0"/>
+     <Button x:Name="Previous" Click="PreviousClick" Style="{DynamicResource Desk.IconButton}" Content="&#xE76B;" ToolTip="{loc:Ui PreviousPage}" AutomationProperties.Name="{loc:Ui PreviousPage}"/>
+     <Button x:Name="Next" Click="NextClick" Style="{DynamicResource Desk.IconButton}" Content="&#xE76C;" ToolTip="{loc:Ui NextPage}" AutomationProperties.Name="{loc:Ui NextPage}"/>
+    </StackPanel>
+    <loc:CopyText x:Name="Source" Margin="0,0,8,0" Foreground="{DynamicResource Desk.Muted}"/>
+   </DockPanel>
+  </Border>
+  <GridSplitter Grid.Row="2" Style="{DynamicResource Desk.RowSplitter}" HorizontalAlignment="Stretch"
+                ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
+  <TabControl Grid.Row="3" Style="{DynamicResource Desk.InspectorTabs}">
+   <TabItem x:Name="EvidenceTab" Header="{loc:Ui SupportingRecords}">
+    <DockPanel>
+   <DockPanel DockPanel.Dock="Top" Margin="8,3">
+    <Button x:Name="OpenHex" DockPanel.Dock="Right" Click="OpenHexClick" Padding="8,3" Margin="4,0,0,0"/>
+    <Button x:Name="OpenLsn" DockPanel.Dock="Right" Click="OpenLsnClick" Padding="8,3"/>
+   </DockPanel>
+   <DataGrid x:Name="Evidence" DockPanel.Dock="Top" MaxHeight="103" ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" SelectionChanged="EvidenceChanged"
+             MouseDoubleClick="OpenHexFromMouse" PreviewKeyDown="OpenHexFromKey">
+    <DataGrid.Columns>
+     <DataGridTextColumn Header="{loc:Ui LeadEvidenceRole}" Binding="{Binding Role}" Width="118" ElementStyle="{StaticResource TimestampText}"/>
+     <DataGridTextColumn Header="LSN" Binding="{Binding Lsn}" Width="146" MinWidth="146" ElementStyle="{StaticResource TimestampMono}"/>
+     <DataGridTextColumn Header="FILETIME" Binding="{Binding FileTime}" Width="172" ElementStyle="{StaticResource TimestampMono}"/>
+     <DataGridTextColumn Header="{loc:Ui LeadSourceOffset}" Binding="{Binding PositionText}" Width="*" MinWidth="180" ElementStyle="{StaticResource Desk.LogMono}"/>
+    </DataGrid.Columns>
+   </DataGrid>
+   <DockPanel DockPanel.Dock="Top" Margin="8,3">
+    <ComboBox x:Name="Fragments" DockPanel.Dock="Right" DisplayMemberPath="OffsetText" SelectionChanged="FragmentChanged" MinWidth="145"/>
+    <TextBlock x:Name="HexLabel" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+   </DockPanel>
+   <loc:HexEvidenceView x:Name="Raw"/>
+    </DockPanel>
+   </TabItem>
+   <TabItem Header="{loc:Ui LeadCriteria}">
+    <loc:CopyText x:Name="Criterion" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                  HorizontalAlignment="Left" VerticalContentAlignment="Top" MaxWidth="680" Margin="10,6" Foreground="{DynamicResource Desk.Text}"
+                  AutomationProperties.Name="{loc:Ui LeadCriteria}"/>
+   </TabItem>
+  </TabControl>
+ </Grid>
+</UserControl>
+

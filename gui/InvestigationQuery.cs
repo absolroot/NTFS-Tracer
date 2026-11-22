@@ -17,7 +17,7 @@ public sealed record LeadRule(LeadKind Kind, string LabelKey, string CriterionKe
         new(LeadKind.DocumentDelete, "LeadDocumentDeleted", "LeadDocumentDeletedRule"),
         new(LeadKind.ClockBack, "LeadTimeOutOfOrder", "LeadTimeOutOfOrderRule"),
         new(LeadKind.RenameDelete, "LeadRenamedThenDeleted", "LeadRenamedThenDeletedRule"),
-        new(LeadKind.ToolName, "LeadSDeleteName", "LeadSDeleteNameRule")
+        new(LeadKind.ToolName, "LeadSDeleteRecords", "LeadSDeleteNameRule")
     ];
 
     public string Label => L.Caption(LabelKey);
@@ -34,13 +34,20 @@ public sealed record LeadObservation(long Position, long Usn, long? Stamp, long 
     public string Offset => $"0x{Position:X}";
     public string ReasonText => $"0x{Reason:X8}";
     public string DisplayName => Name.Length == 0 ? L.T("이름 기록 없음", "No name recorded") : Name;
-    public string ReasonNames => Entry.DescribeReasons(Reason).Replace("USN_REASON_", "", StringComparison.Ordinal);
+    public string ReasonNames => Entry.FormatFlags(Reason, closeFirst: false);
     public string FileText => Journal.Ref(FileId);
 }
 
 public sealed record LeadEvidence(string RoleKey, LeadObservation Record)
 {
-    public string Role => L.Caption(RoleKey);
+    internal const string BasicInfoRole = "LeadRoleBasicInfoChanged";
+    internal const string PrefetchRole = "LeadRolePrefetch";
+    public string Role => RoleKey switch
+    {
+        BasicInfoRole => L.T("기본 정보 변경", "Basic information changed"),
+        PrefetchRole => L.T("실행 관련 흔적", "Execution-related trace"),
+        _ => L.Caption(RoleKey)
+    };
 }
 public enum LeadSortField
 {
@@ -65,10 +72,29 @@ public sealed record InvestigationLead(long Number, LeadKind Kind, IReadOnlyList
     public string Detail => Kind switch
     {
         LeadKind.ClockBack => L.T("앞 기록보다 {0:N1}초 이릅니다.", "{0:N1} seconds earlier than the previous record.", TimeSpan.FromTicks(Evidence[0].Record.Stamp!.Value - Anchor.Stamp!.Value).TotalSeconds),
-        LeadKind.RenameDelete => RenameSequence(Evidence[0].Record, Evidence[1].Record, Evidence[3].Record) + L.T(" · 삭제 기록", " · Deletion record"),
+        LeadKind.RenameDelete => RenameDetail(),
         LeadKind.DocumentDelete => Path.GetExtension(Anchor.Name),
+        LeadKind.ToolName => ToolDetail(),
         _ => Anchor.Name
     };
+    private string ToolDetail()
+    {
+        if (Evidence[0].RoleKey != LeadEvidence.PrefetchRole)
+            return L.T("SDelete 실행 파일 이름과 일치합니다.", "The name matches an SDelete executable.");
+        return (Anchor.Reason & InvestigationQuery.FileCreated) != 0
+            ? L.T("SDelete 이름이 붙은 .pf 파일의 생성 기록입니다.", "A Prefetch file named for SDelete was created.")
+            : L.T("SDelete 이름이 붙은 .pf 파일의 내용이 바뀌었습니다.", "A Prefetch file named for SDelete was updated.");
+    }
+
+    private string RenameDetail()
+    {
+        string sequence = RenameSequence(Evidence[0].Record, Evidence[1].Record, Anchor);
+        int changes = Evidence.Count(item => item.RoleKey == LeadEvidence.BasicInfoRole);
+        return changes == 0
+            ? L.T("{0} → 삭제", "{0} → deleted", sequence)
+            : L.T("{0} → 삭제 · 기본 정보 변경 {1:N0}건", "{0} → deleted · {1:N0} basic information changes", sequence, changes);
+    }
+
     internal static string RenameSequence(LeadObservation first, LeadObservation next, LeadObservation last) =>
         string.Join(" → ", first.Name, next.Name, last.Name);
 }
@@ -84,6 +110,9 @@ public sealed class InvestigationQuery : IDisposable
         ["LeadRoleFirstBefore", "LeadRoleFirstAfter", "LeadRoleSecondBefore", "LeadRoleSecondAfter", "LeadRoleDeleted"], ["LeadRoleNameMatch"]
     ];
     private const int RenameWindow = 512;
+    private const long BasicInfoChange = 0x00008000;
+    internal const long FileCreated = 0x00000100;
+    private const long DataChanged = 0x00000001 | 0x00000002 | 0x00000004;
     private const string Columns = "pos,usn,stamp,reason,file,parent,name,segment,attr";
     private readonly string dbPath;
     private readonly SqliteConnection candidates = new("Data Source=;Pooling=False");
@@ -155,6 +184,7 @@ public sealed class InvestigationQuery : IDisposable
             LeadKind.ClockBack => records[0].Stamp!.Value - anchor.Stamp!.Value,
             LeadKind.RenameDelete => InvestigationLead.RenameSequence(records[0], records[1], records[3]),
             LeadKind.DocumentDelete => Path.GetExtension(anchor.Name),
+            LeadKind.ToolName => IsPrefetchTrace(anchor) ? (anchor.Reason & FileCreated) != 0 ? 1 : 2 : 0,
             _ => anchor.Name
         };
         insert.Parameters["$positions"].Value = bytes;
@@ -209,12 +239,25 @@ public sealed class InvestigationQuery : IDisposable
             bool deleted = (entry.Reason & 0x200) != 0;
             if (deleted && Documents.Contains(Path.GetExtension(entry.Name)))
                 Save(insert, LeadKind.DocumentDelete, entry);
-            if (Tools.Contains(entry.Name))
+            if (Tools.Contains(entry.Name) || IsPrefetchTrace(entry))
                 Save(insert, LeadKind.ToolName, entry);
             TrackRename(insert, entry, ordinal, deleted, tracks);
         }
         token.ThrowIfCancellationRequested();
         transaction.Commit();
+    }
+
+    private static bool IsPrefetchTrace(LeadObservation entry)
+    {
+        string name = entry.Name;
+        const int hashLength = 8;
+        const string extension = ".pf";
+        int separator = name.Length - extension.Length - hashLength - 1;
+        return (entry.Reason & (FileCreated | DataChanged)) != 0
+            && separator > 0 && name[separator] == '-'
+            && name.EndsWith(extension, StringComparison.OrdinalIgnoreCase)
+            && Tools.Contains(name[..separator])
+            && uint.TryParse(name.AsSpan(separator + 1, hashLength), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture, out _);
     }
 
     private static bool ValidStamp(long? value) => value is > 0 and <= 2650467743999999999L;
@@ -322,10 +365,46 @@ public sealed class InvestigationQuery : IDisposable
                 using var r = cmd.ExecuteReader();
                 if (!r.Read())
                     throw new InvalidDataException(L.T("색인에서 근거 레코드를 찾을 수 없습니다.", "The evidence record was not found in the index."));
-                evidence[j] = new(roles[j], Row(r));
+                var entry = Row(r);
+                string role = kind == LeadKind.ToolName && IsPrefetchTrace(entry) ? LeadEvidence.PrefetchRole : roles[j];
+                evidence[j] = new(role, entry);
             }
-            yield return new(found.GetInt64(0), kind, evidence);
+            yield return new(found.GetInt64(0), kind, kind == LeadKind.RenameDelete
+                ? WithBasicInfoChanges(db, evidence, token)
+                : evidence);
         }
+    }
+
+    private static IReadOnlyList<LeadEvidence> WithBasicInfoChanges(SqliteConnection db, LeadEvidence[] evidence, CancellationToken token)
+    {
+        var firstNewName = evidence[1].Record;
+        var deletion = evidence[^1].Record;
+        using var cmd = db.CreateCommand();
+        cmd.CommandText = $"""
+            SELECT {Columns} FROM records
+            WHERE file=$file AND usn>$firstUsn AND usn<$lastUsn AND pos>$firstPos AND pos<$lastPos
+              AND segment=$segment AND (reason & $basicInfo) != 0
+            ORDER BY pos
+            """;
+        cmd.Parameters.AddWithValue("$file", deletion.FileId);
+        cmd.Parameters.AddWithValue("$firstUsn", firstNewName.Usn);
+        cmd.Parameters.AddWithValue("$lastUsn", deletion.Usn);
+        cmd.Parameters.AddWithValue("$firstPos", firstNewName.Position);
+        cmd.Parameters.AddWithValue("$lastPos", deletion.Position);
+        cmd.Parameters.AddWithValue("$segment", deletion.Segment);
+        cmd.Parameters.AddWithValue("$basicInfo", BasicInfoChange);
+        using var reader = cmd.ExecuteReader();
+        List<LeadEvidence>? combined = null;
+        while (reader.Read())
+        {
+            token.ThrowIfCancellationRequested();
+            combined ??= [.. evidence];
+            combined.Add(new(LeadEvidence.BasicInfoRole, Row(reader)));
+        }
+        if (combined == null)
+            return evidence;
+        combined.Sort(static (a, b) => a.Record.Position.CompareTo(b.Record.Position));
+        return combined;
     }
 
     public List<InvestigationLead> Page(LeadKind kind, long start, int length, CancellationToken token, LeadOrder order = default) =>
@@ -336,7 +415,7 @@ public sealed class InvestigationQuery : IDisposable
         var dest = Path.GetFullPath(destination);
         if (!string.Equals(Path.GetExtension(dest), ".csv", StringComparison.OrdinalIgnoreCase) || File.Exists(dest))
             throw new IOException(L.T("저장하려면 새로운 CSV 파일 이름을 지정해 주세요.", "Choose a new CSV file name."));
-        string temp = Path.Combine(Path.GetDirectoryName(dest)!, $".journaldesk-{Guid.NewGuid():N}.partial");
+        string temp = Path.Combine(Path.GetDirectoryName(dest)!, $".ntfstracer-{Guid.NewGuid():N}.partial");
         try
         {
             using (var writer = new StreamWriter(new FileStream(temp, FileMode.CreateNew, FileAccess.Write, FileShare.None), new UTF8Encoding(true)))

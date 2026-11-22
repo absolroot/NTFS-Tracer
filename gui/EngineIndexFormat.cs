@@ -18,7 +18,7 @@ internal static class EngineIndexFormat
             EngineArtifact.Journal => ("usn", 3, 2, "summary"),
             EngineArtifact.CarvedJournal => ("usn_carve", 3, 2, "summary"),
             EngineArtifact.Mft => ("mft", 1, 1, "mft_summary"),
-            EngineArtifact.TransactionLog => ("ntfs_log", 1, 1, "tx_summary"),
+            EngineArtifact.TransactionLog => ("ntfs_log", 2, 1, "tx_summary"),
             EngineArtifact.CarvedLog => ("ntfs_log_carve", 1, 1, "carve_summary"),
             _ => throw new ArgumentOutOfRangeException(nameof(expected))
         };

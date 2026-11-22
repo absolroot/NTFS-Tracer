@@ -169,7 +169,7 @@ public sealed partial class GlobalLogQuery(string dbPath)
             string hash = meta.ExecuteScalar() as string ?? throw new InvalidDataException(L.T("원본 SHA-256을 읽을 수 없습니다.", "Could not read the source SHA-256."));
             using var cmd = order == null ? Command(db, filter, newest, null, null, sort, token) : RankedCommand(db, order, newest);
             using var reader = cmd.ExecuteReader();
-            string temporary = Path.Combine(Path.GetDirectoryName(target)!, $".journaldesk-{Guid.NewGuid():N}.partial");
+            string temporary = Path.Combine(Path.GetDirectoryName(target)!, $".ntfstracer-{Guid.NewGuid():N}.partial");
             long count = 0;
             using var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None);
             try

@@ -6,7 +6,21 @@
       <Grid Margin="0,0,2,1">
        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="FieldLabel" MaxWidth="235"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
        <local:CopyText HorizontalAlignment="Left" Text="{Binding Label,Mode=OneWay}" VerticalAlignment="Top" Margin="0,0,12,0" Foreground="{DynamicResource Desk.Muted}" TextWrapping="Wrap"/>
-       <local:CopyText Grid.Column="1" HorizontalAlignment="Left" Text="{Binding Value,Mode=OneWay}" TextWrapping="Wrap" AutomationProperties.Name="{Binding Label}"/>
+       <StackPanel Grid.Column="1">
+        <local:CopyText HorizontalAlignment="Left" Text="{Binding Value,Mode=OneWay}" TextWrapping="Wrap" AutomationProperties.Name="{Binding Label}"/>
+        <local:CopyText HorizontalAlignment="Left" Text="{Binding SecondaryValue,Mode=OneWay,TargetNullValue=''}"
+                        TextWrapping="Wrap" Foreground="{DynamicResource Desk.Muted}" AutomationProperties.Name="USN Reason flags">
+         <local:CopyText.Style>
+          <Style TargetType="{x:Type local:CopyText}" BasedOn="{StaticResource {x:Type local:CopyText}}">
+           <Style.Triggers>
+            <DataTrigger Binding="{Binding SecondaryValue}" Value="{x:Null}">
+             <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+           </Style.Triggers>
+          </Style>
+         </local:CopyText.Style>
+        </local:CopyText>
+       </StackPanel>
       </Grid>
      </DataTemplate></ItemsControl.ItemTemplate>
     </ItemsControl>

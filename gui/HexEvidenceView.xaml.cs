@@ -128,6 +128,8 @@ public partial class HexEvidenceView : UserControl
         Columns.ResetExtent();
     }
     public void SelectByte(int offset) => SetRange(offset, offset, revealHexColumn: true);
+    internal void FocusHexColumn() => Body.Focus();
+
     public void SelectRange(int anchorOffset, int caretOffset) => SetRange(anchorOffset, caretOffset, revealHexColumn: true);
     internal void CompareField(HexField field, bool showDetails)
     {

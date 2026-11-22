@@ -105,6 +105,10 @@ pub struct Update {
     pub redo_data: Vec<u8>,
     /// What the undo operation writes, as far as the record carries it.
     pub undo_data: Vec<u8>,
+    /// Physical byte offsets of the first 32 redo bytes in a resident update.
+    pub redo_time_offsets: Vec<u64>,
+    /// Physical byte offsets of the first 32 undo bytes in a resident update.
+    pub undo_time_offsets: Vec<u64>,
     /// The redo data's length as the record gives it. Some operations give
     /// a length and no data: `ZeroEndOfFileRecord`'s is how many bytes it
     /// zeroes.
@@ -184,7 +188,7 @@ pub struct TableDump {
 pub(crate) fn decode(found: Found) -> LogRecord {
     let header = found.header;
     let body = match header.record_type {
-        CLIENT_RECORD => update(&found.data).map(|update| Body::Update(Box::new(update))),
+        CLIENT_RECORD => update(&found).map(|update| Body::Update(Box::new(update))),
         CLIENT_RESTART => checkpoint(&found.data).map(Body::Checkpoint),
         _ => None,
     };
@@ -205,7 +209,8 @@ pub(crate) fn decode(found: Found) -> LogRecord {
 }
 
 /// An update record's client data.
-fn update(data: &[u8]) -> Option<Update> {
+fn update(found: &Found) -> Option<Update> {
+    let data = &found.data;
     if data.len() < UPDATE_HEADER {
         return None;
     }
@@ -222,11 +227,33 @@ fn update(data: &[u8]) -> Option<Update> {
     let target_block_size = r.u16_le().ok()?;
     let target_vcn = r.i64_le().ok()?;
     let lcns = (0..lcn_count).map_while(|_| r.i64_le().ok()).collect();
+    let offsets = |start: u16, length: u16| {
+        if redo != Operation::UpdateResidentValue || undo != Operation::UpdateResidentValue {
+            return Vec::new();
+        }
+        let start = usize::from(start);
+        let end = (start + usize::from(length).min(32)).min(data.len());
+        let mut base = 0;
+        let mut offsets = Vec::new();
+        for span in std::iter::once(found.first).chain(found.continuation.iter().copied()) {
+            let limit = base + span.len();
+            for at in start.max(base)..end.min(limit) {
+                offsets.push(span.byte_offset(at - base));
+            }
+            if limit >= end {
+                break;
+            }
+            base = limit;
+        }
+        offsets
+    };
     Some(Update {
         redo,
         undo,
         redo_data: side(data, redo_offset, redo_length),
         undo_data: side(data, undo_offset, undo_length),
+        redo_time_offsets: offsets(redo_offset, redo_length),
+        undo_time_offsets: offsets(undo_offset, undo_length),
         redo_length,
         undo_length,
         target_attribute,

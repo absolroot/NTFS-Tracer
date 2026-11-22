@@ -270,7 +270,7 @@
   <data name="PathSourceColumn" xml:space="preserve"><value>Path source</value></data>
   <data name="TrackerStorage" xml:space="preserve"><value>Stored type</value></data>
   <data name="TrackerValue" xml:space="preserve"><value>Value</value></data>
-  <data name="LeadCriteria" xml:space="preserve"><value>Rule criteria</value></data>
+  <data name="LeadCriteria" xml:space="preserve"><value>Candidate criteria</value></data>
   <data name="LeadReasons" xml:space="preserve"><value>Change reasons</value></data>
   <data name="LeadSourceOffset" xml:space="preserve"><value>Source offset</value></data>
   <data name="LeadEvidenceRole" xml:space="preserve"><value>Record role</value></data>
@@ -384,19 +384,19 @@
   <data name="ScanSourcePageStart" xml:space="preserve"><value>Page start in file</value></data>
   <data name="LeadDocumentDeleted" xml:space="preserve"><value>Document deletions</value></data>
   <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Out-of-order timestamps</value></data>
-  <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Repeated renames before deletion</value></data>
-  <data name="LeadSDeleteName" xml:space="preserve"><value>SDelete file name matches</value></data>
-  <data name="LeadDocumentDeletedRule" xml:space="preserve"><value>Finds file records that include FILE_DELETE and have one of these extensions: {0}. This includes deletions reported together with CLOSE.</value></data>
-  <data name="LeadTimeOutOfOrderRule" xml:space="preserve"><value>Compares adjacent records in the same continuous section of $J. The later record has a higher USN, but its timestamp is at least 60 seconds earlier. Verify the cause separately.</value></data>
-  <data name="LeadRenamedThenDeletedRule" xml:space="preserve"><value>Finds two linked renames of the same file followed by deletion within 512 records of one continuous section. Each rename must have a separate old-name and new-name record with the same timestamp. The file reference, names and parent folders must link through the deletion in increasing USN order.</value></data>
-  <data name="LeadSDeleteNameRule" xml:space="preserve"><value>Matches file names sdelete.exe, sdelete64.exe and sdelete64a.exe without regard to case. A name match alone cannot establish the identity of the program or whether it ran.</value></data>
+  <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Renamed twice before deletion</value></data>
+  <data name="LeadSDeleteRecords" xml:space="preserve"><value>SDelete-related records</value></data>
+  <data name="LeadDocumentDeletedRule" xml:space="preserve"><value>Shows deletion records whose file names end in one of these extensions: {0}.</value></data>
+  <data name="LeadTimeOutOfOrderRule" xml:space="preserve"><value>Compares adjacent entries in one continuous section of the journal. An entry appears here when its record number (USN) is higher and its timestamp is at least 60 seconds earlier than the preceding entry’s.</value></data>
+  <data name="LeadRenamedThenDeletedRule" xml:space="preserve"><value>Finds a file that was renamed twice and then deleted. Each rename must have separate old-name and new-name records with the same timestamp. The names and parent folders must link from the first rename through the deletion within 512 records in one continuous section of the journal. Any basic information change recorded in between is shown as evidence. The journal records the change reason without identifying which timestamp or file attribute changed.</value></data>
+  <data name="LeadSDeleteNameRule" xml:space="preserve"><value>Matches SDelete executable names. It also shows creation and data changes for .pf names such as SDELETE.EXE-A1B2C3D4.pf, where the executable name is followed by eight hexadecimal digits.&#10;&#10;Windows can create or update Prefetch files when a program runs. Check the .pf contents or other evidence to verify whether and when the program ran.</value></data>
   <data name="LeadRoleDeleted" xml:space="preserve"><value>Deletion</value></data>
   <data name="LeadRolePrevious" xml:space="preserve"><value>Previous record</value></data>
   <data name="LeadRoleEarlierTime" xml:space="preserve"><value>Earlier timestamp</value></data>
-  <data name="LeadRoleFirstBefore" xml:space="preserve"><value>Before first rename</value></data>
-  <data name="LeadRoleFirstAfter" xml:space="preserve"><value>After first rename</value></data>
-  <data name="LeadRoleSecondBefore" xml:space="preserve"><value>Before second rename</value></data>
-  <data name="LeadRoleSecondAfter" xml:space="preserve"><value>After second rename</value></data>
+  <data name="LeadRoleFirstBefore" xml:space="preserve"><value>First old name</value></data>
+  <data name="LeadRoleFirstAfter" xml:space="preserve"><value>First new name</value></data>
+  <data name="LeadRoleSecondBefore" xml:space="preserve"><value>Second old name</value></data>
+  <data name="LeadRoleSecondAfter" xml:space="preserve"><value>Second new name</value></data>
   <data name="LeadRoleNameMatch" xml:space="preserve"><value>Name match</value></data>
   <data name="PathReferenceFilters" xml:space="preserve"><value>Path and IDs</value></data>
   <data name="FilterRecordedPath" xml:space="preserve"><value>Path contains</value></data>
@@ -431,4 +431,7 @@
   <data name="WindowsSetting" xml:space="preserve"><value>Windows setting</value></data>
   <data name="LightTheme" xml:space="preserve"><value>Light theme</value></data>
   <data name="CloseSettings" xml:space="preserve"><value>Close</value></data>
+  <data name="OpenInvestigation" xml:space="preserve"><value>Open investigation…</value></data>
+  <data name="ResumeInvestigation" xml:space="preserve"><value>Resume last investigation</value></data>
+  <data name="SaveInvestigation" xml:space="preserve"><value>Save investigation…</value></data>
 </root>

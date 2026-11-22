@@ -71,6 +71,39 @@ internal sealed class TransactionQuery(string path, TransactionMft? mft = null)
         catch { db.Dispose(); throw; }
     }
 
+    internal List<TimestampLead> TimestampLeads(long afterId, int afterField, int limit, CancellationToken token)
+    {
+        using var db = Open();
+        raw.sqlite3_progress_handler(db.Handle, 4096, static state =>
+            ((CancellationToken)state).IsCancellationRequested ? 1 : 0, token);
+        using var cmd = db.CreateCommand();
+        cmd.CommandText = """
+            SELECT r.id,l.field,r.lsn,r.mft_slot,
+                   CASE l.field WHEN 0 THEN u.created WHEN 1 THEN u.modified WHEN 2 THEN u.changed ELSE u.accessed END,
+                   CASE l.field WHEN 0 THEN d.created WHEN 1 THEN d.modified WHEN 2 THEN d.changed ELSE d.accessed END,
+                   l.before_bytes,l.after_bytes
+            FROM tx_time_locations l
+            JOIN tx_records r ON r.id=l.id
+            JOIN tx_times u ON u.id=l.id AND u.side='undo'
+            JOIN tx_times d ON d.id=l.id AND d.side='redo'
+            WHERE (l.id,l.field)>($id,$field)
+            ORDER BY l.id,l.field LIMIT $limit
+            """;
+        cmd.Parameters.AddWithValue("$id", afterId);
+        cmd.Parameters.AddWithValue("$field", afterField);
+        cmd.Parameters.AddWithValue("$limit", limit);
+        using var reader = cmd.ExecuteReader();
+        List<TimestampLead> leads = [];
+        while (reader.Read())
+        {
+            token.ThrowIfCancellationRequested();
+            leads.Add(new(reader.GetInt64(0), reader.GetInt32(1), reader.GetString(2),
+                reader.IsDBNull(3) ? null : reader.GetInt64(3), reader.GetInt64(4), reader.GetInt64(5),
+                reader.GetFieldValue<byte[]>(6), reader.GetFieldValue<byte[]>(7)));
+        }
+        return leads;
+    }
+
     internal TxSummary Summary()
     {
         using var db = Open();

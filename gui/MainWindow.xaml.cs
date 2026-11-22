@@ -108,6 +108,8 @@ public partial class MainWindow : Window
             if (!busy && journal == null && mft != null)
                 SetPreparedMft(null, null);
             UpdateAttachMftCommand();
+            BackToTimestampLeads.Visibility = Visibility.Collapsed;
+            UpdateLeadSources();
         };
         UpdateFindCommand();
         GlobalView.FileRequested += JumpFromGlobal;
@@ -164,7 +166,7 @@ public partial class MainWindow : Window
             catch (OperationCanceledException) { Setup.ShowError(L.T("분석을 취소했습니다.", "Analysis cancelled.")); }
             catch (Exception ex) { if (SettingsTab.IsSelected) Setup.ShowError(ex.Message); else Report(ex); }
         };
-        Closed += (_, _) => { closed = true; App.AppearanceChanged -= UpdateAppearance; historySortWork?.Cancel(); typing.Stop(); import?.Cancel(); historyExport?.Cancel(); (LeadsTab.Content as InvestigationView)?.CloseWithOwner(); source?.Dispose(); mftEvidence?.Dispose(); Setup.ReleaseImage(); Transactions.CloseWithOwner(); };
+        Closed += (_, _) => { closed = true; App.AppearanceChanged -= UpdateAppearance; historySortWork?.Cancel(); typing.Stop(); import?.Cancel(); historyExport?.Cancel(); (UsnLeads.Content as InvestigationView)?.CloseWithOwner(); (LogLeads.Content as TimestampLeadsView)?.CloseWithOwner(); source?.Dispose(); mftEvidence?.Dispose(); Setup.ReleaseImage(); Transactions.CloseWithOwner(); };
     }
     private void ShowStartupSettings()
     {
@@ -357,14 +359,38 @@ public partial class MainWindow : Window
         DarkTheme.IsChecked = App.IsDark;
         Setup.RefreshAppearance();
     }
+    private void UpdateLeadSources()
+    {
+        UsnLeads.IsEnabled = journal != null;
+        LogLeads.IsEnabled = Transactions.SourcePath != null;
+        LeadsTab.IsEnabled = UsnLeads.IsEnabled || LogLeads.IsEnabled;
+        if (LeadSources.SelectedItem is not TabItem { IsEnabled: true })
+            LeadSources.SelectedItem = UsnLeads.IsEnabled ? UsnLeads : LogLeads;
+        if (LogLeads.Content is TimestampLeadsView view)
+            view.SetSource(Transactions.LeadQuery, Transactions.SourcePath, Transactions.SourceHash);
+        if (LeadsTab.IsSelected)
+            ShowInvestigation();
+    }
+
     private void ShowInvestigation()
     {
-        if (LeadsTab.Content != null || journal is not { } j || source == null)
+        if (LogLeads.IsEnabled && LogLeads.Content == null)
+        {
+            var view = new TimestampLeadsView(async lsn =>
+            {
+                TransactionTab.IsSelected = true;
+                BackToTimestampLeads.Visibility = Visibility.Visible;
+                await Transactions.OpenLeadLsnAsync(lsn);
+            });
+            LogLeads.Content = view;
+            view.SetSource(Transactions.LeadQuery, Transactions.SourcePath, Transactions.SourceHash);
+        }
+        if (UsnLeads.Content != null || journal is not { } j || source == null)
             return;
-        LeadsTab.Content = new InvestigationView(j, source.Name, async (id, pos) =>
+        UsnLeads.Content = new InvestigationView(j, source.Name, async (id, pos, openHex) =>
         {
             if (j == journal && !closed)
-                await GoToRecord(id, pos, false, fromLeads: true);
+                await GoToRecord(id, pos, false, fromLeads: true, openHex: openHex);
         });
     }
     private void PickTrackerResult(object sender, RoutedEventArgs e)
@@ -573,13 +599,21 @@ public partial class MainWindow : Window
         GlobalTab.IsSelected = true;
         GlobalView.FocusSelectedRecord();
     }
+    private void BackToTimestampLeadsClicked(object sender, RoutedEventArgs e)
+    {
+        LeadsTab.IsSelected = LogLeads.IsSelected = true;
+        BackToTimestampLeads.Visibility = Visibility.Collapsed;
+        (LogLeads.Content as TimestampLeadsView)?.FocusEvidence();
+    }
+
     private void BackToLeadsClicked(object sender, RoutedEventArgs e)
     {
         LeadsTab.IsSelected = true;
-        (LeadsTab.Content as InvestigationView)?.FocusEvidence();
+        UsnLeads.IsSelected = true;
+        (UsnLeads.Content as InvestigationView)?.FocusEvidence();
     }
 
-    private async Task GoToRecord(byte[] id, long? position, bool fromGlobal, bool fromLeads = false)
+    private async Task GoToRecord(byte[] id, long? position, bool fromGlobal, bool fromLeads = false, bool openHex = false)
     {
         if (busy && !showingIndexResults || journal is not { } j)
             return;
@@ -619,7 +653,9 @@ public partial class MainWindow : Window
             HistoryTab.IsSelected = true;
             BackToLog.Visibility = fromGlobal ? Visibility.Visible : Visibility.Collapsed;
             BackToLeads.Visibility = fromLeads ? Visibility.Visible : Visibility.Collapsed;
-            if (fromGlobal && destinationTab >= 0)
+            if (openHex)
+                OriginalBytesTab.IsSelected = true;
+            else if (fromGlobal && destinationTab >= 0)
             {
                 EvidenceTabs.SelectedIndex = destinationTab;
             }
@@ -646,7 +682,10 @@ public partial class MainWindow : Window
             }
             if (!closed && ticket == jumpVersion && HistoryTab.IsSelected)
             {
-                Events.Focus();
+                if (openHex && Hex.BaseOffset == position)
+                    Hex.FocusHexColumn();
+                else
+                    Events.Focus();
                 if (anchor >= 0 && caret >= 0 && OriginalBytesTab.IsSelected && Hex.BaseOffset == position)
                     Hex.SelectRange(anchor, caret);
             }

@@ -33,6 +33,26 @@ public partial class TransactionView : UserControl
     private bool restoreRecordAfterSource;
     internal bool CanShowSourceInfo => evidence != null && query != null && importing == null;
     internal string? SourcePath => evidence?.Name;
+    internal TransactionQuery? LeadQuery => query;
+
+    internal async Task OpenLeadLsnAsync(string lsn)
+    {
+        if (query == null || importing != null || closed)
+            return;
+        syncingFilter = true;
+        try
+        {
+            filterBeforeLsn ??= Filter.SelectedIndex;
+            Filter.SelectedIndex = 0;
+            RecordFields.Reset();
+            Query.Text = "0x" + lsn;
+        }
+        finally { syncingFilter = false; }
+        typing.Stop();
+        ResetPage();
+        pendingSort = pageRefreshPending = false;
+        await Load();
+    }
     internal string? SourceHash => evidence == null ? null : sourceHash;
     internal event Action? SourceChanged;
     internal bool MatchesSource(string? path) => MainWindow.MatchesSource(evidence, path);
@@ -270,7 +290,7 @@ public partial class TransactionView : UserControl
         progress?.Invoke(L.T("트랜잭션 로그의 SHA-256을 계산하고 있습니다…", "Computing the SHA-256 hash of the transaction log…"));
         string hash = verifiedHash ?? await EvidenceHash.Sha256Async(input, token);
         Directory.CreateDirectory(Cache);
-        string db = Path.Combine(Cache, hash + ".log3.sqlite");
+        string db = Path.Combine(Cache, hash + ".log4.sqlite");
         var stats = await IndexCache.OpenAsync(db, path =>
         {
             progress?.Invoke(L.T("트랜잭션 기록과 작업 데이터를 읽고 있습니다…", "Reading transaction records and operation data…"));
@@ -561,7 +581,29 @@ public partial class TransactionView : UserControl
         Empty.Text = Rows.HasItems ? "" : text;
         PageStatus.Text = Rows.HasItems ? text : "";
     }
-    private async Task Load(TxRow? anchor = null)
+    internal sealed record SavedFilters(RecordSearchFields.SavedFields Fields, TransactionSort Sort, bool Descending, bool ExplicitSort);
+
+    internal SavedFilters CaptureFilters() => new(RecordFields.CaptureFields(), sort, descending, explicitSort);
+
+    internal Task ResumeSearch(string search, int filter, string? lsn, SavedFilters? saved)
+    {
+        ResetSearchInputs();
+        Query.Text = search;
+        Filter.SelectedIndex = Math.Clamp(filter, 0, Filter.Items.Count - 1);
+        if (saved != null)
+        {
+            RecordFields.RestoreFields(saved.Fields);
+            sort = Enum.IsDefined(saved.Sort) ? saved.Sort : TransactionSort.Lsn;
+            descending = saved.Descending;
+            explicitSort = saved.ExplicitSort;
+            UpdateSortIndicator();
+        }
+        typing.Stop();
+        ResetPage();
+        return Load(savedLsn: lsn);
+    }
+
+    private async Task Load(TxRow? anchor = null, string? savedLsn = null)
     {
         var backend = query;
         if (closed || backend == null || importing != null)
@@ -608,9 +650,15 @@ public partial class TransactionView : UserControl
             }
             if (anchor != null)
                 anchor = Rows.SelectedItem as TxRow;
-            if (anchor != null)
+            var restoreAnchor = anchor;
+            if (savedLsn != null && TransactionQuery.ExactLsn(savedLsn) is { } normalized)
             {
-                var starts = await Task.Run(() => backend.FindPageStarts(search, filter, reverse, order, anchor, stop.Token, pageSize, records), stop.Token);
+                restoreAnchor = (await Task.Run(() => backend.Page(normalized, 0, "", stop.Token), stop.Token)).FirstOrDefault();
+                stop.Token.ThrowIfCancellationRequested();
+            }
+            if (restoreAnchor != null)
+            {
+                var starts = await Task.Run(() => backend.FindPageStarts(search, filter, reverse, order, restoreAnchor, stop.Token, pageSize, records), stop.Token);
                 stop.Token.ThrowIfCancellationRequested();
                 history.Clear();
                 foreach (var mark in starts.Take(starts.Count - 1))
@@ -629,7 +677,7 @@ public partial class TransactionView : UserControl
             more = rows.Count > pageSize;
             if (more)
                 rows.RemoveAt(rows.Count - 1);
-            var restore = anchor == null ? null : rows.FirstOrDefault(row => row.Id == anchor.Id);
+            var restore = restoreAnchor == null ? null : rows.FirstOrDefault(row => row.Id == restoreAnchor.Id);
             restoringSort = restore != null && Rows.SelectedItem is TxRow priorRow && priorRow.Id == restore.Id;
             try
             {

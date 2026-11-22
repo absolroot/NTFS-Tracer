@@ -52,7 +52,7 @@ public partial class MainWindow
         return path;
     }
 
-    private async Task<(bool Changed, bool Previewed)> ApplyIntakeAsync(string journal, string mft, string logFile)
+    private async Task<(bool Changed, bool Previewed)> ApplyIntakeAsync(string journal, string mft, string logFile, bool allowPreview = true)
     {
         if (busy || !Transactions.CanReplaceSource)
             throw new InvalidOperationException(L.T("진행 중인 작업을 마친 뒤 다시 시도해 주세요.", "Wait for the current operation to finish, then try again."));
@@ -93,7 +93,7 @@ public partial class MainWindow
                 {
                     newJournal = OpenEvidence(journalPath);
                     preparedJournal = await PrepareJournalAsync(newJournal, progress, stop.Token);
-                    if (closed || jobs.Count < 2 || !SettingsTab.IsSelected)
+                    if (!allowPreview || closed || jobs.Count < 2 || !SettingsTab.IsSelected)
                         return;
                     stop.Token.ThrowIfCancellationRequested();
                     SetPreparedJournal(newJournal, preparedJournal);
@@ -255,8 +255,8 @@ public partial class MainWindow
 
     private void SetPreparedJournal(FileStream? input, PreparedJournal? prepared)
     {
-        (LeadsTab.Content as InvestigationView)?.CloseWithOwner();
-        LeadsTab.Content = null;
+        (UsnLeads.Content as InvestigationView)?.CloseWithOwner();
+        UsnLeads.Content = null;
         BackToLeads.Visibility = Visibility.Collapsed;
         source?.Dispose();
         incompleteIntake = false;
@@ -283,9 +283,7 @@ public partial class MainWindow
         typing.Stop();
         page = 0;
         GlobalTab.IsEnabled = journal != null;
-        LeadsTab.IsEnabled = journal != null;
-        if (LeadsTab.IsSelected && LeadsTab.IsEnabled)
-            ShowInvestigation();
+        UpdateLeadSources();
         Welcome.Visibility = journal == null ? Visibility.Visible : Visibility.Collapsed;
         Transactions.SetDirectory(input == null ? null : Path.GetDirectoryName(input.Name));
         SetHistoryPathSource();

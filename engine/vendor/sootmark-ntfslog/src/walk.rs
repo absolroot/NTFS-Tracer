@@ -33,6 +33,43 @@ pub(crate) struct Found {
     pub(crate) header: Header,
     /// Its client data, short when it is cut short.
     pub(crate) data: Vec<u8>,
+    pub(crate) first: DataSpan,
+    pub(crate) continuation: Vec<DataSpan>,
+}
+
+/// Physical source of a contiguous part of reconstructed client data.
+#[derive(Debug, Clone, Copy)]
+pub(crate) struct DataSpan {
+    offset: u64,
+    start: usize,
+    len: usize,
+    usa: usize,
+}
+
+impl DataSpan {
+    fn new(page: &Page, start: usize, len: usize) -> Self {
+        Self {
+            offset: page.offset,
+            start,
+            len,
+            usa: usize::from(u16::from_le_bytes([page.bytes[4], page.bytes[5]])),
+        }
+    }
+
+    pub(crate) fn len(self) -> usize {
+        self.len
+    }
+
+    pub(crate) fn byte_offset(self, index: usize) -> u64 {
+        let position = self.start + index;
+        // The original sector-trailer bytes are stored in the update sequence array.
+        let raw = if position % 512 >= 510 {
+            self.usa + 2 * (position / 512 + 1) + position % 2
+        } else {
+            position
+        };
+        self.offset + raw as u64
+    }
 }
 
 /// A log record header.
@@ -80,7 +117,7 @@ pub(crate) fn find(pages: &Pages, layout: &Layout, problems: &mut Vec<Problem>) 
             let end = start.saturating_add(header.data_length as usize);
             found.entry(header.lsn).or_insert_with(|| {
                 let offset = page.offset + at as u64;
-                let data = client_data(pages, page, start, &header, layout);
+                let (data, first, continuation) = client_data(pages, page, start, &header, layout);
                 let missing = u64::from(header.data_length) - data.len() as u64;
                 if missing > 0 {
                     let lsn = header.lsn;
@@ -94,6 +131,8 @@ pub(crate) fn find(pages: &Pages, layout: &Layout, problems: &mut Vec<Problem>) 
                     offset,
                     header,
                     data,
+                    first,
+                    continuation,
                 }
             });
             if end > layout.page_size {
@@ -138,10 +177,12 @@ fn client_data(
     start: usize,
     header: &Header,
     layout: &Layout,
-) -> Vec<u8> {
+) -> (Vec<u8>, DataSpan, Vec<DataSpan>) {
     let length = header.data_length as usize;
     let here = (layout.page_size - start).min(length);
     let mut data = first.bytes[start..start + here].to_vec();
+    let mut spans = Vec::new();
+    let start_span = DataSpan::new(first, start, here);
     let mut location = first.location;
     let mut pass = layout.sequence_of(header.lsn);
     while data.len() < length {
@@ -152,9 +193,10 @@ fn client_data(
         };
         let take = (length - data.len()).min(layout.page_size - layout.data_offset);
         data.extend_from_slice(&page.bytes[layout.data_offset..layout.data_offset + take]);
+        spans.push(DataSpan::new(page, layout.data_offset, take));
         location = next;
     }
-    data
+    (data, start_span, spans)
 }
 
 /// The version of a page that continues the record `lsn`, written in

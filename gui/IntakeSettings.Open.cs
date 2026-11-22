@@ -8,6 +8,12 @@ using Microsoft.Win32;
 
 namespace JournalDesk;
 
+public partial class IntakeSettings
+{
+    private void OpenSavedInvestigation(object sender, RoutedEventArgs e) => Host?.OpenInvestigation(sender, e);
+    private void ResumeSavedInvestigation(object sender, RoutedEventArgs e) => Host?.ResumeInvestigation(sender, e);
+}
+
 public sealed class IntakeShellIcon : IValueConverter
 {
     public bool Folder

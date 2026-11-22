@@ -49,7 +49,8 @@ public partial class MainWindow
         foreach (var activity in activities)
             activity.RefreshLanguage();
         GlobalView.RefreshLanguage(historyPaths);
-        (LeadsTab.Content as InvestigationView)?.RefreshLanguage();
+        (UsnLeads.Content as InvestigationView)?.RefreshLanguage();
+        (LogLeads.Content as TimestampLeadsView)?.RefreshLanguage();
         var selectedFile = FileList.SelectedItem;
         updatingFileList = true;
         try

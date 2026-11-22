@@ -6,6 +6,23 @@ namespace JournalDesk;
 
 public partial class RecordSearchFields : UserControl
 {
+    internal sealed record SavedFields(string Path, string File, string Parent);
+
+    internal SavedFields CaptureFields() => new(PathInput.Text, FileInput.Text, ParentInput.Text);
+
+    internal void RestoreFields(SavedFields? saved)
+    {
+        resetting = true;
+        try
+        {
+            PathInput.Text = saved?.Path ?? "";
+            FileInput.Text = saved?.File ?? "";
+            ParentInput.Text = saved?.Parent ?? "";
+        }
+        finally { resetting = false; }
+        ReadFields();
+    }
+
     private bool resetting;
     internal RecordSearch? Criteria { get; private set; } = new();
     internal bool HasInput => Criteria?.IsEmpty != true;

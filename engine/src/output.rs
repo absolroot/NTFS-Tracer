@@ -14,7 +14,7 @@ impl Module {
             Self::Journal => ("usn", 3, "summary"),
             Self::CarvedJournal => ("usn_carve", 3, "summary"),
             Self::Mft => ("mft", 1, "mft_summary"),
-            Self::TransactionLog => ("ntfs_log", 1, "tx_summary"),
+            Self::TransactionLog => ("ntfs_log", 2, "tx_summary"),
             Self::CarvedLog => ("ntfs_log_carve", 1, "carve_summary"),
         };
         tx.pragma_update(None, "application_id", i32::from_be_bytes(*b"JDSK"))?;
@@ -44,7 +44,7 @@ mod tests {
             (Module::Journal, "usn", 3, "summary"),
             (Module::CarvedJournal, "usn_carve", 3, "summary"),
             (Module::Mft, "mft", 1, "mft_summary"),
-            (Module::TransactionLog, "ntfs_log", 1, "tx_summary"),
+            (Module::TransactionLog, "ntfs_log", 2, "tx_summary"),
             (Module::CarvedLog, "ntfs_log_carve", 1, "carve_summary"),
         ] {
             let mut db = Connection::open_in_memory().unwrap();

@@ -270,7 +270,7 @@
   <data name="PathSourceColumn" xml:space="preserve"><value>パスの根拠</value></data>
   <data name="TrackerStorage" xml:space="preserve"><value>格納時の型</value></data>
   <data name="TrackerValue" xml:space="preserve"><value>値</value></data>
-  <data name="LeadCriteria" xml:space="preserve"><value>判定条件</value></data>
+  <data name="LeadCriteria" xml:space="preserve"><value>候補に表示される条件</value></data>
   <data name="LeadReasons" xml:space="preserve"><value>変更理由</value></data>
   <data name="LeadSourceOffset" xml:space="preserve"><value>元資料内のオフセット</value></data>
   <data name="LeadEvidenceRole" xml:space="preserve"><value>レコードの役割</value></data>
@@ -384,12 +384,12 @@
   <data name="ScanSourcePageStart" xml:space="preserve"><value>ファイル内のページ開始位置</value></data>
   <data name="LeadDocumentDeleted" xml:space="preserve"><value>文書ファイルの削除</value></data>
   <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>記録時刻の逆転</value></data>
-  <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>複数回の名前変更後に削除</value></data>
-  <data name="LeadSDeleteName" xml:space="preserve"><value>SDelete のファイル名と一致</value></data>
+  <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>2 回の名前変更後に削除</value></data>
+  <data name="LeadSDeleteRecords" xml:space="preserve"><value>SDelete 関連の記録</value></data>
   <data name="LeadDocumentDeletedRule" xml:space="preserve"><value>変更理由に FILE_DELETE が含まれ、拡張子が {0} のいずれかであるファイルを探します。CLOSE と同時に記録された削除も含みます。</value></data>
   <data name="LeadTimeOutOfOrderRule" xml:space="preserve"><value>$J の同じ連続区間で隣接する記録を比較します。後の記録の USN が大きいにもかかわらず、時刻が 60 秒以上早い場合を探します。時刻が逆転した原因は別途確認してください。</value></data>
-  <data name="LeadRenamedThenDeletedRule" xml:space="preserve"><value>$J の同じ連続区間の 512 レコード以内で、同じファイルが 2 回名前を変更された後に削除された例を探します。変更ごとに旧名と新名が同時刻にそれぞれ単独の変更理由として記録されている必要があります。ファイル参照は同一で、名前と親フォルダーが USN の順に削除までつながることが条件です。</value></data>
-  <data name="LeadSDeleteNameRule" xml:space="preserve"><value>ファイル名が sdelete.exe、sdelete64.exe、sdelete64a.exe のいずれかに一致する記録を探します。大文字と小文字は区別しません。プログラムの実体や実行の有無は別の証拠で確認してください。</value></data>
+  <data name="LeadRenamedThenDeletedRule" xml:space="preserve"><value>同じファイルが 2 回名前を変更された後に削除された例を探します。各変更の旧名と新名は同時刻に別々に記録され、最初の変更から削除まで名前と親フォルダーがつながる必要があります。これらの記録がジャーナルの同じ連続区間の 512 レコード以内にある場合に候補に表示します。途中に基本情報の変更があれば根拠に追加します。ジャーナルの変更理由だけでは、どの時刻やファイル属性が変わったかは分かりません。</value></data>
+  <data name="LeadSDeleteNameRule" xml:space="preserve"><value>SDelete の実行ファイル名と一致する記録を表示します。また、SDelete の名前に 8 桁の 16 進数と .pf が付いたファイルの作成や内容の変更も表示します。Windows はプログラム実行時にこの種の Prefetch ファイルを作成または更新することがあります。実際の実行やその時刻は、Prefetch ファイルの内容や別の証拠で確認してください。</value></data>
   <data name="LeadRoleDeleted" xml:space="preserve"><value>削除</value></data>
   <data name="LeadRolePrevious" xml:space="preserve"><value>直前の記録</value></data>
   <data name="LeadRoleEarlierTime" xml:space="preserve"><value>時刻が早い記録</value></data>
@@ -431,4 +431,7 @@
   <data name="WindowsSetting" xml:space="preserve"><value>Windows の設定値</value></data>
   <data name="LightTheme" xml:space="preserve"><value>ライトテーマ</value></data>
   <data name="CloseSettings" xml:space="preserve"><value>閉じる</value></data>
+  <data name="OpenInvestigation" xml:space="preserve"><value>調査を開く…</value></data>
+  <data name="ResumeInvestigation" xml:space="preserve"><value>前回の調査を再開</value></data>
+  <data name="SaveInvestigation" xml:space="preserve"><value>調査を保存…</value></data>
 </root>

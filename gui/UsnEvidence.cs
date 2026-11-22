@@ -15,7 +15,7 @@ internal static class UsnEvidence
             new("Usn", entry.Usn.ToString(CultureInfo.InvariantCulture)),
             new("FileReferenceNumber", UsnHexFields.ReferenceText(fileId)),
             new("ParentFileReferenceNumber", UsnHexFields.ReferenceText(entry.Parent)),
-            new("Reason", entry.RawReason),
+            new("Reason", entry.FlagsText) { SecondaryValue = entry.RawReason },
             new("SourceInfo", $"0x{entry.Source:X8}")
         };
         if (entry.Version == 4)
