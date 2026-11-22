@@ -10,14 +10,13 @@
 
 <p align="center"><a href="README.ko.md">한국어</a> · <a href="README.ja.md">日本語</a></p>
 
-**NTFS Tracer is a Windows forensic tool for searching NTFS logs and tracing file changes from the records you find.** Its Rust engine indexes the USN journal and NTFS transaction log. File history shows renames, moves, and deletions in order. Each rename brings both names and their supporting USN records together. You can also open existing NTFS Log Tracker SQLite, CSV, and TSV results in read-only mode.
+**NTFS Tracer is a Windows forensic tool for searching NTFS logs and tracing file changes from the records you find.**
 
 ## Why use NTFS Tracer?
 
 - **Open a disk image and extract the NTFS logs in one workflow.** Select an NTFS volume, then extract and index its `$J`, `$MFT`, and `$LogFile` in the app. For regular log parsing, NTFS Log Tracker 1.9 expects files extracted with another tool. [Tracker input requirements](https://sites.google.com/site/forensicnote/ntfs-log-tracker)
 - **Open file history directly from a search result.** Find a file by its current name, then choose **Open file history** to see its previous name and the supporting records.
-- **Fast USN search and file history.** The Rust engine indexes the journal, typical filename searches start as you type, and file history opens on the selected source record. [USN journal benchmark](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
-- **Designed for everyday investigations.** File icons make search results easier to scan. Open supporting records directly from a lead, copy the values you need, and resume an investigation with the same search and selected record.
+- **Find a file's previous name in about one-ninth the time.** On a 378,975-record USN journal, the first lookup including analysis took a median of 2.24 s in NTFS Tracer 0.8.32 and 20.01 s in NTFS Log Tracker 1.9. [USN journal benchmark](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
 
 ## Quick start
 
@@ -30,11 +29,11 @@
    - **Tracker results** · Choose **File → Open Tracker results…**. For TSV, choose **All files** in the file picker.
 3. Search **All records**, open **File history**, or switch to **NTFS transactions**. Select an event to see its details and contributing records. **F1** opens the in-app guide.
 
-Before closing the app, choose **File → Save investigation…**. On your next launch, choose **Resume last investigation** to return to the saved sources, search settings, and selected record. NTFS Tracer checks the source SHA-256 hashes and reuses compatible indexes.
+Before closing the app, choose **File → Save investigation…**. On your next launch, choose **Resume last investigation** to return to the saved sources, search settings, and selected record.
 
 ### Export USN to CSV
 
-The command below accepts an extracted `$J` containing USN V2 records only. Run it from the publish folder of a [build from the current source](#build-from-source). It writes a 13-column UTF-8 CSV in source order without creating a SQLite index. Use a new filename for the output.
+In the extracted release folder, run the command below with a `$J` containing only USN V2 records. Choose a new output filename.
 
 ```powershell
 .\ntfstracer-cli.exe usn-csv '.\$J' '.\usn.csv'
@@ -134,6 +133,6 @@ English · 한국어 · 日本語 · Deutsch · Español · Français · Bahasa 
 
 ## License
 
-Project-owned code is available under the [PolyForm Noncommercial License 1.0.0](LICENSE). Commercial use requires prior written permission, including internal investigations at for-profit companies, paid client work, and inclusion in commercial products. For permission, [open a licensing inquiry](https://github.com/absolroot/NTFS-Tracer/issues/new) with a brief description of the intended use and a way to contact you. Keep case details and evidence out of the public issue.
+Project-owned code is licensed under the [Apache License 2.0](LICENSE).
 
 Third-party components retain their own terms and may be used under those terms. See [third-party notices](THIRD-PARTY-NOTICES.md), including the terms and replacement instructions for libewf.
