@@ -23,7 +23,7 @@ impl Fixture {
     fn run(&self, data: &[u8]) -> Output {
         let src = self.dir.join("source");
         fs::write(&src, data).unwrap();
-        Command::new(env!("CARGO_BIN_EXE_journal-index"))
+        Command::new(env!("CARGO_BIN_EXE_ntfstracer-cli"))
             .arg("mft")
             .arg(src)
             .arg(self.dir.join("db"))

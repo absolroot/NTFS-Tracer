@@ -21,6 +21,8 @@
 
 ## Quick start
 
+### Investigate in the desktop app
+
 1. Extract the Windows x64 ZIP and run **NtfsTracer.exe**. The shared-runtime ZIP requires **.NET 10 Windows Desktop Runtime (x64)**.
 2. Open the source that matches your evidence.
    - **Extracted artifacts** · Choose **Select files…** or **Select extracted folder…**, then **Start analysis**. A `$J` alone is enough for USN history.
@@ -29,6 +31,14 @@
 3. Search **All records**, open **File history**, or switch to **NTFS transactions**. Select an event to see its details and contributing records. **F1** opens the in-app guide.
 
 Before closing the app, choose **File → Save investigation…**. On your next launch, choose **Resume last investigation** to return to the saved sources, search settings, and selected record. NTFS Tracer checks the source SHA-256 hashes and reuses compatible indexes.
+
+### Export USN to CSV
+
+The command below accepts an extracted `$J` containing USN V2 records only. Run it from the publish folder of a [build from the current source](#build-from-source). It writes a 13-column UTF-8 CSV in source order without creating a SQLite index. Use a new filename for the output.
+
+```powershell
+.\ntfstracer-cli.exe usn-csv '.\$J' '.\usn.csv'
+```
 
 ## Investigation features
 
@@ -97,12 +107,6 @@ We ran the same workflow on a 92.34 MiB USN journal with 378,975 records extract
 | Second previous name with the journal open | **216 ms** | 356 ms |
 
 NTFS Tracer finished the second lookup first in all six runs. Both tools agreed on the old and new names, USNs, change reasons, and timestamps at the precision shown by Tracker. [Test setup and six runs](docs/performance.md#previous-name-lookup-on-a-378975-record-journal) · [MFTECmd cross-check for the example above](docs/performance.md#cross-checking-the-demo-with-mftecmd)
-
-### Check file timestamps in a transaction
-
-If a transaction in `$LogFile` looks relevant, you can check whether it changed a file’s creation or modification time. In NTFS Tracer, find the record by LSN (log sequence number) under **NTFS transactions** and check **File attribute timestamps** in the overview. When both Undo and Redo contain values, compare the creation, content modification, metadata change, and last access times before and after the change.
-
-ArtiFast Windows documents a workflow in which you find the LSN in the Windows LogFile list and select the row to inspect the entry offset, transaction ID, and Redo/Undo operations. [ArtiFast's Windows LogFile example](https://forensafe.com/blogs/windowslogfile.html)
 
 ## Build from source
 

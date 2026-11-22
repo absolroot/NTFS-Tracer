@@ -160,8 +160,13 @@ fn create(input: &Path, output: &Path, build: fn(File, &Path) -> Result<()>) -> 
 }
 
 fn main() {
+    const USAGE: &str = "ntfstracer-cli usn-csv INPUT_USN_V2 NEW_CSV\nntfstracer-cli [mft|logfile|carve|logcarve] INPUT NEW_DB";
     let args: Vec<_> = env::args_os().skip(1).collect();
     let result = match args.as_slice() {
+        [flag] if flag == "--help" || flag == "-h" => {
+            println!("{USAGE}");
+            Ok(())
+        }
         [input, out] => create(Path::new(input), Path::new(out), index),
         [mode, input, out] if mode == "mft" => create(Path::new(input), Path::new(out), mft::index),
         [mode, input, out] if mode == "logfile" => {
@@ -175,8 +180,7 @@ fn main() {
             usn_csv::export(Path::new(input), Path::new(out))
         }
         _ => {
-            eprintln!("journal-index [mft|logfile|carve|logcarve] INPUT NEW_DB");
-            eprintln!("journal-index usn-csv INPUT_USN_V2 NEW_CSV");
+            eprintln!("{USAGE}");
             std::process::exit(2);
         }
     };

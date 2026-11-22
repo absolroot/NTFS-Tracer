@@ -1,5 +1,5 @@
 <Window x:Class="JournalDesk.LanguageWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
- Title="NTFS Tracer" Width="380" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="Assets/NtfsTracer.ico"
+ Title="Absolroot NTFS Tracer" Width="380" SizeToContent="Height" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="Assets/NtfsTracer.ico"
  Background="{DynamicResource Desk.Canvas}" Foreground="{DynamicResource Desk.Text}" FontFamily="Segoe UI, Malgun Gothic, Yu Gothic UI">
  <StackPanel Margin="20,16,20,12">
   <Label x:Name="Heading" Target="{Binding ElementName=Languages}" FontSize="17" FontWeight="SemiBold" Padding="0" Margin="0,0,0,8"/>

@@ -137,17 +137,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "journal-index"
-version = "0.4.2"
-dependencies = [
- "rusqlite",
- "sha2",
- "sootmark-ntfslog",
- "tempfile",
- "time",
-]
-
-[[package]]
 name = "libc"
 version = "0.2.191"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -169,6 +158,17 @@ name = "linux-raw-sys"
 version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "32a66949e030da00e8c7d4434b251670a91556f4144941d37452769c25d58a53"
+
+[[package]]
+name = "ntfstracer-cli"
+version = "0.4.2"
+dependencies = [
+ "rusqlite",
+ "sha2",
+ "sootmark-ntfslog",
+ "tempfile",
+ "time",
+]
 
 [[package]]
 name = "num-conv"

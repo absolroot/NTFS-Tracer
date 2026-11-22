@@ -123,7 +123,7 @@
   <data name="RecordHeaderCandidates" xml:space="preserve"><value>레코드 헤더 후보</value></data>
   <data name="RawHeaderBeforeSectorFixup" xml:space="preserve"><value>원본 헤더 · 섹터 복원 전</value></data>
   <data name="CarvedHeaderBytes" xml:space="preserve"><value>카빙 헤더 바이트</value></data>
-  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>Absolroot NTFS Tracer</value></data>
   <data name="MainMenu" xml:space="preserve"><value>주 메뉴</value></data>
   <data name="File" xml:space="preserve"><value>파일(_F)</value></data>
   <data name="OpenUsnJournal" xml:space="preserve"><value>USN Journal 열기…</value></data>

@@ -88,7 +88,7 @@
   <data name="IntakeSettingsTab" xml:space="preserve"><value>Pengaturan</value></data>
   <data name="IntakeSources" xml:space="preserve"><value>Bukti untuk dianalisis</value></data>
   <data name="IntakeStart" xml:space="preserve"><value>Mulai analisis</value></data>
-  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer · Analisis berkas NTFS</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>Absolroot NTFS Tracer</value></data>
   <data name="MoveOrRenameCandidates" xml:space="preserve"><value>Kemungkinan pemindahan atau penggantian nama</value></data>
   <data name="NearbyRecords" xml:space="preserve"><value>Rekaman sekitar</value></data>
   <data name="NewName" xml:space="preserve"><value>Nama baru</value></data>

@@ -7,11 +7,11 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>NtfsTracer</AssemblyName>
     <RootNamespace>JournalDesk</RootNamespace>
-    <AssemblyTitle>NTFS Tracer</AssemblyTitle>
-    <Product>NTFS Tracer</Product>
+    <AssemblyTitle>Absolroot NTFS Tracer</AssemblyTitle>
+    <Product>Absolroot NTFS Tracer</Product>
     <ApplicationIcon>Assets/NtfsTracer.ico</ApplicationIcon>
-    <JournalIndexPath Condition="'$(JournalIndexPath)' == ''">../engine/target/release/journal-index.exe</JournalIndexPath>
-    <Version>0.8.32</Version>
+    <JournalIndexPath Condition="'$(JournalIndexPath)' == ''">../engine/target/release/ntfstracer-cli.exe</JournalIndexPath>
+    <Version>0.9.0</Version>
     <PublishSingleFile>true</PublishSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <DebugType>embedded</DebugType>
@@ -33,7 +33,7 @@
     <InternalsVisibleTo Include="PathResolution" />
     <InternalsVisibleTo Include="GlobalLog" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.11" />
-    <None Include="$(JournalIndexPath)" Link="journal-index.exe" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
+    <None Include="$(JournalIndexPath)" Link="ntfstracer-cli.exe" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
     <None Include="../engine/sootmark-LICENSE.txt" Link="sootmark-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
   </ItemGroup>
 </Project>

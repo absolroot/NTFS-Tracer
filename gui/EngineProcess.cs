@@ -10,7 +10,11 @@ internal static class EngineProcess
         CancellationToken token, Action<string>? onProgress = null)
     {
         token.ThrowIfCancellationRequested();
-        var options = new ProcessStartInfo(Path.Combine(AppContext.BaseDirectory, "journal-index.exe"))
+        string executable = Path.Combine(AppContext.BaseDirectory, "ntfstracer-cli.exe");
+        string legacy = Path.Combine(AppContext.BaseDirectory, "journal-index.exe");
+        if (!File.Exists(executable) && File.Exists(legacy))
+            executable = legacy;
+        var options = new ProcessStartInfo(executable)
         {
             UseShellExecute = false,
             CreateNoWindow = true,

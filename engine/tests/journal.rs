@@ -25,7 +25,7 @@ impl Fixture {
         let output = self.root.join("index");
         fs::write(&input, bytes).unwrap();
         assert!(
-            Command::new(env!("CARGO_BIN_EXE_journal-index"))
+            Command::new(env!("CARGO_BIN_EXE_ntfstracer-cli"))
                 .arg(&input)
                 .arg(&output)
                 .output()
@@ -64,7 +64,7 @@ fn record(version: u16, words: &[u16]) -> Vec<u8> {
 }
 
 fn export_csv(input: &Path, output: &Path) -> Output {
-    Command::new(env!("CARGO_BIN_EXE_journal-index"))
+    Command::new(env!("CARGO_BIN_EXE_ntfstracer-cli"))
         .arg("usn-csv")
         .arg(input)
         .arg(output)
@@ -141,7 +141,7 @@ fn carving_preserves_unaligned_dump_offsets_and_rejects_nameless_noise() {
     let output = fixture.root.join("carved");
     fs::write(&input, data).unwrap();
     assert!(
-        Command::new(env!("CARGO_BIN_EXE_journal-index"))
+        Command::new(env!("CARGO_BIN_EXE_ntfstracer-cli"))
             .arg("carve")
             .arg(&input)
             .arg(&output)
@@ -283,7 +283,7 @@ fn malformed_extent_count_is_not_accepted_and_existing_output_is_preserved() {
     let dest = fixture.root.join("index");
     let before = fs::read(&dest).unwrap();
     assert!(
-        !Command::new(env!("CARGO_BIN_EXE_journal-index"))
+        !Command::new(env!("CARGO_BIN_EXE_ntfstracer-cli"))
             .arg(fixture.root.join("input"))
             .arg(&dest)
             .output()

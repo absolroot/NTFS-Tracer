@@ -88,7 +88,7 @@
   <data name="IntakeSettingsTab" xml:space="preserve"><value>設定</value></data>
   <data name="IntakeSources" xml:space="preserve"><value>待分析證據</value></data>
   <data name="IntakeStart" xml:space="preserve"><value>開始分析</value></data>
-  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer · NTFS 檔案分析</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>Absolroot NTFS Tracer</value></data>
   <data name="MoveOrRenameCandidates" xml:space="preserve"><value>疑似移動或重新命名</value></data>
   <data name="NearbyRecords" xml:space="preserve"><value>前後記錄</value></data>
   <data name="NewName" xml:space="preserve"><value>新名稱</value></data>

@@ -88,7 +88,7 @@
   <data name="IntakeSettingsTab" xml:space="preserve"><value>Cài đặt</value></data>
   <data name="IntakeSources" xml:space="preserve"><value>Chứng cứ cần phân tích</value></data>
   <data name="IntakeStart" xml:space="preserve"><value>Bắt đầu phân tích</value></data>
-  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer · Phân tích tệp NTFS</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>Absolroot NTFS Tracer</value></data>
   <data name="MoveOrRenameCandidates" xml:space="preserve"><value>Có thể đã di chuyển hoặc đổi tên</value></data>
   <data name="NearbyRecords" xml:space="preserve"><value>Bản ghi lân cận</value></data>
   <data name="NewName" xml:space="preserve"><value>Tên mới</value></data>

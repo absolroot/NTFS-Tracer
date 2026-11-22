@@ -29,7 +29,7 @@ impl Run {
         let dest = self.0.join("result.sqlite");
         fs::write(&source, bytes).unwrap();
         let run = || {
-            Command::new(env!("CARGO_BIN_EXE_journal-index"))
+            Command::new(env!("CARGO_BIN_EXE_ntfstracer-cli"))
                 .arg("logcarve")
                 .arg(&source)
                 .arg(&dest)

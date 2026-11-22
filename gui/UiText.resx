@@ -123,7 +123,7 @@
   <data name="RecordHeaderCandidates" xml:space="preserve"><value>Record header candidates</value></data>
   <data name="RawHeaderBeforeSectorFixup" xml:space="preserve"><value>Raw header before sector fixup</value></data>
   <data name="CarvedHeaderBytes" xml:space="preserve"><value>Carved header bytes</value></data>
-  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>Absolroot NTFS Tracer</value></data>
   <data name="MainMenu" xml:space="preserve"><value>Main menu</value></data>
   <data name="File" xml:space="preserve"><value>_File</value></data>
   <data name="OpenUsnJournal" xml:space="preserve"><value>Open USN Journal…</value></data>

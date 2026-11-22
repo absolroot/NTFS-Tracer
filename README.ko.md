@@ -15,6 +15,8 @@
 
 ## 시작하기
 
+### 앱에서 조사하기
+
 배포 ZIP의 압축을 푼 뒤 `NtfsTracer.exe`를 실행하세요. 경량판을 실행하려면 .NET 10 Windows Desktop Runtime(x64)이 필요합니다.
 
 1. 처음 실행하면 **설정** 창이 열립니다. 준비한 자료에 따라 다음 방법으로 분석을 시작하세요.
@@ -24,6 +26,16 @@
 3. 기록을 선택하면 개요에 변경 사유, 경로를 판단한 근거, 원본 파일 안에서의 위치가 표시됩니다. `F1`을 누르면 사용 안내가 열립니다.
 
 작업을 중단할 때는 **파일 → 조사 저장…**을 선택하세요. 다음 실행 때 **마지막 조사 이어서 열기**를 선택하면 저장한 자료와 검색 조건, 선택한 기록으로 돌아갈 수 있습니다. 앱은 원본의 SHA-256을 대조하고 사용할 수 있는 색인을 다시 엽니다.
+
+<a id="export-usn-to-csv"></a>
+
+### USN CSV만 저장하기
+
+USN V2 기록으로 구성된 `$J`를 추출했다면, [현재 소스로 빌드한 배포 폴더](#소스에서-빌드하기)에서 아래 명령을 실행하세요. SQLite 색인 없이 기록을 원본 순서대로 UTF-8 CSV 13열에 저장합니다. 출력 파일에는 새 이름을 지정하세요.
+
+```powershell
+.\ntfstracer-cli.exe usn-csv '.\$J' '.\usn.csv'
+```
 
 ## 조사 기능
 
@@ -87,12 +99,6 @@
 | 저널을 열어 둔 상태에서 두 번째 파일의 이전 이름 확인 | **216ms** | 356ms |
 
 두 번째 조회에서는 6회 모두 NTFS Tracer가 먼저 결과를 표시했습니다. 두 도구에서 이전 이름과 새 이름, USN, 변경 사유가 일치했고, 시각도 Tracker가 표시하는 정밀도까지 일치했습니다. [실험 조건과 6회 측정값](docs/performance.md#previous-name-lookup-on-a-378975-record-journal) · [MFTECmd로 위 예제의 원본을 대조한 방법](docs/performance.md#cross-checking-the-demo-with-mftecmd)
-
-### 트랜잭션에서 파일 시각 값 확인하기
-
-`$LogFile`에서 의심스러운 트랜잭션을 찾았다면 파일의 생성 시각이나 수정 시각이 바뀌었는지 확인할 수 있습니다. NTFS Tracer의 **NTFS 트랜잭션** 탭에서 LSN(로그 순서 번호)으로 기록을 찾고 **파일 속성 시각**을 확인하세요. Undo와 Redo 양쪽에 값이 남아 있으면 생성, 내용 수정, 메타데이터 변경, 마지막 접근 시각을 변경 전후로 비교할 수 있습니다.
-
-ArtiFast Windows의 제품 안내에서는 Windows LogFile 목록에서 LSN을 찾은 뒤, 해당 행을 선택해 원본 오프셋과 트랜잭션 ID, Redo·Undo 작업을 확인합니다. [ArtiFast의 Windows LogFile 조사 예시](https://forensafe.com/blogs/windowslogfile.html)
 
 ## 소스에서 빌드하기
 

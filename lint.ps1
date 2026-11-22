@@ -30,10 +30,10 @@ try {
     Invoke-Checked cargo @('clippy', '--locked', '--all-targets', '--', '-D', 'warnings')
     $artifacts = Invoke-Checked cargo @('build', '--release', '--locked', '--message-format=json-render-diagnostics')
     $engine = $artifacts | ForEach-Object { $_ | ConvertFrom-Json } |
-        Where-Object { $_.target.name -eq 'journal-index' -and $_.executable } |
+        Where-Object { $_.target.name -eq 'ntfstracer-cli' -and $_.executable } |
         Select-Object -ExpandProperty executable -Last 1
     if (-not $engine -or -not (Test-Path -LiteralPath $engine -PathType Leaf)) {
-        throw 'Cargo did not produce the journal-index executable.'
+        throw 'Cargo did not produce the ntfstracer-cli executable.'
     }
 
     Set-Location $PSScriptRoot

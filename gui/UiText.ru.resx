@@ -88,7 +88,7 @@
   <data name="IntakeSettingsTab" xml:space="preserve"><value>Настройки</value></data>
   <data name="IntakeSources" xml:space="preserve"><value>Материалы для анализа</value></data>
   <data name="IntakeStart" xml:space="preserve"><value>Начать анализ</value></data>
-  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer · Анализ файлов NTFS</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>Absolroot NTFS Tracer</value></data>
   <data name="MoveOrRenameCandidates" xml:space="preserve"><value>Возможные перемещения и переименования</value></data>
   <data name="NearbyRecords" xml:space="preserve"><value>Соседние записи</value></data>
   <data name="NewName" xml:space="preserve"><value>Новое имя</value></data>
