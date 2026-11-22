@@ -8,8 +8,9 @@
 
 ## 왜 NTFS Tracer를 쓰나요?
 
+- **디스크 이미지에서 NTFS 로그를 바로 가져옵니다.** 앱에서 이미지와 NTFS 볼륨을 선택하면 `$J`, `$MFT`, `$LogFile`을 추출해 분석할 수 있습니다. NTFS Log Tracker 1.9로 일반 로그를 분석하려면 다른 도구로 해당 파일을 먼저 추출해야 합니다. [Tracker 입력 형식](https://sites.google.com/site/forensicnote/ntfs-log-tracker)
 - **검색 결과에서 파일 이력으로 바로 이동합니다.** 현재 파일명으로 찾은 행에서 **파일 이력 보기**를 선택하면 이전 이름과 근거 기록을 확인할 수 있습니다.
-- **결과 DB 생성, USN 색인, 파일명 검색을 최적화했습니다.** Rust 엔진이 USN 저널을 읽어 검색용 DB를 만들며, 일반 파일명 검색은 입력 후 일정 시간을 기다리지 않고 시작합니다. 같은 예제 USN 저널에서 분석 시작부터 첫 목록이 표시되기까지 NTFS Tracer 개발 빌드 **1.08초**, NTFS Log Tracker 1.9 **3.25초**가 걸렸습니다. 각 도구를 10회씩 실행한 중앙값입니다. [측정 조건과 결과](docs/performance.md#finding-a-previous-name-from-the-current-name)
+- **빠른 USN 검색과 파일 이력 확인.** Rust 엔진이 저널을 색인합니다. 일반 파일명 검색은 입력과 함께 시작되며, 파일 이력을 열면 선택한 원본 기록이 바로 표시됩니다. [대용량 저널 실험 결과](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
 - **분석가의 작업 흐름을 고려했습니다.** 파일 아이콘으로 검색 결과에서 파일 종류를 한눈에 구분할 수 있습니다. 조사 후보에서 근거 기록을 바로 열고, 필요한 값을 복사할 수 있습니다. 조사를 다시 열면 저장한 검색 조건과 선택한 기록으로 돌아갈 수 있습니다.
 
 ## 시작하기
@@ -18,7 +19,7 @@
 
 1. 처음 실행하면 **설정** 창이 열립니다. 준비한 자료에 따라 다음 방법으로 분석을 시작하세요.
    - **이미 추출한 자료가 있으면** `$J`, `$MFT`, `$LogFile` 또는 이 파일들이 들어 있는 폴더를 선택하고 **분석 시작**을 누르세요. 개별 파일이나 폴더를 창에 끌어 놓을 수도 있습니다.
-   - **디스크 이미지가 있으면** 이미지 파일을 선택한 뒤, NTFS 볼륨과 추출할 항목을 고르고 **추출 후 분석**을 누르세요.
+   - **디스크 이미지가 있으면** 이미지 파일을 선택하세요. 읽을 수 있는 첫 번째 NTFS 볼륨이 자동으로 선택됩니다. 분석할 볼륨과 추출할 항목을 확인한 뒤 **추출 후 분석**을 누르세요.
 2. **전체 로그**에서 파일을 검색하세요. 결과에서 파일 이력을 열면 이전 이름과 경로를 확인할 수 있습니다. `$LogFile`을 열었다면 **NTFS 트랜잭션** 탭에서 기록을 조회할 수 있습니다.
 3. 기록을 선택하면 개요에 변경 사유, 경로를 판단한 근거, 원본 파일 안에서의 위치가 표시됩니다. `F1`을 누르면 사용 안내가 열립니다.
 
@@ -56,7 +57,7 @@
 | VMDK | 단일 희소(sparse) 이미지, 스트림 최적화 이미지, 같은 폴더의 FLAT 파일을 참조하는 디스크 설명자 |
 | AFF1 | 무압축 페이지, zlib 압축 페이지 또는 0으로 채운 페이지를 담은 단일 이미지 |
 
-잠겨 있는 BitLocker 볼륨은 외부 도구에서 잠금을 해제한 뒤 열 수 있습니다. 이미지 형식별 세부 조건은 [이미지 모듈 안내](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.31/modules/EvidenceImage/README.md)에서 확인할 수 있습니다.
+잠겨 있는 BitLocker 볼륨은 외부 도구에서 잠금을 해제한 뒤 열 수 있습니다. 이미지 형식별 세부 조건은 [이미지 모듈 안내](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.32/modules/EvidenceImage/README.md)에서 확인할 수 있습니다.
 
 앱은 원본을 읽기 전용으로 열고, 추출한 파일과 SQLite 색인은 별도 경로에 저장합니다. 기본 저장 위치는 `%LOCALAPPDATA%\NtfsTracer`입니다. 기존 JournalDesk에서 사용한 설정과 색인도 이어서 사용할 수 있습니다.
 
@@ -77,14 +78,15 @@
 
 **이전 이름을 찾기까지 걸린 시간**
 
-위 절차를 6.1MB짜리 별도 합성 저널(63,007건)에서 다시 실행했습니다. 같은 PC에서 앱별로 10회씩 자동으로 실행한 결과의 중앙값입니다. 파일 선택, 사람이 검색어를 입력하는 시간, 결과를 읽는 시간은 측정에서 제외했습니다.
+22GiB RAW 디스크 이미지에서 추출한 USN 저널(92.34MiB, 378,975건)에서 같은 절차를 실행했습니다. 두 도구에 같은 저널을 넣고 같은 Windows PC에서 각각 6회 측정한 결과의 중앙값입니다. 두 번째 조회에서는 저널을 열어 둔 상태에서 다른 파일의 이전 이름을 찾았습니다.
 
-| 분석 시작 후 화면에 표시된 결과 | NTFS Tracer 개발 빌드 | NTFS Log Tracker 1.9 |
+| 측정 구간 | NTFS Tracer 0.8.32 | NTFS Log Tracker 1.9 |
 | --- | ---: | ---: |
-| 새 분석의 첫 USN 목록 | **1.08초** | 3.25초 |
-| `report-final.docx`의 이전 이름 | **1.30초** | 3.50초 |
+| 분석 시작부터 첫 USN 목록 표시까지 | **1.95초** | 19.57초 |
+| 분석 시작부터 첫 번째 파일의 이전 이름 확인까지 | **2.24초** | 20.01초 |
+| 저널을 열어 둔 상태에서 두 번째 파일의 이전 이름 확인 | **216ms** | 356ms |
 
-[실험 조건과 10회 측정값](docs/performance.md#finding-a-previous-name-from-the-current-name) · [MFTECmd로 예제의 파일명·USN·원본 위치를 대조한 방법](docs/performance.md#cross-checking-the-demo-with-mftecmd)
+두 번째 조회에서는 6회 모두 NTFS Tracer가 먼저 결과를 표시했습니다. 두 도구에서 이전 이름과 새 이름, USN, 변경 사유가 일치했고, 시각도 Tracker가 표시하는 정밀도까지 일치했습니다. [실험 조건과 6회 측정값](docs/performance.md#previous-name-lookup-on-a-378975-record-journal) · [MFTECmd로 위 예제의 원본을 대조한 방법](docs/performance.md#cross-checking-the-demo-with-mftecmd)
 
 ### 트랜잭션에서 파일 시각 값 확인하기
 
@@ -104,7 +106,7 @@ dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o ar
 
 EWF 이미지를 열 수 있는 배포본을 만들려면 `NtfsTracer.libewf.dll`을 빌드한 뒤 `modules/EvidenceImage/Logical/Native/`에 두고 다시 게시하세요. [libewf 빌드 방법](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md)
 
-소스는 Rust 색인 엔진, WPF 앱, 이미지 판독 모듈로 구성됩니다. [엔진](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/engine) · [WPF 앱](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/gui) · [이미지 모듈](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/modules/EvidenceImage) · [회귀 검사](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/tests)
+소스는 Rust 색인 엔진, WPF 앱, 이미지 판독 모듈로 구성됩니다. [엔진](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/engine) · [WPF 앱](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/gui) · [이미지 모듈](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/modules/EvidenceImage) · [회귀 검사](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/tests)
 
 ## 표시 언어
 

@@ -147,7 +147,7 @@
        <StackPanel Orientation="Horizontal"><TextBlock FontFamily="Segoe MDL2 Assets" FontSize="12" Text="&#xE72B;" VerticalAlignment="Center" Margin="0,0,5,0"/><TextBlock Text="{loc:Ui InvestigationTab}"/></StackPanel>
       </Button>
       <Image x:Name="SelectedIcon" Width="24" Height="24" Margin="0,0,8,0" DockPanel.Dock="Left" Visibility="Collapsed"/>
-      <local:CopyText x:Name="FileTitle" Text="{loc:Ui SelectAFile}" VerticalAlignment="Center" FontSize="17" FontWeight="SemiBold" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/></DockPanel>
+      <local:CopyTextValue x:Name="FileTitle" Text="{loc:Ui SelectAFile}" VerticalAlignment="Center" FontSize="17" FontWeight="SemiBold" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/></DockPanel>
       <StackPanel x:Name="SnapshotPanel" Visibility="Collapsed" Margin="0,4,0,0">
        <DockPanel><TextBlock DockPanel.Dock="Left" Text="MFT" Style="{StaticResource Sub}" Margin="0,0,8,0" VerticalAlignment="Center"/>
         <local:CopyText DockPanel.Dock="Right" x:Name="SnapshotBasis" Foreground="{DynamicResource Desk.Muted}" Margin="5,0,0,0" VerticalAlignment="Center"/>

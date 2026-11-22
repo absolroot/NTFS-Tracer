@@ -130,6 +130,9 @@
     </ControlTemplate.Triggers>
    </ControlTemplate></Setter.Value></Setter>
   </Style>
+  <Style TargetType="{x:Type loc:CopyTextValue}">
+   <Setter Property="Foreground" Value="{DynamicResource Desk.Text}"/>
+  </Style>
   <Style TargetType="{x:Type loc:CopyText}">
    <Setter Property="FocusVisualStyle" Value="{StaticResource Desk.KeyboardOutline}"/>
    <Setter Property="Foreground" Value="{DynamicResource Desk.Text}"/>

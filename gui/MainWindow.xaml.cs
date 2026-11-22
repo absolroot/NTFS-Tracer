@@ -861,7 +861,7 @@ public partial class MainWindow : Window
                 progress(isMft ? L.T("폴더 경로 색인을 만들고 있습니다…", "Indexing folder paths…") : L.T("파일별 이력과 이전 이름 검색 색인을 만들고 있습니다…", "Indexing file histories and previous names…"));
         });
     }
-    private void ResetSelection()
+    private void ResetSelection(bool clearTitle = true)
     {
         historySortWork?.Cancel();
         selectedMftEvidence = null;
@@ -872,8 +872,11 @@ public partial class MainWindow : Window
         Events.ItemsSource = null;
         SetInspector(false);
         EmptyActivities.Visibility = Visibility.Collapsed;
-        FileTitle.Text = L.T("파일을 선택하세요", "Select a file");
-        FileTitle.ToolTip = null;
+        if (clearTitle)
+        {
+            FileTitle.Text = L.T("파일을 선택하세요", "Select a file");
+            FileTitle.ToolTip = null;
+        }
         Observed.Text = "";
         Observed.ToolTip = null;
         SnapshotPanel.Visibility = Visibility.Collapsed;
@@ -1050,9 +1053,12 @@ public partial class MainWindow : Window
             return;
         int savedFilter = bookmark?.Filter ?? (preserveSelection ? ActivityFilter.SelectedIndex : 0);
         long? savedRecord = position ?? bookmark?.Position ?? (preserveSelection ? (ProofPicker.SelectedItem as Entry)?.Position : null);
-        ResetSelection();
         if (FileList.SelectedItem is not FileRow f || journal is not { } j)
+        {
+            ResetSelection();
             return;
+        }
+        ResetSelection(clearTitle: false);
         var linked = mft;
         var version = fileVersion;
         current = f;
@@ -1108,8 +1114,21 @@ public partial class MainWindow : Window
             return false;
         if (!Events.Items.Contains(activity))
             ActivityFilter.SelectedIndex = 0;
-        Events.SelectedItem = activity;
-        ProofPicker.SelectedItem = activity.Records.First(record => record.Position == position);
+        var record = activity.Records.First(record => record.Position == position);
+        if (ReferenceEquals(Events.SelectedItem, activity))
+        {
+            ProofPicker.SelectedItem = record;
+        }
+        else
+        {
+            restoringActivity = true;
+            try
+            {
+                Events.SelectedItem = activity;
+            }
+            finally { restoringActivity = false; }
+            ShowActivity(activity, record);
+        }
         SetInspector(true);
         KeepActivityVisible(activity);
         return true;
@@ -1288,6 +1307,11 @@ public partial class MainWindow : Window
         if (!ReferenceEquals(e.OriginalSource, Events) || restoringActivity)
             return;
         var active = Events.SelectedItem as Activity;
+        ShowActivity(active, active?.Records[0]);
+    }
+
+    private void ShowActivity(Activity? active, Entry? record)
+    {
         NearbyHistory.IsEnabled = active != null;
         CompareChanges.Visibility = ChangeComparisonWindow.CanCompare(active) ? Visibility.Visible : Visibility.Collapsed;
         if (active is not { } activity)
@@ -1309,7 +1333,7 @@ public partial class MainWindow : Window
         ActionName.ToolTip = activity.ClockDetail;
         ProofPicker.Visibility = multiple ? Visibility.Visible : Visibility.Collapsed;
         ProofPicker.ItemsSource = activity.Records;
-        ProofPicker.SelectedIndex = 0;
+        ProofPicker.SelectedItem = record;
     }
     private void OpenRecordBytes(object sender, MouseButtonEventArgs e)
     {

@@ -43,7 +43,7 @@ public partial class IntakeSettings
             SetPathText(ImageFilePath, imageSession.ImagePath);
             var choices = probe.Volumes.Select(v => new VolumeChoice(v, VolumeTitle(probe.Format, v))).ToList();
             ImageVolumes.ItemsSource = choices;
-            ImageVolumes.SelectedIndex = choices.Count == 1 ? 0 : -1;
+            ImageVolumes.SelectedIndex = choices.Count > 0 ? 0 : -1;
             ImageWarnings.Text = string.Join(Environment.NewLine, probe.Warnings.Select(ImageMessage));
             ImageWarnings.ToolTip = string.Join(Environment.NewLine, probe.Warnings);
             ImageWarnings.Visibility = probe.Warnings.Count > 0 ? Visibility.Visible : Visibility.Collapsed;

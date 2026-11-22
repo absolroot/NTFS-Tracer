@@ -8,8 +8,9 @@
 
 ## NTFS Tracer を使う理由
 
+- **ディスクイメージから NTFS ログを直接取り込めます。** アプリでイメージと NTFS ボリュームを選ぶと、`$J`、`$MFT`、`$LogFile`を抽出して解析できます。NTFS Log Tracker 1.9 で通常のログ解析を行うには、別のツールで先にファイルを抽出します。 [Tracker の入力形式](https://sites.google.com/site/forensicnote/ntfs-log-tracker)
 - **検索結果からファイル履歴を直接開けます。** 現在のファイル名で見つけた行からファイル履歴を開くと、変更前の名前と根拠となるレコードを確認できます。
-- **結果 DB の作成、USN のインデックス化、ファイル名検索を最適化しました。** Rust エンジンが USN ジャーナルを読み込んで検索用 DB を作成し、通常のファイル名検索は入力後に固定の待ち時間を設けずに開始します。 同じサンプルの USN ジャーナルで、解析開始から最初の一覧が表示されるまでにかかった時間は、NTFS Tracer 開発版が **1.08 秒**、NTFS Log Tracker 1.9 が **3.25 秒**でした。各ツールを 10 回ずつ実行した結果の中央値です。 [測定条件と結果](docs/performance.md#finding-a-previous-name-from-the-current-name)
+- **USN 検索とファイル履歴をすばやく確認できます。** Rust エンジンがジャーナルをインデックス化します。通常のファイル名検索は入力に応じて開始し、ファイル履歴を開くと、選択したレコードが表示されます。 [大規模な USN ジャーナルでの測定結果](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
 - **分析担当者の作業の流れに配慮しました。** 検索結果では、ファイルの種類をアイコンでひと目で見分けられます。調査候補から根拠となるレコードを直接開き、必要な値をコピーできます。調査を再開すると、保存した検索条件と選択したレコードに戻れます。
 
 ## 使い方
@@ -18,7 +19,7 @@
 
 1. ファイルを指定せずに起動すると、**設定**画面が開きます。
    - **抽出済みのファイルがある場合**は、`$J`、`$MFT`、`$LogFile` のいずれか、またはそれらを含むフォルダーを選び、**解析を開始**を押します。ウィンドウにドラッグして指定することもできます。
-   - **ディスクイメージがある場合**は、イメージを選び、対象の NTFS ボリュームと抽出するファイルを指定してから解析を開始します。
+   - **ディスクイメージがある場合**は、イメージを選ぶと、読み取り可能な最初の NTFS ボリュームが自動で選択されます。対象のボリュームと抽出するファイルを確認し、解析を開始します。
 2. **全レコード**でファイルを検索し、該当する行から**ファイル履歴**を開きます。`$LogFile` を開いた場合は、**NTFS トランザクション**で記録を調べられます。
 3. レコードを選ぶと、変更理由、パスの根拠、元のファイル内の位置が表示されます。`F1` でアプリ内ガイドを開けます。
 
@@ -56,7 +57,7 @@
 | VMDK | 単一の sparse イメージ、stream-optimized イメージ、同じフォルダーにある FLAT ファイルを参照するディスク記述子 |
 | AFF1 | 非圧縮、zlib 圧縮、ゼロ埋めのページを含む単一イメージ |
 
-BitLocker でロックされているボリュームは、事前に外部ツールでロックを解除してください。対応形式の詳細は[イメージモジュールの説明](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.31/modules/EvidenceImage/README.md)を参照してください。
+BitLocker でロックされているボリュームは、事前に外部ツールでロックを解除してください。対応形式の詳細は[イメージモジュールの説明](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.32/modules/EvidenceImage/README.md)を参照してください。
 
 証拠ファイルは読み取り専用で開きます。抽出したファイルと SQLite インデックスは別の場所に保存します。既定の保存先は `%LOCALAPPDATA%\NtfsTracer` です。旧版の JournalDesk から更新した場合は、既存の設定とインデックスを引き続き使えます。
 
@@ -77,14 +78,15 @@ BitLocker でロックされているボリュームは、事前に外部ツー�
 
 **変更前の名前が表示されるまでの時間**
 
-別の模擬ジャーナル（6.1 MB、63,007 件）で同じ手順を実行しました。同じ PC で各アプリを 10 回ずつ自動操作し、中央値を求めました。ファイル選択、手入力、結果を読む時間は測定から除きました。
+22 GiB の RAW ディスクイメージから抽出した USN ジャーナル（92.34 MiB、378,975 件）で同じ手順を試しました。同じ Windows PC で両ツールに同じジャーナルを読み込ませ、各 6 回の測定の中央値を求めました。2 回目の検索では、ジャーナルを開いたまま別のファイルの変更前の名前を調べました。
 
-| 解析開始後に表示された結果 | NTFS Tracer 開発版 | NTFS Log Tracker 1.9 |
+| 測定区間 | NTFS Tracer 0.8.32 | NTFS Log Tracker 1.9 |
 | --- | ---: | ---: |
-| 新規解析の最初の USN 一覧 | **1.08 秒** | 3.25 秒 |
-| `report-final.docx` の変更前の名前 | **1.30 秒** | 3.50 秒 |
+| 解析開始から最初の USN 一覧が表示されるまで | **1.95 秒** | 19.57 秒 |
+| 解析開始から 1 件目のファイルの変更前の名前が分かるまで | **2.24 秒** | 20.01 秒 |
+| ジャーナルを開いた状態で 2 件目のファイルの変更前の名前が分かるまで | **216 ms** | 356 ms |
 
-[実験条件と全 10 回の測定値](docs/performance.md#finding-a-previous-name-from-the-current-name) · [MFTECmd でサンプルのファイル名・USN・オフセットを照合した手順](docs/performance.md#cross-checking-the-demo-with-mftecmd)
+2 件目の検索では、全 6 回で NTFS Tracer が先に結果を表示しました。変更前後の名前、USN、変更理由は両ツールで一致し、時刻も Tracker の表示精度まで一致しました。 [実験条件と全 6 回の測定値](docs/performance.md#previous-name-lookup-on-a-378975-record-journal) · [MFTECmd で上の例を照合した手順](docs/performance.md#cross-checking-the-demo-with-mftecmd)
 
 ### トランザクションでファイルの時刻を確認する
 
@@ -94,7 +96,7 @@ ArtiFast Windows の製品資料では、Windows LogFile の一覧で LSN を探
 
 ## ビルド
 
-[ビルド手順と依存関係](README.md#build-from-source) · [EWF ライブラリのビルド](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md) · [インデックス形式](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.31/engine/INDEX_FORMAT.md)
+[ビルド手順と依存関係](README.md#build-from-source) · [EWF ライブラリのビルド](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md) · [インデックス形式](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.32/engine/INDEX_FORMAT.md)
 
 ## 表示言語
 

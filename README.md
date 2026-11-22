@@ -14,8 +14,9 @@
 
 ## Why use NTFS Tracer?
 
+- **Open a disk image and extract the NTFS logs in one workflow.** Select an NTFS volume, then extract and index its `$J`, `$MFT`, and `$LogFile` in the app. For regular log parsing, NTFS Log Tracker 1.9 expects files extracted with another tool. [Tracker input requirements](https://sites.google.com/site/forensicnote/ntfs-log-tracker)
 - **Open file history directly from a search result.** Find a file by its current name, then choose **Open file history** to see its previous name and the supporting records.
-- **Optimized database setup, USN indexing, and filename search.** The Rust engine reads the USN journal and builds a searchable database. Typical filename searches start without a fixed delay. On the same sample USN journal, the time from starting analysis to seeing the first record list was **1.08 seconds** in the NTFS Tracer development build and **3.25 seconds** in NTFS Log Tracker 1.9. These are medians from ten runs per tool. [Benchmark setup and results](docs/performance.md#finding-a-previous-name-from-the-current-name)
+- **Fast USN search and file history.** The Rust engine indexes the journal, typical filename searches start as you type, and file history opens on the selected source record. [USN journal benchmark](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
 - **Designed for everyday investigations.** File icons make search results easier to scan. Open supporting records directly from a lead, copy the values you need, and resume an investigation with the same search and selected record.
 
 ## Quick start
@@ -23,7 +24,7 @@
 1. Extract the Windows x64 ZIP and run **NtfsTracer.exe**. The shared-runtime ZIP requires **.NET 10 Windows Desktop Runtime (x64)**.
 2. Open the source that matches your evidence.
    - **Extracted artifacts** · Choose **Select files…** or **Select extracted folder…**, then **Start analysis**. A `$J` alone is enough for USN history.
-   - **Disk image** · Choose **Select files…**, select the NTFS volume and artifacts, then **Extract and analyze**.
+   - **Disk image** · Choose **Select files…**. The first readable NTFS volume is selected automatically. Choose the volume and artifacts you need, then select **Extract and analyze**.
    - **Tracker results** · Choose **File → Open Tracker results…**. For TSV, choose **All files** in the file picker.
 3. Search **All records**, open **File history**, or switch to **NTFS transactions**. Select an event to see its details and contributing records. **F1** opens the in-app guide.
 
@@ -54,7 +55,7 @@ Inspect decoded fields, Hex, or JSON, export results to CSV, or scan source file
 | VMDK | Single sparse, stream-optimized, and descriptors referencing FLAT extents in the same directory. Parent chains are unsupported. |
 | AFF | `.aff`. Single AFF1 with uncompressed, zlib, or zero pages |
 
-Physical images must contain a readable NTFS volume. A locked BitLocker volume must be unlocked outside NTFS Tracer. See the [image module](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.31/modules/EvidenceImage/README.md) for the full variant limits.
+Physical images must contain a readable NTFS volume. A locked BitLocker volume must be unlocked outside NTFS Tracer. See the [image module](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.32/modules/EvidenceImage/README.md) for the full variant limits.
 
 ### Extracted artifacts and existing results
 
@@ -87,14 +88,15 @@ Both tools identified **`report-draft.docx`** as the previous name. The NTFS Tra
 
 **Time to reach the previous name**
 
-We ran the same steps on a separate synthetic journal (6.1 MB, 63,007 records). The figures are medians from ten automated runs per app on the same PC. They exclude file selection, human typing, and time spent reading the results.
+We ran the same workflow on a 92.34 MiB USN journal with 378,975 records extracted from a 22 GiB raw disk image. The figures are medians from six runs per app on the same Windows PC. Both apps received the same extracted journal. For the second lookup, we kept the journal open and searched for a different file.
 
-| Result shown after starting analysis | NTFS Tracer development build | NTFS Log Tracker 1.9 |
+| Checkpoint | NTFS Tracer 0.8.32 | NTFS Log Tracker 1.9 |
 | --- | ---: | ---: |
-| First USN list for a fresh analysis | **1.08 s** | 3.25 s |
-| Previous name of `report-final.docx` | **1.30 s** | 3.50 s |
+| First USN list from a fresh analysis | **1.95 s** | 19.57 s |
+| First previous name, including analysis | **2.24 s** | 20.01 s |
+| Second previous name with the journal open | **216 ms** | 356 ms |
 
-[Setup and all ten measurements](docs/performance.md#finding-a-previous-name-from-the-current-name) · [Verify the demo filenames, USNs, and source offsets with MFTECmd](docs/performance.md#cross-checking-the-demo-with-mftecmd)
+NTFS Tracer finished the second lookup first in all six runs. Both tools agreed on the old and new names, USNs, change reasons, and timestamps at the precision shown by Tracker. [Test setup and six runs](docs/performance.md#previous-name-lookup-on-a-378975-record-journal) · [MFTECmd cross-check for the example above](docs/performance.md#cross-checking-the-demo-with-mftecmd)
 
 ### Check file timestamps in a transaction
 
@@ -114,7 +116,7 @@ dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o ar
 
 For EWF support, build `NtfsTracer.libewf.dll` using the [libewf instructions](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md) before publishing.
 
-[Rust engine](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/engine) · [Index format](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.31/engine/INDEX_FORMAT.md) · [WPF app](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/gui) · [Regression tests](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/tests)
+[Rust engine](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/engine) · [Index format](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.32/engine/INDEX_FORMAT.md) · [WPF app](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/gui) · [Regression tests](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/tests)
 
 ## Display language
 

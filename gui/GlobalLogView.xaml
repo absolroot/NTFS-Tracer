@@ -160,7 +160,7 @@
      <Button DockPanel.Dock="Right" x:Name="GoFile" Style="{DynamicResource Desk.EvidenceLink}" Content="{loc:Ui OpenFileHistory}" Margin="4,0,10,0" ToolTip="{loc:Ui OpenThisRecordInFileHistoryEnter}" Click="OpenFile"/>
      <ContentControl DockPanel.Dock="Right" Focusable="False" Content="{Binding SelectedItem.Record,ElementName=Records}" ContentTemplate="{StaticResource Desk.RecordUsn}"/>
      <Image DockPanel.Dock="Left" Source="{Binding SelectedItem.Icon,ElementName=Records}" Style="{StaticResource Desk.RecordIcon}"/>
-     <local:CopyText x:Name="RecordTitle" VerticalAlignment="Center" FontWeight="SemiBold" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+     <local:CopyTextValue x:Name="RecordTitle" VerticalAlignment="Center" FontWeight="SemiBold" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
     </DockPanel>
     <TabControl Style="{DynamicResource Desk.InspectorTabs}" x:Name="Evidence" Background="Transparent" BorderThickness="0" SelectionChanged="EvidenceTabChanged">
      <TabItem Header="{loc:Ui Overview}"><local:RecordOverviewView x:Name="OverviewPanel"/></TabItem>

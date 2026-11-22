@@ -4,20 +4,20 @@
    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" MaxWidth="220" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
    <local:CopyText HorizontalAlignment="Left" Grid.Row="0" Text="{local:Ui FieldAuditRecordTime}" Foreground="{DynamicResource Desk.Muted}" Margin="0,0,8,1" VerticalAlignment="Top"/>
-   <local:CopyText HorizontalAlignment="Left" x:Name="EventTime" Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,1" AutomationProperties.Name="{local:Ui FieldAuditRecordTime}"/>
+   <local:CopyTextValue HorizontalAlignment="Left" x:Name="EventTime" Grid.Row="0" Grid.Column="1" Margin="0,0,0,1" AutomationProperties.Name="{local:Ui FieldAuditRecordTime}"/>
    <local:CopyText HorizontalAlignment="Left" Grid.Row="1" Text="{local:Ui ChangeReason}" Foreground="{DynamicResource Desk.Muted}" Margin="0,0,8,1" VerticalAlignment="Top"/>
-   <local:CopyText HorizontalAlignment="Left" x:Name="Reasons" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,1" AutomationProperties.Name="{local:Ui ChangeReason}"/>
+   <local:CopyTextValue HorizontalAlignment="Left" x:Name="Reasons" Grid.Row="1" Grid.Column="1" Margin="0,0,0,1" AutomationProperties.Name="{local:Ui ChangeReason}"/>
    <local:CopyText HorizontalAlignment="Left" Grid.Row="2" Text="{local:Ui RecordedPath}" Foreground="{DynamicResource Desk.Muted}" Margin="0,0,8,1" VerticalAlignment="Top"/>
-   <local:CopyText HorizontalAlignment="Stretch" x:Name="PathText" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,1" AutomationProperties.Name="{local:Ui RecordedPath}"/>
+   <local:CopyTextValue HorizontalAlignment="Stretch" x:Name="PathText" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}" Grid.Row="2" Grid.Column="1" Margin="0,0,0,1" AutomationProperties.Name="{local:Ui RecordedPath}"/>
    <local:RecordIdentifiersView x:Name="Identifiers" Grid.Row="3" Grid.ColumnSpan="2" Visibility="Collapsed"/>
    <local:CopyText HorizontalAlignment="Left" x:Name="NameLabel" Grid.Row="5" Text="{local:Ui RecordedName}" Foreground="{DynamicResource Desk.Muted}" Margin="0,0,8,1" VerticalAlignment="Top"/>
-   <local:CopyText HorizontalAlignment="Left" x:Name="RawName" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,1" AutomationProperties.Name="{local:Ui RecordedName}"/>
+   <local:CopyTextValue HorizontalAlignment="Left" x:Name="RawName" Grid.Row="5" Grid.Column="1" Margin="0,0,0,1" AutomationProperties.Name="{local:Ui RecordedName}"/>
    <local:CopyText HorizontalAlignment="Left" Grid.Row="6" Text="{local:Ui SourceRecord}" Foreground="{DynamicResource Desk.Muted}" Margin="0,0,8,1" VerticalAlignment="Top"/>
-   <local:CopyText HorizontalAlignment="Left" x:Name="LocationText" Grid.Row="6" Grid.Column="1" TextWrapping="Wrap" Margin="0,0,0,1" AutomationProperties.Name="{local:Ui SourceRecord}"/>
+   <local:CopyTextValue HorizontalAlignment="Left" x:Name="LocationText" Grid.Row="6" Grid.Column="1" Margin="0,0,0,1" AutomationProperties.Name="{local:Ui SourceRecord}"/>
    <Expander x:Name="PathBasis" Grid.Row="4" Grid.Column="1" Style="{DynamicResource Desk.PathEvidence}" Header="{local:Ui PathEvidence}" Visibility="Collapsed">
-    <local:CopyText HorizontalAlignment="Left" x:Name="PathReason" Margin="12,1,0,4" Foreground="{DynamicResource Desk.Muted}" TextWrapping="Wrap" AutomationProperties.Name="{local:Ui PathEvidence}"/>
+    <local:CopyTextValue HorizontalAlignment="Left" x:Name="PathReason" Margin="12,1,0,4" Foreground="{DynamicResource Desk.Muted}" AutomationProperties.Name="{local:Ui PathEvidence}"/>
    </Expander>
-   <local:CopyText HorizontalAlignment="Left" x:Name="Notes" Grid.Row="7" Grid.ColumnSpan="2" Foreground="{DynamicResource Desk.Muted}" TextWrapping="Wrap" Visibility="Collapsed"/>
+   <local:CopyTextValue HorizontalAlignment="Left" x:Name="Notes" Grid.Row="7" Grid.ColumnSpan="2" Foreground="{DynamicResource Desk.Muted}" Visibility="Collapsed"/>
   </Grid>
  </ScrollViewer>
 </UserControl>
