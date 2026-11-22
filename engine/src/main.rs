@@ -1,9 +1,11 @@
 mod bytes;
 mod decode;
+mod journal_scan;
 mod logcarve;
 mod mft;
 mod output;
 mod transaction_log;
+mod usn_csv;
 use decode::{Fields, Step};
 use rusqlite::{Connection, Statement, params};
 use sha2::{Digest, Sha256};
@@ -11,12 +13,10 @@ use std::{
     env,
     error::Error,
     fs::{File, OpenOptions},
-    io::Read,
     path::Path,
 };
 
 type Result<T> = std::result::Result<T, Box<dyn Error>>;
-const BLOCK: usize = 1024 * 1024;
 
 fn flush_damage(
     start: &mut Option<u64>,
@@ -37,7 +37,7 @@ fn carve(source: File, output: &Path) -> Result<()> {
     index_journal(source, output, true)
 }
 
-fn index_journal(mut source: File, output: &Path, carving: bool) -> Result<()> {
+fn index_journal(source: File, output: &Path, carving: bool) -> Result<()> {
     let total = source.metadata()?.len();
     let mut db = Connection::open(output)?;
     let tx = db.transaction()?;
@@ -57,48 +57,31 @@ fn index_journal(mut source: File, output: &Path, carving: bool) -> Result<()> {
     let mut extent = tx.prepare("INSERT INTO extents VALUES(?,?,?,?)")?;
     let mut warning = tx.prepare("INSERT INTO warnings VALUES(?,?,?)")?;
     let mut hash = Sha256::new();
-    let mut buf = vec![0; BLOCK];
-    let mut pending = Vec::with_capacity(BLOCK + 65536);
-    let mut base = 0u64;
-    let mut count = 0u64;
     let mut damage_start = None;
-    let mut seeking = false;
     let mut segment = 0u64;
-    loop {
-        let read = source.read(&mut buf)?;
-        hash.update(&buf[..read]);
-        pending.extend_from_slice(&buf[..read]);
-        let mut i = 0;
-        while i < pending.len() {
-            let pos = base + i as u64;
-            let step = if carving {
-                decode::next_carved(&pending[i..], read == 0)
-            } else {
-                decode::next(&pending[i..], read == 0, seeking)
-            };
-            if !matches!(step, Step::Damaged(_) | Step::More) {
+    let (base, count) = journal_scan::scan(
+        source,
+        carving,
+        |bytes| hash.update(bytes),
+        |pos, seeking, step| {
+            if !matches!(step, Step::Damaged(_)) {
                 flush_damage(&mut damage_start, pos, &mut warning)?;
             }
-            i += match step {
-                Step::More => break,
-                Step::Zero(size) => {
+            match step {
+                Step::Zero(_) => {
                     if carving {
                         segment += 1;
                     }
-                    size
                 }
                 Step::Unsupported(size, version) => {
                     segment += 1;
                     warning.execute(params![pos, size, format!("지원하지 않는 USN V{version}")])?;
-                    size
                 }
-                Step::Damaged(size) => {
+                Step::Damaged(_) => {
                     if !seeking {
                         segment += 1;
                     }
                     damage_start.get_or_insert(pos);
-                    seeking = true;
-                    size
                 }
                 Step::Record(r) => {
                     let (name, stamp, security, attr, escaped) = match &r.fields {
@@ -121,19 +104,13 @@ fn index_journal(mut source: File, output: &Path, carving: bool) -> Result<()> {
                         pos, r.size, r.version, r.file, r.parent, r.usn, stamp, r.reason, r.source,
                         security, attr, name, r.minor, seeking, escaped, segment
                     ])?;
-                    seeking = false;
-                    count += 1;
-                    r.size
                 }
-            };
-        }
-        pending.drain(..i);
-        base += i as u64;
-        if read == 0 {
-            break;
-        }
-        println!("read {base} {total} {count}");
-    }
+                Step::More => unreachable!("scan only emits completed steps"),
+            }
+            Ok(())
+        },
+        |base, count| println!("read {base} {total} {count}"),
+    )?;
     flush_damage(&mut damage_start, base, &mut warning)?;
     drop((insert, range, extent, warning));
     tx.execute(
@@ -194,8 +171,12 @@ fn main() {
         [mode, input, out] if mode == "logcarve" => {
             create(Path::new(input), Path::new(out), logcarve::index)
         }
+        [mode, input, out] if mode == "usn-csv" => {
+            usn_csv::export(Path::new(input), Path::new(out))
+        }
         _ => {
             eprintln!("journal-index [mft|logfile|carve|logcarve] INPUT NEW_DB");
+            eprintln!("journal-index usn-csv INPUT_USN_V2 NEW_CSV");
             std::process::exit(2);
         }
     };

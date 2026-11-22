@@ -7,3 +7,5 @@ edition = "2024"
 rusqlite = { version = "0.37", features = ["bundled"] }
 sha2 = "0.10"
 ntfslog = { package = "sootmark-ntfslog", version = "=0.1.0", path = "vendor/sootmark-ntfslog" }
+tempfile = { version = "3", default-features = false }
+time = { version = "0.3", default-features = false }

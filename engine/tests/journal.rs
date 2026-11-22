@@ -1,8 +1,8 @@
 use rusqlite::Connection;
 use std::{
     fs,
-    path::PathBuf,
-    process::Command,
+    path::{Path, PathBuf},
+    process::{Command, Output},
     sync::atomic::{AtomicUsize, Ordering},
 };
 
@@ -61,6 +61,67 @@ fn record(version: u16, words: &[u16]) -> Vec<u8> {
         *chunk = word.to_le_bytes();
     }
     b
+}
+
+fn export_csv(input: &Path, output: &Path) -> Output {
+    Command::new(env!("CARGO_BIN_EXE_journal-index"))
+        .arg("usn-csv")
+        .arg(input)
+        .arg(output)
+        .output()
+        .unwrap()
+}
+
+#[test]
+fn direct_csv_preserves_field_values_and_refuses_overwrite() {
+    let fixture = Fixture::new();
+    let input = fixture.root.join("input,journal");
+    let output = fixture.root.join("export.csv");
+    let mut data = vec![0; 1024 * 1024 - 8];
+    let position = data.len();
+    let mut item = record(2, &" x,\"draft\".txt".encode_utf16().collect::<Vec<_>>());
+    item[14..16].copy_from_slice(&3u16.to_le_bytes());
+    item[16..24].copy_from_slice(&((2u64 << 48) | 5).to_le_bytes());
+    item[32..40].copy_from_slice(&116_444_736_000_000_001i64.to_le_bytes());
+    item[40..44].copy_from_slice(&0x80000100u32.to_le_bytes());
+    item[52..56].copy_from_slice(&0x20u32.to_le_bytes());
+    data.extend(item);
+    data.extend([1, 2, 3]);
+    fs::write(&input, &data).unwrap();
+
+    let result = export_csv(&input, &output);
+    assert!(result.status.success());
+    assert!(String::from_utf8_lossy(&result.stderr).contains("Skipped 3 damaged source bytes"));
+    let csv = fs::read_to_string(&output).unwrap();
+    let (header, row) = csv.split_once("\r\n").unwrap();
+    assert!(header.starts_with("\u{feff}Name,Extension,"));
+    assert_eq!(header.split(',').count(), 13);
+    assert_eq!(
+        row,
+        format!(
+            "\" x,\"\"draft\"\".txt\",.txt,31,3,5,2,,400,1970-01-01 00:00:00.0000001,FileCreate|Close,Archive,{position},\"{}\"\r\n",
+            input.display()
+        )
+    );
+    assert!(!export_csv(&input, &output).status.success());
+    assert_eq!(fs::read_to_string(&output).unwrap(), csv);
+    assert_eq!(fs::read(&input).unwrap(), data);
+}
+
+#[test]
+fn direct_csv_does_not_publish_partial_output_for_an_unsupported_record() {
+    let fixture = Fixture::new();
+    let input = fixture.root.join("input");
+    let output = fixture.root.join("export.csv");
+    let mut data = record(2, &[b'A' as u16]);
+    data.extend(record(3, &[b'B' as u16]));
+    fs::write(&input, data).unwrap();
+
+    let result = export_csv(&input, &output);
+    assert!(!result.status.success());
+    assert!(String::from_utf8_lossy(&result.stderr).contains("found V3 at offset"));
+    assert!(!output.exists());
+    assert_eq!(fs::read_dir(&fixture.root).unwrap().count(), 1);
 }
 
 #[test]

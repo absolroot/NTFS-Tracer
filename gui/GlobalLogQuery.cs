@@ -177,7 +177,7 @@ public sealed partial class GlobalLogQuery(string dbPath)
             using var stream = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None);
             try
             {
-                using (var writer = new StreamWriter(stream, new UTF8Encoding(true)))
+                using (var writer = new StreamWriter(stream, new UTF8Encoding(true), bufferSize: 64 * 1024))
                 {
                     string zone = utc.Code;
                     writer.Write(L.T("기록 당시 파일 이름,기록 시각({0}),변경 사유,사유 비트,USN,파일 식별자(원본 바이트),상위 폴더 식별자(원본 바이트),원본 오프셋,바이트 길이,원본 FILETIME,원본 파일,원본 SHA-256,기록 형식,소스 정보 비트,보안 식별 번호,파일 특성 비트,변경 범위(시작 + 길이),후속 범위 수,손상 직후 재동기화,파일 이름 이스케이프,연속 구간 번호,분석 방식", "Recorded file name,Record time ({0}),Change reason,Reason bits,USN,File ID (raw bytes),Parent ID (raw bytes),Source offset,Byte length,Raw FILETIME,Source file,Source SHA-256,Record format,Source info bits,Security ID,File attribute bits,Changed ranges (start + length),Remaining extents,Resynced after damage,Escaped file name,Continuous segment ID,Analysis method", zone));
@@ -186,27 +186,37 @@ public sealed partial class GlobalLogQuery(string dbPath)
                             ",Event-time path,Path source,Path assessment,Path evidence,Attached MFT file,MFT SHA-256"));
                     writer.WriteLine();
                     var progressTimer = System.Diagnostics.Stopwatch.StartNew();
+                    var line = new StringBuilder(512);
+                    var reasonLabels = new Dictionary<(long Reason, string Language), string>();
                     while (reader.Read())
                     {
                         token.ThrowIfCancellationRequested();
                         var row = Row(reader, utc);
                         var e = row.Record;
-                        string[] fields = [e.Name, e.Timestamp is long t ? GlobalLogFilter.PreciseTime(t, utc) : "",
-                            row.ReasonsText, $"0x{e.Reason:X8}", Number(e.Usn), Convert.ToHexString(row.FileId), Convert.ToHexString(e.Parent),
+                        var reasonKey = (e.Reason, L.Code);
+                        if (!reasonLabels.TryGetValue(reasonKey, out var reasonLabel))
+                        {
+                            reasonLabel = row.ReasonsText;
+                            if (reasonLabels.Count < 1024)
+                                reasonLabels.Add(reasonKey, reasonLabel);
+                        }
+                        AppendCsvFields(line, [e.Name, e.Timestamp is long t ? GlobalLogFilter.PreciseTime(t, utc) : "",
+                            reasonLabel, $"0x{e.Reason:X8}", Number(e.Usn), Convert.ToHexString(row.FileId), Convert.ToHexString(e.Parent),
                             Number(e.Position), Number(e.Size), Number(e.Timestamp), source, hash, $"{e.Version}.{e.Minor}", $"0x{e.Source:X8}",
                             Number(e.Security), e.Attributes is long a ? $"0x{a:X8}" : "", e.Extents, Number(e.Remaining),
-                            e.Resynced ? L.T("예", "Yes") : "", e.Escaped ? L.T("예", "Yes") : "", Number(e.Segment), carvedSource ? L.T("카빙 후보", "Carved candidate") : L.T("저널 기록", "Journal record")];
+                            e.Resynced ? L.T("예", "Yes") : "", e.Escaped ? L.T("예", "Yes") : "", Number(e.Segment), carvedSource ? L.T("카빙 후보", "Carved candidate") : L.T("저널 기록", "Journal record")]);
                         if (resolvePath != null)
                         {
                             var path = resolvePath(row);
-                            fields = [..fields,path.HasKnownPath?path.Display:"",path.HasKnownPath?path.SourceLabel:"",
-                                path.DisplayBasis,path.Explanation,mftSource??"",mftHash??""];
+                            AppendCsvFields(line, [path.HasKnownPath ? path.Display : "", path.HasKnownPath ? path.SourceLabel : "",
+                                path.DisplayBasis, path.Explanation, mftSource ?? "", mftHash ?? ""]);
                         }
-                        writer.WriteLine(string.Join(",", fields.Select(s => "\"" + s.Replace("\"", "\"\"") + "\"")));
+                        writer.WriteLine(line);
+                        line.Clear();
                         count++;
-                        if (count % 4096 == 0 || progressTimer.ElapsedMilliseconds >= 250)
+                        if (progress != null && (count % 4096 == 0 || progressTimer.ElapsedMilliseconds >= 250))
                         {
-                            progress?.Report(count);
+                            progress.Report(count);
                             progressTimer.Restart();
                         }
                     }
@@ -222,6 +232,24 @@ public sealed partial class GlobalLogQuery(string dbPath)
                     File.Delete(temporary);
             }
         }, token).ContinueOnInterrupt(token);
+    }
+
+    private static void AppendCsvFields(StringBuilder line, ReadOnlySpan<string> fields)
+    {
+        foreach (string value in fields)
+        {
+            if (line.Length > 0)
+                line.Append(',');
+            line.Append('"');
+            var remaining = value.AsSpan();
+            int quote;
+            while ((quote = remaining.IndexOf('"')) >= 0)
+            {
+                line.Append(remaining[..quote]).Append("\"\"");
+                remaining = remaining[(quote + 1)..];
+            }
+            line.Append(remaining).Append('"');
+        }
     }
 
     private static string Number(long? number) => number?.ToString(CultureInfo.InvariantCulture) ?? "";
