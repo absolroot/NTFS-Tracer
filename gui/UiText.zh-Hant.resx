@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="AboutJournaldesk" xml:space="preserve"><value>關於 NTFS Tracer</value></data>
+  <data name="Activity" xml:space="preserve"><value>活動</value></data>
+  <data name="AllActivities" xml:space="preserve"><value>所有活動</value></data>
+  <data name="AllOperations" xml:space="preserve"><value>所有記錄</value></data>
+  <data name="AllRecords" xml:space="preserve"><value>所有記錄</value></data>
+  <data name="AllRecordsCtrl1" xml:space="preserve"><value>所有記錄 (Ctrl+1)</value></data>
+  <data name="AnalysisOptions" xml:space="preserve"><value>分析選項</value></data>
+  <data name="ArtifactJournal" xml:space="preserve"><value>記錄位於 $UsnJrnl 檔案的替代資料流 $J 中。擷取工具可將該資料流儲存為 $J 或 $UsnJrnl-$J。</value></data>
+  <data name="ArtifactLocationTitle" xml:space="preserve"><value>NTFS 檔案位置</value></data>
+  <data name="ArtifactLog" xml:space="preserve"><value>此檔案記錄 NTFS 中繼資料交易，可獨立分析。</value></data>
+  <data name="ArtifactMft" xml:space="preserve"><value>MFT 識別檔案與上層資料夾。請使用與 $J 位於同一磁碟區的 $MFT 來重建路徑。</value></data>
+  <data name="ArtifactRoot" xml:space="preserve"><value>這些路徑以 NTFS 磁碟區為基準。</value></data>
+  <data name="AttachMft" xml:space="preserve"><value>連結 $MFT…</value></data>
+  <data name="ChangeReason" xml:space="preserve"><value>變更原因</value></data>
+  <data name="ChangeReasonFilter" xml:space="preserve"><value>變更原因</value></data>
+  <data name="ClearFileNameSearch" xml:space="preserve"><value>清除搜尋</value></data>
+  <data name="ClearFileSearch" xml:space="preserve"><value>清除搜尋</value></data>
+  <data name="ClearFilters" xml:space="preserve"><value>重設所有篩選</value></data>
+  <data name="ClearSearch" xml:space="preserve"><value>清除搜尋</value></data>
+  <data name="ClearSelection" xml:space="preserve"><value>清除選取</value></data>
+  <data name="ClearTransactionSearch" xml:space="preserve"><value>清除搜尋</value></data>
+  <data name="CollapseDetailsEsc" xml:space="preserve"><value>關閉詳細資料 (Esc)</value></data>
+  <data name="CollapseEvidencePane" xml:space="preserve"><value>關閉詳細資料</value></data>
+  <data name="CollapseEvidencePaneEsc" xml:space="preserve"><value>關閉詳細資料 (Esc)</value></data>
+  <data name="CollapseSelectedRecord" xml:space="preserve"><value>關閉詳細資料</value></data>
+  <data name="CollapseSelectedRecordEsc" xml:space="preserve"><value>關閉詳細資料 (Esc)</value></data>
+  <data name="CollapseTransactionDetails" xml:space="preserve"><value>關閉詳細資料</value></data>
+  <data name="CompareChanges" xml:space="preserve"><value>比較變更</value></data>
+  <data name="Copy" xml:space="preserve"><value>複製</value></data>
+  <data name="CsvSaveLocation" xml:space="preserve"><value>CSV 儲存位置</value></data>
+  <data name="DarkTheme" xml:space="preserve"><value>深色佈景主題</value></data>
+  <data name="DateFilter" xml:space="preserve"><value>日期篩選</value></data>
+  <data name="DisplayLanguage" xml:space="preserve"><value>介面語言</value></data>
+  <data name="Done" xml:space="preserve"><value>完成</value></data>
+  <data name="DropSourcesHint" xml:space="preserve"><value>將磁碟映像、已擷取的檔案（$J、$MFT、$LogFile）或資料夾拖放至此。</value></data>
+  <data name="EXit" xml:space="preserve"><value>結束</value></data>
+  <data name="Edit" xml:space="preserve"><value>編輯</value></data>
+  <data name="EndDate" xml:space="preserve"><value>結束日期</value></data>
+  <data name="EndTime" xml:space="preserve"><value>結束時間</value></data>
+  <data name="Export" xml:space="preserve"><value>匯出</value></data>
+  <data name="ExportAsCsv" xml:space="preserve"><value>匯出為 CSV…</value></data>
+  <data name="ExtractionFolder" xml:space="preserve"><value>擷取資料夾</value></data>
+  <data name="FieldAuditRecordTime" xml:space="preserve"><value>記錄時間</value></data>
+  <data name="File" xml:space="preserve"><value>檔案</value></data>
+  <data name="FileHistory" xml:space="preserve"><value>檔案歷程</value></data>
+  <data name="FileHistoryCtrl2" xml:space="preserve"><value>檔案歷程 (Ctrl+2)</value></data>
+  <data name="Files" xml:space="preserve"><value>檔案</value></data>
+  <data name="Find" xml:space="preserve"><value>尋找</value></data>
+  <data name="FindAReason" xml:space="preserve"><value>搜尋原因</value></data>
+  <data name="From" xml:space="preserve"><value>原位置</value></data>
+  <data name="FullPaths" xml:space="preserve"><value>顯示完整路徑</value></data>
+  <data name="GuideFields" xml:space="preserve"><value>選擇來源記錄。記錄詳細資料會顯示 FileName、Reason 等欄位。JSON 顯示索引值，Hex 顯示來源位元組。</value></data>
+  <data name="GuideFollow" xml:space="preserve"><value>追蹤檔案</value></data>
+  <data name="GuideFollowPath" xml:space="preserve"><value>顯示完整路徑後，可在不同欄位查看路徑與來源。在概覽展開路徑依據，即可查看哪些資料夾來自記錄檔，哪些參考了 MFT。</value></data>
+  <data name="GuideInspect" xml:space="preserve"><value>檢查來源記錄</value></data>
+  <data name="GuideLanguage" xml:space="preserve"><value>介面語言</value></data>
+  <data name="GuideLanguageText" xml:space="preserve"><value>在「檢視 → 介面語言」中選擇語言，立即生效。原始檔名與位元組維持原樣。</value></data>
+  <data name="GuideOpen" xml:space="preserve"><value>開啟證據</value></data>
+  <data name="GuideOpenFiles" xml:space="preserve"><value>在設定中選擇檔案或擷取資料夾。檢查自動加入的檔案，用 × 移除不需要的項目。</value></data>
+  <data name="GuidePreferences" xml:space="preserve"><value>顯示與分析</value></data>
+  <data name="GuideSave" xml:space="preserve"><value>儲存結果</value></data>
+  <data name="GuideSearch" xml:space="preserve"><value>搜尋指南</value></data>
+  <data name="GuideTimeZone" xml:space="preserve"><value>在「設定 → 分析選項」選擇時區。切換後，同一事件會以新時區顯示。比較時間時請查看欄位標題。</value></data>
+  <data name="GuideTransactions" xml:space="preserve"><value>交易與復原</value></data>
+  <data name="Help" xml:space="preserve"><value>說明</value></data>
+  <data name="ImageArtifacts" xml:space="preserve"><value>要擷取的檔案</value></data>
+  <data name="ImageFile" xml:space="preserve"><value>映像檔</value></data>
+  <data name="ImageVolume" xml:space="preserve"><value>磁碟區或集合</value></data>
+  <data name="IncludePreviousNames" xml:space="preserve"><value>包含舊名稱</value></data>
+  <data name="IndexChooseFolder" xml:space="preserve"><value>索引資料夾</value></data>
+  <data name="IndexLocation" xml:space="preserve"><value>索引資料夾</value></data>
+  <data name="IndexResetFolder" xml:space="preserve"><value>使用預設資料夾</value></data>
+  <data name="IndexingModeLabel" xml:space="preserve"><value>索引模式</value></data>
+  <data name="IndexingParallel" xml:space="preserve"><value>平行（最多 2 項）</value></data>
+  <data name="IndexingSequential" xml:space="preserve"><value>循序</value></data>
+  <data name="IntakeBrowse" xml:space="preserve"><value>瀏覽…</value></data>
+  <data name="IntakeCancel" xml:space="preserve"><value>取消</value></data>
+  <data name="IntakeFromFolder" xml:space="preserve"><value>選取擷取資料夾…</value></data>
+  <data name="IntakeLog" xml:space="preserve"><value>交易記錄檔（$LogFile）</value></data>
+  <data name="IntakeMft" xml:space="preserve"><value>檔案表（$MFT）</value></data>
+  <data name="IntakeSettingsShortcut" xml:space="preserve"><value>設定 (Ctrl+,)</value></data>
+  <data name="IntakeSettingsTab" xml:space="preserve"><value>設定</value></data>
+  <data name="IntakeSources" xml:space="preserve"><value>待分析證據</value></data>
+  <data name="IntakeStart" xml:space="preserve"><value>開始分析</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer · NTFS 檔案分析</value></data>
+  <data name="MoveOrRenameCandidates" xml:space="preserve"><value>疑似移動或重新命名</value></data>
+  <data name="NearbyRecords" xml:space="preserve"><value>前後記錄</value></data>
+  <data name="NewName" xml:space="preserve"><value>新名稱</value></data>
+  <data name="NextFilePage" xml:space="preserve"><value>下一頁</value></data>
+  <data name="NextPage" xml:space="preserve"><value>下一頁</value></data>
+  <data name="NoMatchingFiles" xml:space="preserve"><value>找不到符合的檔案。</value></data>
+  <data name="NtfsTransactions" xml:space="preserve"><value>NTFS 交易</value></data>
+  <data name="NtfsTransactionsCtrl3" xml:space="preserve"><value>NTFS 交易 (Ctrl+3)</value></data>
+  <data name="OpenFileHistory" xml:space="preserve"><value>開啟檔案歷程</value></data>
+  <data name="OpenLogfile" xml:space="preserve"><value>開啟 $LogFile…</value></data>
+  <data name="OpenSources" xml:space="preserve"><value>開啟證據…</value></data>
+  <data name="OpenUsnJournal" xml:space="preserve"><value>開啟 USN 記錄…</value></data>
+  <data name="OpenUsnJournalJ" xml:space="preserve"><value>開啟 USN 記錄（$J）…</value></data>
+  <data name="Operation" xml:space="preserve"><value>記錄類型 / 操作</value></data>
+  <data name="OperationsWithFileNames" xml:space="preserve"><value>含有檔案名稱的操作</value></data>
+  <data name="Overview" xml:space="preserve"><value>概覽</value></data>
+  <data name="PathEvidence" xml:space="preserve"><value>路徑依據</value></data>
+  <data name="PathSourceColumn" xml:space="preserve"><value>路徑來源</value></data>
+  <data name="PreviousFilePage" xml:space="preserve"><value>上一頁</value></data>
+  <data name="PreviousName" xml:space="preserve"><value>舊名稱</value></data>
+  <data name="PreviousPage" xml:space="preserve"><value>上一頁</value></data>
+  <data name="RecordDetails" xml:space="preserve"><value>記錄詳細資料</value></data>
+  <data name="RecordSummary" xml:space="preserve"><value>記錄摘要</value></data>
+  <data name="RecordedFileName" xml:space="preserve"><value>記錄的檔案名稱</value></data>
+  <data name="RecordedFileNames" xml:space="preserve"><value>記錄的檔案名稱</value></data>
+  <data name="RecordedName" xml:space="preserve"><value>記錄名稱</value></data>
+  <data name="RecordedPath" xml:space="preserve"><value>記錄路徑</value></data>
+  <data name="RecordedTimeKst" xml:space="preserve"><value>記錄時間 (KST)</value></data>
+  <data name="RecordedTimeKstLabel" xml:space="preserve"><value>記錄時間 (KST)</value></data>
+  <data name="ResetAllFilters" xml:space="preserve"><value>重設所有篩選</value></data>
+  <data name="ReturnToRecords" xml:space="preserve"><value>返回記錄</value></data>
+  <data name="RowsPerPage" xml:space="preserve"><value>每頁列數</value></data>
+  <data name="RowsPerPageValue" xml:space="preserve"><value>每頁 {0:N0} 筆</value></data>
+  <data name="SearchFileNameOrLsn" xml:space="preserve"><value>搜尋檔案名稱或 LSN</value></data>
+  <data name="SearchFileNames" xml:space="preserve"><value>搜尋檔案名稱</value></data>
+  <data name="SearchFileNamesInTheJournal" xml:space="preserve"><value>搜尋檔案名稱</value></data>
+  <data name="SelectAll" xml:space="preserve"><value>全選</value></data>
+  <data name="SelectEvidenceFiles" xml:space="preserve"><value>選取檔案…</value></data>
+  <data name="Source" xml:space="preserve"><value>記錄</value></data>
+  <data name="SourceInformation" xml:space="preserve"><value>來源資訊…</value></data>
+  <data name="SourceInformationLabel" xml:space="preserve"><value>來源資訊</value></data>
+  <data name="SourceOffset" xml:space="preserve"><value>來源位移</value></data>
+  <data name="SourceRecord" xml:space="preserve"><value>來源記錄</value></data>
+  <data name="StartDate" xml:space="preserve"><value>開始日期</value></data>
+  <data name="StartTime" xml:space="preserve"><value>開始時間</value></data>
+  <data name="TimeKst" xml:space="preserve"><value>記錄時間 (KST)</value></data>
+  <data name="TimeZone" xml:space="preserve"><value>時區</value></data>
+  <data name="To" xml:space="preserve"><value>新位置</value></data>
+  <data name="Tools" xml:space="preserve"><value>工具</value></data>
+  <data name="TransactionId" xml:space="preserve"><value>交易 ID</value></data>
+  <data name="UseSelectedFiles" xml:space="preserve"><value>套用選取項目</value></data>
+  <data name="UseWindowsLanguage" xml:space="preserve"><value>使用 Windows 語言</value></data>
+  <data name="UserGuide" xml:space="preserve"><value>使用指南</value></data>
+  <data name="View" xml:space="preserve"><value>檢視</value></data>
+  <data name="InvestigationTab" xml:space="preserve"><value>調查線索</value></data>
+  <data name="OpenLeadEvidence" xml:space="preserve"><value>在檔案歷程中檢視</value></data>
+  <data name="ScanOpenJournal" xml:space="preserve"><value>掃描已開啟的 $J</value></data>
+  <data name="ScanOpenLogFile" xml:space="preserve"><value>掃描已開啟的 $LogFile</value></data>
+  <data name="ChooseScanFile" xml:space="preserve"><value>選擇要掃描的檔案…</value></data>
+  <data name="ScanSourceOffset" xml:space="preserve"><value>檔案位移</value></data>
+  <data name="LeadDocumentDeleted" xml:space="preserve"><value>文件刪除</value></data>
+  <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>記錄時間順序異常</value></data>
+  <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>多次重新命名後刪除</value></data>
+  <data name="LeadSDeleteName" xml:space="preserve"><value>檔名與 SDelete 相符</value></data>
+  <data name="InvestigationTabShortcut" xml:space="preserve"><value>調查線索 (Ctrl+4)</value></data>
+  <data name="ScanUsnSourceHint" xml:space="preserve"><value>從原始位元組中尋找可能的 USN 記錄。&#10;也可掃描 RAW 映像和擷取的檔案。</value></data>
+  <data name="ScanLogSourceHint" xml:space="preserve"><value>從原始位元組中尋找可能的 $LogFile 頁面和記錄標頭。&#10;也可掃描 RAW 映像和擷取的檔案。</value></data>
+  <data name="DateFilterStartTimeHint" xml:space="preserve"><value>未輸入時間時，從 00:00 開始搜尋。</value></data>
+  <data name="DateFilterEndTimeHint" xml:space="preserve"><value>輸入 23:59 會包含該分鐘內的所有記錄。留空時包含結束日期當天的所有記錄。</value></data>
+  <data name="PathReferenceFilters" xml:space="preserve"><value>路徑與 ID</value></data>
+  <data name="FilterRecordedPath" xml:space="preserve"><value>路徑包含</value></data>
+  <data name="ParentFolderReference" xml:space="preserve"><value>上層資料夾參照</value></data>
+  <data name="ClearPathReferenceFilters" xml:space="preserve"><value>清除路徑與參照篩選條件</value></data>
+  <data name="PartialPath" xml:space="preserve"><value>部分路徑</value></data>
+  <data name="FilterFileId" xml:space="preserve"><value>檔案 ID</value></data>
+  <data name="FilterParentId" xml:space="preserve"><value>上層資料夾 ID</value></data>
+  <data name="PasteRecordId" xml:space="preserve"><value>貼上 ID</value></data>
+  <data name="SearchThisId" xml:space="preserve"><value>搜尋此 ID</value></data>
+  <data name="SearchThisIdHelp" xml:space="preserve"><value>使用此 ID 開始新的搜尋。</value></data>
+  <data name="IntakeDropFiles" xml:space="preserve"><value>拖入 NTFS 磁碟映像（如 E01、VHD）、擷取的 $J、$MFT、$LogFile 或包含這些檔案的資料夾。</value></data>
+  <data name="DatePickerPrompt" xml:space="preserve"><value>選擇日期</value></data>
+  <data name="AboutAuthor" xml:space="preserve"><value>作者：{0}</value></data>
+  <data name="DisplayOptions" xml:space="preserve"><value>顯示</value></data>
+  <data name="AppearanceTheme" xml:space="preserve"><value>主題</value></data>
+  <data name="WindowsSetting" xml:space="preserve"><value>Windows 設定</value></data>
+  <data name="LightTheme" xml:space="preserve"><value>淺色主題</value></data>
+  <data name="CloseSettings" xml:space="preserve"><value>關閉</value></data>
+</root>

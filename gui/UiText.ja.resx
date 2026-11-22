@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="RecordLength" xml:space="preserve"><value>   ·   レコード長 </value></data>
+  <data name="Bytes" xml:space="preserve"><value> バイト</value></data>
+  <data name="FindUsnRemnantsJournaldesk" xml:space="preserve"><value>USN レコードの断片を検索 · NTFS Tracer</value></data>
+  <data name="SelectFile" xml:space="preserve"><value>ファイルを選択…</value></data>
+  <data name="SelectFolder" xml:space="preserve"><value>フォルダーを選択…</value></data>
+  <data name="CancelScan" xml:space="preserve"><value>スキャンを中止</value></data>
+  <data name="FindUsnRemnants" xml:space="preserve"><value>USN レコードの断片を検索</value></data>
+  <data name="ScannedSources" xml:space="preserve"><value>スキャンした資料</value></data>
+  <data name="CarvedSource" xml:space="preserve"><value>カービング元の資料</value></data>
+  <data name="CompareChanges" xml:space="preserve"><value>変更前後を比較</value></data>
+  <data name="IncludeTechnicalFields" xml:space="preserve"><value>技術フィールドも表示</value></data>
+  <data name="CompareAllRecordFields" xml:space="preserve"><value>すべてのレコードフィールドを比較</value></data>
+  <data name="CompareFieldsBeforeAndAfter" xml:space="preserve"><value>変更前後のフィールドを比較</value></data>
+  <data name="Field" xml:space="preserve"><value>フィールド</value></data>
+  <data name="ShowEvidence" xml:space="preserve"><value>根拠を表示</value></data>
+  <data name="ShowPathEvidence" xml:space="preserve"><value>パスの根拠を表示</value></data>
+  <data name="HideEvidence" xml:space="preserve"><value>根拠を隠す</value></data>
+  <data name="Before" xml:space="preserve"><value>変更前</value></data>
+  <data name="After" xml:space="preserve"><value>変更後</value></data>
+  <data name="Comparison" xml:space="preserve"><value>比較結果</value></data>
+  <data name="ParentFolderEvidence" xml:space="preserve"><value>親フォルダーを特定した根拠</value></data>
+  <data name="FullPathForThisEvidence" xml:space="preserve"><value>この根拠に対応するフルパス</value></data>
+  <data name="InspectCursorValues" xml:space="preserve"><value>カーソル位置の値を確認</value></data>
+  <data name="ReadBytesAndIntegersAtEachCursor" xml:space="preserve"><value>左右のカーソル位置にあるバイトと整数値を確認します。</value></data>
+  <data name="SourceBytesForBothRecords" xml:space="preserve"><value>両方のレコードの元データ</value></data>
+  <data name="PreviousNameRecordBytes" xml:space="preserve"><value>変更前の名前を記録した元データ</value></data>
+  <data name="ThisRecordHasNoKnownByteRangeFor" xml:space="preserve"><value>このフィールドのバイト範囲は、このレコードから特定できません。</value></data>
+  <data name="NewNameRecordBytes" xml:space="preserve"><value>変更後の名前を記録した元データ</value></data>
+  <data name="SearchFileNamesInTheJournal" xml:space="preserve"><value>ジャーナルのファイル名を検索</value></data>
+  <data name="EnterPartOfAFileNameCtrlF" xml:space="preserve"><value>ファイル名の一部を入力します。(Ctrl+F)</value></data>
+  <data name="SearchFileNames" xml:space="preserve"><value>ファイル名を検索</value></data>
+  <data name="ClearFileNameSearch" xml:space="preserve"><value>ファイル名の検索をクリア</value></data>
+  <data name="IncludePreviousNames" xml:space="preserve"><value>以前の名前も含める</value></data>
+  <data name="FindRecordsUnderOtherNamesUsedByThe" xml:space="preserve"><value>同じファイルが別の名前で記録されたときのレコードも検索します。</value></data>
+  <data name="ChangeReasonFilter" xml:space="preserve"><value>変更理由で絞り込み</value></data>
+  <data name="MatchAnySelectedReason" xml:space="preserve"><value>選択した理由のいずれかに一致するレコードを表示します。</value></data>
+  <data name="ChangeReason" xml:space="preserve"><value>変更理由</value></data>
+  <data name="FindAReason" xml:space="preserve"><value>変更理由を検索</value></data>
+  <data name="Done" xml:space="preserve"><value>完了</value></data>
+  <data name="ClearSelection" xml:space="preserve"><value>選択を解除</value></data>
+  <data name="ClearEverySelectedReasonIncludingThoseHiddenBy" xml:space="preserve"><value>検索で非表示になっている変更理由を含め、すべての選択を解除します。</value></data>
+  <data name="NoMatchingReasons" xml:space="preserve"><value>一致する変更理由はありません。</value></data>
+  <data name="DateFilter" xml:space="preserve"><value>期間で絞り込み</value></data>
+  <data name="FilterByStartDateEndDateOrUsn" xml:space="preserve"><value>開始日、終了日、または USN で絞り込みます。</value></data>
+  <data name="ResetAllFilters" xml:space="preserve"><value>すべてのフィルターをリセット</value></data>
+  <data name="StartDate" xml:space="preserve"><value>開始日</value></data>
+  <data name="StartDateCalendar" xml:space="preserve"><value>開始日のカレンダー</value></data>
+  <data name="ChooseADateOrTypeItInThe" xml:space="preserve"><value>カレンダーから選ぶか、表示されている形式で日付を入力してください。</value></data>
+  <data name="StartTime" xml:space="preserve"><value>開始時刻</value></data>
+  <data name="ClearStartDateAndTime" xml:space="preserve"><value>開始日時をクリア</value></data>
+  <data name="EndDate" xml:space="preserve"><value>終了日</value></data>
+  <data name="EndDateCalendar" xml:space="preserve"><value>終了日のカレンダー</value></data>
+  <data name="EndTime" xml:space="preserve"><value>終了時刻</value></data>
+  <data name="ClearEndDateAndTime" xml:space="preserve"><value>終了日時をクリア</value></data>
+  <data name="TimeZone" xml:space="preserve"><value>タイムゾーン</value></data>
+  <data name="ExactUsn" xml:space="preserve"><value>USN を指定</value></data>
+  <data name="EnterADecimalUsnOrAHexadecimalValue" xml:space="preserve"><value>USN を 10 進数、または 0x で始まる 16 進数で入力してください。</value></data>
+  <data name="JournalRecords" xml:space="preserve"><value>ジャーナルレコード</value></data>
+  <data name="RecordedTimeKst" xml:space="preserve"><value>記録時刻 (KST)  ↓</value></data>
+  <data name="SortByRecordedTime" xml:space="preserve"><value>記録時刻で並べ替え</value></data>
+  <data name="RecordedFileName" xml:space="preserve"><value>記録されたファイル名</value></data>
+  <data name="PreviousPage" xml:space="preserve"><value>前のページ</value></data>
+  <data name="NextPage" xml:space="preserve"><value>次のページ</value></data>
+  <data name="Export" xml:space="preserve"><value>エクスポート</value></data>
+  <data name="ExportMatchingRecordsFromAllPages" xml:space="preserve"><value>全ページの検索結果をエクスポート</value></data>
+  <data name="ExportAllSearchResults" xml:space="preserve"><value>検索結果をすべてエクスポート</value></data>
+  <data name="ExportAsCsv" xml:space="preserve"><value>CSV 形式でエクスポート…</value></data>
+  <data name="CancelExport" xml:space="preserve"><value>エクスポートを中止</value></data>
+  <data name="CancelTheCsvExportInProgress" xml:space="preserve"><value>実行中の CSV エクスポートを中止</value></data>
+  <data name="CancelCsvExport" xml:space="preserve"><value>CSV エクスポートを中止</value></data>
+  <data name="ResizeSelectedRecordDetails" xml:space="preserve"><value>選択レコードの詳細ペインの高さを変更</value></data>
+  <data name="CollapseSelectedRecordEsc" xml:space="preserve"><value>詳細を閉じる (Esc)</value></data>
+  <data name="CollapseSelectedRecord" xml:space="preserve"><value>詳細を閉じる</value></data>
+  <data name="NearbyRecords" xml:space="preserve"><value>前後のレコード</value></data>
+  <data name="InspectRecordsFromOtherFilesAroundTheSelected" xml:space="preserve"><value>選択したレコードの前後で、ほかのファイルに生じた変更を確認します。</value></data>
+  <data name="OpenFileHistory" xml:space="preserve"><value>ファイル履歴を開く</value></data>
+  <data name="OpenThisRecordInFileHistoryEnter" xml:space="preserve"><value>このレコードをファイル履歴で開く (Enter)</value></data>
+  <data name="Overview" xml:space="preserve"><value>概要</value></data>
+  <data name="Path" xml:space="preserve"><value>パス</value></data>
+  <data name="PathEvidence" xml:space="preserve"><value>パスの根拠</value></data>
+  <data name="SourceBytes" xml:space="preserve"><value>元のバイト列</value></data>
+  <data name="OpenSourceBytesInANewWindow" xml:space="preserve"><value>元のバイト列を新しいウィンドウで開く</value></data>
+  <data name="RecordDetails" xml:space="preserve"><value>レコードの詳細</value></data>
+  <data name="JournalRecordFields" xml:space="preserve"><value>ジャーナルレコードのフィールド</value></data>
+  <data name="HexByteTable" xml:space="preserve"><value>16 進表示</value></data>
+  <data name="UseTheArrowKeysToMoveShiftArrow" xml:space="preserve"><value>矢印キーで移動し、Shift+矢印キーまたはドラッグで範囲を選択できます。Ctrl+C で選択したバイト列をコピーします。</value></data>
+  <data name="CopyTableAddressHexAndAscii" xml:space="preserve"><value>表をコピー (アドレス、16 進数、ASCII)</value></data>
+  <data name="LengthOfThisFieldInTheSourceRecord" xml:space="preserve"><value>元のレコード内でのフィールドの長さ</value></data>
+  <data name="DecodedFieldValue" xml:space="preserve"><value>デコードしたフィールド値</value></data>
+  <data name="Integers" xml:space="preserve"><value>整数</value></data>
+  <data name="ReadIntegerAtCursor" xml:space="preserve"><value>カーソル位置の整数値を表示</value></data>
+  <data name="Read124Or8BytesAt" xml:space="preserve"><value>カーソル位置から 1、2、4、8 バイトをリトルエンディアンの整数として読み取ります。</value></data>
+  <data name="UnsignedIntegersStartAtTheCursorMultiByte" xml:space="preserve"><value>カーソル位置から符号なし整数として読み取ります。複数バイトの値はリトルエンディアンです。</value></data>
+  <data name="RefreshInvestigationLeads" xml:space="preserve"><value>調査の手がかりを再検索</value></data>
+  <data name="CancelOperation" xml:space="preserve"><value>処理を中止</value></data>
+  <data name="ExportLeadsOfTheSelectedTypeAsCsv" xml:space="preserve"><value>選択した種類の手がかりを CSV にエクスポート</value></data>
+  <data name="LeadType" xml:space="preserve"><value>手がかりの種類</value></data>
+  <data name="LeadTypesAndCounts" xml:space="preserve"><value>手がかりの種類と件数</value></data>
+  <data name="InvestigationLeads" xml:space="preserve"><value>調査の手がかり</value></data>
+  <data name="Lead" xml:space="preserve"><value>手がかり</value></data>
+  <data name="RecordedTimeKstLabel" xml:space="preserve"><value>記録時刻 (KST)</value></data>
+  <data name="RecordedName" xml:space="preserve"><value>記録された名前</value></data>
+  <data name="Observation" xml:space="preserve"><value>確認できた内容</value></data>
+  <data name="SupportingRecords" xml:space="preserve"><value>根拠となるレコード</value></data>
+  <data name="SupportingRecordList" xml:space="preserve"><value>根拠となるレコードの一覧</value></data>
+  <data name="Evidence" xml:space="preserve"><value>根拠</value></data>
+  <data name="Offset" xml:space="preserve"><value>オフセット</value></data>
+  <data name="ReasonFlags" xml:space="preserve"><value>変更理由フラグ</value></data>
+  <data name="FileReference" xml:space="preserve"><value>ファイル参照番号</value></data>
+  <data name="LogfilePageCarvingJournaldesk" xml:space="preserve"><value>$LogFile の断片を検索 · NTFS Tracer</value></data>
+  <data name="CancelScanOrExport" xml:space="preserve"><value>スキャンまたはエクスポートを中止</value></data>
+  <data name="LogfilePageCarving" xml:space="preserve"><value>$LogFile のページカービング</value></data>
+  <data name="CandidatesMatchTheRcrdSignatureAndUpdateSequence" xml:space="preserve"><value>RCRD シグネチャと更新シーケンス配列 (USA) が一致した候補です。元のボリューム、削除の有無、実行の有無は別の証拠で確認してください。</value></data>
+  <data name="ExportCurrentResultsAsCsv" xml:space="preserve"><value>現在の結果を CSV にエクスポート</value></data>
+  <data name="RecoveryResultType" xml:space="preserve"><value>復元結果の種類</value></data>
+  <data name="PageCandidates" xml:space="preserve"><value>ページ候補</value></data>
+  <data name="RecordHeaderCandidates" xml:space="preserve"><value>レコードヘッダー候補</value></data>
+  <data name="RawHeaderBeforeSectorFixup" xml:space="preserve"><value>セクター補正前の生ヘッダー</value></data>
+  <data name="CarvedHeaderBytes" xml:space="preserve"><value>カービングで抽出したヘッダーのバイト列</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer</value></data>
+  <data name="MainMenu" xml:space="preserve"><value>メインメニュー</value></data>
+  <data name="File" xml:space="preserve"><value>ファイル(_F)</value></data>
+  <data name="OpenUsnJournal" xml:space="preserve"><value>USN ジャーナルを開く…</value></data>
+  <data name="AttachMft" xml:space="preserve"><value>$MFT を追加…</value></data>
+  <data name="OpenLogfile" xml:space="preserve"><value>$LogFile を開く…</value></data>
+  <data name="OpenTrackerResults" xml:space="preserve"><value>Tracker の結果を開く…</value></data>
+  <data name="SourceInformation" xml:space="preserve"><value>元資料の情報…</value></data>
+  <data name="EXit" xml:space="preserve"><value>終了(_X)</value></data>
+  <data name="Edit" xml:space="preserve"><value>編集(_E)</value></data>
+  <data name="Copy" xml:space="preserve"><value>コピー(_C)</value></data>
+  <data name="SelectAll" xml:space="preserve"><value>すべて選択(_A)</value></data>
+  <data name="Find" xml:space="preserve"><value>検索(_F)</value></data>
+  <data name="View" xml:space="preserve"><value>表示(_V)</value></data>
+  <data name="FileHistory" xml:space="preserve"><value>ファイル履歴</value></data>
+  <data name="AllRecords" xml:space="preserve"><value>全レコード</value></data>
+  <data name="NtfsTransactions" xml:space="preserve"><value>NTFS トランザクション</value></data>
+  <data name="DarkTheme" xml:space="preserve"><value>ダークテーマ</value></data>
+  <data name="Tools" xml:space="preserve"><value>ツール(_T)</value></data>
+  <data name="FindUsnRemnantsLabel" xml:space="preserve"><value>USN レコードの断片を検索…</value></data>
+  <data name="FindTransactionRemnants" xml:space="preserve"><value>トランザクションの断片を検索…</value></data>
+  <data name="Help" xml:space="preserve"><value>ヘルプ(_H)</value></data>
+  <data name="UserGuide" xml:space="preserve"><value>使い方</value></data>
+  <data name="AboutJournaldesk" xml:space="preserve"><value>NTFS Tracer について</value></data>
+  <data name="CancelAnalysis" xml:space="preserve"><value>解析を中止</value></data>
+  <data name="FileHistoryCtrl2" xml:space="preserve"><value>ファイル履歴 (Ctrl+2)</value></data>
+  <data name="SearchCurrentAndPreviousNamesCtrlF" xml:space="preserve"><value>現在の名前と以前の名前を検索 (Ctrl+F)</value></data>
+  <data name="ClearFileSearch" xml:space="preserve"><value>ファイル検索をクリア</value></data>
+  <data name="PreviousFilePage" xml:space="preserve"><value>ファイル一覧の前のページ</value></data>
+  <data name="NextFilePage" xml:space="preserve"><value>ファイル一覧の次のページ</value></data>
+  <data name="Files" xml:space="preserve"><value>ファイル</value></data>
+  <data name="NoMatchingFiles" xml:space="preserve"><value>一致するファイルはありません。</value></data>
+  <data name="ResizeFileList" xml:space="preserve"><value>ファイル一覧の幅を変更</value></data>
+  <data name="ExportAllSourceRecordsForTheSelectedFile" xml:space="preserve"><value>選択したファイルの元レコードをすべてエクスポート</value></data>
+  <data name="ExportSelectedFileHistory" xml:space="preserve"><value>選択したファイルの履歴をエクスポート</value></data>
+  <data name="ReturnToSelectedJournalRecordAlt" xml:space="preserve"><value>選択していたジャーナルレコードに戻る (Alt+←)</value></data>
+  <data name="ReturnToSelectedJournalRecord" xml:space="preserve"><value>選択していたジャーナルレコードに戻る</value></data>
+  <data name="SelectAFile" xml:space="preserve"><value>ファイルを選択</value></data>
+  <data name="CopyFileName" xml:space="preserve"><value>ファイル名をコピー</value></data>
+  <data name="ViewPathDetails" xml:space="preserve"><value>パスの詳細を表示</value></data>
+  <data name="CompareThePreviousAndNewNameRecordsFor" xml:space="preserve"><value>選択した出来事について、変更前の名前と変更後の名前のレコードを比較します。</value></data>
+  <data name="ActivityType" xml:space="preserve"><value>変更の種類</value></data>
+  <data name="AllActivities" xml:space="preserve"><value>すべての変更</value></data>
+  <data name="NamesAndLocations" xml:space="preserve"><value>名前と場所</value></data>
+  <data name="CreationAndDeletion" xml:space="preserve"><value>作成と削除</value></data>
+  <data name="ContentChanges" xml:space="preserve"><value>内容の変更</value></data>
+  <data name="NoActivitiesMatchThisFilter" xml:space="preserve"><value>この条件に一致する変更はありません。</value></data>
+  <data name="FileActivityHistory" xml:space="preserve"><value>ファイルの変更履歴</value></data>
+  <data name="TimeKst" xml:space="preserve"><value>時刻 (KST)</value></data>
+  <data name="Activity" xml:space="preserve"><value>変更内容</value></data>
+  <data name="RecordSummary" xml:space="preserve"><value>レコードの概要</value></data>
+  <data name="PreviousName" xml:space="preserve"><value>変更前の名前</value></data>
+  <data name="NewName" xml:space="preserve"><value>変更後の名前</value></data>
+  <data name="MftAssisted" xml:space="preserve"><value>MFT で補完</value></data>
+  <data name="JournalReconstruction" xml:space="preserve"><value>ジャーナルから復元</value></data>
+  <data name="From" xml:space="preserve"><value>移動元</value></data>
+  <data name="To" xml:space="preserve"><value>移動先</value></data>
+  <data name="Source" xml:space="preserve"><value>元レコード</value></data>
+  <data name="OpenSourceBytesForThisActivity" xml:space="preserve"><value>この変更の元のバイト列を開く</value></data>
+  <data name="Open0Source" xml:space="preserve"><value>元のバイト列を開く ({0})</value></data>
+  <data name="ResizeEvidencePane" xml:space="preserve"><value>根拠ペインの高さを変更</value></data>
+  <data name="InspectChangesToOtherFilesAroundTheSelected" xml:space="preserve"><value>選択した元レコードの前後で、ほかのファイルに生じた変更を確認します。</value></data>
+  <data name="CollapseEvidencePaneEsc" xml:space="preserve"><value>詳細を閉じる (Esc)</value></data>
+  <data name="CollapseEvidencePane" xml:space="preserve"><value>詳細を閉じる</value></data>
+  <data name="SourceRecord" xml:space="preserve"><value>元レコード</value></data>
+  <data name="ChooseASourceRecord" xml:space="preserve"><value>元レコードを選択</value></data>
+  <data name="OpenSourceInANewWindow" xml:space="preserve"><value>元データを新しいウィンドウで開く</value></data>
+  <data name="OpenUsnJournalJ" xml:space="preserve"><value>USN ジャーナル ($J) を開く…</value></data>
+  <data name="AllRecordsCtrl1" xml:space="preserve"><value>全レコード (Ctrl+1)</value></data>
+  <data name="NtfsTransactionsCtrl3" xml:space="preserve"><value>NTFS トランザクション (Ctrl+3)</value></data>
+  <data name="RecordsAroundThisEvent" xml:space="preserve"><value>この変更の前後のレコード</value></data>
+  <data name="ReferenceRecord" xml:space="preserve"><value>基準レコード</value></data>
+  <data name="GoToReference" xml:space="preserve"><value>基準レコードに移動</value></data>
+  <data name="GoToThePageAndRowContainingThe" xml:space="preserve"><value>基準レコードがあるページに移動し、該当行を選択します。</value></data>
+  <data name="TimeWindow" xml:space="preserve"><value>時間範囲</value></data>
+  <data name="1S" xml:space="preserve"><value>±1 秒</value></data>
+  <data name="5S" xml:space="preserve"><value>±5 秒</value></data>
+  <data name="30S" xml:space="preserve"><value>±30 秒</value></data>
+  <data name="ReferenceRecordAndNearbyJournalRecords" xml:space="preserve"><value>基準レコードとその前後のジャーナルレコード</value></data>
+  <data name="TimeDelta" xml:space="preserve"><value>基準時刻との差</value></data>
+  <data name="ViewSourceBytes" xml:space="preserve"><value>元のバイト列を表示</value></data>
+  <data name="AttachedSourceInformation" xml:space="preserve"><value>読み込んだ資料の情報</value></data>
+  <data name="SourceInformationLabel" xml:space="preserve"><value>元資料の情報</value></data>
+  <data name="AttachedSources" xml:space="preserve"><value>読み込んだ資料</value></data>
+  <data name="CopySourceInformation" xml:space="preserve"><value>元資料の情報をコピー</value></data>
+  <data name="FileLocation" xml:space="preserve"><value>ファイルの場所</value></data>
+  <data name="ExtractedFilePath" xml:space="preserve"><value>抽出したファイルのパス</value></data>
+  <data name="SourceSha256" xml:space="preserve"><value>元資料の SHA-256</value></data>
+  <data name="ParseResults" xml:space="preserve"><value>解析結果</value></data>
+  <data name="ParseWarnings" xml:space="preserve"><value>解析時の警告</value></data>
+  <data name="IndexVersion" xml:space="preserve"><value>インデックスのバージョン</value></data>
+  <data name="SourceGuide" xml:space="preserve"><value>資料の読み方</value></data>
+  <data name="EachRecordContainsAFileNameAParent" xml:space="preserve"><value>V2 と V3 のレコードには、ファイル名、タイムスタンプ、変更理由フラグが記録されます。名前変更では、変更前と変更後の名前が別々のレコードに残ることがあります。V4 レコードには変更されたファイル範囲が記録され、ファイル名とタイムスタンプは含まれません。</value></data>
+  <data name="TheMftPathInFileHistoryComesFrom" xml:space="preserve"><value>ファイル履歴に表示する MFT のパスは、抽出したファイルテーブルに基づきます。記録時点のパスを復元する際に、不明なフォルダー名をこのテーブルで補った箇所は、MFT による推定として表示します。</value></data>
+  <data name="AddressesAreByteOffsetsFromTheStartOf" xml:space="preserve"><value>アドレスは抽出ファイルの先頭を基準としたバイト単位のオフセットです。バイトを選択すると、対応するフィールドと読み取った値を確認できます。</value></data>
+  <data name="TrackerResults" xml:space="preserve"><value>Tracker の結果</value></data>
+  <data name="ReadingTrackerResults" xml:space="preserve"><value>Tracker の結果を読み込み中…</value></data>
+  <data name="Table" xml:space="preserve"><value>テーブル</value></data>
+  <data name="ResultTables" xml:space="preserve"><value>結果テーブル</value></data>
+  <data name="Search" xml:space="preserve"><value>検索</value></data>
+  <data name="SearchResults" xml:space="preserve"><value>検索結果</value></data>
+  <data name="FindTextInAnyColumnCtrlF" xml:space="preserve"><value>すべての列から文字列を検索します。(Ctrl+F)</value></data>
+  <data name="ExportMatchingResultsAsCsv" xml:space="preserve"><value>条件に一致する結果を CSV にエクスポート</value></data>
+  <data name="TrackerResultRows" xml:space="preserve"><value>Tracker の結果一覧</value></data>
+  <data name="ResizeSelectedRowDetails" xml:space="preserve"><value>選択行の詳細ペインの高さを変更</value></data>
+  <data name="SelectedRow" xml:space="preserve"><value>選択行</value></data>
+  <data name="AllColumnsForTheSelectedRow" xml:space="preserve"><value>選択行のすべての列</value></data>
+  <data name="SearchFileNameOrLsn" xml:space="preserve"><value>ファイル名または LSN を検索</value></data>
+  <data name="EnterAFileNameOrAHexadecimalLsn" xml:space="preserve"><value>ファイル名または 16 進数の LSN を入力してください (例 0xE4E6A74、000000000E4E6A74)。</value></data>
+  <data name="ClearSearch" xml:space="preserve"><value>検索をクリア</value></data>
+  <data name="ClearTransactionSearch" xml:space="preserve"><value>トランザクション検索をクリア</value></data>
+  <data name="TransactionType" xml:space="preserve"><value>トランザクションの種類</value></data>
+  <data name="AllOperations" xml:space="preserve"><value>すべてのレコード</value></data>
+  <data name="OperationsWithFileNames" xml:space="preserve"><value>ファイル名を含む操作</value></data>
+  <data name="EarlierFileTimestamps" xml:space="preserve"><value>Redo の時刻が Undo より古い記録</value></data>
+  <data name="MoveOrRenameCandidates" xml:space="preserve"><value>移動または名前変更の候補</value></data>
+  <data name="NtfsTransactionRecords" xml:space="preserve"><value>NTFS トランザクションレコード</value></data>
+  <data name="Operation" xml:space="preserve"><value>レコードの種類 / 操作</value></data>
+  <data name="RecordedFileNames" xml:space="preserve"><value>記録されたファイル名</value></data>
+  <data name="TransactionId" xml:space="preserve"><value>トランザクション ID</value></data>
+  <data name="ClearFilters" xml:space="preserve"><value>フィルターをクリア</value></data>
+  <data name="ExportAllMatchingTransactions" xml:space="preserve"><value>条件に一致するトランザクションをすべてエクスポート</value></data>
+  <data name="ExportTransactionResults" xml:space="preserve"><value>トランザクションの結果をエクスポート</value></data>
+  <data name="CollapseDetailsEsc" xml:space="preserve"><value>詳細を閉じる (Esc)</value></data>
+  <data name="CollapseTransactionDetails" xml:space="preserve"><value>詳細を閉じる</value></data>
+  <data name="PreviousLsn" xml:space="preserve"><value>直前の LSN</value></data>
+  <data name="CopyOverview" xml:space="preserve"><value>概要をコピー</value></data>
+  <data name="CopyTransactionOverview" xml:space="preserve"><value>トランザクションの概要をコピー</value></data>
+  <data name="NextUndoLsn" xml:space="preserve"><value>次の Undo LSN</value></data>
+  <data name="SourceOffset" xml:space="preserve"><value>元資料内のオフセット</value></data>
+  <data name="AdditionalRecordInformation" xml:space="preserve"><value>レコードの追加情報</value></data>
+  <data name="RawHeader" xml:space="preserve"><value>生ヘッダー</value></data>
+  <data name="TheExtractedLogfileHeaderBeforeSectorEndFixups" xml:space="preserve"><value>抽出した $LogFile の、セクター末尾を補正する前のヘッダーです。</value></data>
+  <data name="RawTransactionHeader" xml:space="preserve"><value>トランザクションの生ヘッダー</value></data>
+  <data name="OffsetInReconstructedData" xml:space="preserve"><value>復元データ内のオフセット</value></data>
+  <data name="ReconstructedOperationData" xml:space="preserve"><value>復元した操作データ</value></data>
+  <data name="TransactionSourceInformation" xml:space="preserve"><value>トランザクションの元資料情報</value></data>
+  <data name="PathSha256AndParseResultsForThe" xml:space="preserve"><value>読み込んだ $LogFile のパス、SHA-256、解析結果</value></data>
+  <data name="CancelOpeningTransactionLog" xml:space="preserve"><value>トランザクションログの読み込みを中止</value></data>
+  <data name="DisplayLanguage" xml:space="preserve"><value>表示言語</value></data>
+  <data name="UseWindowsLanguage" xml:space="preserve"><value>Windows の表示言語を使用</value></data>
+  <data name="FullPaths" xml:space="preserve"><value>フルパスを表示</value></data>
+  <data name="RecordedPath" xml:space="preserve"><value>記録時点のパス</value></data>
+  <data name="FullPathsTooltip" xml:space="preserve"><value>各レコードが記録された時点のパスを表示します。</value></data>
+  <data name="PathSourceColumn" xml:space="preserve"><value>パスの根拠</value></data>
+  <data name="TrackerStorage" xml:space="preserve"><value>格納時の型</value></data>
+  <data name="TrackerValue" xml:space="preserve"><value>値</value></data>
+  <data name="LeadCriteria" xml:space="preserve"><value>判定条件</value></data>
+  <data name="LeadReasons" xml:space="preserve"><value>変更理由</value></data>
+  <data name="LeadSourceOffset" xml:space="preserve"><value>元資料内のオフセット</value></data>
+  <data name="LeadEvidenceRole" xml:space="preserve"><value>レコードの役割</value></data>
+  <data name="FieldAuditRecordTime" xml:space="preserve"><value>記録時刻</value></data>
+  <data name="TrackerColumnName" xml:space="preserve"><value>列名</value></data>
+  <data name="IntakeSettingsTab" xml:space="preserve"><value>設定</value></data>
+  <data name="IntakeSettingsShortcut" xml:space="preserve"><value>設定 (Ctrl+,)</value></data>
+  <data name="IntakeBrowse" xml:space="preserve"><value>参照…</value></data>
+  <data name="IntakeFromFolder" xml:space="preserve"><value>抽出済みフォルダーを選択…</value></data>
+  <data name="AnalysisOptions" xml:space="preserve"><value>解析オプション</value></data>
+  <data name="ChooseExtractionFolder" xml:space="preserve"><value>抽出先フォルダーを選択</value></data>
+  <data name="IntakeSources" xml:space="preserve"><value>解析対象</value></data>
+  <data name="IntakeMft" xml:space="preserve"><value>ファイルテーブル ($MFT)</value></data>
+  <data name="IntakeLog" xml:space="preserve"><value>トランザクションログ ($LogFile)</value></data>
+  <data name="IntakeOutput" xml:space="preserve"><value>既定の保存先フォルダー</value></data>
+  <data name="IntakeChooseOutput" xml:space="preserve"><value>既定のエクスポート先を選択</value></data>
+  <data name="IntakeReset" xml:space="preserve"><value>Windows の既定値に戻す</value></data>
+  <data name="IntakeStart" xml:space="preserve"><value>解析を開始</value></data>
+  <data name="IntakePickJournal" xml:space="preserve"><value>USN ジャーナル ($J) を選択</value></data>
+  <data name="IntakePickMft" xml:space="preserve"><value>ファイルテーブル ($MFT) を選択</value></data>
+  <data name="IntakePickLog" xml:space="preserve"><value>トランザクションログ ($LogFile) を選択</value></data>
+  <data name="ImageOpen" xml:space="preserve"><value>イメージを開く…</value></data>
+  <data name="ImageFile" xml:space="preserve"><value>イメージファイル</value></data>
+  <data name="ImageVolume" xml:space="preserve"><value>ボリュームまたは収集対象</value></data>
+  <data name="ImageArtifacts" xml:space="preserve"><value>抽出対象</value></data>
+  <data name="ImageAllCopies" xml:space="preserve"><value>選択した項目だけを抽出します。</value></data>
+  <data name="IntakeRevealFolder" xml:space="preserve"><value>抽出したファイルを表示</value></data>
+  <data name="ImageSwitchFiles" xml:space="preserve"><value>個別のファイルを指定</value></data>
+  <data name="ImageManifestLabel" xml:space="preserve"><value>抽出マニフェストを表示</value></data>
+  <data name="OpenSources" xml:space="preserve"><value>資料を開く…</value></data>
+  <data name="OpenSourcesShortcut" xml:space="preserve"><value>イメージまたは抽出済みファイルを開く (Ctrl+O)</value></data>
+  <data name="DropSourcesHint" xml:space="preserve"><value>ディスクイメージ、抽出済みファイル ($J、$MFT、$LogFile)、またはフォルダーをここにドロップします。</value></data>
+  <data name="AssignSourceTypes" xml:space="preserve"><value>選択したファイルの種類を指定してください。</value></data>
+  <data name="UseSelectedFiles" xml:space="preserve"><value>選択を適用</value></data>
+  <data name="IntakeCancel" xml:space="preserve"><value>キャンセル</value></data>
+  <data name="ClearIntakeJournal" xml:space="preserve"><value>USN ジャーナル ($J) を対象から外す</value></data>
+  <data name="ClearIntakeMft" xml:space="preserve"><value>$MFT を対象から外す</value></data>
+  <data name="ClearIntakeLog" xml:space="preserve"><value>$LogFile を対象から外す</value></data>
+  <data name="SelectEvidenceFiles" xml:space="preserve"><value>ファイルを選択…</value></data>
+  <data name="CsvSaveLocation" xml:space="preserve"><value>CSV の保存先</value></data>
+  <data name="IndexingModeLabel" xml:space="preserve"><value>インデックス作成方式</value></data>
+  <data name="IndexingSequential" xml:space="preserve"><value>順次</value></data>
+  <data name="IndexingSequentialHelp" xml:space="preserve"><value>1 つの資料のインデックスを作成してから、次の資料に進みます。</value></data>
+  <data name="IndexingParallel" xml:space="preserve"><value>並列 (最大 2 件)</value></data>
+  <data name="IndexingParallelHelp" xml:space="preserve"><value>新しいインデックスが必要な資料を、最大 2 件ずつ同時に処理します。</value></data>
+  <data name="ExtractionFolder" xml:space="preserve"><value>抽出先フォルダー</value></data>
+  <data name="JournalPurpose" xml:space="preserve"><value>ファイル履歴と全レコード</value></data>
+  <data name="MftPurpose" xml:space="preserve"><value>パスの復元に使う同一ボリュームのファイルテーブル</value></data>
+  <data name="LogPurpose" xml:space="preserve"><value>NTFS トランザクション</value></data>
+  <data name="OpenSourceHexGesture" xml:space="preserve"><value>レコードをダブルクリックするか、Enter キーを押すと、そのレコードの Hex タブが開きます。</value></data>
+  <data name="DropToReview" xml:space="preserve"><value>ドロップして資料を確認</value></data>
+  <data name="RowsPerPage" xml:space="preserve"><value>ページあたりの行数</value></data>
+  <data name="RowsPerPageValue" xml:space="preserve"><value>{0:N0}件ずつ</value></data>
+  <data name="GuideTopics" xml:space="preserve"><value>目次</value></data>
+  <data name="GuideSearch" xml:space="preserve"><value>ヘルプを検索</value></data>
+  <data name="GuideNoResults" xml:space="preserve"><value>一致する項目はありません。</value></data>
+  <data name="GuideOpen" xml:space="preserve"><value>資料を開く</value></data>
+  <data name="ArtifactLocationTitle" xml:space="preserve"><value>NTFS ファイルの場所</value></data>
+  <data name="ArtifactRoot" xml:space="preserve"><value>各パスは、調査対象の NTFS ボリュームのルートを起点とします。</value></data>
+  <data name="ArtifactJournal" xml:space="preserve"><value>USN の変更記録は、$UsnJrnl ファイルの代替データストリーム (ADS) である $J にあります。抽出すると、$J や $UsnJrnl-$J などの名前で保存されます。</value></data>
+  <data name="ArtifactMft" xml:space="preserve"><value>ファイルと親フォルダーを識別するためのテーブルです。パスを調べるには、$J または $LogFile と同じボリュームから取得した $MFT を使用します。</value></data>
+  <data name="ArtifactLog" xml:space="preserve"><value>NTFS メタデータのトランザクションログです。このファイルだけでもトランザクションを解析できます。</value></data>
+  <data name="ArtifactAcquire" xml:space="preserve"><value>ディスクイメージは「ファイルを選択」で開き、ボリュームと抽出対象を選びます。抽出済みの場合は、収集ツールで保存したファイルまたはフォルダーを選んでください。</value></data>
+  <data name="GuideOpenFiles" xml:space="preserve"><value>設定で、ファイルまたは抽出済みフォルダーを選びます。ファイルを 1 つ選んだときは自動で追加された資料も確認し、不要なものは × で外します。複数のファイルを直接選ぶと、そのファイルだけが対象になります。</value></data>
+  <data name="GuideOpenImage" xml:space="preserve"><value>ディスクイメージを開き、NTFS ボリューム、抽出対象、保存先を確認して、抽出と解析を開始します。論理イメージでは収集されているファイルから選びます。</value></data>
+  <data name="GuideOpenVerify" xml:space="preserve"><value>解析後は設定から抽出したファイルとマニフェストを開き、保存先と SHA-256 を照合できます。「ファイル」メニューの「元資料の情報」では、読み込んだ資料と解析時の警告を確認できます。</value></data>
+  <data name="GuideFollow" xml:space="preserve"><value>ファイル履歴をたどる</value></data>
+  <data name="GuideFollowFilter" xml:space="preserve"><value>「全レコード」ではファイル名や変更理由で検索できます。期間フィルターで日付だけを選ぶと、その日の全記録が対象になります。時刻を入力すると範囲を絞り込めます。時刻は設定で選んだタイムゾーンに従います。</value></data>
+  <data name="GuideFollowFile" xml:space="preserve"><value>レコードを選び Enter キーを押すと、そのファイルの履歴で同じ記録が開きます。名前が分かっている場合は「ファイル履歴」から検索できます。Alt+← で「全レコード」の元の行に戻ります。</value></data>
+  <data name="GuideFollowPath" xml:space="preserve"><value>フルパスを表示すると、記録時点のパスとその根拠が別々の列に表示されます。「概要」で根拠を開くと、ジャーナルから復元したフォルダーと収集時の MFT で補った箇所を区別できます。</value></data>
+  <data name="GuideInspect" xml:space="preserve"><value>元レコードを照合する</value></data>
+  <data name="GuideCompare" xml:space="preserve"><value>名前変更や移動を選んで「変更前後を比較」を開くと、各レコードの名前と親フォルダーを対照できます。元レコードが複数ある場合は 1 行につき 1 件ずつ表示されます。</value></data>
+  <data name="GuideFields" xml:space="preserve"><value>元レコードを選ぶと、開いているタブでその記録を確認できます。「レコードの詳細」では FileName や Reason の値を、JSON タブでは索引の値を構造化形式でコピーできます。元資料のバイト列は Hex で確認できます。</value></data>
+  <data name="GuideHex" xml:space="preserve"><value>元レコードをダブルクリックするか Enter キーを押すと Hex が開きます。アドレスは抽出ファイル先頭からのバイトオフセットです。バイトを選ぶと対応するフィールドと値が分かります。ドラッグまたは Shift+矢印キーで範囲を選び、Ctrl+C でコピーします。</value></data>
+  <data name="GuideTransactions" xml:space="preserve"><value>トランザクションと復元</value></data>
+  <data name="GuideTransactionReads" xml:space="preserve"><value>$LogFile を開き、ファイル名または 16 進数の LSN を検索します。生ヘッダーにはディスク上のバイト列が表示されます。Redo と Undo のオフセットは、それぞれの復元データの先頭を起点とします。</value></data>
+  <data name="GuideRecovery" xml:space="preserve"><value>「調査の手がかり」では開いている $J から文書ファイルの削除などの記録を探します。「ツール」では、開いている $J や $LogFile、または別の RAW 資料をバイト単位でスキャンできます。候補を出来事と結び付ける前に元の記録と照合してください。</value></data>
+  <data name="GuideSave" xml:space="preserve"><value>結果を保存する</value></data>
+  <data name="GuideExportScope" xml:space="preserve"><value>「全レコード」のエクスポートは、条件に一致する全ページが対象です。ファイル履歴のファイル名に付いたエクスポートは、そのファイルだけが対象です。復元パスと根拠も保存するには、該当する CSV 形式を選びます。</value></data>
+  <data name="GuideFolder" xml:space="preserve"><value>設定の「解析オプション」で保存先を変更できます。CSV をエクスポートするたびに保存先を選ぶこともできます。抽出したファイルは設定から保存先フォルダーを開いて確認できます。</value></data>
+  <data name="GuidePreferences" xml:space="preserve"><value>表示と解析の設定</value></data>
+  <data name="GuideLanguage" xml:space="preserve"><value>表示言語</value></data>
+  <data name="GuideLanguageText" xml:space="preserve"><value>「表示 → 表示言語」で言語を選ぶとすぐに切り替わります。元のファイル名とバイト列はそのままです。</value></data>
+  <data name="GuideIndexing" xml:space="preserve"><value>設定で順次、並列、自動のいずれかを選べます。並列の場合、新しいインデックスが必要な別々の資料を最大 2 件ずつ処理します。資料が 1 つなら 1 件だけ処理し、既存のインデックスは照合してから再利用します。</value></data>
+  <data name="GuideTimeZone" xml:space="preserve"><value>設定の「解析オプション」で表示タイムゾーンを選びます。時刻を比較するときは列見出しのタイムゾーンを確認してください。変更後も、同じ瞬間を選択したタイムゾーンの時刻で表示します。</value></data>
+  <data name="GuideTracker" xml:space="preserve"><value>「ファイル」メニューから既存の Tracker の SQLite または CSV を開けます。SQLite の型と値は選択行の詳細で確認します。CSV に出力すると SQL NULL と空文字列はいずれも空欄になります。</value></data>
+  <data name="HexDecoded" xml:space="preserve"><value>解釈値</value></data>
+  <data name="HexLength" xml:space="preserve"><value>長さ</value></data>
+  <data name="HexCursor" xml:space="preserve"><value>カーソル</value></data>
+  <data name="HexByteValue" xml:space="preserve"><value>バイト値</value></data>
+  <data name="HexIntegersEndian" xml:space="preserve"><value>整数 (リトルエンディアン)</value></data>
+  <data name="HexSourceField" xml:space="preserve"><value>フィールド</value></data>
+  <data name="IndexLocation" xml:space="preserve"><value>索引の保存先</value></data>
+  <data name="IndexChooseFolder" xml:space="preserve"><value>索引フォルダーを選択</value></data>
+  <data name="IndexResetFolder" xml:space="preserve"><value>既定の保存先に戻す</value></data>
+  <data name="ReturnToRecords" xml:space="preserve"><value>レコードに戻る</value></data>
+  <data name="InvestigationTab" xml:space="preserve"><value>調査の手がかり</value></data>
+  <data name="InvestigationTabShortcut" xml:space="preserve"><value>調査の手がかり (Ctrl+4)</value></data>
+  <data name="ReturnToLeadAlt" xml:space="preserve"><value>選択した手がかりに戻る (Alt+←)</value></data>
+  <data name="OpenLeadEvidence" xml:space="preserve"><value>ファイル履歴で表示</value></data>
+  <data name="DateFilterStartTimeHint" xml:space="preserve"><value>空欄の場合は 00:00 から検索します。</value></data>
+  <data name="DateFilterEndTimeHint" xml:space="preserve"><value>23:59 と入力すると、その 1 分間の最後の記録まで含めます。空欄の場合は終了日全体が対象です。</value></data>
+  <data name="ScanOpenJournal" xml:space="preserve"><value>開いている $J をスキャン</value></data>
+  <data name="ScanOpenLogFile" xml:space="preserve"><value>開いている $LogFile をスキャン</value></data>
+  <data name="ChooseScanFile" xml:space="preserve"><value>スキャンするファイルを選択…</value></data>
+  <data name="ScanUsnSourceHint" xml:space="preserve"><value>元のバイト列から USN レコードの候補を探します。&#10;RAW イメージや抽出ファイルもスキャンできます。</value></data>
+  <data name="ScanLogSourceHint" xml:space="preserve"><value>元のバイト列から $LogFile のページやレコードヘッダーの候補を探します。&#10;RAW イメージや抽出ファイルもスキャンできます。</value></data>
+  <data name="ScanSourcePathHash" xml:space="preserve"><value>スキャンしたファイルのパスと SHA-256</value></data>
+  <data name="ScanUsnSourceOffsetNote" xml:space="preserve"><value>USN V2 または V3 の構造に合う候補です。オフセットはスキャンしたファイル内の位置で、ボリューム上の位置とは異なる場合があります。</value></data>
+  <data name="ScanSourceOffset" xml:space="preserve"><value>ファイル内オフセット</value></data>
+  <data name="ScanSourcePageStart" xml:space="preserve"><value>ファイル内のページ開始位置</value></data>
+  <data name="LeadDocumentDeleted" xml:space="preserve"><value>文書ファイルの削除</value></data>
+  <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>記録時刻の逆転</value></data>
+  <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>複数回の名前変更後に削除</value></data>
+  <data name="LeadSDeleteName" xml:space="preserve"><value>SDelete のファイル名と一致</value></data>
+  <data name="LeadDocumentDeletedRule" xml:space="preserve"><value>変更理由に FILE_DELETE が含まれ、拡張子が {0} のいずれかであるファイルを探します。CLOSE と同時に記録された削除も含みます。</value></data>
+  <data name="LeadTimeOutOfOrderRule" xml:space="preserve"><value>$J の同じ連続区間で隣接する記録を比較します。後の記録の USN が大きいにもかかわらず、時刻が 60 秒以上早い場合を探します。時刻が逆転した原因は別途確認してください。</value></data>
+  <data name="LeadRenamedThenDeletedRule" xml:space="preserve"><value>$J の同じ連続区間の 512 レコード以内で、同じファイルが 2 回名前を変更された後に削除された例を探します。変更ごとに旧名と新名が同時刻にそれぞれ単独の変更理由として記録されている必要があります。ファイル参照は同一で、名前と親フォルダーが USN の順に削除までつながることが条件です。</value></data>
+  <data name="LeadSDeleteNameRule" xml:space="preserve"><value>ファイル名が sdelete.exe、sdelete64.exe、sdelete64a.exe のいずれかに一致する記録を探します。大文字と小文字は区別しません。プログラムの実体や実行の有無は別の証拠で確認してください。</value></data>
+  <data name="LeadRoleDeleted" xml:space="preserve"><value>削除</value></data>
+  <data name="LeadRolePrevious" xml:space="preserve"><value>直前の記録</value></data>
+  <data name="LeadRoleEarlierTime" xml:space="preserve"><value>時刻が早い記録</value></data>
+  <data name="LeadRoleFirstBefore" xml:space="preserve"><value>1 回目の変更前</value></data>
+  <data name="LeadRoleFirstAfter" xml:space="preserve"><value>1 回目の変更後</value></data>
+  <data name="LeadRoleSecondBefore" xml:space="preserve"><value>2 回目の変更前</value></data>
+  <data name="LeadRoleSecondAfter" xml:space="preserve"><value>2 回目の変更後</value></data>
+  <data name="LeadRoleNameMatch" xml:space="preserve"><value>ファイル名の一致</value></data>
+  <data name="PathReferenceFilters" xml:space="preserve"><value>パスと ID</value></data>
+  <data name="FilterRecordedPath" xml:space="preserve"><value>パスに含む</value></data>
+  <data name="ParentFolderReference" xml:space="preserve"><value>親フォルダー参照</value></data>
+  <data name="ReferenceNumberHint" xml:space="preserve"><value>選択した記録の概要から ID をコピーするか、この ID で検索を選んでください。</value></data>
+  <data name="ReferenceNumberInvalid" xml:space="preserve"><value>概要からコピーした ID を入力してください。10 進数・16 進数の ID、MFT レコード番号、番号:シーケンス番号を入力できます。</value></data>
+  <data name="ClearPathReferenceFilters" xml:space="preserve"><value>パスと ID の条件をクリア</value></data>
+  <data name="PartialPath" xml:space="preserve"><value>パスの一部</value></data>
+  <data name="MftPathNotEventTime" xml:space="preserve"><value>名前と直近の親フォルダー参照は $LogFile から取得しています。親フォルダーのパスは収集時の $MFT に基づくため、操作時と異なる場合があります。</value></data>
+  <data name="TransactionPathInvalidName" xml:space="preserve"><value>$LogFile の名前をパスの一部として使用できません。</value></data>
+  <data name="TransactionPathMissingParent" xml:space="preserve"><value>このレコードには完全な親フォルダー参照がありません。</value></data>
+  <data name="TransactionPathRoot" xml:space="preserve"><value>$LogFile ではボリュームのルートが親フォルダーとして記録されています。</value></data>
+  <data name="TransactionPathNeedsMft" xml:space="preserve"><value>親フォルダーを調べるには、同じボリュームから取得した $MFT を関連付けてください。</value></data>
+  <data name="TransactionPathParentNotDirectory" xml:space="preserve"><value>対応する $MFT エントリはフォルダーを指していません。</value></data>
+  <data name="TransactionPathFromLogFile" xml:space="preserve"><value>$LogFile</value></data>
+  <data name="TransactionPathFromMft" xml:space="preserve"><value>MFT による推定</value></data>
+  <data name="TransactionMftSource" xml:space="preserve"><value>MFT の元ファイル</value></data>
+  <data name="IntakeMftNeedsLog" xml:space="preserve"><value>この $MFT を関連付けるには、同じボリュームから取得した $J または $LogFile を選択してください。</value></data>
+  <data name="FilterFileId" xml:space="preserve"><value>ファイル ID</value></data>
+  <data name="FilterParentId" xml:space="preserve"><value>親フォルダー ID</value></data>
+  <data name="PasteRecordId" xml:space="preserve"><value>ID を貼り付け</value></data>
+  <data name="SearchThisId" xml:space="preserve"><value>この ID で検索</value></data>
+  <data name="SearchThisIdHelp" xml:space="preserve"><value>現在のフィルターを解除し、この ID で検索します。</value></data>
+  <data name="FileIdDefinition" xml:space="preserve"><value>この記録で変更されたファイルまたはフォルダーの ID です。</value></data>
+  <data name="ParentIdDefinition" xml:space="preserve"><value>この記録に残っている直近の親フォルダーの ID です。</value></data>
+  <data name="RecordIdMissing" xml:space="preserve"><value>この記録から該当する ID を読み取れません。</value></data>
+  <data name="IntakeDropFiles" xml:space="preserve"><value>対応資料   NTFS ディスクイメージ（E01、VHD など）・抽出ファイル（$J、$MFT、$LogFile）とそのフォルダー</value></data>
+  <data name="DatePickerPrompt" xml:space="preserve"><value>日付を選択</value></data>
+  <data name="AboutAuthor" xml:space="preserve"><value>制作者: {0}</value></data>
+  <data name="DisplayOptions" xml:space="preserve"><value>表示</value></data>
+  <data name="AppearanceTheme" xml:space="preserve"><value>テーマ</value></data>
+  <data name="WindowsSetting" xml:space="preserve"><value>Windows の設定値</value></data>
+  <data name="LightTheme" xml:space="preserve"><value>ライトテーマ</value></data>
+  <data name="CloseSettings" xml:space="preserve"><value>閉じる</value></data>
+</root>

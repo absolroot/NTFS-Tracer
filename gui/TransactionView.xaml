@@ -1,0 +1,161 @@
+<UserControl x:Class="JournalDesk.TransactionView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:local="clr-namespace:JournalDesk" Language="{Binding Language,Source={x:Static loc:L.Text}}" xmlns:loc="clr-namespace:JournalDesk" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="{DynamicResource Desk.Canvas}" Unloaded="OnUnloaded">
+ <UserControl.Resources>
+  <ResourceDictionary>
+   <ResourceDictionary.MergedDictionaries><ResourceDictionary Source="LogTable.xaml"/></ResourceDictionary.MergedDictionaries>
+   <Style x:Key="TransactionPathCell" TargetType="TextBlock" BasedOn="{StaticResource Desk.LogText}">
+    <Setter Property="ToolTip" Value="{Binding PathText}"/>
+   </Style>
+   <Style x:Key="TransactionPathSourceCell" TargetType="TextBlock" BasedOn="{StaticResource Desk.LogText}">
+    <Setter Property="ToolTip" Value="{Binding PathEvidence}"/>
+    <Setter Property="AutomationProperties.HelpText" Value="{Binding PathEvidence}"/>
+   </Style>
+  </ResourceDictionary>
+ </UserControl.Resources>
+ <Grid x:Name="Layout">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*" MinHeight="62"/><RowDefinition Height="Auto"/><RowDefinition x:Name="DetailHeight" Height="0"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <Border x:Name="TransactionCommands" Background="{DynamicResource Desk.Canvas}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1" Style="{DynamicResource Desk.LogToolbar}">
+   <StackPanel>
+   <Grid>
+    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+    <Grid><loc:HintTextBox x:Name="Query" Hint="{loc:Ui SearchFileNameOrLsn}" Style="{DynamicResource Desk.LogSearchInput}" VerticalContentAlignment="Center" TextChanged="QueryChanged" AutomationProperties.Name="{loc:Ui SearchFileNameOrLsn}" ToolTip="{loc:Ui EnterAFileNameOrAHexadecimalLsn}"/>
+     <Button x:Name="ClearQuery" Style="{DynamicResource Desk.ClearLogSearch}" Visibility="Collapsed" Click="ClearQueryClick" ToolTip="{loc:Ui ClearSearch}" AutomationProperties.Name="{loc:Ui ClearTransactionSearch}"/>
+    </Grid>
+    <ComboBox x:Name="Filter" Grid.Column="1" Margin="6,0,0,0" MinHeight="30" SelectedIndex="0" SelectionChanged="FilterChanged" AutomationProperties.Name="{loc:Ui TransactionType}"><ComboBoxItem Content="{loc:Ui AllOperations}"/><ComboBoxItem Content="{loc:Ui OperationsWithFileNames}"/><ComboBoxItem Content="{loc:Ui EarlierFileTimestamps}"/><ComboBoxItem Content="{loc:Ui MoveOrRenameCandidates}"/></ComboBox>
+   </Grid>
+   <local:RecordSearchFields x:Name="RecordFields" Changed="RecordFieldsChanged"/>
+   </StackPanel>
+  </Border>
+  <Grid x:Name="Results" Grid.Row="1">
+   <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Rows" Grid.Row="0" Style="{StaticResource Desk.LogTable}" IsReadOnly="True" CanUserAddRows="False" CanUserSortColumns="True" Sorting="SortRows"
+            SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" SelectionChanged="Selected" AutomationProperties.Name="{loc:Ui NtfsTransactionRecords}">
+   <DataGrid.Columns>
+    <DataGridTextColumn x:Name="LsnColumn" Header="LSN" Binding="{Binding Lsn}" Width="158" ElementStyle="{StaticResource Desk.LogMono}"/>
+    <DataGridTextColumn x:Name="OperationColumn" Header="{loc:Ui Operation}" Binding="{Binding Label}" Width="192" ElementStyle="{StaticResource Desk.LogText}"/>
+    <DataGridTextColumn x:Name="NameColumn" Header="{loc:Ui RecordedFileNames}" Binding="{Binding Name}" Width="*" MinWidth="140" ElementStyle="{StaticResource Desk.LogText}"/>
+    <DataGridTextColumn x:Name="PathSourceColumn" Header="{loc:Ui PathSourceColumn}" Binding="{Binding PathSource}" Width="120" ElementStyle="{StaticResource TransactionPathSourceCell}"/>
+    <DataGridTextColumn x:Name="TransactionIdColumn" Header="{loc:Ui TransactionId}" Binding="{Binding Tx}" Width="114" ElementStyle="{StaticResource Desk.LogNumber}"/>
+   </DataGrid.Columns>
+  </DataGrid>
+  <StackPanel Margin="16,39,12,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+   <TextBlock x:Name="Empty" Foreground="{DynamicResource Desk.Muted}" TextWrapping="Wrap" IsHitTestVisible="False" AutomationProperties.LiveSetting="Polite"/>
+   <Button x:Name="ResetSearch" Visibility="Collapsed" HorizontalAlignment="Left" Margin="0,3,0,0" Content="{loc:Ui ClearFilters}" Click="ResetSearchClick" Style="{DynamicResource Desk.EvidenceLink}"/>
+  </StackPanel>
+  <Border Grid.Row="1" Padding="8,2" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0" Background="{DynamicResource Desk.Panel}"><DockPanel>
+   <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+    <ComboBox x:Name="PageLimit" ItemsSource="{x:Static local:PageSizeOption.Choices}" DisplayMemberPath="Caption" SelectedValuePath="Size" SelectedValue="{x:Static local:PageSizeOption.Preferred}" local:PageSizeOption.Synchronize="True"
+              Style="{DynamicResource Desk.PageSizePicker}" ToolTip="{loc:Ui RowsPerPage}" AutomationProperties.Name="{loc:Ui RowsPerPage}" SelectionChanged="PageSizeChanged"/>
+    <TextBlock x:Name="PageStatus" VerticalAlignment="Center" FontSize="12" Foreground="{DynamicResource Desk.Muted}" Margin="0,0,9,0" AutomationProperties.LiveSetting="Polite"/>
+    <Button x:Name="Prev" Click="Previous" IsEnabled="False" Style="{DynamicResource Desk.IconButton}" Content="&#xE76B;" ToolTip="{loc:Ui PreviousPage}" AutomationProperties.Name="{loc:Ui PreviousPage}"/><Button x:Name="Next" Click="Following" IsEnabled="False" Margin="3,0,0,0" Style="{DynamicResource Desk.IconButton}" Content="&#xE76C;" ToolTip="{loc:Ui NextPage}" AutomationProperties.Name="{loc:Ui NextPage}"/>
+   </StackPanel>
+   <Menu DockPanel.Dock="Left" IsMainMenu="False" Padding="0" VerticalAlignment="Center" Background="Transparent">
+    <Menu.Resources><ResourceDictionary Source="CompactMenu.xaml"/></Menu.Resources>
+    <MenuItem x:Name="ExportLog" Header="{loc:Ui Export}" HeaderTemplate="{DynamicResource Desk.ExportHeader}" ToolTip="{loc:Ui ExportAllMatchingTransactions}" ToolTipService.ShowOnDisabled="True" AutomationProperties.Name="{loc:Ui ExportTransactionResults}">
+     <MenuItem Header="{loc:Ui ExportAsCsv}" Click="Export"/>
+    </MenuItem>
+   </Menu>
+   <Button x:Name="CancelExport" DockPanel.Dock="Left" Visibility="Collapsed" Content="{loc:Ui CancelExport}" Click="Stop" Padding="7,1" MinHeight="25"/>
+   <Border/>
+  </DockPanel></Border>
+  </Grid>
+  <GridSplitter x:Name="Splitter" Grid.Row="2" Height="4" Visibility="Collapsed" Style="{DynamicResource Desk.RowSplitter}" HorizontalAlignment="Stretch" Background="{DynamicResource Desk.Rule}" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
+  <Border Grid.Row="3" x:Name="Inspector" Visibility="Collapsed" Padding="10,3" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0"><DockPanel>
+   <DockPanel DockPanel.Dock="Top" Margin="2,0,0,1">
+    <Button x:Name="CloseInspector" DockPanel.Dock="Right" Style="{DynamicResource Desk.IconButton}" Content="&#xE711;" Click="CloseInspectorClick" ToolTip="{loc:Ui CollapseDetailsEsc}" AutomationProperties.Name="{loc:Ui CollapseTransactionDetails}"/>
+    <local:CopyText x:Name="RecordTitle" TextWrapping="NoWrap" VerticalAlignment="Center" FontWeight="SemiBold" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+   </DockPanel>
+   <Grid>
+   <TabControl x:Name="DetailTabs" Style="{DynamicResource Desk.InspectorTabs}" Background="Transparent" BorderThickness="0">
+   <TabItem Header="{loc:Ui Overview}"><ScrollViewer x:Name="OverviewScroll" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Focusable="False">
+    <ScrollViewer.Resources>
+     <Style x:Key="OverviewLabel" TargetType="local:CopyText" BasedOn="{StaticResource {x:Type local:CopyText}}">
+      <Setter Property="Foreground" Value="{DynamicResource Desk.Muted}"/>
+      <Setter Property="Margin" Value="0,0,8,0"/>
+      <Setter Property="MaxWidth" Value="152"/>
+      <Setter Property="ToolTip" Value="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+     </Style>
+    </ScrollViewer.Resources>
+    <StackPanel Margin="4,4" Grid.IsSharedSizeScope="True">
+     <Grid Margin="0,0,0,4" Visibility="{Binding Visibility,ElementName=OverviewSummary}" DataContext="{Binding DataContext.Record,ElementName=OverviewSummary}">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+      <local:CopyText Style="{StaticResource OverviewLabel}" HorizontalAlignment="Left" Text="{loc:Ui Path}"/>
+      <local:CopyText Grid.Column="1" Text="{Binding PathText,Mode=OneWay}" TextWrapping="Wrap" MaxHeight="44" VerticalScrollBarVisibility="Auto" ToolTip="{Binding PathText}" AutomationProperties.Name="{loc:Ui Path}"/>
+      <TextBlock Grid.Column="2" Text="{Binding PathSource}" Foreground="{DynamicResource Desk.Muted}" Margin="8,0,4,0" VerticalAlignment="Center" AutomationProperties.Name="{loc:Ui PathSourceColumn}"/>
+      <local:RecordIdentifiersView x:Name="Identifiers" Grid.Row="1" Grid.ColumnSpan="3"/>
+      <Expander x:Name="TransactionPathEvidence" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Style="{DynamicResource Desk.PathEvidence}" Header="{loc:Ui PathEvidence}">
+       <StackPanel Margin="12,1,4,4">
+        <local:CopyText Text="{Binding PathEvidence,Mode=OneWay}" TextWrapping="Wrap" Foreground="{DynamicResource Desk.Muted}" AutomationProperties.Name="{loc:Ui PathEvidence}"/>
+        <StackPanel Margin="0,4,0,0">
+         <StackPanel.Style><Style TargetType="StackPanel"><Style.Triggers><DataTrigger Binding="{Binding MftSource}" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></StackPanel.Style>
+         <local:CopyText Text="{Binding MftSource,Mode=OneWay,StringFormat='MFT  {0}'}" TextWrapping="Wrap" Foreground="{DynamicResource Desk.Muted}"/>
+         <local:CopyText Text="{Binding MftHash,Mode=OneWay,StringFormat='SHA-256  {0}'}" TextWrapping="Wrap" Foreground="{DynamicResource Desk.Muted}"/>
+        </StackPanel>
+       </StackPanel>
+      </Expander>
+     </Grid>
+     <Grid x:Name="OverviewSummary" Visibility="Collapsed">
+      <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+      <local:CopyText HorizontalAlignment="Left" Style="{StaticResource OverviewLabel}" Text="Redo"/>
+      <local:CopyText HorizontalAlignment="Left" Grid.Column="1" TextWrapping="Wrap" Text="{Binding Redo.Operation,Mode=OneWay}" AutomationProperties.Name="Redo"/>
+      <local:CopyText HorizontalAlignment="Left" Grid.Column="2" Style="{StaticResource OverviewLabel}" Text="{loc:Ui PreviousLsn}"/>
+      <local:CopyText HorizontalAlignment="Left" Grid.Column="3" TextWrapping="Wrap" Text="{Binding PreviousLsn,Mode=OneWay}" AutomationProperties.Name="{loc:Ui PreviousLsn}"/>
+      <Button x:Name="CopyOverview" Grid.Column="4" Grid.RowSpan="3" VerticalAlignment="Top" Style="{DynamicResource Desk.IconButton}" Content="&#xE8C8;" ToolTip="{loc:Ui CopyOverview}" AutomationProperties.Name="{loc:Ui CopyTransactionOverview}" Click="CopyOverviewClick"/>
+      <local:CopyText HorizontalAlignment="Left" Grid.Row="1" Style="{StaticResource OverviewLabel}" Text="Undo"/>
+      <local:CopyText HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Text="{Binding Undo.Operation,Mode=OneWay}" AutomationProperties.Name="Undo"/>
+      <local:CopyText HorizontalAlignment="Left" Grid.Row="1" Grid.Column="2" Style="{StaticResource OverviewLabel}" Text="{loc:Ui NextUndoLsn}"/>
+      <local:CopyText HorizontalAlignment="Left" Grid.Row="1" Grid.Column="3" TextWrapping="Wrap" Text="{Binding NextUndoLsn,Mode=OneWay}" AutomationProperties.Name="{loc:Ui NextUndoLsn}"/>
+      <local:CopyText HorizontalAlignment="Left" Grid.Row="2" Style="{StaticResource OverviewLabel}" Text="{loc:Ui TransactionId}" ToolTip="{Binding TransactionIdNote}"/>
+      <local:CopyText HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Text="{Binding Record.Tx,Mode=OneWay}" ToolTip="{Binding TransactionIdNote}" AutomationProperties.Name="{loc:Ui TransactionId}" AutomationProperties.HelpText="{Binding TransactionIdNote}"/>
+      <local:CopyText HorizontalAlignment="Left" Grid.Row="2" Grid.Column="2" Style="{StaticResource OverviewLabel}" Text="{loc:Ui SourceOffset}"/>
+      <local:CopyText HorizontalAlignment="Left" Grid.Row="2" Grid.Column="3" TextWrapping="Wrap" Text="{Binding OriginalPosition,Mode=OneWay}" AutomationProperties.Name="{loc:Ui SourceOffset}"/>
+     </Grid>
+     <ItemsControl x:Name="AdditionalFields" ItemsSource="{Binding DataContext.Facts,ElementName=OverviewSummary}">
+      <ItemsControl.ItemTemplate><DataTemplate>
+       <Grid>
+        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition/></Grid.ColumnDefinitions>
+        <local:CopyText HorizontalAlignment="Left" x:Name="FactLabel" Style="{StaticResource OverviewLabel}" Text="{Binding Label,Mode=OneWay}"/>
+        <local:CopyText x:Name="FactValue" Grid.Column="1" Text="{Binding Value,Mode=OneWay}" TextWrapping="Wrap" AutomationProperties.Name="{Binding Label}"/>
+       </Grid>
+       <DataTemplate.Triggers><DataTrigger Binding="{Binding Label}" Value="">
+        <Setter TargetName="FactLabel" Property="Visibility" Value="Collapsed"/><Setter TargetName="FactValue" Property="Grid.Column" Value="0"/>
+        <Setter TargetName="FactValue" Property="Grid.ColumnSpan" Value="2"/><Setter TargetName="FactValue" Property="Margin" Value="0,4,0,1"/>
+       </DataTrigger></DataTemplate.Triggers>
+      </DataTemplate></ItemsControl.ItemTemplate>
+     </ItemsControl>
+     <local:CopyText x:Name="Info" TextWrapping="Wrap" Margin="0,4,0,0" AutomationProperties.Name="{loc:Ui AdditionalRecordInformation}">
+      <local:CopyText.Style><Style TargetType="local:CopyText" BasedOn="{StaticResource {x:Type local:CopyText}}"><Style.Triggers><Trigger Property="Text" Value=""><Setter Property="Visibility" Value="Collapsed"/></Trigger></Style.Triggers></Style></local:CopyText.Style>
+     </local:CopyText>
+    </StackPanel>
+   </ScrollViewer></TabItem>
+   <TabItem Header="Redo / Undo"><DockPanel Margin="0,1">
+    <DockPanel DockPanel.Dock="Top" Margin="0,1,0,3">
+     <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Margin="0,0,12,0">
+      <RadioButton x:Name="RedoChoice" Content="Redo" GroupName="PayloadSide" VerticalAlignment="Center" Margin="0,0,10,0" Checked="ChangePayload"/>
+      <RadioButton x:Name="UndoChoice" Content="Undo" GroupName="PayloadSide" VerticalAlignment="Center" Checked="ChangePayload"/>
+     </StackPanel>
+     <local:CopyText x:Name="PayloadInfo" VerticalAlignment="Center" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+    </DockPanel>
+    <local:HexEvidenceView x:Name="Payload" AddressLabel="{loc:Ui OffsetInReconstructedData}" AutomationProperties.Name="{loc:Ui ReconstructedOperationData}"/>
+   </DockPanel></TabItem>
+   <TabItem Header="Hex" ToolTip="{loc:Ui RawHeader}"><DockPanel Margin="0,1">
+    <local:CopyText x:Name="HeaderLocation" DockPanel.Dock="Top" Margin="4,1,0,3" FontSize="12" Foreground="{DynamicResource Desk.Muted}" ToolTip="{loc:Ui TheExtractedLogfileHeaderBeforeSectorEndFixups}"/>
+    <local:HexEvidenceView x:Name="Raw" AutomationProperties.Name="{loc:Ui RawTransactionHeader}"/>
+   </DockPanel></TabItem>
+  </TabControl>
+  <local:CopyText x:Name="SourceInfo" Visibility="Collapsed" AutomationProperties.Name="{loc:Ui TransactionSourceInformation}" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource Desk.Text}" Padding="4,4"/>
+  </Grid></DockPanel></Border>
+  <Border x:Name="Welcome" Grid.RowSpan="4" Background="{DynamicResource Desk.Canvas}">
+   <Button x:Name="OpenLog" Content="{loc:Ui OpenLogfile}" Click="Pick" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  </Border>
+  <Border Grid.Row="4" Padding="10,3" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0">
+   <DockPanel>
+    <Button x:Name="ViewSource" DockPanel.Dock="Right" Click="SourceClick" Content="{loc:Ui SourceInformationLabel}" MinHeight="22" Style="{DynamicResource Desk.EvidenceLink}" ToolTip="{loc:Ui PathSha256AndParseResultsForThe}"/>
+    <Button x:Name="StopLog" DockPanel.Dock="Right" Click="Stop" Visibility="Collapsed" Style="{DynamicResource Desk.IconButton}" Content="&#xE71A;" ToolTip="{loc:Ui CancelOpeningTransactionLog}" AutomationProperties.Name="{loc:Ui CancelOpeningTransactionLog}"/>
+    <TextBlock x:Name="State" VerticalAlignment="Center" FontSize="12" Foreground="{DynamicResource Desk.Muted}" TextTrimming="CharacterEllipsis" AutomationProperties.LiveSetting="Polite" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/></DockPanel>
+  </Border>
+ </Grid>
+</UserControl>

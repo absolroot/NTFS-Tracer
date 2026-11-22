@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Attach $MFT…" xml:space="preserve"><value>Vincular $MFT…</value></data>
+  <data name="CSV with paths and evidence…" xml:space="preserve"><value>CSV con rutas y evidencia…</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Cancelar</value></data>
+  <data name="Change reason" xml:space="preserve"><value>Motivo del cambio</value></data>
+  <data name="Continue" xml:space="preserve"><value>Continuar</value></data>
+  <data name="Copied" xml:space="preserve"><value>Copiado</value></data>
+  <data name="Copy full text" xml:space="preserve"><value>Copiar todo el texto</value></data>
+  <data name="Creation record" xml:space="preserve"><value>Registro de creación</value></data>
+  <data name="Date filter" xml:space="preserve"><value>Filtro por fecha</value></data>
+  <data name="Deletion record" xml:space="preserve"><value>Registro de eliminación</value></data>
+  <data name="Display language" xml:space="preserve"><value>Idioma de la interfaz</value></data>
+  <data name="File path" xml:space="preserve"><value>Ruta registrada</value></data>
+  <data name="File renamed" xml:space="preserve"><value>Archivo renombrado</value></data>
+  <data name="Files and folders: {0:N0}   ·   Change records: {1:N0}" xml:space="preserve"><value>Archivos y carpetas: {0:N0}   ·   Registros de cambios: {1:N0}</value></data>
+  <data name="Loading records…" xml:space="preserve"><value>Cargando registros…</value></data>
+  <data name="Moved to another folder" xml:space="preserve"><value>Movido a otra carpeta</value></data>
+  <data name="Names missing from the journal ({0}) come from the MFT at acquisition. Their names and locations at the time of the event are unknown." xml:space="preserve"><value>Los nombres de las carpetas superiores ({0}) no figuran en el diario. Se tomaron de la MFT adquirida. Se desconocen sus nombres y ubicaciones en el momento del evento.</value></data>
+  <data name="New name record" xml:space="preserve"><value>Registro del nombre nuevo</value></data>
+  <data name="No matching records." xml:space="preserve"><value>No hay registros que coincidan.</value></data>
+  <data name="Old name record" xml:space="preserve"><value>Registro del nombre anterior</value></data>
+  <data name="Path inferred from MFT" xml:space="preserve"><value>Ruta inferida de la MFT</value></data>
+  <data name="Path unavailable." xml:space="preserve"><value>Ruta no disponible.</value></data>
+  <data name="Record CSV…" xml:space="preserve"><value>Registros en CSV…</value></data>
+  <data name="Record time ({0})" xml:space="preserve"><value>Hora del registro ({0})</value></data>
+  <data name="Recorded file name" xml:space="preserve"><value>Nombre de archivo registrado</value></data>
+  <data name="Recorded path" xml:space="preserve"><value>Ruta registrada</value></data>
+  <data name="Resolving path…" xml:space="preserve"><value>Reconstruyendo la ruta…</value></data>
+  <data name="Some folder names come from the last journal record before this event. Those names or locations may have changed afterward." xml:space="preserve"><value>Algunos nombres proceden del último registro de cada carpeta antes del evento. El nombre o la ubicación pudieron cambiar después.</value></data>
+  <data name="Source file" xml:space="preserve"><value>Archivo de origen</value></data>
+  <data name="The acquired MFT links the file name to its parent folders." xml:space="preserve"><value>La MFT adquirida vincula el nombre del archivo con sus carpetas superiores.</value></data>
+  <data name="The journal links this file name to its parent folders up to the volume root." xml:space="preserve"><value>El diario vincula este nombre de archivo con sus carpetas superiores hasta la raíz del volumen.</value></data>
+  <data name="The parent folder cannot be identified in this journal segment. No MFT is attached." xml:space="preserve"><value>Este tramo del diario no permite identificar la carpeta superior. No hay ninguna MFT vinculada.</value></data>
+  <data name="Unknown path" xml:space="preserve"><value>Ruta desconocida</value></data>
+  <data name="Use Windows language ({0})" xml:space="preserve"><value>Usar el idioma de Windows ({0})</value></data>
+  <data name="Records: {0:N0}" xml:space="preserve"><value>Registros: {0:N0}</value></data>
+  <data name="Records {0:N0}–{1:N0}" xml:space="preserve"><value>Registros {0:N0}–{1:N0}</value></data>
+  <data name="Auto (sequential)" xml:space="preserve"><value>Automático (secuencial)</value></data>
+  <data name="Auto (up to 2 in parallel)" xml:space="preserve"><value>Automático (hasta 2 en paralelo)</value></data>
+  <data name="Extract and analyze" xml:space="preserve"><value>Extraer y analizar</value></data>
+  <data name="Extract files" xml:space="preserve"><value>Extraer archivos</value></data>
+  <data name="Preparing indexes · {0}" xml:space="preserve"><value>Preparando índices · {0}</value></data>
+  <data name="Sorting all matching records…" xml:space="preserve"><value>Ordenando los registros encontrados…</value></data>
+  <data name="Data overwritten" xml:space="preserve"><value>Datos sobrescritos</value></data>
+  <data name="Data extended" xml:space="preserve"><value>Datos ampliados</value></data>
+  <data name="Data truncated" xml:space="preserve"><value>Datos truncados</value></data>
+  <data name="File closed" xml:space="preserve"><value>Archivo cerrado</value></data>
+  <data name="Attributes or timestamps changed" xml:space="preserve"><value>Atributos o marcas de tiempo modificados</value></data>
+  <data name="{0}   ·   Records: {1:N0}" xml:space="preserve"><value>{0}   ·   Registros: {1:N0}</value></data>
+  <data name="No records match your search." xml:space="preserve"><value>No hay registros que coincidan.</value></data>
+  <data name="Source offset 0x{0:X}  ·  {1:N0} bytes" xml:space="preserve"><value>Desplazamiento 0x{0:X}  ·  {1:N0} bytes</value></data>
+</root>

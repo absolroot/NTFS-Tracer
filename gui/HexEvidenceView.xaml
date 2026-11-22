@@ -1,0 +1,117 @@
+<UserControl x:Class="JournalDesk.HexEvidenceView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ Language="{Binding Language,Source={x:Static loc:L.Text}}" xmlns:loc="clr-namespace:JournalDesk" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:JournalDesk"
+ Background="{DynamicResource Desk.Canvas}" FontFamily="Segoe UI, Malgun Gothic" FontSize="12" FontWeight="Normal">
+ <Grid>
+  <Grid x:Name="Reader">
+   <Grid.ColumnDefinitions><ColumnDefinition x:Name="ByteColumn"/><ColumnDefinition x:Name="InspectorColumn" Width="0"/></Grid.ColumnDefinitions>
+   <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+   <Grid x:Name="BytePane" ClipToBounds="True">
+    <Grid.RowDefinitions><RowDefinition Height="21"/><RowDefinition/></Grid.RowDefinitions>
+    <Border Background="{DynamicResource Desk.Inset}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1" ClipToBounds="True">
+     <Grid>
+      <Border ClipToBounds="True"><local:HexStrip x:Name="Columns" Header="True" HorizontalAlignment="Left" Foreground="{DynamicResource Desk.Muted}"/></Border>
+      <Grid HorizontalAlignment="Right" Width="24" Background="{DynamicResource Desk.Inset}">
+       <Grid.Style><Style TargetType="Grid">
+        <Setter Property="Visibility" Value="Hidden"/>
+        <Style.Triggers>
+         <DataTrigger Binding="{Binding IsMouseOver,ElementName=BytePane}" Value="True"><Setter Property="Visibility" Value="Visible"/></DataTrigger>
+         <DataTrigger Binding="{Binding IsKeyboardFocusWithin,ElementName=BytePane}" Value="True"><Setter Property="Visibility" Value="Visible"/></DataTrigger>
+        </Style.Triggers>
+       </Style></Grid.Style>
+       <Button x:Name="CopyBytesButton" Width="22" Height="19" MinWidth="0" MinHeight="0" Padding="0" FontSize="11" HorizontalAlignment="Center"
+               Style="{DynamicResource Desk.IconButton}" Content="&#xE8C8;" Click="CopySelection"/>
+      </Grid>
+     </Grid>
+    </Border>
+    <ScrollViewer x:Name="Viewport" Grid.Row="1" Focusable="False" CanContentScroll="False"
+                  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" ScrollChanged="ViewportChanged">
+     <local:HexStrip x:Name="Body" Focusable="True" FocusVisualStyle="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top"
+       AutomationProperties.Name="{loc:Ui HexByteTable}" AutomationProperties.AutomationId="HexByteGrid"
+       AutomationProperties.HelpText="{loc:Ui UseTheArrowKeysToMoveShiftArrow}"
+       Foreground="{DynamicResource Desk.Text}" MouseLeftButtonDown="BeginRange" MouseMove="DragRange" MouseLeftButtonUp="EndRange"
+       LostMouseCapture="RangeCaptureLost" ContextMenuOpening="OpenCopyMenu" KeyDown="NavigateBytes">
+      <local:HexStrip.ContextMenu>
+       <ContextMenu><MenuItem x:Name="CopyBytesItem" InputGestureText="Ctrl+C" Click="CopySelection"/>
+        <MenuItem x:Name="CopyAddressItem" Click="CopyAddress"/>
+        <Separator x:Name="FieldCopyDivider"/>
+        <MenuItem x:Name="CopyFieldItem" Click="CopyField"/>
+        <MenuItem x:Name="CopyValueItem" Click="CopyFieldValue"/>
+        <Separator/>
+        <MenuItem Header="{loc:Ui CopyTableAddressHexAndAscii}" Click="CopyAll"/></ContextMenu>
+      </local:HexStrip.ContextMenu>
+     </local:HexStrip>
+    </ScrollViewer>
+   </Grid>
+   <Border x:Name="Inspector" Grid.Column="1" Grid.IsSharedSizeScope="True" Background="{DynamicResource Desk.Panel}"
+           BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="1,0,0,0" Padding="8,4">
+    <Border.Resources>
+     <Style x:Key="Hex.Caption" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+      <Setter Property="Foreground" Value="{DynamicResource Desk.Muted}"/>
+      <Setter Property="Margin" Value="0,2,10,0"/>
+      <Setter Property="TextWrapping" Value="Wrap"/>
+      <Setter Property="MaxWidth" Value="108"/>
+      <Setter Property="VerticalAlignment" Value="Top"/>
+     </Style>
+     <Style TargetType="local:CopyText" BasedOn="{StaticResource {x:Type local:CopyText}}">
+      <Setter Property="FontFamily" Value="Consolas, Malgun Gothic, Meiryo"/>
+      <Setter Property="VerticalAlignment" Value="Top"/>
+      <Setter Property="Padding" Value="2,1"/>
+      <Setter Property="ToolTip" Value="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+     </Style>
+    </Border.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Focusable="False">
+     <Grid x:Name="InspectorLayout" VerticalAlignment="Top">
+      <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition x:Name="SecondaryColumn" Width="0"/></Grid.ColumnDefinitions>
+      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+       <Grid x:Name="FieldControl">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="HexCaption"/><ColumnDefinition/></Grid.ColumnDefinitions>
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <TextBlock x:Name="FieldNameLabel" Style="{StaticResource Hex.Caption}" Grid.Row="0" Text="{loc:Ui HexSourceField}"/>
+        <local:CopyText x:Name="FieldName" Grid.Row="0" Grid.Column="1" AutomationProperties.AutomationId="HexFieldName" AutomationProperties.LabeledBy="{Binding ElementName=FieldNameLabel}"/>
+        <TextBlock x:Name="FieldValueLabel" Style="{StaticResource Hex.Caption}" Grid.Row="1" Text="{loc:Ui HexDecoded}"/>
+        <local:CopyText x:Name="FieldValue" Grid.Row="1" Grid.Column="1" AutomationProperties.AutomationId="HexFieldValue" AutomationProperties.LabeledBy="{Binding ElementName=FieldValueLabel}"/>
+        <TextBlock x:Name="FieldSizeLabel" Style="{StaticResource Hex.Caption}" Grid.Row="2" Text="{loc:Ui HexLength}"/>
+        <local:CopyText x:Name="FieldSize" Grid.Row="2" Grid.Column="1" AutomationProperties.AutomationId="HexFieldLength" AutomationProperties.LabeledBy="{Binding ElementName=FieldSizeLabel}"/>
+       </Grid>
+      <StackPanel x:Name="CursorGroup" Grid.Row="1">
+       <Grid x:Name="CursorInfo">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="HexCaption"/><ColumnDefinition/></Grid.ColumnDefinitions>
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <TextBlock x:Name="CursorValueLabel" Style="{StaticResource Hex.Caption}" Grid.Row="0" Text="{loc:Ui HexCursor}"/>
+        <local:CopyText x:Name="CursorValue" Grid.Row="0" Grid.Column="1" AutomationProperties.AutomationId="HexCursorOffset" AutomationProperties.LabeledBy="{Binding ElementName=CursorValueLabel}"/>
+        <TextBlock x:Name="ByteValueLabel" Style="{StaticResource Hex.Caption}" Grid.Row="1" Text="{loc:Ui HexByteValue}"/>
+        <local:CopyText x:Name="ByteValue" Grid.Row="1" Grid.Column="1" AutomationProperties.AutomationId="HexSelectedByte" AutomationProperties.LabeledBy="{Binding ElementName=ByteValueLabel}"/>
+       </Grid>
+       <Expander x:Name="ShowNumbers" Expanded="RevealIntegerValues" Header="{loc:Ui HexIntegersEndian}" Focusable="False" Style="{StaticResource Desk.PathEvidence}"
+                 ToolTip="{loc:Ui Read124Or8BytesAt}" AutomationProperties.Name="{loc:Ui ReadIntegerAtCursor}">
+        <Expander.Resources>
+         <Style TargetType="ToggleButton" BasedOn="{StaticResource {x:Type ToggleButton}}">
+          <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+         </Style>
+        </Expander.Resources>
+       <Grid x:Name="IntegerValues">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="HexCaption"/><ColumnDefinition/></Grid.ColumnDefinitions>
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+        <TextBlock x:Name="UInt8Label" Style="{StaticResource Hex.Caption}" Grid.Row="0" Text="UInt8"/>
+        <local:CopyText x:Name="UInt8" Grid.Row="0" Grid.Column="1" AutomationProperties.AutomationId="HexUInt8" AutomationProperties.LabeledBy="{Binding ElementName=UInt8Label}"/>
+        <TextBlock x:Name="UInt16Label" Style="{StaticResource Hex.Caption}" Grid.Row="1" Text="UInt16"/>
+        <local:CopyText x:Name="UInt16" Grid.Row="1" Grid.Column="1" AutomationProperties.AutomationId="HexUInt16" AutomationProperties.LabeledBy="{Binding ElementName=UInt16Label}"/>
+        <TextBlock x:Name="UInt32Label" Style="{StaticResource Hex.Caption}" Grid.Row="2" Text="UInt32"/>
+        <local:CopyText x:Name="UInt32" Grid.Row="2" Grid.Column="1" AutomationProperties.AutomationId="HexUInt32" AutomationProperties.LabeledBy="{Binding ElementName=UInt32Label}"/>
+        <TextBlock x:Name="UInt64Label" Style="{StaticResource Hex.Caption}" Grid.Row="3" Text="UInt64"/>
+        <local:CopyText x:Name="UInt64" Grid.Row="3" Grid.Column="1" AutomationProperties.AutomationId="HexUInt64" AutomationProperties.LabeledBy="{Binding ElementName=UInt64Label}"/>
+       </Grid>
+       </Expander>
+      </StackPanel>
+     </Grid>
+    </ScrollViewer>
+   </Border>
+   <local:CopyText x:Name="ManualSelection" Grid.Row="2" Grid.ColumnSpan="2" Visibility="Collapsed" Margin="6,3,2,1"
+    FontFamily="Consolas, Malgun Gothic" FontSize="12" Foreground="{DynamicResource Desk.Muted}"
+    ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}" AutomationProperties.AutomationId="HexManualSelection"/>
+   <TextBlock x:Name="CopyStatus" Grid.Row="3" Grid.ColumnSpan="2" Margin="6,2" Visibility="Collapsed" Foreground="{DynamicResource Desk.Muted}" AutomationProperties.LiveSetting="Polite"/>
+  </Grid>
+  <TextBlock x:Name="Message" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8,3" TextWrapping="Wrap"
+   Foreground="{DynamicResource Desk.Muted}" AutomationProperties.LiveSetting="Polite"/>
+ </Grid>
+</UserControl>

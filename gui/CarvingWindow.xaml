@@ -1,0 +1,56 @@
+<Window x:Class="JournalDesk.CarvingWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Language="{Binding Language,Source={x:Static loc:L.Text}}" xmlns:loc="clr-namespace:JournalDesk" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:JournalDesk" Title="{loc:Ui FindUsnRemnantsJournaldesk}" Width="1100" Height="730" MinWidth="740" MinHeight="460" WindowStartupLocation="CenterOwner" FontFamily="Segoe UI, Malgun Gothic" Foreground="{DynamicResource Desk.Text}" Background="{DynamicResource Desk.Canvas}">
+ <DockPanel>
+  <Border DockPanel.Dock="Top" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1" Style="{DynamicResource Desk.LogToolbar}">
+   <WrapPanel>
+    <Button x:Name="ScanOpenSource" Click="ScanLoaded" Content="{loc:Ui ScanOpenJournal}" Visibility="Collapsed" Margin="0,0,6,0" MinHeight="30" Padding="8,2"/>
+    <Button x:Name="PickFiles" Click="AddFiles" Content="{loc:Ui ChooseScanFile}" MinHeight="30" Padding="8,2"/>
+    <Button x:Name="PickFolder" Click="AddFolder" Margin="6,0,0,0" Content="{loc:Ui SelectFolder}" MinHeight="30" Padding="8,2"/>
+    <Button x:Name="Stop" Visibility="Collapsed" Click="StopScan" Style="{DynamicResource Desk.IconButton}" Content="&#xE71A;" ToolTip="{loc:Ui CancelScan}" AutomationProperties.Name="{loc:Ui CancelScan}"/>
+   </WrapPanel>
+  </Border>
+  <Border DockPanel.Dock="Bottom" Background="{DynamicResource Desk.Panel}" Padding="10,4" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0">
+   <Border.Style><Style TargetType="Border"><Style.Triggers>
+    <DataTrigger Binding="{Binding Text,ElementName=State}" Value=""><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+   </Style.Triggers></Style></Border.Style>
+   <TextBlock x:Name="State" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite"/>
+  </Border>
+  <Grid>
+  <Grid><Grid.Style><Style TargetType="Grid"><Style.Triggers><DataTrigger Binding="{Binding HasItems,ElementName=Sources}" Value="False"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></Grid.Style>
+   <Grid.ColumnDefinitions><ColumnDefinition Width="235" MinWidth="145"/><ColumnDefinition Width="4"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+   <DockPanel Background="{DynamicResource Desk.Panel}">
+    <TextBlock DockPanel.Dock="Top" Margin="10,8" Text="{loc:Ui ScannedSources}" FontWeight="SemiBold"/>
+    <Expander x:Name="SourceMetadata" DockPanel.Dock="Bottom" Header="{loc:Ui SourceInformationLabel}" Style="{DynamicResource Desk.PathEvidence}" Margin="8,4" Visibility="Collapsed">
+     <TextBox x:Name="MetadataValue" IsReadOnly="True" TextWrapping="Wrap" Padding="2,2" Background="Transparent" Foreground="{DynamicResource Desk.Text}" BorderThickness="0" MaxHeight="155" VerticalScrollBarVisibility="Auto"/>
+    </Expander>
+    <ListBox x:Name="Sources" AutomationProperties.Name="{loc:Ui CarvedSource}" SelectionChanged="Selected" BorderThickness="0" Background="Transparent"
+     ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch">
+     <ListBox.ItemContainerStyle><Style TargetType="ListBoxItem">
+      <Setter Property="Foreground" Value="{DynamicResource Desk.Text}"/>
+      <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ListBoxItem">
+       <Border x:Name="Line" Padding="7,2" Background="Transparent" BorderBrush="Transparent" BorderThickness="1">
+        <ContentPresenter HorizontalAlignment="Stretch"/></Border>
+       <ControlTemplate.Triggers>
+        <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Line" Property="Background" Value="{DynamicResource Desk.Hover}"/></Trigger>
+        <Trigger Property="IsSelected" Value="True"><Setter TargetName="Line" Property="Background" Value="{DynamicResource Desk.Selected}"/></Trigger>
+        <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Line" Property="BorderBrush" Value="{DynamicResource Desk.Accent}"/></Trigger>
+       </ControlTemplate.Triggers>
+      </ControlTemplate></Setter.Value></Setter>
+     </Style></ListBox.ItemContainerStyle>
+     <ListBox.ItemTemplate><DataTemplate><StackPanel Margin="3,2" ToolTip="{Binding Source}">
+      <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+      <TextBlock Text="{Binding Folder}" FontSize="12" Foreground="{DynamicResource Desk.Muted}" TextTrimming="CharacterEllipsis">
+       <TextBlock.Style><Style TargetType="TextBlock"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding ShowFolder}" Value="True"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></TextBlock.Style>
+      </TextBlock>
+      <TextBlock Text="{Binding Summary}" Foreground="{DynamicResource Desk.Muted}" FontSize="12" TextTrimming="CharacterEllipsis" ToolTip="{Binding Summary}"/>
+     </StackPanel></DataTemplate></ListBox.ItemTemplate>
+    </ListBox></DockPanel>
+   <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="{DynamicResource Desk.Rule}" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ScannedSources}"/>
+   <local:GlobalLogView x:Name="Results" Grid.Column="2" Visibility="Collapsed" IsCarvedSource="True"/>
+   <TextBlock x:Name="ResultNotice" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="18" MaxWidth="450" TextAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Desk.Muted}"/>
+  </Grid>
+  <TextBlock x:Name="Hint" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,12" MaxWidth="560" TextWrapping="Wrap" Text="{loc:Ui ScanUsnSourceHint}" Foreground="{DynamicResource Desk.Muted}" IsHitTestVisible="False">
+   <TextBlock.Style><Style TargetType="TextBlock"><Style.Triggers><DataTrigger Binding="{Binding HasItems,ElementName=Sources}" Value="True"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></TextBlock.Style>
+  </TextBlock>
+  </Grid>
+ </DockPanel>
+</Window>

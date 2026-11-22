@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Attach $MFT…" xml:space="preserve"><value>連結 $MFT…</value></data>
+  <data name="CSV with paths and evidence…" xml:space="preserve"><value>包含路徑與依據的 CSV…</value></data>
+  <data name="Cancel" xml:space="preserve"><value>取消</value></data>
+  <data name="Change reason" xml:space="preserve"><value>變更原因</value></data>
+  <data name="Continue" xml:space="preserve"><value>繼續</value></data>
+  <data name="Copied" xml:space="preserve"><value>已複製</value></data>
+  <data name="Copy full text" xml:space="preserve"><value>複製全文</value></data>
+  <data name="Creation record" xml:space="preserve"><value>建立記錄</value></data>
+  <data name="Date filter" xml:space="preserve"><value>日期篩選</value></data>
+  <data name="Deletion record" xml:space="preserve"><value>刪除記錄</value></data>
+  <data name="Display language" xml:space="preserve"><value>介面語言</value></data>
+  <data name="File path" xml:space="preserve"><value>記錄路徑</value></data>
+  <data name="File renamed" xml:space="preserve"><value>檔案已重新命名</value></data>
+  <data name="Files and folders: {0:N0}   ·   Change records: {1:N0}" xml:space="preserve"><value>檔案與資料夾：{0:N0}   ·   變更記錄：{1:N0}</value></data>
+  <data name="Loading records…" xml:space="preserve"><value>正在載入記錄…</value></data>
+  <data name="Moved to another folder" xml:space="preserve"><value>已移至其他資料夾</value></data>
+  <data name="Names missing from the journal ({0}) come from the MFT at acquisition. Their names and locations at the time of the event are unknown." xml:space="preserve"><value>記錄檔未保留上層資料夾（{0}）的名稱。這些名稱取自擷取時的 MFT。無法確認事件發生時的名稱與位置。</value></data>
+  <data name="New name record" xml:space="preserve"><value>新名稱記錄</value></data>
+  <data name="No matching records." xml:space="preserve"><value>沒有符合的記錄。</value></data>
+  <data name="Old name record" xml:space="preserve"><value>舊名稱記錄</value></data>
+  <data name="Path inferred from MFT" xml:space="preserve"><value>依 MFT 推得的路徑</value></data>
+  <data name="Path unavailable." xml:space="preserve"><value>無法取得路徑。</value></data>
+  <data name="Record CSV…" xml:space="preserve"><value>記錄 CSV…</value></data>
+  <data name="Record time ({0})" xml:space="preserve"><value>記錄時間（{0}）</value></data>
+  <data name="Recorded file name" xml:space="preserve"><value>記錄的檔案名稱</value></data>
+  <data name="Recorded path" xml:space="preserve"><value>記錄路徑</value></data>
+  <data name="Resolving path…" xml:space="preserve"><value>正在重建路徑…</value></data>
+  <data name="Some folder names come from the last journal record before this event. Those names or locations may have changed afterward." xml:space="preserve"><value>部分資料夾名稱取自事件前最後一筆相關記錄。之後的名稱或位置可能已變更。</value></data>
+  <data name="Source file" xml:space="preserve"><value>來源檔案</value></data>
+  <data name="The acquired MFT links the file name to its parent folders." xml:space="preserve"><value>擷取的 MFT 將檔名與上層資料夾連結起來。</value></data>
+  <data name="The journal links this file name to its parent folders up to the volume root." xml:space="preserve"><value>記錄檔中的檔名與上層資料夾可逐層連結至磁碟區根目錄。</value></data>
+  <data name="The parent folder cannot be identified in this journal segment. No MFT is attached." xml:space="preserve"><value>無法從這段記錄判斷上層資料夾。目前未連結 MFT。</value></data>
+  <data name="Unknown path" xml:space="preserve"><value>路徑未知</value></data>
+  <data name="Use Windows language ({0})" xml:space="preserve"><value>使用 Windows 語言（{0}）</value></data>
+  <data name="Records: {0:N0}" xml:space="preserve"><value>記錄：{0:N0} 筆</value></data>
+  <data name="Records {0:N0}–{1:N0}" xml:space="preserve"><value>第 {0:N0}–{1:N0} 筆</value></data>
+  <data name="Auto (sequential)" xml:space="preserve"><value>自動（循序）</value></data>
+  <data name="Auto (up to 2 in parallel)" xml:space="preserve"><value>自動（最多平行 2 項）</value></data>
+  <data name="Extract and analyze" xml:space="preserve"><value>擷取並分析</value></data>
+  <data name="Extract files" xml:space="preserve"><value>擷取檔案</value></data>
+  <data name="Preparing indexes · {0}" xml:space="preserve"><value>正在準備索引 · {0}</value></data>
+  <data name="Sorting all matching records…" xml:space="preserve"><value>正在排序所有符合的記錄…</value></data>
+  <data name="Data overwritten" xml:space="preserve"><value>資料已覆寫</value></data>
+  <data name="Data extended" xml:space="preserve"><value>資料已延伸</value></data>
+  <data name="Data truncated" xml:space="preserve"><value>資料已截斷</value></data>
+  <data name="File closed" xml:space="preserve"><value>檔案已關閉</value></data>
+  <data name="Attributes or timestamps changed" xml:space="preserve"><value>屬性或時間戳記已變更</value></data>
+  <data name="{0}   ·   Records: {1:N0}" xml:space="preserve"><value>{0}   ·   記錄：{1:N0}</value></data>
+  <data name="No records match your search." xml:space="preserve"><value>沒有符合的記錄。</value></data>
+  <data name="Source offset 0x{0:X}  ·  {1:N0} bytes" xml:space="preserve"><value>來源位移 0x{0:X}  ·  {1:N0} 位元組</value></data>
+</root>

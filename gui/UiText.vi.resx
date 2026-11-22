@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="AboutJournaldesk" xml:space="preserve"><value>Giới thiệu NTFS Tracer</value></data>
+  <data name="Activity" xml:space="preserve"><value>Hoạt động</value></data>
+  <data name="AllActivities" xml:space="preserve"><value>Tất cả hoạt động</value></data>
+  <data name="AllOperations" xml:space="preserve"><value>Tất cả bản ghi</value></data>
+  <data name="AllRecords" xml:space="preserve"><value>Tất cả bản ghi</value></data>
+  <data name="AllRecordsCtrl1" xml:space="preserve"><value>Tất cả bản ghi (Ctrl+1)</value></data>
+  <data name="AnalysisOptions" xml:space="preserve"><value>Tùy chọn phân tích</value></data>
+  <data name="ArtifactJournal" xml:space="preserve"><value>Nhật ký nằm trong luồng dữ liệu thay thế $J của tệp $UsnJrnl. Công cụ thu thập có thể lưu luồng thành $J hoặc $UsnJrnl-$J.</value></data>
+  <data name="ArtifactLocationTitle" xml:space="preserve"><value>Vị trí tệp NTFS</value></data>
+  <data name="ArtifactLog" xml:space="preserve"><value>Tệp ghi các giao dịch siêu dữ liệu NTFS và có thể được phân tích riêng.</value></data>
+  <data name="ArtifactMft" xml:space="preserve"><value>MFT xác định tệp và thư mục cha. Để dựng lại đường dẫn, dùng $MFT từ cùng ổ đĩa với $J.</value></data>
+  <data name="ArtifactRoot" xml:space="preserve"><value>Đường dẫn tính từ ổ đĩa NTFS.</value></data>
+  <data name="AttachMft" xml:space="preserve"><value>Liên kết $MFT…</value></data>
+  <data name="ChangeReason" xml:space="preserve"><value>Lý do thay đổi</value></data>
+  <data name="ChangeReasonFilter" xml:space="preserve"><value>Lý do thay đổi</value></data>
+  <data name="ClearFileNameSearch" xml:space="preserve"><value>Xóa tìm kiếm</value></data>
+  <data name="ClearFileSearch" xml:space="preserve"><value>Xóa tìm kiếm</value></data>
+  <data name="ClearFilters" xml:space="preserve"><value>Đặt lại mọi bộ lọc</value></data>
+  <data name="ClearSearch" xml:space="preserve"><value>Xóa tìm kiếm</value></data>
+  <data name="ClearSelection" xml:space="preserve"><value>Bỏ chọn</value></data>
+  <data name="ClearTransactionSearch" xml:space="preserve"><value>Xóa tìm kiếm</value></data>
+  <data name="CollapseDetailsEsc" xml:space="preserve"><value>Đóng chi tiết (Esc)</value></data>
+  <data name="CollapseEvidencePane" xml:space="preserve"><value>Đóng chi tiết</value></data>
+  <data name="CollapseEvidencePaneEsc" xml:space="preserve"><value>Đóng chi tiết (Esc)</value></data>
+  <data name="CollapseSelectedRecord" xml:space="preserve"><value>Đóng chi tiết</value></data>
+  <data name="CollapseSelectedRecordEsc" xml:space="preserve"><value>Đóng chi tiết (Esc)</value></data>
+  <data name="CollapseTransactionDetails" xml:space="preserve"><value>Đóng chi tiết</value></data>
+  <data name="CompareChanges" xml:space="preserve"><value>So sánh thay đổi</value></data>
+  <data name="Copy" xml:space="preserve"><value>Sao chép</value></data>
+  <data name="CsvSaveLocation" xml:space="preserve"><value>Thư mục lưu CSV</value></data>
+  <data name="DarkTheme" xml:space="preserve"><value>Giao diện tối</value></data>
+  <data name="DateFilter" xml:space="preserve"><value>Bộ lọc ngày</value></data>
+  <data name="DisplayLanguage" xml:space="preserve"><value>Ngôn ngữ hiển thị</value></data>
+  <data name="Done" xml:space="preserve"><value>Xong</value></data>
+  <data name="DropSourcesHint" xml:space="preserve"><value>Thả ảnh đĩa, tệp đã trích xuất ($J, $MFT, $LogFile) hoặc thư mục vào đây.</value></data>
+  <data name="EXit" xml:space="preserve"><value>Thoát</value></data>
+  <data name="Edit" xml:space="preserve"><value>Chỉnh sửa</value></data>
+  <data name="EndDate" xml:space="preserve"><value>Ngày kết thúc</value></data>
+  <data name="EndTime" xml:space="preserve"><value>Giờ kết thúc</value></data>
+  <data name="Export" xml:space="preserve"><value>Xuất</value></data>
+  <data name="ExportAsCsv" xml:space="preserve"><value>Xuất CSV…</value></data>
+  <data name="ExtractionFolder" xml:space="preserve"><value>Thư mục trích xuất</value></data>
+  <data name="FieldAuditRecordTime" xml:space="preserve"><value>Thời gian ghi</value></data>
+  <data name="File" xml:space="preserve"><value>Tệp</value></data>
+  <data name="FileHistory" xml:space="preserve"><value>Lịch sử tệp</value></data>
+  <data name="FileHistoryCtrl2" xml:space="preserve"><value>Lịch sử tệp (Ctrl+2)</value></data>
+  <data name="Files" xml:space="preserve"><value>Tệp</value></data>
+  <data name="Find" xml:space="preserve"><value>Tìm</value></data>
+  <data name="FindAReason" xml:space="preserve"><value>Tìm lý do</value></data>
+  <data name="From" xml:space="preserve"><value>Từ</value></data>
+  <data name="FullPaths" xml:space="preserve"><value>Hiện đường dẫn đầy đủ</value></data>
+  <data name="GuideFields" xml:space="preserve"><value>Chọn một bản ghi nguồn. Phần chi tiết hiển thị các trường như FileName và Reason. JSON chứa giá trị từ chỉ mục. Hex hiển thị byte gốc.</value></data>
+  <data name="GuideFollow" xml:space="preserve"><value>Theo dõi tệp</value></data>
+  <data name="GuideFollowPath" xml:space="preserve"><value>Hiện đường dẫn đầy đủ để xem đường dẫn và nguồn ở hai cột riêng. Phần Tổng quan cho biết thư mục nào lấy từ nhật ký và thư mục nào suy ra từ MFT.</value></data>
+  <data name="GuideInspect" xml:space="preserve"><value>Kiểm tra bản ghi nguồn</value></data>
+  <data name="GuideLanguage" xml:space="preserve"><value>Ngôn ngữ hiển thị</value></data>
+  <data name="GuideLanguageText" xml:space="preserve"><value>Chọn ngôn ngữ trong Xem → Ngôn ngữ hiển thị. Thay đổi áp dụng ngay. Tên và byte gốc được giữ nguyên.</value></data>
+  <data name="GuideOpen" xml:space="preserve"><value>Mở chứng cứ</value></data>
+  <data name="GuideOpenFiles" xml:space="preserve"><value>Trong Cài đặt, chọn tệp hoặc thư mục trích xuất. Kiểm tra các tệp tự động thêm và dùng × để bỏ tệp không cần thiết.</value></data>
+  <data name="GuidePreferences" xml:space="preserve"><value>Hiển thị và phân tích</value></data>
+  <data name="GuideSave" xml:space="preserve"><value>Lưu kết quả</value></data>
+  <data name="GuideSearch" xml:space="preserve"><value>Tìm trong hướng dẫn</value></data>
+  <data name="GuideTimeZone" xml:space="preserve"><value>Chọn múi giờ trong Cài đặt → Tùy chọn phân tích. Cùng một sự kiện sẽ được hiển thị theo giờ mới. Khi so sánh, hãy kiểm tra tiêu đề cột.</value></data>
+  <data name="GuideTransactions" xml:space="preserve"><value>Giao dịch và khôi phục</value></data>
+  <data name="Help" xml:space="preserve"><value>Trợ giúp</value></data>
+  <data name="ImageArtifacts" xml:space="preserve"><value>Tệp cần trích xuất</value></data>
+  <data name="ImageFile" xml:space="preserve"><value>Tệp ảnh đĩa</value></data>
+  <data name="ImageVolume" xml:space="preserve"><value>Phân vùng hoặc bộ sưu tập</value></data>
+  <data name="IncludePreviousNames" xml:space="preserve"><value>Tìm cả tên trước đây</value></data>
+  <data name="IndexChooseFolder" xml:space="preserve"><value>Thư mục chỉ mục</value></data>
+  <data name="IndexLocation" xml:space="preserve"><value>Thư mục chỉ mục</value></data>
+  <data name="IndexResetFolder" xml:space="preserve"><value>Dùng thư mục mặc định</value></data>
+  <data name="IndexingModeLabel" xml:space="preserve"><value>Chế độ lập chỉ mục</value></data>
+  <data name="IndexingParallel" xml:space="preserve"><value>Song song (tối đa 2)</value></data>
+  <data name="IndexingSequential" xml:space="preserve"><value>Tuần tự</value></data>
+  <data name="IntakeBrowse" xml:space="preserve"><value>Duyệt…</value></data>
+  <data name="IntakeCancel" xml:space="preserve"><value>Hủy</value></data>
+  <data name="IntakeFromFolder" xml:space="preserve"><value>Chọn thư mục chứa tệp đã trích xuất…</value></data>
+  <data name="IntakeLog" xml:space="preserve"><value>Nhật ký giao dịch ($LogFile)</value></data>
+  <data name="IntakeMft" xml:space="preserve"><value>Bảng tệp ($MFT)</value></data>
+  <data name="IntakeSettingsShortcut" xml:space="preserve"><value>Cài đặt (Ctrl+,)</value></data>
+  <data name="IntakeSettingsTab" xml:space="preserve"><value>Cài đặt</value></data>
+  <data name="IntakeSources" xml:space="preserve"><value>Chứng cứ cần phân tích</value></data>
+  <data name="IntakeStart" xml:space="preserve"><value>Bắt đầu phân tích</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer · Phân tích tệp NTFS</value></data>
+  <data name="MoveOrRenameCandidates" xml:space="preserve"><value>Có thể đã di chuyển hoặc đổi tên</value></data>
+  <data name="NearbyRecords" xml:space="preserve"><value>Bản ghi lân cận</value></data>
+  <data name="NewName" xml:space="preserve"><value>Tên mới</value></data>
+  <data name="NextFilePage" xml:space="preserve"><value>Trang sau</value></data>
+  <data name="NextPage" xml:space="preserve"><value>Trang sau</value></data>
+  <data name="NoMatchingFiles" xml:space="preserve"><value>Không tìm thấy tệp phù hợp.</value></data>
+  <data name="NtfsTransactions" xml:space="preserve"><value>Giao dịch NTFS</value></data>
+  <data name="NtfsTransactionsCtrl3" xml:space="preserve"><value>Giao dịch NTFS (Ctrl+3)</value></data>
+  <data name="OpenFileHistory" xml:space="preserve"><value>Mở lịch sử tệp</value></data>
+  <data name="OpenLogfile" xml:space="preserve"><value>Mở $LogFile…</value></data>
+  <data name="OpenSources" xml:space="preserve"><value>Mở chứng cứ…</value></data>
+  <data name="OpenUsnJournal" xml:space="preserve"><value>Mở nhật ký USN…</value></data>
+  <data name="OpenUsnJournalJ" xml:space="preserve"><value>Mở nhật ký USN ($J)…</value></data>
+  <data name="Operation" xml:space="preserve"><value>Loại bản ghi / thao tác</value></data>
+  <data name="OperationsWithFileNames" xml:space="preserve"><value>Thao tác có tên tệp</value></data>
+  <data name="Overview" xml:space="preserve"><value>Tổng quan</value></data>
+  <data name="PathEvidence" xml:space="preserve"><value>Căn cứ về đường dẫn</value></data>
+  <data name="PathSourceColumn" xml:space="preserve"><value>Nguồn đường dẫn</value></data>
+  <data name="PreviousFilePage" xml:space="preserve"><value>Trang trước</value></data>
+  <data name="PreviousName" xml:space="preserve"><value>Tên trước đây</value></data>
+  <data name="PreviousPage" xml:space="preserve"><value>Trang trước</value></data>
+  <data name="RecordDetails" xml:space="preserve"><value>Chi tiết bản ghi</value></data>
+  <data name="RecordSummary" xml:space="preserve"><value>Tóm tắt bản ghi</value></data>
+  <data name="RecordedFileName" xml:space="preserve"><value>Tên tệp đã ghi</value></data>
+  <data name="RecordedFileNames" xml:space="preserve"><value>Tên tệp đã ghi</value></data>
+  <data name="RecordedName" xml:space="preserve"><value>Tên đã ghi</value></data>
+  <data name="RecordedPath" xml:space="preserve"><value>Đường dẫn đã ghi</value></data>
+  <data name="RecordedTimeKst" xml:space="preserve"><value>Thời gian ghi (KST)</value></data>
+  <data name="RecordedTimeKstLabel" xml:space="preserve"><value>Thời gian ghi (KST)</value></data>
+  <data name="ResetAllFilters" xml:space="preserve"><value>Đặt lại mọi bộ lọc</value></data>
+  <data name="ReturnToRecords" xml:space="preserve"><value>Quay lại bản ghi</value></data>
+  <data name="RowsPerPage" xml:space="preserve"><value>Số dòng mỗi trang</value></data>
+  <data name="RowsPerPageValue" xml:space="preserve"><value>{0:N0} / trang</value></data>
+  <data name="SearchFileNameOrLsn" xml:space="preserve"><value>Tìm theo tên tệp hoặc LSN</value></data>
+  <data name="SearchFileNames" xml:space="preserve"><value>Tìm tên tệp</value></data>
+  <data name="SearchFileNamesInTheJournal" xml:space="preserve"><value>Tìm tên tệp</value></data>
+  <data name="SelectAll" xml:space="preserve"><value>Chọn tất cả</value></data>
+  <data name="SelectEvidenceFiles" xml:space="preserve"><value>Chọn tệp…</value></data>
+  <data name="Source" xml:space="preserve"><value>Bản ghi</value></data>
+  <data name="SourceInformation" xml:space="preserve"><value>Thông tin nguồn…</value></data>
+  <data name="SourceInformationLabel" xml:space="preserve"><value>Thông tin nguồn</value></data>
+  <data name="SourceOffset" xml:space="preserve"><value>Độ lệch trong nguồn</value></data>
+  <data name="SourceRecord" xml:space="preserve"><value>Bản ghi nguồn</value></data>
+  <data name="StartDate" xml:space="preserve"><value>Ngày bắt đầu</value></data>
+  <data name="StartTime" xml:space="preserve"><value>Giờ bắt đầu</value></data>
+  <data name="TimeKst" xml:space="preserve"><value>Thời gian ghi (KST)</value></data>
+  <data name="TimeZone" xml:space="preserve"><value>Múi giờ</value></data>
+  <data name="To" xml:space="preserve"><value>Đến</value></data>
+  <data name="Tools" xml:space="preserve"><value>Công cụ</value></data>
+  <data name="TransactionId" xml:space="preserve"><value>ID giao dịch</value></data>
+  <data name="UseSelectedFiles" xml:space="preserve"><value>Áp dụng lựa chọn</value></data>
+  <data name="UseWindowsLanguage" xml:space="preserve"><value>Dùng ngôn ngữ Windows</value></data>
+  <data name="UserGuide" xml:space="preserve"><value>Hướng dẫn sử dụng</value></data>
+  <data name="View" xml:space="preserve"><value>Xem</value></data>
+  <data name="InvestigationTab" xml:space="preserve"><value>Manh mối điều tra</value></data>
+  <data name="OpenLeadEvidence" xml:space="preserve"><value>Xem trong lịch sử tệp</value></data>
+  <data name="ScanOpenJournal" xml:space="preserve"><value>Quét $J đang mở</value></data>
+  <data name="ScanOpenLogFile" xml:space="preserve"><value>Quét $LogFile đang mở</value></data>
+  <data name="ChooseScanFile" xml:space="preserve"><value>Chọn tệp để quét…</value></data>
+  <data name="ScanSourceOffset" xml:space="preserve"><value>Vị trí trong tệp</value></data>
+  <data name="LeadDocumentDeleted" xml:space="preserve"><value>Tài liệu đã xóa</value></data>
+  <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Dấu thời gian không theo thứ tự</value></data>
+  <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Đổi tên nhiều lần trước khi xóa</value></data>
+  <data name="LeadSDeleteName" xml:space="preserve"><value>Tên tệp trùng với SDelete</value></data>
+  <data name="InvestigationTabShortcut" xml:space="preserve"><value>Manh mối điều tra (Ctrl+4)</value></data>
+  <data name="PathReferenceFilters" xml:space="preserve"><value>Đường dẫn và ID</value></data>
+  <data name="FilterRecordedPath" xml:space="preserve"><value>Đường dẫn chứa</value></data>
+  <data name="ParentFolderReference" xml:space="preserve"><value>Tham chiếu thư mục mẹ</value></data>
+  <data name="ClearPathReferenceFilters" xml:space="preserve"><value>Xóa bộ lọc đường dẫn và tham chiếu</value></data>
+  <data name="PartialPath" xml:space="preserve"><value>Đường dẫn một phần</value></data>
+  <data name="FilterFileId" xml:space="preserve"><value>ID tệp</value></data>
+  <data name="FilterParentId" xml:space="preserve"><value>ID thư mục mẹ</value></data>
+  <data name="PasteRecordId" xml:space="preserve"><value>Dán ID</value></data>
+  <data name="SearchThisId" xml:space="preserve"><value>Tìm ID này</value></data>
+  <data name="SearchThisIdHelp" xml:space="preserve"><value>Bắt đầu tìm kiếm mới theo ID này.</value></data>
+  <data name="IntakeDropFiles" xml:space="preserve"><value>Kéo ảnh đĩa NTFS (E01, VHD, v.v.), các tệp đã trích xuất ($J, $MFT, $LogFile) hoặc thư mục chứa chúng vào đây.</value></data>
+  <data name="DatePickerPrompt" xml:space="preserve"><value>Chọn ngày</value></data>
+  <data name="AboutAuthor" xml:space="preserve"><value>Tác giả: {0}</value></data>
+  <data name="DisplayOptions" xml:space="preserve"><value>Hiển thị</value></data>
+  <data name="AppearanceTheme" xml:space="preserve"><value>Chủ đề</value></data>
+  <data name="WindowsSetting" xml:space="preserve"><value>Cài đặt Windows</value></data>
+  <data name="LightTheme" xml:space="preserve"><value>Chủ đề sáng</value></data>
+  <data name="CloseSettings" xml:space="preserve"><value>Đóng</value></data>
+</root>

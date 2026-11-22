@@ -1,0 +1,13 @@
+<Solution>
+  <Project Path="gui/NtfsTracer.csproj" />
+  <Project Path="modules/EvidenceImage/EvidenceImage.csproj" />
+  <Folder Name="/Tests/">
+    <Project Path="tests/EvidenceImage/EvidenceImage.Tests.csproj" />
+    <Project Path="tests/GlobalLog/GlobalLog.csproj" />
+    <Project Path="tests/HexFields/HexFields.csproj" />
+    <Project Path="tests/Neighborhood/Neighborhood.csproj" />
+    <Project Path="tests/PathResolution/PathResolution.csproj" />
+    <Project Path="tests/LanguageCoverage/LanguageCoverage.csproj" />
+    <Project Path="tests/TrackerFields/TrackerFields.csproj" />
+  </Folder>
+</Solution>

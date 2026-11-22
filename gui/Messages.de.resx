@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Attach $MFT…" xml:space="preserve"><value>$MFT verknüpfen…</value></data>
+  <data name="CSV with paths and evidence…" xml:space="preserve"><value>CSV mit Pfaden und Belegen…</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Abbrechen</value></data>
+  <data name="Change reason" xml:space="preserve"><value>Änderungsgrund</value></data>
+  <data name="Continue" xml:space="preserve"><value>Weiter</value></data>
+  <data name="Copied" xml:space="preserve"><value>Kopiert</value></data>
+  <data name="Copy full text" xml:space="preserve"><value>Ganzen Text kopieren</value></data>
+  <data name="Creation record" xml:space="preserve"><value>Eintrag zur Erstellung</value></data>
+  <data name="Date filter" xml:space="preserve"><value>Datumsfilter</value></data>
+  <data name="Deletion record" xml:space="preserve"><value>Eintrag zur Löschung</value></data>
+  <data name="Display language" xml:space="preserve"><value>Anzeigesprache</value></data>
+  <data name="File path" xml:space="preserve"><value>Protokollierter Pfad</value></data>
+  <data name="File renamed" xml:space="preserve"><value>Datei umbenannt</value></data>
+  <data name="Files and folders: {0:N0}   ·   Change records: {1:N0}" xml:space="preserve"><value>Dateien und Ordner: {0:N0}   ·   Änderungen: {1:N0}</value></data>
+  <data name="Loading records…" xml:space="preserve"><value>Einträge werden geladen…</value></data>
+  <data name="Moved to another folder" xml:space="preserve"><value>In anderen Ordner verschoben</value></data>
+  <data name="Names missing from the journal ({0}) come from the MFT at acquisition. Their names and locations at the time of the event are unknown." xml:space="preserve"><value>Die Namen der übergeordneten Ordner ({0}) fehlen im Journal. Sie stammen aus der MFT zum Zeitpunkt der Sicherung. Name und Speicherort zum Zeitpunkt des Ereignisses sind nicht belegt.</value></data>
+  <data name="New name record" xml:space="preserve"><value>Eintrag zum neuen Namen</value></data>
+  <data name="No matching records." xml:space="preserve"><value>Keine passenden Einträge.</value></data>
+  <data name="Old name record" xml:space="preserve"><value>Eintrag zum früheren Namen</value></data>
+  <data name="Path inferred from MFT" xml:space="preserve"><value>Pfad aus MFT abgeleitet</value></data>
+  <data name="Path unavailable." xml:space="preserve"><value>Pfad nicht verfügbar.</value></data>
+  <data name="Record CSV…" xml:space="preserve"><value>Einträge als CSV…</value></data>
+  <data name="Record time ({0})" xml:space="preserve"><value>Zeitpunkt ({0})</value></data>
+  <data name="Recorded file name" xml:space="preserve"><value>Protokollierter Dateiname</value></data>
+  <data name="Recorded path" xml:space="preserve"><value>Protokollierter Pfad</value></data>
+  <data name="Resolving path…" xml:space="preserve"><value>Pfad wird ermittelt…</value></data>
+  <data name="Some folder names come from the last journal record before this event. Those names or locations may have changed afterward." xml:space="preserve"><value>Einige Ordnernamen stammen aus dem letzten Journaleintrag vor dem Ereignis. Namen oder Speicherorte können sich danach geändert haben.</value></data>
+  <data name="Source file" xml:space="preserve"><value>Quelldatei</value></data>
+  <data name="The acquired MFT links the file name to its parent folders." xml:space="preserve"><value>Die gesicherte MFT verknüpft den Dateinamen mit den übergeordneten Ordnern.</value></data>
+  <data name="The journal links this file name to its parent folders up to the volume root." xml:space="preserve"><value>Das Journal verknüpft den Dateinamen über die übergeordneten Ordner bis zum Stamm des Volumes.</value></data>
+  <data name="The parent folder cannot be identified in this journal segment. No MFT is attached." xml:space="preserve"><value>Das Journal nennt den übergeordneten Ordner in diesem Abschnitt nicht. Es ist keine MFT verknüpft.</value></data>
+  <data name="Unknown path" xml:space="preserve"><value>Unbekannter Pfad</value></data>
+  <data name="Use Windows language ({0})" xml:space="preserve"><value>Windows-Sprache verwenden ({0})</value></data>
+  <data name="Records: {0:N0}" xml:space="preserve"><value>Einträge: {0:N0}</value></data>
+  <data name="Records {0:N0}–{1:N0}" xml:space="preserve"><value>Einträge {0:N0}–{1:N0}</value></data>
+  <data name="Auto (sequential)" xml:space="preserve"><value>Automatisch (nacheinander)</value></data>
+  <data name="Auto (up to 2 in parallel)" xml:space="preserve"><value>Automatisch (bis zu 2 parallel)</value></data>
+  <data name="Extract and analyze" xml:space="preserve"><value>Extrahieren und analysieren</value></data>
+  <data name="Extract files" xml:space="preserve"><value>Dateien extrahieren</value></data>
+  <data name="Preparing indexes · {0}" xml:space="preserve"><value>Indexierung läuft · {0}</value></data>
+  <data name="Sorting all matching records…" xml:space="preserve"><value>Passende Einträge werden sortiert…</value></data>
+  <data name="Data overwritten" xml:space="preserve"><value>Daten überschrieben</value></data>
+  <data name="Data extended" xml:space="preserve"><value>Daten erweitert</value></data>
+  <data name="Data truncated" xml:space="preserve"><value>Daten gekürzt</value></data>
+  <data name="File closed" xml:space="preserve"><value>Datei geschlossen</value></data>
+  <data name="Attributes or timestamps changed" xml:space="preserve"><value>Attribute oder Zeitstempel geändert</value></data>
+  <data name="{0}   ·   Records: {1:N0}" xml:space="preserve"><value>{0}   ·   Einträge: {1:N0}</value></data>
+  <data name="No records match your search." xml:space="preserve"><value>Keine passenden Einträge.</value></data>
+  <data name="Source offset 0x{0:X}  ·  {1:N0} bytes" xml:space="preserve"><value>Quelloffset 0x{0:X}  ·  {1:N0} Byte</value></data>
+</root>

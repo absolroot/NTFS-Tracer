@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="AboutJournaldesk" xml:space="preserve"><value>NTFS Tracer hakkında</value></data>
+  <data name="Activity" xml:space="preserve"><value>Etkinlik</value></data>
+  <data name="AllActivities" xml:space="preserve"><value>Tüm etkinlikler</value></data>
+  <data name="AllOperations" xml:space="preserve"><value>Tüm kayıtlar</value></data>
+  <data name="AllRecords" xml:space="preserve"><value>Tüm kayıtlar</value></data>
+  <data name="AllRecordsCtrl1" xml:space="preserve"><value>Tüm kayıtlar (Ctrl+1)</value></data>
+  <data name="AnalysisOptions" xml:space="preserve"><value>Analiz seçenekleri</value></data>
+  <data name="ArtifactJournal" xml:space="preserve"><value>Günlük, $UsnJrnl dosyasının $J alternatif veri akışındadır. Edinim aracı akışı $J veya $UsnJrnl-$J adıyla kaydedebilir.</value></data>
+  <data name="ArtifactLocationTitle" xml:space="preserve"><value>NTFS dosya konumları</value></data>
+  <data name="ArtifactLog" xml:space="preserve"><value>Dosya, NTFS meta veri işlemlerini kaydeder. Tek başına incelenebilir.</value></data>
+  <data name="ArtifactMft" xml:space="preserve"><value>MFT, dosyaları ve üst klasörlerini tanımlar. Yolları oluşturmak için $J ile aynı birimdeki $MFT dosyasını kullanın.</value></data>
+  <data name="ArtifactRoot" xml:space="preserve"><value>Yollar NTFS birimine göredir.</value></data>
+  <data name="AttachMft" xml:space="preserve"><value>$MFT dosyasını ilişkilendir…</value></data>
+  <data name="ChangeReason" xml:space="preserve"><value>Değişiklik nedeni</value></data>
+  <data name="ChangeReasonFilter" xml:space="preserve"><value>Değişiklik nedeni</value></data>
+  <data name="ClearFileNameSearch" xml:space="preserve"><value>Aramayı temizle</value></data>
+  <data name="ClearFileSearch" xml:space="preserve"><value>Aramayı temizle</value></data>
+  <data name="ClearFilters" xml:space="preserve"><value>Tüm filtreleri sıfırla</value></data>
+  <data name="ClearSearch" xml:space="preserve"><value>Aramayı temizle</value></data>
+  <data name="ClearSelection" xml:space="preserve"><value>Seçimi temizle</value></data>
+  <data name="ClearTransactionSearch" xml:space="preserve"><value>Aramayı temizle</value></data>
+  <data name="CollapseDetailsEsc" xml:space="preserve"><value>Ayrıntıları kapat (Esc)</value></data>
+  <data name="CollapseEvidencePane" xml:space="preserve"><value>Ayrıntıları kapat</value></data>
+  <data name="CollapseEvidencePaneEsc" xml:space="preserve"><value>Ayrıntıları kapat (Esc)</value></data>
+  <data name="CollapseSelectedRecord" xml:space="preserve"><value>Ayrıntıları kapat</value></data>
+  <data name="CollapseSelectedRecordEsc" xml:space="preserve"><value>Ayrıntıları kapat (Esc)</value></data>
+  <data name="CollapseTransactionDetails" xml:space="preserve"><value>Ayrıntıları kapat</value></data>
+  <data name="CompareChanges" xml:space="preserve"><value>Değişiklikleri karşılaştır</value></data>
+  <data name="Copy" xml:space="preserve"><value>Kopyala</value></data>
+  <data name="CsvSaveLocation" xml:space="preserve"><value>CSV kayıt konumu</value></data>
+  <data name="DarkTheme" xml:space="preserve"><value>Koyu tema</value></data>
+  <data name="DateFilter" xml:space="preserve"><value>Tarih filtresi</value></data>
+  <data name="DisplayLanguage" xml:space="preserve"><value>Görüntüleme dili</value></data>
+  <data name="Done" xml:space="preserve"><value>Bitti</value></data>
+  <data name="DropSourcesHint" xml:space="preserve"><value>Bir disk imajını, çıkarılmış dosyaları ($J, $MFT, $LogFile) veya klasörü buraya bırakın.</value></data>
+  <data name="EXit" xml:space="preserve"><value>Çıkış</value></data>
+  <data name="Edit" xml:space="preserve"><value>Düzen</value></data>
+  <data name="EndDate" xml:space="preserve"><value>Bitiş tarihi</value></data>
+  <data name="EndTime" xml:space="preserve"><value>Bitiş saati</value></data>
+  <data name="Export" xml:space="preserve"><value>Dışa aktar</value></data>
+  <data name="ExportAsCsv" xml:space="preserve"><value>CSV olarak dışa aktar…</value></data>
+  <data name="ExtractionFolder" xml:space="preserve"><value>Çıkarma klasörü</value></data>
+  <data name="FieldAuditRecordTime" xml:space="preserve"><value>Kayıt zamanı</value></data>
+  <data name="File" xml:space="preserve"><value>Dosya</value></data>
+  <data name="FileHistory" xml:space="preserve"><value>Dosya geçmişi</value></data>
+  <data name="FileHistoryCtrl2" xml:space="preserve"><value>Dosya geçmişi (Ctrl+2)</value></data>
+  <data name="Files" xml:space="preserve"><value>Dosyalar</value></data>
+  <data name="Find" xml:space="preserve"><value>Bul</value></data>
+  <data name="FindAReason" xml:space="preserve"><value>Neden ara</value></data>
+  <data name="From" xml:space="preserve"><value>Önceki</value></data>
+  <data name="FullPaths" xml:space="preserve"><value>Tam yolları göster</value></data>
+  <data name="GuideFields" xml:space="preserve"><value>Bir kaynak kaydı seçin. Kayıt ayrıntılarında FileName ve Reason gibi alanlar görünür. JSON dizin değerlerini, Hex ise kaynak baytlarını gösterir.</value></data>
+  <data name="GuideFollow" xml:space="preserve"><value>Dosyayı izle</value></data>
+  <data name="GuideFollowPath" xml:space="preserve"><value>Yol ile kaynağı ayrı sütunlarda görmek için tam yolları gösterin. Genel bakışta günlükten belirlenen ve MFT’den çıkarılan klasörleri görebilirsiniz.</value></data>
+  <data name="GuideInspect" xml:space="preserve"><value>Kaynak kayıtları incele</value></data>
+  <data name="GuideLanguage" xml:space="preserve"><value>Görüntüleme dili</value></data>
+  <data name="GuideLanguageText" xml:space="preserve"><value>Görünüm → Görüntüleme dili menüsünden dili seçin. Değişiklik hemen uygulanır. Özgün adlar ve baytlar korunur.</value></data>
+  <data name="GuideOpen" xml:space="preserve"><value>Delilleri aç</value></data>
+  <data name="GuideOpenFiles" xml:space="preserve"><value>Ayarlarda dosyaları veya çıkarma klasörünü seçin. Otomatik eklenen dosyaları kontrol edin ve gereksiz olanları × ile kaldırın.</value></data>
+  <data name="GuidePreferences" xml:space="preserve"><value>Görünüm ve analiz</value></data>
+  <data name="GuideSave" xml:space="preserve"><value>Sonuçları kaydet</value></data>
+  <data name="GuideSearch" xml:space="preserve"><value>Kılavuzda ara</value></data>
+  <data name="GuideTimeZone" xml:space="preserve"><value>Ayarlar → Analiz seçenekleri bölümünde saat dilimini seçin. Değişiklik aynı olayın görüntülenen saatini değiştirir. Karşılaştırırken sütun başlığını kontrol edin.</value></data>
+  <data name="GuideTransactions" xml:space="preserve"><value>İşlemler ve kurtarma</value></data>
+  <data name="Help" xml:space="preserve"><value>Yardım</value></data>
+  <data name="ImageArtifacts" xml:space="preserve"><value>Çıkarılacak dosyalar</value></data>
+  <data name="ImageFile" xml:space="preserve"><value>İmaj dosyası</value></data>
+  <data name="ImageVolume" xml:space="preserve"><value>Birim veya koleksiyon</value></data>
+  <data name="IncludePreviousNames" xml:space="preserve"><value>Önceki adları dahil et</value></data>
+  <data name="IndexChooseFolder" xml:space="preserve"><value>Dizin klasörü</value></data>
+  <data name="IndexLocation" xml:space="preserve"><value>Dizin klasörü</value></data>
+  <data name="IndexResetFolder" xml:space="preserve"><value>Varsayılan klasörü kullan</value></data>
+  <data name="IndexingModeLabel" xml:space="preserve"><value>Dizinleme modu</value></data>
+  <data name="IndexingParallel" xml:space="preserve"><value>Paralel (en fazla 2)</value></data>
+  <data name="IndexingSequential" xml:space="preserve"><value>Sıralı</value></data>
+  <data name="IntakeBrowse" xml:space="preserve"><value>Gözat…</value></data>
+  <data name="IntakeCancel" xml:space="preserve"><value>İptal</value></data>
+  <data name="IntakeFromFolder" xml:space="preserve"><value>Çıkarılan dosyaların klasörünü seç…</value></data>
+  <data name="IntakeLog" xml:space="preserve"><value>İşlem günlüğü ($LogFile)</value></data>
+  <data name="IntakeMft" xml:space="preserve"><value>Dosya tablosu ($MFT)</value></data>
+  <data name="IntakeSettingsShortcut" xml:space="preserve"><value>Ayarlar (Ctrl+,)</value></data>
+  <data name="IntakeSettingsTab" xml:space="preserve"><value>Ayarlar</value></data>
+  <data name="IntakeSources" xml:space="preserve"><value>İncelenecek deliller</value></data>
+  <data name="IntakeStart" xml:space="preserve"><value>Analizi başlat</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer · NTFS dosya analizi</value></data>
+  <data name="MoveOrRenameCandidates" xml:space="preserve"><value>Olası taşıma veya ad değiştirmeler</value></data>
+  <data name="NearbyRecords" xml:space="preserve"><value>Yakın kayıtlar</value></data>
+  <data name="NewName" xml:space="preserve"><value>Yeni ad</value></data>
+  <data name="NextFilePage" xml:space="preserve"><value>Sonraki sayfa</value></data>
+  <data name="NextPage" xml:space="preserve"><value>Sonraki sayfa</value></data>
+  <data name="NoMatchingFiles" xml:space="preserve"><value>Eşleşen dosya yok.</value></data>
+  <data name="NtfsTransactions" xml:space="preserve"><value>NTFS işlemleri</value></data>
+  <data name="NtfsTransactionsCtrl3" xml:space="preserve"><value>NTFS işlemleri (Ctrl+3)</value></data>
+  <data name="OpenFileHistory" xml:space="preserve"><value>Dosya geçmişini aç</value></data>
+  <data name="OpenLogfile" xml:space="preserve"><value>$LogFile dosyasını aç…</value></data>
+  <data name="OpenSources" xml:space="preserve"><value>Delilleri aç…</value></data>
+  <data name="OpenUsnJournal" xml:space="preserve"><value>USN günlüğünü aç…</value></data>
+  <data name="OpenUsnJournalJ" xml:space="preserve"><value>USN günlüğünü ($J) aç…</value></data>
+  <data name="Operation" xml:space="preserve"><value>Kayıt türü / işlem</value></data>
+  <data name="OperationsWithFileNames" xml:space="preserve"><value>Dosya adı içeren işlemler</value></data>
+  <data name="Overview" xml:space="preserve"><value>Genel bakış</value></data>
+  <data name="PathEvidence" xml:space="preserve"><value>Yolun dayanağı</value></data>
+  <data name="PathSourceColumn" xml:space="preserve"><value>Yol kaynağı</value></data>
+  <data name="PreviousFilePage" xml:space="preserve"><value>Önceki sayfa</value></data>
+  <data name="PreviousName" xml:space="preserve"><value>Önceki ad</value></data>
+  <data name="PreviousPage" xml:space="preserve"><value>Önceki sayfa</value></data>
+  <data name="RecordDetails" xml:space="preserve"><value>Kayıt ayrıntıları</value></data>
+  <data name="RecordSummary" xml:space="preserve"><value>Kayıt özeti</value></data>
+  <data name="RecordedFileName" xml:space="preserve"><value>Kayıtlı dosya adı</value></data>
+  <data name="RecordedFileNames" xml:space="preserve"><value>Kayıtlı dosya adı</value></data>
+  <data name="RecordedName" xml:space="preserve"><value>Kayıtlı ad</value></data>
+  <data name="RecordedPath" xml:space="preserve"><value>Kayıtlı yol</value></data>
+  <data name="RecordedTimeKst" xml:space="preserve"><value>Kayıt zamanı (KST)</value></data>
+  <data name="RecordedTimeKstLabel" xml:space="preserve"><value>Kayıt zamanı (KST)</value></data>
+  <data name="ResetAllFilters" xml:space="preserve"><value>Tüm filtreleri sıfırla</value></data>
+  <data name="ReturnToRecords" xml:space="preserve"><value>Kayıtlara dön</value></data>
+  <data name="RowsPerPage" xml:space="preserve"><value>Sayfa başına satır</value></data>
+  <data name="RowsPerPageValue" xml:space="preserve"><value>{0:N0} / sayfa</value></data>
+  <data name="SearchFileNameOrLsn" xml:space="preserve"><value>Dosya adı veya LSN ara</value></data>
+  <data name="SearchFileNames" xml:space="preserve"><value>Dosya adlarını ara</value></data>
+  <data name="SearchFileNamesInTheJournal" xml:space="preserve"><value>Dosya adlarını ara</value></data>
+  <data name="SelectAll" xml:space="preserve"><value>Tümünü seç</value></data>
+  <data name="SelectEvidenceFiles" xml:space="preserve"><value>Dosyaları seç…</value></data>
+  <data name="Source" xml:space="preserve"><value>Kayıtlar</value></data>
+  <data name="SourceInformation" xml:space="preserve"><value>Kaynak bilgileri…</value></data>
+  <data name="SourceInformationLabel" xml:space="preserve"><value>Kaynak bilgileri</value></data>
+  <data name="SourceOffset" xml:space="preserve"><value>Kaynak ofseti</value></data>
+  <data name="SourceRecord" xml:space="preserve"><value>Kaynak kayıt</value></data>
+  <data name="StartDate" xml:space="preserve"><value>Başlangıç tarihi</value></data>
+  <data name="StartTime" xml:space="preserve"><value>Başlangıç saati</value></data>
+  <data name="TimeKst" xml:space="preserve"><value>Kayıt zamanı (KST)</value></data>
+  <data name="TimeZone" xml:space="preserve"><value>Saat dilimi</value></data>
+  <data name="To" xml:space="preserve"><value>Yeni</value></data>
+  <data name="Tools" xml:space="preserve"><value>Araçlar</value></data>
+  <data name="TransactionId" xml:space="preserve"><value>İşlem kimliği</value></data>
+  <data name="UseSelectedFiles" xml:space="preserve"><value>Seçimi uygula</value></data>
+  <data name="UseWindowsLanguage" xml:space="preserve"><value>Windows dilini kullan</value></data>
+  <data name="UserGuide" xml:space="preserve"><value>Kullanıcı kılavuzu</value></data>
+  <data name="View" xml:space="preserve"><value>Görünüm</value></data>
+  <data name="InvestigationTab" xml:space="preserve"><value>İnceleme ipuçları</value></data>
+  <data name="OpenLeadEvidence" xml:space="preserve"><value>Dosya geçmişinde göster</value></data>
+  <data name="ScanOpenJournal" xml:space="preserve"><value>Açık $J dosyasını tara</value></data>
+  <data name="ScanOpenLogFile" xml:space="preserve"><value>Açık $LogFile dosyasını tara</value></data>
+  <data name="ChooseScanFile" xml:space="preserve"><value>Taranacak dosyayı seç…</value></data>
+  <data name="ScanSourceOffset" xml:space="preserve"><value>Dosya ofseti</value></data>
+  <data name="LeadDocumentDeleted" xml:space="preserve"><value>Silinen belgeler</value></data>
+  <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Sırası bozuk zaman damgaları</value></data>
+  <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Silmeden önce birden çok ad değişikliği</value></data>
+  <data name="LeadSDeleteName" xml:space="preserve"><value>SDelete dosya adı eşleşmeleri</value></data>
+  <data name="InvestigationTabShortcut" xml:space="preserve"><value>İnceleme ipuçları (Ctrl+4)</value></data>
+  <data name="PathReferenceFilters" xml:space="preserve"><value>Yol ve kimlikler</value></data>
+  <data name="FilterRecordedPath" xml:space="preserve"><value>Yol şunu içerir</value></data>
+  <data name="ParentFolderReference" xml:space="preserve"><value>Üst klasör başvurusu</value></data>
+  <data name="ClearPathReferenceFilters" xml:space="preserve"><value>Yol ve başvuru filtrelerini temizle</value></data>
+  <data name="PartialPath" xml:space="preserve"><value>Kısmi yol</value></data>
+  <data name="FilterFileId" xml:space="preserve"><value>Dosya kimliği</value></data>
+  <data name="FilterParentId" xml:space="preserve"><value>Üst klasör kimliği</value></data>
+  <data name="PasteRecordId" xml:space="preserve"><value>Kimliği yapıştır</value></data>
+  <data name="SearchThisId" xml:space="preserve"><value>Bu kimliği ara</value></data>
+  <data name="SearchThisIdHelp" xml:space="preserve"><value>Bu kimlikle yeni bir arama başlatır.</value></data>
+  <data name="IntakeDropFiles" xml:space="preserve"><value>NTFS disk imajını (E01, VHD vb.), çıkarılan dosyaları ($J, $MFT, $LogFile) veya bunları içeren klasörü sürükleyin.</value></data>
+  <data name="DatePickerPrompt" xml:space="preserve"><value>Tarih seçin</value></data>
+  <data name="AboutAuthor" xml:space="preserve"><value>Geliştirici: {0}</value></data>
+  <data name="DisplayOptions" xml:space="preserve"><value>Görünüm</value></data>
+  <data name="AppearanceTheme" xml:space="preserve"><value>Tema</value></data>
+  <data name="WindowsSetting" xml:space="preserve"><value>Windows ayarı</value></data>
+  <data name="LightTheme" xml:space="preserve"><value>Açık tema</value></data>
+  <data name="CloseSettings" xml:space="preserve"><value>Kapat</value></data>
+</root>

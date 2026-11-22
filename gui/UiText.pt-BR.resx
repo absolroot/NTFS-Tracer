@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="AboutJournaldesk" xml:space="preserve"><value>Sobre o NTFS Tracer</value></data>
+  <data name="Activity" xml:space="preserve"><value>Atividade</value></data>
+  <data name="AllActivities" xml:space="preserve"><value>Todas as atividades</value></data>
+  <data name="AllOperations" xml:space="preserve"><value>Todos os registros</value></data>
+  <data name="AllRecords" xml:space="preserve"><value>Todos os registros</value></data>
+  <data name="AllRecordsCtrl1" xml:space="preserve"><value>Todos os registros (Ctrl+1)</value></data>
+  <data name="AnalysisOptions" xml:space="preserve"><value>Opções de análise</value></data>
+  <data name="ArtifactJournal" xml:space="preserve"><value>O diário fica no fluxo de dados alternativo $J do arquivo $UsnJrnl. A ferramenta de aquisição pode salvá-lo como $J ou $UsnJrnl-$J.</value></data>
+  <data name="ArtifactLocationTitle" xml:space="preserve"><value>Localização de arquivos NTFS</value></data>
+  <data name="ArtifactLog" xml:space="preserve"><value>O arquivo registra transações de metadados NTFS e pode ser analisado separadamente.</value></data>
+  <data name="ArtifactMft" xml:space="preserve"><value>A MFT identifica os arquivos e suas pastas superiores. Para reconstruir caminhos, use a $MFT do mesmo volume de $J.</value></data>
+  <data name="ArtifactRoot" xml:space="preserve"><value>Os caminhos são relativos ao volume NTFS.</value></data>
+  <data name="AttachMft" xml:space="preserve"><value>Vincular $MFT…</value></data>
+  <data name="ChangeReason" xml:space="preserve"><value>Motivo da alteração</value></data>
+  <data name="ChangeReasonFilter" xml:space="preserve"><value>Motivo da alteração</value></data>
+  <data name="ClearFileNameSearch" xml:space="preserve"><value>Limpar busca</value></data>
+  <data name="ClearFileSearch" xml:space="preserve"><value>Limpar busca</value></data>
+  <data name="ClearFilters" xml:space="preserve"><value>Redefinir todos os filtros</value></data>
+  <data name="ClearSearch" xml:space="preserve"><value>Limpar busca</value></data>
+  <data name="ClearSelection" xml:space="preserve"><value>Limpar seleção</value></data>
+  <data name="ClearTransactionSearch" xml:space="preserve"><value>Limpar busca</value></data>
+  <data name="CollapseDetailsEsc" xml:space="preserve"><value>Fechar detalhes (Esc)</value></data>
+  <data name="CollapseEvidencePane" xml:space="preserve"><value>Fechar detalhes</value></data>
+  <data name="CollapseEvidencePaneEsc" xml:space="preserve"><value>Fechar detalhes (Esc)</value></data>
+  <data name="CollapseSelectedRecord" xml:space="preserve"><value>Fechar detalhes</value></data>
+  <data name="CollapseSelectedRecordEsc" xml:space="preserve"><value>Fechar detalhes (Esc)</value></data>
+  <data name="CollapseTransactionDetails" xml:space="preserve"><value>Fechar detalhes</value></data>
+  <data name="CompareChanges" xml:space="preserve"><value>Comparar alterações</value></data>
+  <data name="Copy" xml:space="preserve"><value>Copiar</value></data>
+  <data name="CsvSaveLocation" xml:space="preserve"><value>Pasta para CSV</value></data>
+  <data name="DarkTheme" xml:space="preserve"><value>Tema escuro</value></data>
+  <data name="DateFilter" xml:space="preserve"><value>Filtro por data</value></data>
+  <data name="DisplayLanguage" xml:space="preserve"><value>Idioma da interface</value></data>
+  <data name="Done" xml:space="preserve"><value>Concluído</value></data>
+  <data name="DropSourcesHint" xml:space="preserve"><value>Solte aqui uma imagem de disco, os arquivos extraídos ($J, $MFT, $LogFile) ou uma pasta.</value></data>
+  <data name="EXit" xml:space="preserve"><value>Sair</value></data>
+  <data name="Edit" xml:space="preserve"><value>Editar</value></data>
+  <data name="EndDate" xml:space="preserve"><value>Data de término</value></data>
+  <data name="EndTime" xml:space="preserve"><value>Hora de término</value></data>
+  <data name="Export" xml:space="preserve"><value>Exportar</value></data>
+  <data name="ExportAsCsv" xml:space="preserve"><value>Exportar como CSV…</value></data>
+  <data name="ExtractionFolder" xml:space="preserve"><value>Pasta de extração</value></data>
+  <data name="FieldAuditRecordTime" xml:space="preserve"><value>Hora do registro</value></data>
+  <data name="File" xml:space="preserve"><value>Arquivo</value></data>
+  <data name="FileHistory" xml:space="preserve"><value>Histórico do arquivo</value></data>
+  <data name="FileHistoryCtrl2" xml:space="preserve"><value>Histórico do arquivo (Ctrl+2)</value></data>
+  <data name="Files" xml:space="preserve"><value>Arquivos</value></data>
+  <data name="Find" xml:space="preserve"><value>Buscar</value></data>
+  <data name="FindAReason" xml:space="preserve"><value>Buscar um motivo</value></data>
+  <data name="From" xml:space="preserve"><value>De</value></data>
+  <data name="FullPaths" xml:space="preserve"><value>Mostrar caminhos completos</value></data>
+  <data name="GuideFields" xml:space="preserve"><value>Selecione um registro de origem. Os detalhes mostram campos como FileName e Reason. JSON contém os valores do índice. Hex mostra os bytes de origem.</value></data>
+  <data name="GuideFollow" xml:space="preserve"><value>Rastrear um arquivo</value></data>
+  <data name="GuideFollowPath" xml:space="preserve"><value>Mostre os caminhos completos para ver o caminho e a fonte em colunas separadas. A visão geral indica as pastas identificadas pelo diário e as inferidas pela MFT.</value></data>
+  <data name="GuideInspect" xml:space="preserve"><value>Inspecionar registros de origem</value></data>
+  <data name="GuideLanguage" xml:space="preserve"><value>Idioma da interface</value></data>
+  <data name="GuideLanguageText" xml:space="preserve"><value>Selecione o idioma em Exibir → Idioma da interface. A alteração é imediata. Os nomes e bytes originais são preservados.</value></data>
+  <data name="GuideOpen" xml:space="preserve"><value>Abrir evidências</value></data>
+  <data name="GuideOpenFiles" xml:space="preserve"><value>Em Configurações, selecione os arquivos ou a pasta de extração. Confira os arquivos adicionados automaticamente e remova os desnecessários com ×.</value></data>
+  <data name="GuidePreferences" xml:space="preserve"><value>Interface e análise</value></data>
+  <data name="GuideSave" xml:space="preserve"><value>Salvar resultados</value></data>
+  <data name="GuideSearch" xml:space="preserve"><value>Buscar no guia</value></data>
+  <data name="GuideTimeZone" xml:space="preserve"><value>Selecione o fuso horário em Configurações → Opções de análise. A mudança altera a hora exibida para o mesmo evento. Ao comparar horários, confira o cabeçalho da coluna.</value></data>
+  <data name="GuideTransactions" xml:space="preserve"><value>Transações e recuperação</value></data>
+  <data name="Help" xml:space="preserve"><value>Ajuda</value></data>
+  <data name="ImageArtifacts" xml:space="preserve"><value>Arquivos para extrair</value></data>
+  <data name="ImageFile" xml:space="preserve"><value>Arquivo de imagem</value></data>
+  <data name="ImageVolume" xml:space="preserve"><value>Volume ou coleção</value></data>
+  <data name="IncludePreviousNames" xml:space="preserve"><value>Incluir nomes anteriores</value></data>
+  <data name="IndexChooseFolder" xml:space="preserve"><value>Pasta dos índices</value></data>
+  <data name="IndexLocation" xml:space="preserve"><value>Pasta dos índices</value></data>
+  <data name="IndexResetFolder" xml:space="preserve"><value>Usar a pasta padrão</value></data>
+  <data name="IndexingModeLabel" xml:space="preserve"><value>Modo de indexação</value></data>
+  <data name="IndexingParallel" xml:space="preserve"><value>Paralelo (até 2)</value></data>
+  <data name="IndexingSequential" xml:space="preserve"><value>Sequencial</value></data>
+  <data name="IntakeBrowse" xml:space="preserve"><value>Procurar…</value></data>
+  <data name="IntakeCancel" xml:space="preserve"><value>Cancelar</value></data>
+  <data name="IntakeFromFolder" xml:space="preserve"><value>Selecionar pasta de extração…</value></data>
+  <data name="IntakeLog" xml:space="preserve"><value>Registro de transações ($LogFile)</value></data>
+  <data name="IntakeMft" xml:space="preserve"><value>Tabela de arquivos ($MFT)</value></data>
+  <data name="IntakeSettingsShortcut" xml:space="preserve"><value>Configurações (Ctrl+,)</value></data>
+  <data name="IntakeSettingsTab" xml:space="preserve"><value>Configurações</value></data>
+  <data name="IntakeSources" xml:space="preserve"><value>Evidências para análise</value></data>
+  <data name="IntakeStart" xml:space="preserve"><value>Iniciar análise</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer · Análise de arquivos NTFS</value></data>
+  <data name="MoveOrRenameCandidates" xml:space="preserve"><value>Possíveis movimentações ou renomeações</value></data>
+  <data name="NearbyRecords" xml:space="preserve"><value>Registros próximos</value></data>
+  <data name="NewName" xml:space="preserve"><value>Novo nome</value></data>
+  <data name="NextFilePage" xml:space="preserve"><value>Próxima página</value></data>
+  <data name="NextPage" xml:space="preserve"><value>Próxima página</value></data>
+  <data name="NoMatchingFiles" xml:space="preserve"><value>Nenhum arquivo encontrado.</value></data>
+  <data name="NtfsTransactions" xml:space="preserve"><value>Transações NTFS</value></data>
+  <data name="NtfsTransactionsCtrl3" xml:space="preserve"><value>Transações NTFS (Ctrl+3)</value></data>
+  <data name="OpenFileHistory" xml:space="preserve"><value>Abrir histórico do arquivo</value></data>
+  <data name="OpenLogfile" xml:space="preserve"><value>Abrir $LogFile…</value></data>
+  <data name="OpenSources" xml:space="preserve"><value>Abrir evidências…</value></data>
+  <data name="OpenUsnJournal" xml:space="preserve"><value>Abrir diário USN…</value></data>
+  <data name="OpenUsnJournalJ" xml:space="preserve"><value>Abrir diário USN ($J)…</value></data>
+  <data name="Operation" xml:space="preserve"><value>Tipo de registro / operação</value></data>
+  <data name="OperationsWithFileNames" xml:space="preserve"><value>Operações com nomes de arquivos</value></data>
+  <data name="Overview" xml:space="preserve"><value>Visão geral</value></data>
+  <data name="PathEvidence" xml:space="preserve"><value>Evidências do caminho</value></data>
+  <data name="PathSourceColumn" xml:space="preserve"><value>Origem</value></data>
+  <data name="PreviousFilePage" xml:space="preserve"><value>Página anterior</value></data>
+  <data name="PreviousName" xml:space="preserve"><value>Nome anterior</value></data>
+  <data name="PreviousPage" xml:space="preserve"><value>Página anterior</value></data>
+  <data name="RecordDetails" xml:space="preserve"><value>Detalhes do registro</value></data>
+  <data name="RecordSummary" xml:space="preserve"><value>Resumo do registro</value></data>
+  <data name="RecordedFileName" xml:space="preserve"><value>Nome de arquivo registrado</value></data>
+  <data name="RecordedFileNames" xml:space="preserve"><value>Nome de arquivo registrado</value></data>
+  <data name="RecordedName" xml:space="preserve"><value>Nome registrado</value></data>
+  <data name="RecordedPath" xml:space="preserve"><value>Caminho registrado</value></data>
+  <data name="RecordedTimeKst" xml:space="preserve"><value>Hora do registro (KST)</value></data>
+  <data name="RecordedTimeKstLabel" xml:space="preserve"><value>Hora do registro (KST)</value></data>
+  <data name="ResetAllFilters" xml:space="preserve"><value>Redefinir todos os filtros</value></data>
+  <data name="ReturnToRecords" xml:space="preserve"><value>Voltar aos registros</value></data>
+  <data name="RowsPerPage" xml:space="preserve"><value>Linhas por página</value></data>
+  <data name="RowsPerPageValue" xml:space="preserve"><value>{0:N0} / pág.</value></data>
+  <data name="SearchFileNameOrLsn" xml:space="preserve"><value>Buscar por nome ou LSN</value></data>
+  <data name="SearchFileNames" xml:space="preserve"><value>Buscar nomes de arquivos</value></data>
+  <data name="SearchFileNamesInTheJournal" xml:space="preserve"><value>Buscar nomes de arquivos</value></data>
+  <data name="SelectAll" xml:space="preserve"><value>Selecionar tudo</value></data>
+  <data name="SelectEvidenceFiles" xml:space="preserve"><value>Selecionar arquivos…</value></data>
+  <data name="Source" xml:space="preserve"><value>Registros</value></data>
+  <data name="SourceInformation" xml:space="preserve"><value>Informações da fonte…</value></data>
+  <data name="SourceInformationLabel" xml:space="preserve"><value>Informações da fonte</value></data>
+  <data name="SourceOffset" xml:space="preserve"><value>Deslocamento na fonte</value></data>
+  <data name="SourceRecord" xml:space="preserve"><value>Registro de origem</value></data>
+  <data name="StartDate" xml:space="preserve"><value>Data de início</value></data>
+  <data name="StartTime" xml:space="preserve"><value>Hora de início</value></data>
+  <data name="TimeKst" xml:space="preserve"><value>Hora do registro (KST)</value></data>
+  <data name="TimeZone" xml:space="preserve"><value>Fuso horário</value></data>
+  <data name="To" xml:space="preserve"><value>Para</value></data>
+  <data name="Tools" xml:space="preserve"><value>Ferramentas</value></data>
+  <data name="TransactionId" xml:space="preserve"><value>ID da transação</value></data>
+  <data name="UseSelectedFiles" xml:space="preserve"><value>Aplicar seleção</value></data>
+  <data name="UseWindowsLanguage" xml:space="preserve"><value>Usar o idioma do Windows</value></data>
+  <data name="UserGuide" xml:space="preserve"><value>Guia do usuário</value></data>
+  <data name="View" xml:space="preserve"><value>Exibir</value></data>
+  <data name="InvestigationTab" xml:space="preserve"><value>Pistas de investigação</value></data>
+  <data name="OpenLeadEvidence" xml:space="preserve"><value>Ver no histórico do arquivo</value></data>
+  <data name="ScanOpenJournal" xml:space="preserve"><value>Examinar $J aberto</value></data>
+  <data name="ScanOpenLogFile" xml:space="preserve"><value>Examinar $LogFile aberto</value></data>
+  <data name="ChooseScanFile" xml:space="preserve"><value>Escolher arquivo para examinar…</value></data>
+  <data name="ScanSourceOffset" xml:space="preserve"><value>Deslocamento no arquivo</value></data>
+  <data name="LeadDocumentDeleted" xml:space="preserve"><value>Documentos excluídos</value></data>
+  <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Data e hora fora de ordem</value></data>
+  <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Várias renomeações antes da exclusão</value></data>
+  <data name="LeadSDeleteName" xml:space="preserve"><value>Nomes de arquivo do SDelete</value></data>
+  <data name="InvestigationTabShortcut" xml:space="preserve"><value>Pistas de investigação (Ctrl+4)</value></data>
+  <data name="PathReferenceFilters" xml:space="preserve"><value>Caminho e IDs</value></data>
+  <data name="FilterRecordedPath" xml:space="preserve"><value>O caminho contém</value></data>
+  <data name="ParentFolderReference" xml:space="preserve"><value>Referência da pasta pai</value></data>
+  <data name="ClearPathReferenceFilters" xml:space="preserve"><value>Limpar filtros de caminho e referências</value></data>
+  <data name="PartialPath" xml:space="preserve"><value>Caminho parcial</value></data>
+  <data name="FilterFileId" xml:space="preserve"><value>ID do arquivo</value></data>
+  <data name="FilterParentId" xml:space="preserve"><value>ID da pasta pai</value></data>
+  <data name="PasteRecordId" xml:space="preserve"><value>Colar ID</value></data>
+  <data name="SearchThisId" xml:space="preserve"><value>Buscar este ID</value></data>
+  <data name="SearchThisIdHelp" xml:space="preserve"><value>Inicia uma nova busca por este ID.</value></data>
+  <data name="IntakeDropFiles" xml:space="preserve"><value>Arraste uma imagem de disco NTFS (E01, VHD etc.), arquivos extraídos ($J, $MFT, $LogFile) ou a pasta que os contém.</value></data>
+  <data name="DatePickerPrompt" xml:space="preserve"><value>Selecionar data</value></data>
+  <data name="AboutAuthor" xml:space="preserve"><value>Autor: {0}</value></data>
+  <data name="DisplayOptions" xml:space="preserve"><value>Exibição</value></data>
+  <data name="AppearanceTheme" xml:space="preserve"><value>Tema</value></data>
+  <data name="WindowsSetting" xml:space="preserve"><value>Configuração do Windows</value></data>
+  <data name="LightTheme" xml:space="preserve"><value>Tema claro</value></data>
+  <data name="CloseSettings" xml:space="preserve"><value>Fechar</value></data>
+</root>

@@ -1,0 +1,62 @@
+<Window x:Class="JournalDesk.TrackerResultsWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ Language="{Binding Language,Source={x:Static loc:L.Text}}" xmlns:loc="clr-namespace:JournalDesk" xmlns:local="clr-namespace:JournalDesk" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{loc:Ui TrackerResults}" Width="1100" Height="690" MinWidth="660" MinHeight="420"
+ WindowStartupLocation="CenterOwner" FontFamily="Segoe UI, Malgun Gothic" Foreground="{DynamicResource Desk.Text}" Background="{DynamicResource Desk.Canvas}" PreviewKeyDown="Shortcuts">
+ <DockPanel>
+  <Border DockPanel.Dock="Top" Padding="10,8" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1" Background="{DynamicResource Desk.Panel}">
+   <StackPanel><TextBlock x:Name="SourceTitle" FontWeight="SemiBold" FontSize="17" TextTrimming="CharacterEllipsis"/>
+    <TextBlock x:Name="Origin" Margin="0,3,0,0" Foreground="{DynamicResource Desk.Muted}" TextWrapping="Wrap" Text="{loc:Ui ReadingTrackerResults}"/></StackPanel></Border>
+  <Border DockPanel.Dock="Top" Style="{DynamicResource Desk.LogToolbar}">
+   <Grid>
+    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition/></Grid.ColumnDefinitions>
+    <Label Target="{Binding ElementName=Tables}" Content="{loc:Ui Table}" Padding="0" Margin="0,0,8,0" VerticalAlignment="Center"/>
+    <ComboBox x:Name="Tables" Grid.Column="1" MinWidth="126" MaxWidth="220" MinHeight="30" VerticalAlignment="Center" DisplayMemberPath="Name" SelectionChanged="TableChanged" AutomationProperties.Name="{loc:Ui ResultTables}"/>
+    <Grid Grid.Column="2" Margin="8,0,0,0">
+     <local:HintTextBox x:Name="Search" Hint="{loc:Ui SearchResults}" Style="{DynamicResource Desk.LogSearchInput}" TextChanged="SearchChanged" AutomationProperties.Name="{loc:Ui SearchResults}" ToolTip="{loc:Ui FindTextInAnyColumnCtrlF}"/>
+     <Button Click="ClearTrackerSearch" ToolTip="{loc:Ui ClearSearch}" AutomationProperties.Name="{loc:Ui ClearSearch}">
+      <Button.Style><Style TargetType="Button" BasedOn="{StaticResource Desk.ClearLogSearch}">
+       <Style.Triggers><DataTrigger Binding="{Binding Text,ElementName=Search}" Value=""><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers>
+      </Style></Button.Style>
+     </Button>
+    </Grid>
+   </Grid>
+  </Border>
+  <Border DockPanel.Dock="Bottom" Padding="10,4" Background="{DynamicResource Desk.Panel}" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource Desk.Rule}">
+   <DockPanel>
+    <Menu DockPanel.Dock="Left" Margin="0,0,8,0" VerticalAlignment="Center" Background="Transparent" IsMainMenu="False">
+     <Menu.Resources><ResourceDictionary Source="CompactMenu.xaml"/></Menu.Resources>
+     <MenuItem x:Name="Save" Header="{loc:Ui Export}" HeaderTemplate="{DynamicResource Desk.ExportHeader}" IsEnabled="False" ToolTip="{loc:Ui ExportMatchingResultsAsCsv}"><MenuItem Header="{loc:Ui ExportAsCsv}" Click="Export"/></MenuItem>
+    </Menu>
+    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal"><ComboBox x:Name="PageLimit" ItemsSource="{x:Static local:PageSizeOption.Choices}" DisplayMemberPath="Caption" SelectedValuePath="Size" SelectedValue="{x:Static local:PageSizeOption.Preferred}" local:PageSizeOption.Synchronize="True"
+              Style="{DynamicResource Desk.PageSizePicker}" ToolTip="{loc:Ui RowsPerPage}" AutomationProperties.Name="{loc:Ui RowsPerPage}" SelectionChanged="PageSizeChanged"/>
+    <Button x:Name="Prev" IsEnabled="False" Click="Previous" Style="{DynamicResource Desk.IconButton}" Content="&#xE76B;" ToolTip="{loc:Ui PreviousPage}" AutomationProperties.Name="{loc:Ui PreviousPage}"/><Button x:Name="Next" IsEnabled="False" Margin="4,0,0,0" Click="Following" Style="{DynamicResource Desk.IconButton}" Content="&#xE76C;" ToolTip="{loc:Ui NextPage}" AutomationProperties.Name="{loc:Ui NextPage}"/></StackPanel>
+    <TextBlock x:Name="Status" VerticalAlignment="Center" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite"/></DockPanel></Border>
+  <Grid><Grid.RowDefinitions><RowDefinition Height="3*" MinHeight="95"/><RowDefinition Height="4"/><RowDefinition Height="2*" MinHeight="50"/></Grid.RowDefinitions>
+   <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Rows" Style="{DynamicResource Desk.LogTable}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" Sorting="SortRows" CanUserSortColumns="True" CanUserReorderColumns="True"
+    GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{DynamicResource Desk.Inset}" BorderThickness="0" HeadersVisibility="Column" RowHeaderWidth="0" SelectionUnit="FullRow"
+    SelectionMode="Single" SelectionChanged="RowChanged" EnableColumnVirtualization="True" AutomationProperties.Name="{loc:Ui TrackerResultRows}" ClipboardCopyMode="IncludeHeader"/>
+   <GridSplitter Grid.Row="1" Height="4" Style="{DynamicResource Desk.RowSplitter}" HorizontalAlignment="Stretch" Background="{DynamicResource Desk.Rule}" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRowDetails}"/>
+   <DockPanel Grid.Row="2" Margin="10,6"><TextBlock DockPanel.Dock="Top" Text="{loc:Ui SelectedRow}" FontWeight="SemiBold" Margin="0,0,0,4"/>
+    <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Details" Style="{DynamicResource Desk.LogTable}" RowHeight="NaN" MinRowHeight="23"
+     IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" CanUserSortColumns="False" SelectionUnit="Cell"
+     AutomationProperties.Name="{loc:Ui AllColumnsForTheSelectedRow}" ClipboardCopyMode="ExcludeHeader">
+     <DataGrid.Columns>
+      <DataGridTemplateColumn Header="{loc:Ui TrackerColumnName}" Width="1.1*" MinWidth="90" ClipboardContentBinding="{Binding Name}">
+       <DataGridTemplateColumn.CellTemplate><DataTemplate><local:CopyText Text="{Binding Name,Mode=OneWay}" Padding="6,1" TextWrapping="Wrap" AutomationProperties.Name="{loc:Ui TrackerColumnName}"/></DataTemplate></DataGridTemplateColumn.CellTemplate>
+      </DataGridTemplateColumn>
+      <DataGridTemplateColumn Header="{loc:Ui TrackerStorage}" Width="155" ClipboardContentBinding="{Binding Storage}">
+       <DataGridTemplateColumn.CellTemplate><DataTemplate><local:CopyText Text="{Binding Storage,Mode=OneWay}" Padding="6,1" TextWrapping="Wrap" AutomationProperties.Name="{loc:Ui TrackerStorage}"/></DataTemplate></DataGridTemplateColumn.CellTemplate>
+      </DataGridTemplateColumn>
+      <DataGridTemplateColumn Header="{loc:Ui TrackerValue}" Width="3*" MinWidth="140" ClipboardContentBinding="{Binding Cell.Value}">
+       <DataGridTemplateColumn.CellTemplate><DataTemplate><Grid>
+        <local:CopyText x:Name="ValueEditor" Text="{Binding Cell.Value, Mode=OneWay}" IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap" MinHeight="0" MaxHeight="120" VerticalScrollBarVisibility="Auto" Padding="6,1" Background="Transparent" BorderThickness="0" AutomationProperties.Name="{Binding Name}"/>
+        <TextBlock x:Name="MissingValue" Visibility="Collapsed" Style="{StaticResource Desk.LogText}" FontStyle="Italic" Text="{Binding Cell.DetailPlaceholder}"/>
+       </Grid><DataTemplate.Triggers><DataTrigger Binding="{Binding Cell.IsPlaceholder}" Value="True">
+        <Setter TargetName="ValueEditor" Property="Visibility" Value="Collapsed"/><Setter TargetName="MissingValue" Property="Visibility" Value="Visible"/>
+       </DataTrigger></DataTemplate.Triggers></DataTemplate></DataGridTemplateColumn.CellTemplate>
+      </DataGridTemplateColumn>
+     </DataGrid.Columns>
+    </DataGrid></DockPanel>
+  </Grid>
+ </DockPanel>
+</Window>
+

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="AboutJournaldesk" xml:space="preserve"><value>Tentang NTFS Tracer</value></data>
+  <data name="Activity" xml:space="preserve"><value>Aktivitas</value></data>
+  <data name="AllActivities" xml:space="preserve"><value>Semua aktivitas</value></data>
+  <data name="AllOperations" xml:space="preserve"><value>Semua rekaman</value></data>
+  <data name="AllRecords" xml:space="preserve"><value>Semua rekaman</value></data>
+  <data name="AllRecordsCtrl1" xml:space="preserve"><value>Semua rekaman (Ctrl+1)</value></data>
+  <data name="AnalysisOptions" xml:space="preserve"><value>Opsi analisis</value></data>
+  <data name="ArtifactJournal" xml:space="preserve"><value>Jurnal berada di aliran data alternatif $J milik berkas $UsnJrnl. Alat akuisisi dapat menyimpannya sebagai $J atau $UsnJrnl-$J.</value></data>
+  <data name="ArtifactLocationTitle" xml:space="preserve"><value>Lokasi berkas NTFS</value></data>
+  <data name="ArtifactLog" xml:space="preserve"><value>Berkas ini mencatat transaksi metadata NTFS dan dapat dianalisis secara terpisah.</value></data>
+  <data name="ArtifactMft" xml:space="preserve"><value>MFT mengidentifikasi berkas dan folder induknya. Gunakan $MFT dari volume yang sama dengan $J untuk merekonstruksi jalur.</value></data>
+  <data name="ArtifactRoot" xml:space="preserve"><value>Jalur dihitung dari volume NTFS.</value></data>
+  <data name="AttachMft" xml:space="preserve"><value>Tautkan $MFT…</value></data>
+  <data name="ChangeReason" xml:space="preserve"><value>Alasan perubahan</value></data>
+  <data name="ChangeReasonFilter" xml:space="preserve"><value>Alasan perubahan</value></data>
+  <data name="ClearFileNameSearch" xml:space="preserve"><value>Hapus pencarian</value></data>
+  <data name="ClearFileSearch" xml:space="preserve"><value>Hapus pencarian</value></data>
+  <data name="ClearFilters" xml:space="preserve"><value>Reset semua filter</value></data>
+  <data name="ClearSearch" xml:space="preserve"><value>Hapus pencarian</value></data>
+  <data name="ClearSelection" xml:space="preserve"><value>Hapus pilihan</value></data>
+  <data name="ClearTransactionSearch" xml:space="preserve"><value>Hapus pencarian</value></data>
+  <data name="CollapseDetailsEsc" xml:space="preserve"><value>Tutup detail (Esc)</value></data>
+  <data name="CollapseEvidencePane" xml:space="preserve"><value>Tutup detail</value></data>
+  <data name="CollapseEvidencePaneEsc" xml:space="preserve"><value>Tutup detail (Esc)</value></data>
+  <data name="CollapseSelectedRecord" xml:space="preserve"><value>Tutup detail</value></data>
+  <data name="CollapseSelectedRecordEsc" xml:space="preserve"><value>Tutup detail (Esc)</value></data>
+  <data name="CollapseTransactionDetails" xml:space="preserve"><value>Tutup detail</value></data>
+  <data name="CompareChanges" xml:space="preserve"><value>Bandingkan perubahan</value></data>
+  <data name="Copy" xml:space="preserve"><value>Salin</value></data>
+  <data name="CsvSaveLocation" xml:space="preserve"><value>Folder penyimpanan CSV</value></data>
+  <data name="DarkTheme" xml:space="preserve"><value>Tema gelap</value></data>
+  <data name="DateFilter" xml:space="preserve"><value>Filter tanggal</value></data>
+  <data name="DisplayLanguage" xml:space="preserve"><value>Bahasa tampilan</value></data>
+  <data name="Done" xml:space="preserve"><value>Selesai</value></data>
+  <data name="DropSourcesHint" xml:space="preserve"><value>Jatuhkan citra disk, berkas hasil ekstraksi ($J, $MFT, $LogFile), atau folder di sini.</value></data>
+  <data name="EXit" xml:space="preserve"><value>Keluar</value></data>
+  <data name="Edit" xml:space="preserve"><value>Edit</value></data>
+  <data name="EndDate" xml:space="preserve"><value>Tanggal akhir</value></data>
+  <data name="EndTime" xml:space="preserve"><value>Waktu akhir</value></data>
+  <data name="Export" xml:space="preserve"><value>Ekspor</value></data>
+  <data name="ExportAsCsv" xml:space="preserve"><value>Ekspor sebagai CSV…</value></data>
+  <data name="ExtractionFolder" xml:space="preserve"><value>Folder ekstraksi</value></data>
+  <data name="FieldAuditRecordTime" xml:space="preserve"><value>Waktu rekaman</value></data>
+  <data name="File" xml:space="preserve"><value>Berkas</value></data>
+  <data name="FileHistory" xml:space="preserve"><value>Riwayat berkas</value></data>
+  <data name="FileHistoryCtrl2" xml:space="preserve"><value>Riwayat berkas (Ctrl+2)</value></data>
+  <data name="Files" xml:space="preserve"><value>Berkas</value></data>
+  <data name="Find" xml:space="preserve"><value>Cari</value></data>
+  <data name="FindAReason" xml:space="preserve"><value>Cari alasan</value></data>
+  <data name="From" xml:space="preserve"><value>Dari</value></data>
+  <data name="FullPaths" xml:space="preserve"><value>Tampilkan jalur lengkap</value></data>
+  <data name="GuideFields" xml:space="preserve"><value>Pilih rekaman sumber. Detail menampilkan kolom seperti FileName dan Reason. JSON berisi nilai dari indeks. Hex menampilkan byte sumber.</value></data>
+  <data name="GuideFollow" xml:space="preserve"><value>Telusuri berkas</value></data>
+  <data name="GuideFollowPath" xml:space="preserve"><value>Tampilkan jalur lengkap untuk memisahkan jalur dan sumbernya. Ringkasan menunjukkan folder yang diketahui dari jurnal dan folder yang diperkirakan dari MFT.</value></data>
+  <data name="GuideInspect" xml:space="preserve"><value>Periksa rekaman sumber</value></data>
+  <data name="GuideLanguage" xml:space="preserve"><value>Bahasa tampilan</value></data>
+  <data name="GuideLanguageText" xml:space="preserve"><value>Pilih bahasa melalui Tampilan → Bahasa tampilan. Perubahan langsung diterapkan. Nama asli dan byte sumber tetap utuh.</value></data>
+  <data name="GuideOpen" xml:space="preserve"><value>Buka bukti</value></data>
+  <data name="GuideOpenFiles" xml:space="preserve"><value>Di Pengaturan, pilih berkas atau folder hasil ekstraksi. Periksa berkas yang ditambahkan otomatis dan gunakan × untuk menghapus yang tidak diperlukan.</value></data>
+  <data name="GuidePreferences" xml:space="preserve"><value>Tampilan dan analisis</value></data>
+  <data name="GuideSave" xml:space="preserve"><value>Simpan hasil</value></data>
+  <data name="GuideSearch" xml:space="preserve"><value>Cari dalam panduan</value></data>
+  <data name="GuideTimeZone" xml:space="preserve"><value>Pilih zona waktu di Pengaturan → Opsi analisis. Perubahan mengubah waktu yang ditampilkan untuk peristiwa yang sama. Periksa judul kolom saat membandingkan waktu.</value></data>
+  <data name="GuideTransactions" xml:space="preserve"><value>Transaksi dan pemulihan</value></data>
+  <data name="Help" xml:space="preserve"><value>Bantuan</value></data>
+  <data name="ImageArtifacts" xml:space="preserve"><value>Berkas untuk diekstrak</value></data>
+  <data name="ImageFile" xml:space="preserve"><value>Berkas citra</value></data>
+  <data name="ImageVolume" xml:space="preserve"><value>Volume atau koleksi</value></data>
+  <data name="IncludePreviousNames" xml:space="preserve"><value>Sertakan nama sebelumnya</value></data>
+  <data name="IndexChooseFolder" xml:space="preserve"><value>Folder indeks</value></data>
+  <data name="IndexLocation" xml:space="preserve"><value>Folder indeks</value></data>
+  <data name="IndexResetFolder" xml:space="preserve"><value>Gunakan folder bawaan</value></data>
+  <data name="IndexingModeLabel" xml:space="preserve"><value>Mode pengindeksan</value></data>
+  <data name="IndexingParallel" xml:space="preserve"><value>Paralel (maks. 2)</value></data>
+  <data name="IndexingSequential" xml:space="preserve"><value>Berurutan</value></data>
+  <data name="IntakeBrowse" xml:space="preserve"><value>Telusuri…</value></data>
+  <data name="IntakeCancel" xml:space="preserve"><value>Batal</value></data>
+  <data name="IntakeFromFolder" xml:space="preserve"><value>Pilih folder hasil ekstraksi…</value></data>
+  <data name="IntakeLog" xml:space="preserve"><value>Log transaksi ($LogFile)</value></data>
+  <data name="IntakeMft" xml:space="preserve"><value>Tabel berkas ($MFT)</value></data>
+  <data name="IntakeSettingsShortcut" xml:space="preserve"><value>Pengaturan (Ctrl+,)</value></data>
+  <data name="IntakeSettingsTab" xml:space="preserve"><value>Pengaturan</value></data>
+  <data name="IntakeSources" xml:space="preserve"><value>Bukti untuk dianalisis</value></data>
+  <data name="IntakeStart" xml:space="preserve"><value>Mulai analisis</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer · Analisis berkas NTFS</value></data>
+  <data name="MoveOrRenameCandidates" xml:space="preserve"><value>Kemungkinan pemindahan atau penggantian nama</value></data>
+  <data name="NearbyRecords" xml:space="preserve"><value>Rekaman sekitar</value></data>
+  <data name="NewName" xml:space="preserve"><value>Nama baru</value></data>
+  <data name="NextFilePage" xml:space="preserve"><value>Halaman berikutnya</value></data>
+  <data name="NextPage" xml:space="preserve"><value>Halaman berikutnya</value></data>
+  <data name="NoMatchingFiles" xml:space="preserve"><value>Tidak ada berkas yang cocok.</value></data>
+  <data name="NtfsTransactions" xml:space="preserve"><value>Transaksi NTFS</value></data>
+  <data name="NtfsTransactionsCtrl3" xml:space="preserve"><value>Transaksi NTFS (Ctrl+3)</value></data>
+  <data name="OpenFileHistory" xml:space="preserve"><value>Buka riwayat berkas</value></data>
+  <data name="OpenLogfile" xml:space="preserve"><value>Buka $LogFile…</value></data>
+  <data name="OpenSources" xml:space="preserve"><value>Buka bukti…</value></data>
+  <data name="OpenUsnJournal" xml:space="preserve"><value>Buka jurnal USN…</value></data>
+  <data name="OpenUsnJournalJ" xml:space="preserve"><value>Buka jurnal USN ($J)…</value></data>
+  <data name="Operation" xml:space="preserve"><value>Jenis rekaman / operasi</value></data>
+  <data name="OperationsWithFileNames" xml:space="preserve"><value>Operasi dengan nama berkas</value></data>
+  <data name="Overview" xml:space="preserve"><value>Ringkasan</value></data>
+  <data name="PathEvidence" xml:space="preserve"><value>Bukti jalur</value></data>
+  <data name="PathSourceColumn" xml:space="preserve"><value>Sumber jalur</value></data>
+  <data name="PreviousFilePage" xml:space="preserve"><value>Halaman sebelumnya</value></data>
+  <data name="PreviousName" xml:space="preserve"><value>Nama lama</value></data>
+  <data name="PreviousPage" xml:space="preserve"><value>Halaman sebelumnya</value></data>
+  <data name="RecordDetails" xml:space="preserve"><value>Detail rekaman</value></data>
+  <data name="RecordSummary" xml:space="preserve"><value>Ringkasan rekaman</value></data>
+  <data name="RecordedFileName" xml:space="preserve"><value>Nama berkas tercatat</value></data>
+  <data name="RecordedFileNames" xml:space="preserve"><value>Nama berkas tercatat</value></data>
+  <data name="RecordedName" xml:space="preserve"><value>Nama tercatat</value></data>
+  <data name="RecordedPath" xml:space="preserve"><value>Jalur tercatat</value></data>
+  <data name="RecordedTimeKst" xml:space="preserve"><value>Waktu rekaman (KST)</value></data>
+  <data name="RecordedTimeKstLabel" xml:space="preserve"><value>Waktu rekaman (KST)</value></data>
+  <data name="ResetAllFilters" xml:space="preserve"><value>Reset semua filter</value></data>
+  <data name="ReturnToRecords" xml:space="preserve"><value>Kembali ke rekaman</value></data>
+  <data name="RowsPerPage" xml:space="preserve"><value>Baris per halaman</value></data>
+  <data name="RowsPerPageValue" xml:space="preserve"><value>{0:N0} / halaman</value></data>
+  <data name="SearchFileNameOrLsn" xml:space="preserve"><value>Cari nama berkas atau LSN</value></data>
+  <data name="SearchFileNames" xml:space="preserve"><value>Cari nama berkas</value></data>
+  <data name="SearchFileNamesInTheJournal" xml:space="preserve"><value>Cari nama berkas</value></data>
+  <data name="SelectAll" xml:space="preserve"><value>Pilih semua</value></data>
+  <data name="SelectEvidenceFiles" xml:space="preserve"><value>Pilih berkas…</value></data>
+  <data name="Source" xml:space="preserve"><value>Rekaman</value></data>
+  <data name="SourceInformation" xml:space="preserve"><value>Informasi sumber…</value></data>
+  <data name="SourceInformationLabel" xml:space="preserve"><value>Informasi sumber</value></data>
+  <data name="SourceOffset" xml:space="preserve"><value>Ofset sumber</value></data>
+  <data name="SourceRecord" xml:space="preserve"><value>Rekaman sumber</value></data>
+  <data name="StartDate" xml:space="preserve"><value>Tanggal mulai</value></data>
+  <data name="StartTime" xml:space="preserve"><value>Waktu mulai</value></data>
+  <data name="TimeKst" xml:space="preserve"><value>Waktu rekaman (KST)</value></data>
+  <data name="TimeZone" xml:space="preserve"><value>Zona waktu</value></data>
+  <data name="To" xml:space="preserve"><value>Ke</value></data>
+  <data name="Tools" xml:space="preserve"><value>Alat</value></data>
+  <data name="TransactionId" xml:space="preserve"><value>ID transaksi</value></data>
+  <data name="UseSelectedFiles" xml:space="preserve"><value>Terapkan pilihan</value></data>
+  <data name="UseWindowsLanguage" xml:space="preserve"><value>Gunakan bahasa Windows</value></data>
+  <data name="UserGuide" xml:space="preserve"><value>Panduan pengguna</value></data>
+  <data name="View" xml:space="preserve"><value>Tampilan</value></data>
+  <data name="InvestigationTab" xml:space="preserve"><value>Petunjuk investigasi</value></data>
+  <data name="OpenLeadEvidence" xml:space="preserve"><value>Lihat di riwayat file</value></data>
+  <data name="ScanOpenJournal" xml:space="preserve"><value>Pindai $J terbuka</value></data>
+  <data name="ScanOpenLogFile" xml:space="preserve"><value>Pindai $LogFile terbuka</value></data>
+  <data name="ChooseScanFile" xml:space="preserve"><value>Pilih file untuk dipindai…</value></data>
+  <data name="ScanSourceOffset" xml:space="preserve"><value>Ofset file</value></data>
+  <data name="LeadDocumentDeleted" xml:space="preserve"><value>Penghapusan dokumen</value></data>
+  <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Stempel waktu tidak berurutan</value></data>
+  <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Beberapa kali ganti nama sebelum dihapus</value></data>
+  <data name="LeadSDeleteName" xml:space="preserve"><value>Nama file cocok dengan SDelete</value></data>
+  <data name="InvestigationTabShortcut" xml:space="preserve"><value>Petunjuk investigasi (Ctrl+4)</value></data>
+  <data name="PathReferenceFilters" xml:space="preserve"><value>Path dan ID</value></data>
+  <data name="FilterRecordedPath" xml:space="preserve"><value>Path memuat</value></data>
+  <data name="ParentFolderReference" xml:space="preserve"><value>Referensi folder induk</value></data>
+  <data name="ClearPathReferenceFilters" xml:space="preserve"><value>Hapus filter path dan referensi</value></data>
+  <data name="PartialPath" xml:space="preserve"><value>Path sebagian</value></data>
+  <data name="FilterFileId" xml:space="preserve"><value>ID file</value></data>
+  <data name="FilterParentId" xml:space="preserve"><value>ID folder induk</value></data>
+  <data name="PasteRecordId" xml:space="preserve"><value>Tempel ID</value></data>
+  <data name="SearchThisId" xml:space="preserve"><value>Cari ID ini</value></data>
+  <data name="SearchThisIdHelp" xml:space="preserve"><value>Memulai pencarian baru untuk ID ini.</value></data>
+  <data name="IntakeDropFiles" xml:space="preserve"><value>Seret citra disk NTFS (E01, VHD, dll.), berkas hasil ekstraksi ($J, $MFT, $LogFile), atau folder yang memuatnya.</value></data>
+  <data name="DatePickerPrompt" xml:space="preserve"><value>Pilih tanggal</value></data>
+  <data name="AboutAuthor" xml:space="preserve"><value>Pengembang: {0}</value></data>
+  <data name="DisplayOptions" xml:space="preserve"><value>Tampilan</value></data>
+  <data name="AppearanceTheme" xml:space="preserve"><value>Tema</value></data>
+  <data name="WindowsSetting" xml:space="preserve"><value>Pengaturan Windows</value></data>
+  <data name="LightTheme" xml:space="preserve"><value>Tema terang</value></data>
+  <data name="CloseSettings" xml:space="preserve"><value>Tutup</value></data>
+</root>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Attach $MFT…" xml:space="preserve"><value>$MFT dosyasını ilişkilendir…</value></data>
+  <data name="CSV with paths and evidence…" xml:space="preserve"><value>Yollar ve dayanaklarla CSV…</value></data>
+  <data name="Cancel" xml:space="preserve"><value>İptal</value></data>
+  <data name="Change reason" xml:space="preserve"><value>Değişiklik nedeni</value></data>
+  <data name="Continue" xml:space="preserve"><value>Devam</value></data>
+  <data name="Copied" xml:space="preserve"><value>Kopyalandı</value></data>
+  <data name="Copy full text" xml:space="preserve"><value>Tüm metni kopyala</value></data>
+  <data name="Creation record" xml:space="preserve"><value>Oluşturma kaydı</value></data>
+  <data name="Date filter" xml:space="preserve"><value>Tarih filtresi</value></data>
+  <data name="Deletion record" xml:space="preserve"><value>Silme kaydı</value></data>
+  <data name="Display language" xml:space="preserve"><value>Görüntüleme dili</value></data>
+  <data name="File path" xml:space="preserve"><value>Kayıtlı yol</value></data>
+  <data name="File renamed" xml:space="preserve"><value>Dosya yeniden adlandırıldı</value></data>
+  <data name="Files and folders: {0:N0}   ·   Change records: {1:N0}" xml:space="preserve"><value>Dosya ve klasör: {0:N0}   ·   Değişiklik kaydı: {1:N0}</value></data>
+  <data name="Loading records…" xml:space="preserve"><value>Kayıtlar yükleniyor…</value></data>
+  <data name="Moved to another folder" xml:space="preserve"><value>Başka klasöre taşındı</value></data>
+  <data name="Names missing from the journal ({0}) come from the MFT at acquisition. Their names and locations at the time of the event are unknown." xml:space="preserve"><value>Üst klasörlerin adları ({0}) günlükte yoktur. Adlar edinilen MFT’den alındı. Olay anındaki adları ve konumları bilinmiyor.</value></data>
+  <data name="New name record" xml:space="preserve"><value>Yeni ad kaydı</value></data>
+  <data name="No matching records." xml:space="preserve"><value>Eşleşen kayıt yok.</value></data>
+  <data name="Old name record" xml:space="preserve"><value>Önceki ad kaydı</value></data>
+  <data name="Path inferred from MFT" xml:space="preserve"><value>MFT’den çıkarılan yol</value></data>
+  <data name="Path unavailable." xml:space="preserve"><value>Yol kullanılamıyor.</value></data>
+  <data name="Record CSV…" xml:space="preserve"><value>Kayıtları CSV olarak dışa aktar…</value></data>
+  <data name="Record time ({0})" xml:space="preserve"><value>Kayıt zamanı ({0})</value></data>
+  <data name="Recorded file name" xml:space="preserve"><value>Kayıtlı dosya adı</value></data>
+  <data name="Recorded path" xml:space="preserve"><value>Kayıtlı yol</value></data>
+  <data name="Resolving path…" xml:space="preserve"><value>Yol belirleniyor…</value></data>
+  <data name="Some folder names come from the last journal record before this event. Those names or locations may have changed afterward." xml:space="preserve"><value>Bazı klasör adları, olaydan önceki son günlük kaydından alındı. Ad veya konum daha sonra değişmiş olabilir.</value></data>
+  <data name="Source file" xml:space="preserve"><value>Kaynak dosya</value></data>
+  <data name="The acquired MFT links the file name to its parent folders." xml:space="preserve"><value>Edinilen MFT, dosya adını üst klasörlerle ilişkilendirir.</value></data>
+  <data name="The journal links this file name to its parent folders up to the volume root." xml:space="preserve"><value>Günlük, dosya adını birimin köküne kadar üst klasörlerle ilişkilendirir.</value></data>
+  <data name="The parent folder cannot be identified in this journal segment. No MFT is attached." xml:space="preserve"><value>Bu günlük bölümünde üst klasör belirlenemiyor. İlişkilendirilmiş MFT yok.</value></data>
+  <data name="Unknown path" xml:space="preserve"><value>Bilinmeyen yol</value></data>
+  <data name="Use Windows language ({0})" xml:space="preserve"><value>Windows dilini kullan ({0})</value></data>
+  <data name="Records: {0:N0}" xml:space="preserve"><value>Kayıt: {0:N0}</value></data>
+  <data name="Records {0:N0}–{1:N0}" xml:space="preserve"><value>{0:N0}–{1:N0}. kayıtlar</value></data>
+  <data name="Auto (sequential)" xml:space="preserve"><value>Otomatik (sıralı)</value></data>
+  <data name="Auto (up to 2 in parallel)" xml:space="preserve"><value>Otomatik (en fazla 2 paralel)</value></data>
+  <data name="Extract and analyze" xml:space="preserve"><value>Çıkar ve analiz et</value></data>
+  <data name="Extract files" xml:space="preserve"><value>Dosyaları çıkar</value></data>
+  <data name="Preparing indexes · {0}" xml:space="preserve"><value>Dizinler hazırlanıyor · {0}</value></data>
+  <data name="Sorting all matching records…" xml:space="preserve"><value>Eşleşen kayıtlar sıralanıyor…</value></data>
+  <data name="Data overwritten" xml:space="preserve"><value>Verilerin üzerine yazıldı</value></data>
+  <data name="Data extended" xml:space="preserve"><value>Veriler genişletildi</value></data>
+  <data name="Data truncated" xml:space="preserve"><value>Veriler kısaltıldı</value></data>
+  <data name="File closed" xml:space="preserve"><value>Dosya kapatıldı</value></data>
+  <data name="Attributes or timestamps changed" xml:space="preserve"><value>Öznitelikler veya zaman damgaları değişti</value></data>
+  <data name="{0}   ·   Records: {1:N0}" xml:space="preserve"><value>{0}   ·   Kayıt: {1:N0}</value></data>
+  <data name="No records match your search." xml:space="preserve"><value>Eşleşen kayıt yok.</value></data>
+  <data name="Source offset 0x{0:X}  ·  {1:N0} bytes" xml:space="preserve"><value>Kaynak ofseti 0x{0:X}  ·  {1:N0} bayt</value></data>
+</root>

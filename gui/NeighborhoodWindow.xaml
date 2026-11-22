@@ -1,0 +1,85 @@
+<Window x:Class="JournalDesk.NeighborhoodWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ Language="{Binding Language,Source={x:Static loc:L.Text}}" xmlns:loc="clr-namespace:JournalDesk" xmlns:local="clr-namespace:JournalDesk" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{loc:Ui RecordsAroundThisEvent}" Width="1010" Height="575"
+ MinWidth="595" MinHeight="360" WindowStartupLocation="CenterOwner" FontFamily="Segoe UI, Malgun Gothic"
+ Background="{DynamicResource Desk.Canvas}" Foreground="{DynamicResource Desk.Text}">
+ <Window.Resources>
+  <Style x:Key="RangeOption" TargetType="RadioButton">
+   <Setter Property="MinWidth" Value="48"/><Setter Property="MinHeight" Value="26"/>
+   <Setter Property="Margin" Value="0,0,2,0"/><Setter Property="Padding" Value="7,1"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="RadioButton">
+    <Border x:Name="Hit" Padding="{TemplateBinding Padding}" Background="Transparent" BorderThickness="1" BorderBrush="Transparent" CornerRadius="2">
+     <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+    </Border>
+    <ControlTemplate.Triggers>
+     <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Hit" Property="Background" Value="{DynamicResource Desk.Hover}"/></Trigger>
+     <Trigger Property="IsChecked" Value="True"><Setter TargetName="Hit" Property="Background" Value="{DynamicResource Desk.Selected}"/><Setter Property="FontWeight" Value="SemiBold"/></Trigger>
+     <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Hit" Property="BorderBrush" Value="{DynamicResource Desk.Accent}"/></Trigger>
+    </ControlTemplate.Triggers>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <Style x:Key="Cell" TargetType="TextBlock"><Setter Property="Margin" Value="6,0"/><Setter Property="VerticalAlignment" Value="Center"/><Setter Property="TextTrimming" Value="CharacterEllipsis"/><Setter Property="ToolTip" Value="{Binding Text,RelativeSource={RelativeSource Self}}"/></Style>
+  <Style x:Key="Number" TargetType="TextBlock" BasedOn="{StaticResource Cell}"><Setter Property="FontFamily" Value="Consolas, Malgun Gothic"/><Setter Property="FontSize" Value="12"/></Style>
+  <Style x:Key="RecordTime" TargetType="TextBlock" BasedOn="{StaticResource Number}"><Setter Property="ToolTip" Value="{Binding Item.TimeDetail}"/></Style>
+  <Style x:Key="Distance" TargetType="TextBlock" BasedOn="{StaticResource Cell}"><Setter Property="ToolTip" Value="{Binding RelativeDetail}"/></Style>
+ </Window.Resources>
+ <Grid>
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <Border Padding="10,8,10,6" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1">
+   <StackPanel>
+    <DockPanel>
+     <TextBlock Text="{loc:Ui ReferenceRecord}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Center" Margin="0,0,9,0"/>
+     <TextBlock x:Name="AnchorTitle" FontSize="16" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+    </DockPanel>
+    <TextBlock x:Name="AnchorInfo" Margin="0,3,0,0" FontSize="12" Foreground="{DynamicResource Desk.Muted}" TextWrapping="Wrap"/>
+   </StackPanel>
+  </Border>
+  <Border Grid.Row="1" Style="{DynamicResource Desk.LogToolbar}"><DockPanel>
+   <Button x:Name="ToAnchor" Content="{loc:Ui GoToReference}" DockPanel.Dock="Right" Click="BackToAnchor" MinHeight="28" Padding="8,1" ToolTip="{loc:Ui GoToThePageAndRowContainingThe}"/>
+   <WrapPanel>
+    <TextBlock x:Name="RangeLabel" Text="{loc:Ui TimeWindow}" VerticalAlignment="Center" Margin="0,0,10,0"/>
+    <RadioButton x:Name="Range1" Style="{StaticResource RangeOption}" GroupName="WindowSize" Tag="0" Content="{loc:Ui 1S}" Checked="RangeChanged"/>
+    <RadioButton x:Name="Range5" Style="{StaticResource RangeOption}" GroupName="WindowSize" Tag="1" Content="{loc:Ui 5S}" Checked="RangeChanged"/>
+    <RadioButton x:Name="Range30" Style="{StaticResource RangeOption}" GroupName="WindowSize" Tag="2" Content="{loc:Ui 30S}" Checked="RangeChanged"/>
+   </WrapPanel>
+  </DockPanel></Border>
+  <DataGrid x:Name="Rows" ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" Grid.Row="2" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" CanUserSortColumns="False"
+    HeadersVisibility="Column" ColumnHeaderHeight="26" RowHeight="25" SelectionMode="Single" SelectionUnit="FullRow"
+    FrozenColumnCount="2" Background="{DynamicResource Desk.Canvas}" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="{DynamicResource Desk.Hairline}"
+    BorderThickness="0" VirtualizingPanel.ScrollUnit="Pixel" EnableRowVirtualization="True" AutomationProperties.Name="{loc:Ui ReferenceRecordAndNearbyJournalRecords}"
+    SelectionChanged="SelectionChanged" MouseDoubleClick="OpenRow" PreviewKeyDown="GridKey">
+   <DataGrid.CellStyle><Style TargetType="DataGridCell" BasedOn="{StaticResource Desk.GridCell}">
+    <Setter Property="Padding" Value="0"/><Setter Property="BorderThickness" Value="0"/><Setter Property="Foreground" Value="{DynamicResource Desk.Text}"/>
+    <Style.Triggers>
+     <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="{DynamicResource Desk.Selected}"/></Trigger>
+    </Style.Triggers>
+   </Style></DataGrid.CellStyle>
+   
+   <DataGrid.RowStyle><Style TargetType="DataGridRow"><Style.Triggers>
+    <DataTrigger Binding="{Binding IsAnchor}" Value="True"><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Background" Value="{DynamicResource Desk.Inset}"/></DataTrigger>
+    <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="{DynamicResource Desk.Selected}"/><Setter Property="Foreground" Value="{DynamicResource Desk.Text}"/></Trigger>
+   </Style.Triggers></Style></DataGrid.RowStyle>
+   <DataGrid.Columns>
+    <DataGridTextColumn Header="{loc:Ui TimeDelta}" Binding="{Binding Relative}" ElementStyle="{StaticResource Distance}" Width="82"/>
+    <DataGridTextColumn x:Name="TimeColumn" Header="{loc:Ui RecordedTimeKstLabel}" Binding="{Binding Item.TimeText}" ClipboardContentBinding="{Binding Item.TimeDetail}" ElementStyle="{StaticResource RecordTime}" Width="175"/>
+    <DataGridTextColumn Header="{loc:Ui RecordedFileName}" Binding="{Binding Item.Name}" ElementStyle="{StaticResource Cell}" Width="1.8*" MinWidth="136"/>
+    <DataGridTextColumn Header="{loc:Ui ChangeReason}" Binding="{Binding Item.Title}" ElementStyle="{StaticResource Cell}" Width="1.1*" MinWidth="112"/>
+    <DataGridTextColumn Header="USN" Binding="{Binding Item.Usn}" ElementStyle="{StaticResource Number}" Width="103"/>
+   </DataGrid.Columns>
+  </DataGrid>
+  <Grid Grid.Row="3" Background="{DynamicResource Desk.Panel}"><DockPanel Margin="10,4">
+   <Button x:Name="OpenOriginal" Content="{loc:Ui ViewSourceBytes}" DockPanel.Dock="Right" Click="OpenBytes" MinHeight="28" Padding="8,2" IsEnabled="False"/>
+   <local:CopyText x:Name="SelectionInfo" TextWrapping="NoWrap" VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite" Margin="0,0,8,0" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+  </DockPanel></Grid>
+  <Border Grid.Row="4" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0" Padding="10,4">
+   <DockPanel>
+    <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+     <ComboBox x:Name="PageLimit" ItemsSource="{x:Static local:PageSizeOption.Choices}" DisplayMemberPath="Caption" SelectedValuePath="Size" SelectedValue="{x:Static local:PageSizeOption.Preferred}" local:PageSizeOption.Synchronize="True"
+              Style="{DynamicResource Desk.PageSizePicker}" ToolTip="{loc:Ui RowsPerPage}" AutomationProperties.Name="{loc:Ui RowsPerPage}" SelectionChanged="PageSizeChanged"/>
+    <Button x:Name="Prev" Click="PreviousPage" IsEnabled="False" Style="{DynamicResource Desk.IconButton}" Content="&#xE76B;" ToolTip="{loc:Ui PreviousPage}" AutomationProperties.Name="{loc:Ui PreviousPage}"/>
+     <Button x:Name="Next" Click="NextPage" IsEnabled="False" Margin="4,0,0,0" Style="{DynamicResource Desk.IconButton}" Content="&#xE76C;" ToolTip="{loc:Ui NextPage}" AutomationProperties.Name="{loc:Ui NextPage}"/>
+    </StackPanel>
+    <TextBlock x:Name="Counts" Margin="0,0,7,0" VerticalAlignment="Center" TextWrapping="Wrap" FontSize="12" AutomationProperties.LiveSetting="Polite"/>
+   </DockPanel>
+  </Border>
+ </Grid>
+</Window>

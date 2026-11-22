@@ -1,0 +1,20 @@
+<Window x:Class="JournalDesk.EvidenceWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:JournalDesk" Language="{x:Static local:L.XmlLanguage}"
+ Width="950" Height="465" MinWidth="490" MinHeight="270" WindowStartupLocation="CenterOwner"
+ FontFamily="Segoe UI, Malgun Gothic" Foreground="{DynamicResource Desk.Text}" Background="{DynamicResource Desk.Canvas}">
+ <DockPanel>
+  <StackPanel DockPanel.Dock="Top" Margin="10,8,10,6">
+   <local:CopyText x:Name="RecordName" FontSize="15" FontWeight="SemiBold" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+   <WrapPanel Margin="0,2,0,0">
+    <local:CopyText x:Name="RecordLocation" FontFamily="Consolas, Malgun Gothic" FontSize="12" Margin="0,0,8,0" Foreground="{DynamicResource Desk.Muted}" TextWrapping="NoWrap" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+    <local:CopyText x:Name="ByteLocation" FontFamily="Consolas, Malgun Gothic" FontSize="12" Foreground="{DynamicResource Desk.Muted}" TextWrapping="NoWrap" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+   </WrapPanel>
+  </StackPanel>
+  <Border DockPanel.Dock="Bottom" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource Desk.Rule}" Background="{DynamicResource Desk.Panel}" Padding="10,4">
+   <DockPanel><local:CopyText DockPanel.Dock="Left" Text="{local:Ui FileLocation}" Margin="0,0,8,0" VerticalAlignment="Center" Foreground="{DynamicResource Desk.Muted}"/>
+    <local:CopyText x:Name="Origin" AutomationProperties.Name="{local:Ui ExtractedFilePath}" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+   </DockPanel>
+  </Border>
+  <local:HexEvidenceView x:Name="Viewer" Margin="10,0"/>
+ </DockPanel>
+</Window>

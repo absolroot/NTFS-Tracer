@@ -1,0 +1,31 @@
+<UserControl x:Class="JournalDesk.RecordIdentifiersView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:loc="clr-namespace:JournalDesk" HorizontalContentAlignment="Stretch">
+ <UserControl.Resources>
+  <DataTemplate x:Key="RecordId">
+   <StackPanel Orientation="Horizontal" Margin="0,0,10,1">
+    <loc:CopyText Text="{Binding Value,Mode=OneWay}" FontFamily="Consolas" MinWidth="170" VerticalAlignment="Center"
+     AutomationProperties.Name="{Binding Value}" />
+    <Button Style="{DynamicResource Desk.EvidenceLink}" Content="{loc:Ui SearchThisId}" Padding="5,2" Click="SearchClick"
+     ToolTip="{loc:Ui SearchThisIdHelp}" AutomationProperties.Name="{loc:Ui SearchThisId}">
+     <Button.ContentTemplate><DataTemplate>
+      <StackPanel Orientation="Horizontal">
+       <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="11" Text="&#xE721;" Margin="0,0,5,0" VerticalAlignment="Center" Foreground="{DynamicResource Desk.Link}"/>
+       <TextBlock Text="{Binding}" VerticalAlignment="Center" Foreground="{DynamicResource Desk.Link}"/>
+      </StackPanel>
+     </DataTemplate></Button.ContentTemplate>
+    </Button>
+   </StackPanel>
+  </DataTemplate>
+  <ItemsPanelTemplate x:Key="IdsPanel"><WrapPanel/></ItemsPanelTemplate>
+ </UserControl.Resources>
+ <Grid Margin="0,2,0,1">
+  <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition/></Grid.ColumnDefinitions>
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+  <loc:CopyText HorizontalAlignment="Left" Text="{loc:Ui FilterFileId}" ToolTip="{loc:Ui FileIdDefinition}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+  <ItemsControl x:Name="FileIds" Grid.Column="1" ItemsPanel="{StaticResource IdsPanel}" ItemTemplate="{StaticResource RecordId}"/>
+  <TextBlock x:Name="MissingFile" Grid.Column="1" Text="—" ToolTip="{loc:Ui RecordIdMissing}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Center" Visibility="Collapsed"/>
+  <loc:CopyText HorizontalAlignment="Left" Grid.Row="1" Text="{loc:Ui FilterParentId}" ToolTip="{loc:Ui ParentIdDefinition}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+  <ItemsControl x:Name="ParentIds" Grid.Row="1" Grid.Column="1" ItemsPanel="{StaticResource IdsPanel}" ItemTemplate="{StaticResource RecordId}"/>
+  <TextBlock x:Name="MissingParent" Grid.Row="1" Grid.Column="1" Text="—" ToolTip="{loc:Ui RecordIdMissing}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Center" Visibility="Collapsed"/>
+ </Grid>
+</UserControl>

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Version>1.2.1</Version>
+    <DebugType>embedded</DebugType>
+    <DefaultItemExcludes>$(DefaultItemExcludes);Logical/Native/build/**;Logical/Native/libewf_python-*/**;Logical/Native/zlib-*/**</DefaultItemExcludes>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="LTRData.DiscUtils.Ntfs" Version="1.0.91" />
+    <PackageReference Include="LTRData.DiscUtils.Vhd" Version="1.0.91" />
+    <PackageReference Include="LTRData.DiscUtils.Vhdx" Version="1.0.91" />
+    <PackageReference Include="LTRData.DiscUtils.Vmdk" Version="1.0.91" />
+    <None Update="Notices/DiscUtils.txt" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Update="Logical/Native/JournalDesk.libewf.dll" Link="JournalDesk.libewf.dll" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Update="Logical/Native/COPYING*;Logical/Native/CMakeLists.txt;Logical/Native/*.md;Logical/Native/*.tar.gz" Link="Notices/ewf/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+  </ItemGroup>
+</Project>

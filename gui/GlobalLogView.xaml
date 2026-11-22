@@ -1,0 +1,181 @@
+<UserControl x:Class="JournalDesk.GlobalLogView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:local="clr-namespace:JournalDesk" Language="{Binding Language,Source={x:Static loc:L.Text}}" xmlns:loc="clr-namespace:JournalDesk" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="{DynamicResource Desk.Canvas}" FontFamily="Segoe UI, Malgun Gothic"
+ IsVisibleChanged="VisibilityChanged" PreviewKeyDown="ControlKeyDown">
+ <UserControl.Resources>
+  <ResourceDictionary>
+   <ResourceDictionary.MergedDictionaries><ResourceDictionary Source="LogTable.xaml"/></ResourceDictionary.MergedDictionaries>
+  <Style x:Key="FilterToggle" TargetType="ToggleButton">
+   <Setter Property="Foreground" Value="{DynamicResource Desk.Text}"/>
+   <Setter Property="MinHeight" Value="28"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ToggleButton">
+    <Border x:Name="Face" CornerRadius="3" BorderThickness="1" BorderBrush="{DynamicResource Desk.Rule}"
+            Background="{DynamicResource Desk.Inset}" Padding="{TemplateBinding Padding}">
+     <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+    </Border>
+    <ControlTemplate.Triggers>
+     <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Face" Property="Background" Value="{DynamicResource Desk.Hover}"/></Trigger>
+     <Trigger Property="IsChecked" Value="True"><Setter TargetName="Face" Property="Background" Value="{DynamicResource Desk.Selected}"/></Trigger>
+     <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Face" Property="BorderBrush" Value="{DynamicResource Desk.Accent}"/></Trigger>
+     <Trigger Property="IsEnabled" Value="False"><Setter TargetName="Face" Property="Opacity" Value="0.5"/></Trigger>
+    </ControlTemplate.Triggers>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <Style x:Key="Caption" TargetType="TextBlock"><Setter Property="Foreground" Value="{DynamicResource Desk.Muted}"/><Setter Property="FontSize" Value="12"/></Style>
+  </ResourceDictionary>
+ </UserControl.Resources>
+ <Grid>
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*" MinHeight="116"/><RowDefinition Height="Auto"/><RowDefinition x:Name="DetailHeight" Height="0"/></Grid.RowDefinitions>
+  <Border Background="{DynamicResource Desk.Canvas}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1" Style="{DynamicResource Desk.LogToolbar}">
+   <StackPanel x:Name="FilterPanel">
+    <Grid>
+     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+     <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <Grid x:Name="SearchGroup">
+      <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <Grid>
+      <loc:HintTextBox x:Name="QueryText" Hint="{loc:Ui SearchFileNames}" Style="{DynamicResource Desk.LogSearchInput}" TextChanged="SearchChanged" PreviewKeyDown="SearchKeyDown" VerticalContentAlignment="Center" AutomationProperties.Name="{loc:Ui SearchFileNamesInTheJournal}" ToolTip="{loc:Ui EnterPartOfAFileNameCtrlF}"/>
+      <Button x:Name="ClearQuery" Style="{DynamicResource Desk.ClearLogSearch}" Visibility="Collapsed" Click="ClearQueryClick" ToolTip="{loc:Ui ClearFileNameSearch}" AutomationProperties.Name="{loc:Ui ClearFileNameSearch}"/>
+     </Grid>
+     <CheckBox Grid.Column="1" x:Name="NameScope" IsChecked="True" Checked="ScopeChanged" Unchecked="ScopeChanged" Margin="8,0,3,0" VerticalAlignment="Center" Content="{loc:Ui IncludePreviousNames}" ToolTip="{loc:Ui FindRecordsUnderOtherNamesUsedByThe}"/>
+     </Grid>
+     <StackPanel x:Name="FilterCommands" Grid.Column="1" Orientation="Horizontal" Margin="6,0,0,0">
+      <ToggleButton x:Name="Kind" MinWidth="146" MaxWidth="218" Padding="7,2" AutomationProperties.Name="{loc:Ui ChangeReasonFilter}" ToolTip="{loc:Ui MatchAnySelectedReason}">
+       <ToggleButton.Style><Style TargetType="ToggleButton" BasedOn="{StaticResource FilterToggle}"><Style.Triggers><DataTrigger Binding="{Binding IsOpen,ElementName=KindPopup}" Value="True"><Setter Property="IsHitTestVisible" Value="False"/></DataTrigger></Style.Triggers></Style></ToggleButton.Style>
+       <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+        <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE71C;" FontSize="13" VerticalAlignment="Center"/>
+        <TextBlock x:Name="KindLabel" Grid.Column="1" Text="{loc:Ui ChangeReason}" Margin="6,0" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+        <TextBlock Grid.Column="2" FontFamily="Segoe MDL2 Assets" Text="&#xE70D;" FontSize="10" VerticalAlignment="Center"/>
+       </Grid>
+      </ToggleButton>
+      <Popup x:Name="KindPopup" PlacementTarget="{Binding ElementName=Kind}" Placement="Bottom" IsOpen="{Binding IsChecked,ElementName=Kind,Mode=TwoWay}" StaysOpen="False" Opened="ReasonsOpened" AllowsTransparency="True">
+       <AdornerDecorator><Border Width="254" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="1" CornerRadius="4" Padding="7" PreviewKeyDown="ReasonKeys" KeyboardNavigation.TabNavigation="Cycle">
+        <DockPanel>
+         <Grid DockPanel.Dock="Top" Margin="0,0,0,4">
+          <loc:HintTextBox x:Name="ReasonSearch" Style="{DynamicResource Desk.SearchInput}" Hint="{loc:Ui FindAReason}" Padding="6,2" AutomationProperties.Name="{loc:Ui FindAReason}" TextChanged="SearchReasons"/>
+         </Grid>
+         <DockPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+          <Button DockPanel.Dock="Right" Content="{loc:Ui Done}" Padding="8,1" Click="CloseReasons"/>
+          <Button x:Name="ClearReasons" HorizontalAlignment="Left" Content="{loc:Ui ClearSelection}" Padding="6,1" Click="ResetReasons" ToolTip="{loc:Ui ClearEverySelectedReasonIncludingThoseHiddenBy}"/>
+         </DockPanel>
+         <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="260" Focusable="False">
+          <StackPanel><TextBlock x:Name="NoReasons" Text="{loc:Ui NoMatchingReasons}" Margin="4,8" Visibility="Collapsed"/>
+           <StackPanel x:Name="ReasonOptions" KeyboardNavigation.DirectionalNavigation="Contained"/>
+          </StackPanel>
+         </ScrollViewer>
+        </DockPanel>
+       </Border>
+      </AdornerDecorator></Popup>
+      <ToggleButton x:Name="More" Style="{StaticResource FilterToggle}" Margin="6,0,0,0" Padding="8,2" AutomationProperties.Name="{loc:Ui DateFilter}" ToolTip="{loc:Ui FilterByStartDateEndDateOrUsn}">
+       <DockPanel><TextBlock DockPanel.Dock="Left" FontFamily="Segoe MDL2 Assets" Text="&#xE787;" FontSize="14" VerticalAlignment="Center" Margin="0,0,6,0"/><TextBlock x:Name="PeriodLabel" Text="{loc:Ui DateFilter}" MaxWidth="150" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/></DockPanel>
+      </ToggleButton>
+     <Button x:Name="ClearFilters" Content="&#xE894;" Visibility="Collapsed" Style="{DynamicResource Desk.IconButton}" Margin="4,0,0,0" Click="ClearClick" AutomationProperties.Name="{loc:Ui ResetAllFilters}" ToolTip="{loc:Ui ResetAllFilters}"/>
+     </StackPanel>
+    </Grid>
+    <StackPanel><StackPanel.Style><Style TargetType="StackPanel"><Setter Property="Visibility" Value="Collapsed"/><Style.Triggers><DataTrigger Binding="{Binding IsChecked,ElementName=More}" Value="True"><Setter Property="Visibility" Value="Visible"/></DataTrigger></Style.Triggers></Style></StackPanel.Style>
+     <WrapPanel Margin="0,7,0,0">
+      <StackPanel Margin="0,0,12,2">
+       <TextBlock Style="{StaticResource Caption}" Text="{loc:Ui StartDate}" Margin="1,0,0,2"/>
+       <StackPanel Orientation="Horizontal">
+        <DatePicker x:Name="StartDate" Width="133" SelectedDateFormat="Short" CalendarOpened="OpenCalendar" SelectedDateChanged="DateChanged" DateValidationError="DateInvalid" AutomationProperties.Name="{loc:Ui StartDateCalendar}" ToolTip="{loc:Ui ChooseADateOrTypeItInThe}"/>
+        <Grid Width="126" Margin="4,0,0,0">
+         <loc:HintTextBox x:Name="StartTime" Style="{DynamicResource Desk.SearchInput}" Hint="00:00" TextChanged="ClockChanged" AutomationProperties.Name="{loc:Ui StartTime}" ToolTip="{loc:Ui DateFilterStartTimeHint}"/>
+        </Grid>
+        <Button x:Name="ClearStart" Style="{DynamicResource Desk.IconButton}" Content="&#xE711;" Width="24" Height="24" Margin="2,0,0,0" Click="ClearBound" Visibility="Hidden" ToolTip="{loc:Ui ClearStartDateAndTime}" AutomationProperties.Name="{loc:Ui ClearStartDateAndTime}"/>
+       </StackPanel>
+      </StackPanel>
+      <StackPanel Margin="0,0,12,2">
+       <TextBlock Style="{StaticResource Caption}" Text="{loc:Ui EndDate}" Margin="1,0,0,2"/>
+       <StackPanel Orientation="Horizontal">
+        <DatePicker x:Name="EndDate" Width="133" SelectedDateFormat="Short" CalendarOpened="OpenCalendar" SelectedDateChanged="DateChanged" DateValidationError="DateInvalid" AutomationProperties.Name="{loc:Ui EndDateCalendar}" ToolTip="{loc:Ui ChooseADateOrTypeItInThe}"/>
+        <Grid Width="126" Margin="4,0,0,0">
+         <loc:HintTextBox x:Name="EndTime" Style="{DynamicResource Desk.SearchInput}" Hint="23:59" TextChanged="ClockChanged" AutomationProperties.Name="{loc:Ui EndTime}" ToolTip="{loc:Ui DateFilterEndTimeHint}"/>
+        </Grid>
+        <Button x:Name="ClearEnd" Style="{DynamicResource Desk.IconButton}" Content="&#xE711;" Width="24" Height="24" Margin="2,0,0,0" Click="ClearBound" Visibility="Hidden" ToolTip="{loc:Ui ClearEndDateAndTime}" AutomationProperties.Name="{loc:Ui ClearEndDateAndTime}"/>
+       </StackPanel>
+      </StackPanel>
+      <StackPanel Margin="0,0,0,2"><TextBlock Text="USN" Style="{StaticResource Caption}" Margin="1,0,0,2"/><TextBox x:Name="ExactUsn" Width="136" Style="{DynamicResource Desk.SearchInput}" TextChanged="SearchChanged" AutomationProperties.Name="{loc:Ui ExactUsn}" ToolTip="{loc:Ui EnterADecimalUsnOrAHexadecimalValue}"/></StackPanel>
+     </WrapPanel>
+    </StackPanel>
+    <local:RecordSearchFields x:Name="PathFilters" Changed="RecordFieldsChanged" Margin="0,4,0,0"/>
+   </StackPanel>
+  </Border>
+  <Grid Grid.Row="1">
+   <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+   <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Records" Style="{StaticResource Desk.LogTable}" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False"
+    CanUserSortColumns="True" Sorting="SortRecords" CanUserReorderColumns="True" FrozenColumnCount="1" SelectionUnit="FullRow" SelectionMode="Single" EnableRowVirtualization="True"
+    ClipboardCopyMode="IncludeHeader" AutomationProperties.Name="{loc:Ui JournalRecords}" ItemsSource="{x:Null}"
+    SelectionChanged="RecordChanged" MouseLeftButtonUp="ReopenRecord" MouseDoubleClick="DoubleClickRow" PreviewKeyDown="GridKeyDown">
+    <DataGrid.Columns>
+     <DataGridTextColumn x:Name="TimeColumn" Header="{loc:Ui RecordedTimeKst}" SortMemberPath="Timestamp" Binding="{Binding TimeText}" ClipboardContentBinding="{Binding TimeDetail}" Width="195" MinWidth="195">
+      <DataGridTextColumn.ElementStyle><Style TargetType="TextBlock" BasedOn="{StaticResource Desk.LogMono}"><Setter Property="ToolTip" Value="{Binding TimeDetail}"/></Style></DataGridTextColumn.ElementStyle>
+
+     </DataGridTextColumn>
+     <DataGridTemplateColumn x:Name="NameColumn" SortMemberPath="Name" Header="{loc:Ui RecordedFileName}" ClipboardContentBinding="{Binding Name}" Width="1.7*" MinWidth="110">
+      <DataGridTemplateColumn.CellTemplate><DataTemplate><DockPanel Margin="7,0" VerticalAlignment="Center">
+       <Image DockPanel.Dock="Left" Source="{Binding Icon}" Style="{StaticResource Desk.RecordIcon}"/>
+       <local:JournalPathText Padding="0,0,22,0" Record="{Binding Record}" ShortText="{Binding Name}" FileId="{Binding FileId}"/>
+      </DockPanel></DataTemplate></DataGridTemplateColumn.CellTemplate>
+     </DataGridTemplateColumn>
+     <DataGridTemplateColumn x:Name="GlobalPathSourceColumn" Header="{loc:Ui PathSourceColumn}" Width="105" MinWidth="105" SortMemberPath="PathSource">
+      <DataGridTemplateColumn.CellTemplate><DataTemplate>
+       <local:JournalPathText Margin="7,0" VerticalAlignment="Center" Foreground="{DynamicResource Desk.Muted}" BasisOnly="True" Record="{Binding Record}" FileId="{Binding FileId}"/>
+      </DataTemplate></DataGridTemplateColumn.CellTemplate>
+     </DataGridTemplateColumn>
+     <DataGridTextColumn x:Name="ReasonColumn" SortMemberPath="Title" Header="{loc:Ui ChangeReason}" Binding="{Binding Title}" Width="1.05*" MinWidth="124" ElementStyle="{StaticResource Desk.LogText}"/>
+     <DataGridTextColumn x:Name="UsnColumn" Header="USN" Binding="{Binding Usn}" Width="112" MinWidth="66" ElementStyle="{StaticResource Desk.LogNumber}"/>
+    </DataGrid.Columns>
+   </DataGrid>
+   <StackPanel Margin="16,39,12,0" VerticalAlignment="Top" HorizontalAlignment="Left">
+    <TextBlock x:Name="Empty" AutomationProperties.LiveSetting="Polite" Foreground="{DynamicResource Desk.Muted}" TextWrapping="Wrap" IsHitTestVisible="False"/>
+    <Button x:Name="RecoverFilter" Visibility="Collapsed" HorizontalAlignment="Left" Margin="0,3,0,0" Padding="3,0"
+            Style="{DynamicResource Desk.EvidenceLink}" Click="RecoverFilterClick"/>
+   </StackPanel>
+  <Border Grid.Row="1" Padding="8,2" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0" Background="{DynamicResource Desk.Panel}"><DockPanel>
+   <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+    <ComboBox x:Name="PageLimit" ItemsSource="{x:Static local:PageSizeOption.Choices}" DisplayMemberPath="Caption" SelectedValuePath="Size" SelectedValue="{x:Static local:PageSizeOption.Preferred}" local:PageSizeOption.Synchronize="True"
+              Style="{DynamicResource Desk.PageSizePicker}" ToolTip="{loc:Ui RowsPerPage}" AutomationProperties.Name="{loc:Ui RowsPerPage}" SelectionChanged="PageSizeChanged"/>
+    <TextBlock x:Name="PageStatus" Style="{StaticResource Caption}" VerticalAlignment="Center" Margin="0,0,9,0" AutomationProperties.LiveSetting="Polite"/>
+    <Button x:Name="Prev" Style="{DynamicResource Desk.IconButton}" Content="&#xE76B;" Click="PrevClick" ToolTip="{loc:Ui PreviousPage}" AutomationProperties.Name="{loc:Ui PreviousPage}" IsEnabled="False"/>
+    <Button x:Name="Next" Style="{DynamicResource Desk.IconButton}" Content="&#xE76C;" Click="NextClick" Margin="3,0,0,0" ToolTip="{loc:Ui NextPage}" AutomationProperties.Name="{loc:Ui NextPage}" IsEnabled="False"/>
+   </StackPanel>
+   <Menu x:Name="ResultsExportMenu" DockPanel.Dock="Left" IsMainMenu="False" Background="Transparent" Padding="0" VerticalAlignment="Center">
+    <Menu.Resources><ResourceDictionary Source="CompactMenu.xaml"/></Menu.Resources>
+    <MenuItem x:Name="SaveCsv" Header="{loc:Ui Export}" HeaderTemplate="{DynamicResource Desk.ExportHeader}" IsEnabled="False"
+       ToolTip="{loc:Ui ExportMatchingRecordsFromAllPages}" ToolTipService.ShowOnDisabled="True" AutomationProperties.Name="{loc:Ui ExportAllSearchResults}">
+     <MenuItem x:Name="ExportResultsCsv" Header="{loc:Ui ExportAsCsv}" Click="SaveClick"/>
+     <MenuItem x:Name="ExportPathsCsv" Click="SaveClick"/>
+    </MenuItem>
+   </Menu>
+   <Button x:Name="CancelCsv" DockPanel.Dock="Left" Visibility="Collapsed" Content="{loc:Ui CancelExport}" Padding="7,1" MinHeight="25"
+      Click="CancelExport" ToolTip="{loc:Ui CancelTheCsvExportInProgress}" AutomationProperties.Name="{loc:Ui CancelCsvExport}"/>
+   <TextBlock x:Name="ExportStatus" Margin="8,0" VerticalAlignment="Center" Visibility="Collapsed" Foreground="{DynamicResource Desk.Link}" AutomationProperties.LiveSetting="Polite" TextTrimming="CharacterEllipsis" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+  </DockPanel></Border>
+  </Grid>
+  <GridSplitter Grid.Row="2" x:Name="Split" Style="{DynamicResource Desk.RowSplitter}" Visibility="Collapsed" Height="4" Background="{DynamicResource Desk.Rule}" HorizontalAlignment="Stretch" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
+  <Border Grid.Row="3" x:Name="Inspector" Visibility="Collapsed" Padding="10,3" Background="{DynamicResource Desk.Panel}" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource Desk.Rule}">
+   <DockPanel>
+    <DockPanel DockPanel.Dock="Top" Margin="2,0,0,1">
+     <Button x:Name="CloseInspector" Style="{DynamicResource Desk.IconButton}" DockPanel.Dock="Right" Content="&#xE711;" ToolTip="{loc:Ui CollapseSelectedRecordEsc}" AutomationProperties.Name="{loc:Ui CollapseSelectedRecord}" Click="CloseClick"/>
+     <Button x:Name="NearbyGlobal" Style="{DynamicResource Desk.EvidenceLink}" DockPanel.Dock="Right" Content="{loc:Ui NearbyRecords}" Margin="0,0,6,0" ToolTip="{loc:Ui InspectRecordsFromOtherFilesAroundTheSelected}" Click="OpenNeighborhood"/>
+     <Button DockPanel.Dock="Right" x:Name="GoFile" Style="{DynamicResource Desk.EvidenceLink}" Content="{loc:Ui OpenFileHistory}" Margin="4,0,10,0" ToolTip="{loc:Ui OpenThisRecordInFileHistoryEnter}" Click="OpenFile"/>
+     <ContentControl DockPanel.Dock="Right" Focusable="False" Content="{Binding SelectedItem.Record,ElementName=Records}" ContentTemplate="{StaticResource Desk.RecordUsn}"/>
+     <Image DockPanel.Dock="Left" Source="{Binding SelectedItem.Icon,ElementName=Records}" Style="{StaticResource Desk.RecordIcon}"/>
+     <local:CopyText x:Name="RecordTitle" VerticalAlignment="Center" FontWeight="SemiBold" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+    </DockPanel>
+    <TabControl Style="{DynamicResource Desk.InspectorTabs}" x:Name="Evidence" Background="Transparent" BorderThickness="0" SelectionChanged="EvidenceTabChanged">
+     <TabItem Header="{loc:Ui Overview}"><local:RecordOverviewView x:Name="OverviewPanel"/></TabItem>
+      <TabItem x:Name="DetailsTab" Header="{loc:Ui RecordDetails}"><local:RecordDetailsView x:Name="RecordFields" AutomationProperties.Name="{loc:Ui JournalRecordFields}"/></TabItem>
+      <TabItem x:Name="OriginalBytesTab" Header="Hex" ToolTip="{loc:Ui SourceBytes}"><DockPanel>
+       <DockPanel DockPanel.Dock="Top"><Button DockPanel.Dock="Right" x:Name="Detach" IsEnabled="False" Click="DetachEvidence" Style="{DynamicResource Desk.OpenInWindow}" ToolTip="{loc:Ui OpenSourceBytesInANewWindow}" AutomationProperties.Name="{loc:Ui OpenSourceBytesInANewWindow}"/>
+       <ContentControl Focusable="False" Content="{Binding SelectedItem.Record, ElementName=Records}" ContentTemplate="{DynamicResource Desk.RawRecordHeader}"/></DockPanel>
+       <local:HexEvidenceView x:Name="Raw" AutomationProperties.Name="{loc:Ui SourceBytes}"/>
+      </DockPanel></TabItem>
+      <TabItem x:Name="JsonTab" Header="JSON">
+       <loc:CopyText x:Name="RecordJson" AutomationProperties.Name="JSON" FontFamily="Consolas" FontSize="13"
+        TextWrapping="Wrap" VerticalAlignment="Stretch" VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Margin="4,3"/>
+      </TabItem>
+    </TabControl>
+   </DockPanel>
+  </Border>
+ </Grid>
+</UserControl>

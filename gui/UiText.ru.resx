@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="AboutJournaldesk" xml:space="preserve"><value>О NTFS Tracer</value></data>
+  <data name="Activity" xml:space="preserve"><value>Действие</value></data>
+  <data name="AllActivities" xml:space="preserve"><value>Все действия</value></data>
+  <data name="AllOperations" xml:space="preserve"><value>Все записи</value></data>
+  <data name="AllRecords" xml:space="preserve"><value>Все записи</value></data>
+  <data name="AllRecordsCtrl1" xml:space="preserve"><value>Все записи (Ctrl+1)</value></data>
+  <data name="AnalysisOptions" xml:space="preserve"><value>Параметры анализа</value></data>
+  <data name="ArtifactJournal" xml:space="preserve"><value>Журнал хранится в альтернативном потоке данных $J файла $UsnJrnl. Средство сбора может сохранить поток под именем $J или $UsnJrnl-$J.</value></data>
+  <data name="ArtifactLocationTitle" xml:space="preserve"><value>Расположение файлов NTFS</value></data>
+  <data name="ArtifactLog" xml:space="preserve"><value>Файл содержит транзакции с метаданными NTFS. Его можно анализировать отдельно.</value></data>
+  <data name="ArtifactMft" xml:space="preserve"><value>MFT содержит сведения о файлах и родительских папках. Для восстановления путей используйте $MFT с того же тома, что и $J.</value></data>
+  <data name="ArtifactRoot" xml:space="preserve"><value>Пути указаны относительно тома NTFS.</value></data>
+  <data name="AttachMft" xml:space="preserve"><value>Подключить $MFT…</value></data>
+  <data name="ChangeReason" xml:space="preserve"><value>Причина изменения</value></data>
+  <data name="ChangeReasonFilter" xml:space="preserve"><value>Причина изменения</value></data>
+  <data name="ClearFileNameSearch" xml:space="preserve"><value>Очистить поиск</value></data>
+  <data name="ClearFileSearch" xml:space="preserve"><value>Очистить поиск</value></data>
+  <data name="ClearFilters" xml:space="preserve"><value>Сбросить все фильтры</value></data>
+  <data name="ClearSearch" xml:space="preserve"><value>Очистить поиск</value></data>
+  <data name="ClearSelection" xml:space="preserve"><value>Снять выделение</value></data>
+  <data name="ClearTransactionSearch" xml:space="preserve"><value>Очистить поиск</value></data>
+  <data name="CollapseDetailsEsc" xml:space="preserve"><value>Закрыть детали (Esc)</value></data>
+  <data name="CollapseEvidencePane" xml:space="preserve"><value>Закрыть детали</value></data>
+  <data name="CollapseEvidencePaneEsc" xml:space="preserve"><value>Закрыть детали (Esc)</value></data>
+  <data name="CollapseSelectedRecord" xml:space="preserve"><value>Закрыть детали</value></data>
+  <data name="CollapseSelectedRecordEsc" xml:space="preserve"><value>Закрыть детали (Esc)</value></data>
+  <data name="CollapseTransactionDetails" xml:space="preserve"><value>Закрыть детали</value></data>
+  <data name="CompareChanges" xml:space="preserve"><value>Сравнить изменения</value></data>
+  <data name="Copy" xml:space="preserve"><value>Копировать</value></data>
+  <data name="CsvSaveLocation" xml:space="preserve"><value>Папка для CSV</value></data>
+  <data name="DarkTheme" xml:space="preserve"><value>Тёмная тема</value></data>
+  <data name="DateFilter" xml:space="preserve"><value>Фильтр по дате</value></data>
+  <data name="DisplayLanguage" xml:space="preserve"><value>Язык интерфейса</value></data>
+  <data name="Done" xml:space="preserve"><value>Готово</value></data>
+  <data name="DropSourcesHint" xml:space="preserve"><value>Перетащите сюда образ диска, извлечённые файлы ($J, $MFT, $LogFile) или папку.</value></data>
+  <data name="EXit" xml:space="preserve"><value>Выход</value></data>
+  <data name="Edit" xml:space="preserve"><value>Правка</value></data>
+  <data name="EndDate" xml:space="preserve"><value>Дата окончания</value></data>
+  <data name="EndTime" xml:space="preserve"><value>Время окончания</value></data>
+  <data name="Export" xml:space="preserve"><value>Экспорт</value></data>
+  <data name="ExportAsCsv" xml:space="preserve"><value>Экспорт в CSV…</value></data>
+  <data name="ExtractionFolder" xml:space="preserve"><value>Папка извлечения</value></data>
+  <data name="FieldAuditRecordTime" xml:space="preserve"><value>Время записи</value></data>
+  <data name="File" xml:space="preserve"><value>Файл</value></data>
+  <data name="FileHistory" xml:space="preserve"><value>История файла</value></data>
+  <data name="FileHistoryCtrl2" xml:space="preserve"><value>История файла (Ctrl+2)</value></data>
+  <data name="Files" xml:space="preserve"><value>Файлы</value></data>
+  <data name="Find" xml:space="preserve"><value>Найти</value></data>
+  <data name="FindAReason" xml:space="preserve"><value>Поиск причины</value></data>
+  <data name="From" xml:space="preserve"><value>Откуда</value></data>
+  <data name="FullPaths" xml:space="preserve"><value>Показывать полные пути</value></data>
+  <data name="GuideFields" xml:space="preserve"><value>Выберите исходную запись. В деталях видны поля FileName, Reason и другие. JSON показывает значения из индекса. Hex показывает исходные байты.</value></data>
+  <data name="GuideFollow" xml:space="preserve"><value>Проследить историю файла</value></data>
+  <data name="GuideFollowPath" xml:space="preserve"><value>Полные пути показывают путь и его источник в отдельных столбцах. В обзоре указано, какие папки восстановлены по журналу, а какие — по MFT.</value></data>
+  <data name="GuideInspect" xml:space="preserve"><value>Проверить исходные записи</value></data>
+  <data name="GuideLanguage" xml:space="preserve"><value>Язык интерфейса</value></data>
+  <data name="GuideLanguageText" xml:space="preserve"><value>Выберите язык в меню «Вид → Язык интерфейса». Изменение вступает в силу сразу. Исходные имена и байты сохраняются.</value></data>
+  <data name="GuideOpen" xml:space="preserve"><value>Открыть материалы</value></data>
+  <data name="GuideOpenFiles" xml:space="preserve"><value>В настройках выберите файлы или папку извлечения. Проверьте автоматически добавленные файлы и удалите ненужные кнопкой ×.</value></data>
+  <data name="GuidePreferences" xml:space="preserve"><value>Интерфейс и анализ</value></data>
+  <data name="GuideSave" xml:space="preserve"><value>Сохранить результаты</value></data>
+  <data name="GuideSearch" xml:space="preserve"><value>Поиск в руководстве</value></data>
+  <data name="GuideTimeZone" xml:space="preserve"><value>Выберите часовой пояс в разделе «Настройки → Параметры анализа». Изменится отображаемое время того же события. При сравнении сверяйтесь с заголовком столбца.</value></data>
+  <data name="GuideTransactions" xml:space="preserve"><value>Транзакции и восстановление</value></data>
+  <data name="Help" xml:space="preserve"><value>Справка</value></data>
+  <data name="ImageArtifacts" xml:space="preserve"><value>Файлы для извлечения</value></data>
+  <data name="ImageFile" xml:space="preserve"><value>Файл образа</value></data>
+  <data name="ImageVolume" xml:space="preserve"><value>Том или коллекция</value></data>
+  <data name="IncludePreviousNames" xml:space="preserve"><value>Учитывать прежние имена</value></data>
+  <data name="IndexChooseFolder" xml:space="preserve"><value>Папка индексов</value></data>
+  <data name="IndexLocation" xml:space="preserve"><value>Папка индексов</value></data>
+  <data name="IndexResetFolder" xml:space="preserve"><value>Использовать папку по умолчанию</value></data>
+  <data name="IndexingModeLabel" xml:space="preserve"><value>Режим индексирования</value></data>
+  <data name="IndexingParallel" xml:space="preserve"><value>Параллельно (до 2)</value></data>
+  <data name="IndexingSequential" xml:space="preserve"><value>Последовательно</value></data>
+  <data name="IntakeBrowse" xml:space="preserve"><value>Обзор…</value></data>
+  <data name="IntakeCancel" xml:space="preserve"><value>Отмена</value></data>
+  <data name="IntakeFromFolder" xml:space="preserve"><value>Выбрать папку извлечения…</value></data>
+  <data name="IntakeLog" xml:space="preserve"><value>Журнал транзакций ($LogFile)</value></data>
+  <data name="IntakeMft" xml:space="preserve"><value>Таблица файлов ($MFT)</value></data>
+  <data name="IntakeSettingsShortcut" xml:space="preserve"><value>Настройки (Ctrl+,)</value></data>
+  <data name="IntakeSettingsTab" xml:space="preserve"><value>Настройки</value></data>
+  <data name="IntakeSources" xml:space="preserve"><value>Материалы для анализа</value></data>
+  <data name="IntakeStart" xml:space="preserve"><value>Начать анализ</value></data>
+  <data name="JournaldeskNtfsFileAnalysis" xml:space="preserve"><value>NTFS Tracer · Анализ файлов NTFS</value></data>
+  <data name="MoveOrRenameCandidates" xml:space="preserve"><value>Возможные перемещения и переименования</value></data>
+  <data name="NearbyRecords" xml:space="preserve"><value>Соседние записи</value></data>
+  <data name="NewName" xml:space="preserve"><value>Новое имя</value></data>
+  <data name="NextFilePage" xml:space="preserve"><value>Следующая страница</value></data>
+  <data name="NextPage" xml:space="preserve"><value>Следующая страница</value></data>
+  <data name="NoMatchingFiles" xml:space="preserve"><value>Подходящие файлы не найдены.</value></data>
+  <data name="NtfsTransactions" xml:space="preserve"><value>Транзакции NTFS</value></data>
+  <data name="NtfsTransactionsCtrl3" xml:space="preserve"><value>Транзакции NTFS (Ctrl+3)</value></data>
+  <data name="OpenFileHistory" xml:space="preserve"><value>Открыть историю файла</value></data>
+  <data name="OpenLogfile" xml:space="preserve"><value>Открыть $LogFile…</value></data>
+  <data name="OpenSources" xml:space="preserve"><value>Открыть материалы…</value></data>
+  <data name="OpenUsnJournal" xml:space="preserve"><value>Открыть журнал USN…</value></data>
+  <data name="OpenUsnJournalJ" xml:space="preserve"><value>Открыть журнал USN ($J)…</value></data>
+  <data name="Operation" xml:space="preserve"><value>Тип записи / операция</value></data>
+  <data name="OperationsWithFileNames" xml:space="preserve"><value>Операции с именами файлов</value></data>
+  <data name="Overview" xml:space="preserve"><value>Обзор</value></data>
+  <data name="PathEvidence" xml:space="preserve"><value>Обоснование пути</value></data>
+  <data name="PathSourceColumn" xml:space="preserve"><value>Источник</value></data>
+  <data name="PreviousFilePage" xml:space="preserve"><value>Предыдущая страница</value></data>
+  <data name="PreviousName" xml:space="preserve"><value>Прежнее имя</value></data>
+  <data name="PreviousPage" xml:space="preserve"><value>Предыдущая страница</value></data>
+  <data name="RecordDetails" xml:space="preserve"><value>Детали записи</value></data>
+  <data name="RecordSummary" xml:space="preserve"><value>Сводка записи</value></data>
+  <data name="RecordedFileName" xml:space="preserve"><value>Имя файла в записи</value></data>
+  <data name="RecordedFileNames" xml:space="preserve"><value>Имя файла в записи</value></data>
+  <data name="RecordedName" xml:space="preserve"><value>Имя в записи</value></data>
+  <data name="RecordedPath" xml:space="preserve"><value>Путь в записи</value></data>
+  <data name="RecordedTimeKst" xml:space="preserve"><value>Время записи (KST)</value></data>
+  <data name="RecordedTimeKstLabel" xml:space="preserve"><value>Время записи (KST)</value></data>
+  <data name="ResetAllFilters" xml:space="preserve"><value>Сбросить все фильтры</value></data>
+  <data name="ReturnToRecords" xml:space="preserve"><value>Вернуться к записям</value></data>
+  <data name="RowsPerPage" xml:space="preserve"><value>Строк на странице</value></data>
+  <data name="RowsPerPageValue" xml:space="preserve"><value>{0:N0} / стр.</value></data>
+  <data name="SearchFileNameOrLsn" xml:space="preserve"><value>Поиск по имени или LSN</value></data>
+  <data name="SearchFileNames" xml:space="preserve"><value>Поиск имён файлов</value></data>
+  <data name="SearchFileNamesInTheJournal" xml:space="preserve"><value>Поиск имён файлов</value></data>
+  <data name="SelectAll" xml:space="preserve"><value>Выделить всё</value></data>
+  <data name="SelectEvidenceFiles" xml:space="preserve"><value>Выбрать файлы…</value></data>
+  <data name="Source" xml:space="preserve"><value>Записи</value></data>
+  <data name="SourceInformation" xml:space="preserve"><value>Сведения об источнике…</value></data>
+  <data name="SourceInformationLabel" xml:space="preserve"><value>Сведения об источнике</value></data>
+  <data name="SourceOffset" xml:space="preserve"><value>Смещение в источнике</value></data>
+  <data name="SourceRecord" xml:space="preserve"><value>Исходная запись</value></data>
+  <data name="StartDate" xml:space="preserve"><value>Дата начала</value></data>
+  <data name="StartTime" xml:space="preserve"><value>Время начала</value></data>
+  <data name="TimeKst" xml:space="preserve"><value>Время записи (KST)</value></data>
+  <data name="TimeZone" xml:space="preserve"><value>Часовой пояс</value></data>
+  <data name="To" xml:space="preserve"><value>Куда</value></data>
+  <data name="Tools" xml:space="preserve"><value>Инструменты</value></data>
+  <data name="TransactionId" xml:space="preserve"><value>ID транзакции</value></data>
+  <data name="UseSelectedFiles" xml:space="preserve"><value>Применить выбор</value></data>
+  <data name="UseWindowsLanguage" xml:space="preserve"><value>Использовать язык Windows</value></data>
+  <data name="UserGuide" xml:space="preserve"><value>Руководство пользователя</value></data>
+  <data name="View" xml:space="preserve"><value>Вид</value></data>
+  <data name="InvestigationTab" xml:space="preserve"><value>Зацепки</value></data>
+  <data name="OpenLeadEvidence" xml:space="preserve"><value>Показать в истории файла</value></data>
+  <data name="ScanOpenJournal" xml:space="preserve"><value>Проверить открытый $J</value></data>
+  <data name="ScanOpenLogFile" xml:space="preserve"><value>Проверить открытый $LogFile</value></data>
+  <data name="ChooseScanFile" xml:space="preserve"><value>Выбрать файл для проверки…</value></data>
+  <data name="ScanSourceOffset" xml:space="preserve"><value>Смещение в файле</value></data>
+  <data name="LeadDocumentDeleted" xml:space="preserve"><value>Удалённые документы</value></data>
+  <data name="LeadTimeOutOfOrder" xml:space="preserve"><value>Нарушен порядок меток времени</value></data>
+  <data name="LeadRenamedThenDeleted" xml:space="preserve"><value>Несколько переименований перед удалением</value></data>
+  <data name="LeadSDeleteName" xml:space="preserve"><value>Совпадения с именами файлов SDelete</value></data>
+  <data name="InvestigationTabShortcut" xml:space="preserve"><value>Зацепки (Ctrl+4)</value></data>
+  <data name="PathReferenceFilters" xml:space="preserve"><value>Путь и ID</value></data>
+  <data name="FilterRecordedPath" xml:space="preserve"><value>Путь содержит</value></data>
+  <data name="ParentFolderReference" xml:space="preserve"><value>Ссылка на родительскую папку</value></data>
+  <data name="ClearPathReferenceFilters" xml:space="preserve"><value>Сбросить фильтры пути и ссылок</value></data>
+  <data name="PartialPath" xml:space="preserve"><value>Неполный путь</value></data>
+  <data name="FilterFileId" xml:space="preserve"><value>ID файла</value></data>
+  <data name="FilterParentId" xml:space="preserve"><value>ID родительской папки</value></data>
+  <data name="PasteRecordId" xml:space="preserve"><value>Вставить ID</value></data>
+  <data name="SearchThisId" xml:space="preserve"><value>Найти этот ID</value></data>
+  <data name="SearchThisIdHelp" xml:space="preserve"><value>Начинает новый поиск по этому ID.</value></data>
+  <data name="IntakeDropFiles" xml:space="preserve"><value>Перетащите образ диска NTFS (E01, VHD и др.), извлечённые файлы ($J, $MFT, $LogFile) или папку с ними.</value></data>
+  <data name="DatePickerPrompt" xml:space="preserve"><value>Выберите дату</value></data>
+  <data name="AboutAuthor" xml:space="preserve"><value>Автор: {0}</value></data>
+  <data name="DisplayOptions" xml:space="preserve"><value>Отображение</value></data>
+  <data name="AppearanceTheme" xml:space="preserve"><value>Тема</value></data>
+  <data name="WindowsSetting" xml:space="preserve"><value>Параметр Windows</value></data>
+  <data name="LightTheme" xml:space="preserve"><value>Светлая тема</value></data>
+  <data name="CloseSettings" xml:space="preserve"><value>Закрыть</value></data>
+</root>

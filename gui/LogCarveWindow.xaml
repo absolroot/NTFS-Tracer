@@ -1,0 +1,54 @@
+<Window x:Class="JournalDesk.LogCarveWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:local="clr-namespace:JournalDesk" Language="{Binding Language,Source={x:Static loc:L.Text}}" xmlns:loc="clr-namespace:JournalDesk" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="{loc:Ui LogfilePageCarvingJournaldesk}" Width="1040" Height="710" MinWidth="700" MinHeight="480" WindowStartupLocation="CenterOwner" FontFamily="Segoe UI, Malgun Gothic" Foreground="{DynamicResource Desk.Text}" Background="{DynamicResource Desk.Canvas}">
+ <DockPanel>
+  <Border DockPanel.Dock="Top" Style="{DynamicResource Desk.LogToolbar}" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1"><StackPanel>
+   <DockPanel>
+    <ComboBox DockPanel.Dock="Right" x:Name="Mode" IsEnabled="False" SelectionChanged="ModeChanged" SelectedIndex="0" MinHeight="30" VerticalAlignment="Top" Margin="8,0,0,0" AutomationProperties.Name="{loc:Ui RecoveryResultType}" ToolTip="{loc:Ui CandidatesMatchTheRcrdSignatureAndUpdateSequence}">
+     <ComboBoxItem Content="{loc:Ui PageCandidates}"/><ComboBoxItem Content="{loc:Ui RecordHeaderCandidates}"/>
+    </ComboBox>
+    <WrapPanel>
+     <Button x:Name="ScanOpenSource" Click="ScanLoaded" Content="{loc:Ui ScanOpenLogFile}" Visibility="Collapsed" Margin="0,0,6,0" MinHeight="30" Padding="8,2"/>
+     <Button x:Name="Pick" Click="PickSource" Content="{loc:Ui ChooseScanFile}" MinHeight="30" Padding="8,2"/>
+     <Button x:Name="Stop" Click="StopWork" Visibility="Collapsed" Style="{DynamicResource Desk.IconButton}" Content="&#xE71A;" ToolTip="{loc:Ui CancelScanOrExport}" AutomationProperties.Name="{loc:Ui CancelScanOrExport}"/>
+     <TextBlock x:Name="SourceLabel" Margin="10,0,0,0" MaxWidth="200" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+    </WrapPanel>
+   </DockPanel>
+   <Expander x:Name="SourceBox" Visibility="Collapsed" Header="{loc:Ui SourceInformationLabel}" Style="{DynamicResource Desk.PathEvidence}" Margin="0,3,0,0">
+    <TextBox x:Name="SourceDetails" IsReadOnly="True" TextWrapping="Wrap" BorderThickness="0" Background="Transparent" Foreground="{DynamicResource Desk.Text}" Padding="2,2"/>
+   </Expander>
+  </StackPanel></Border>
+  <Border DockPanel.Dock="Bottom" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0" Padding="10,4">
+   <Border.Style><Style TargetType="Border"><Style.Triggers>
+    <MultiDataTrigger><MultiDataTrigger.Conditions>
+     <Condition Binding="{Binding Text,ElementName=State}" Value=""/>
+     <Condition Binding="{Binding Visibility,ElementName=ResultsNavigation}" Value="Collapsed"/>
+    </MultiDataTrigger.Conditions><Setter Property="Visibility" Value="Collapsed"/></MultiDataTrigger>
+   </Style.Triggers></Style></Border.Style>
+   <DockPanel>
+   <StackPanel x:Name="ResultsNavigation" DockPanel.Dock="Right" Orientation="Horizontal">
+    <ComboBox x:Name="PageLimit" ItemsSource="{x:Static local:PageSizeOption.Choices}" DisplayMemberPath="Caption" SelectedValuePath="Size" SelectedValue="{x:Static local:PageSizeOption.Preferred}" local:PageSizeOption.Synchronize="True"
+              Style="{DynamicResource Desk.PageSizePicker}" ToolTip="{loc:Ui RowsPerPage}" AutomationProperties.Name="{loc:Ui RowsPerPage}" SelectionChanged="PageSizeChanged"/>
+    <Button x:Name="Prev" Click="PreviousPage" IsEnabled="False" Style="{DynamicResource Desk.IconButton}" Content="&#xE76B;" ToolTip="{loc:Ui PreviousPage}" AutomationProperties.Name="{loc:Ui PreviousPage}"/>
+    <Button x:Name="Next" Margin="4,0,0,0" Click="NextPage" IsEnabled="False" Style="{DynamicResource Desk.IconButton}" Content="&#xE76C;" ToolTip="{loc:Ui NextPage}" AutomationProperties.Name="{loc:Ui NextPage}"/>
+   </StackPanel>
+   <Menu x:Name="ResultsExport" DockPanel.Dock="Left" IsMainMenu="False" Padding="0" VerticalAlignment="Center" Background="Transparent">
+    <Menu.Resources><ResourceDictionary Source="CompactMenu.xaml"/></Menu.Resources>
+    <MenuItem x:Name="Save" Header="{loc:Ui Export}" HeaderTemplate="{DynamicResource Desk.ExportHeader}" IsEnabled="False" ToolTip="{loc:Ui ExportCurrentResultsAsCsv}">
+     <MenuItem x:Name="CsvAction" Header="{loc:Ui ExportAsCsv}" Click="SaveCsv"/>
+    </MenuItem>
+   </Menu>
+   <TextBlock x:Name="State" Margin="8,0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}" AutomationProperties.LiveSetting="Polite"/>
+  </DockPanel></Border>
+  <DockPanel>
+   <Border DockPanel.Dock="Bottom" x:Name="EvidencePanel" Visibility="Collapsed" Padding="10,4" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0"><DockPanel>
+    <local:CopyText x:Name="RawLabel" DockPanel.Dock="Top" FontWeight="SemiBold" Margin="0,0,0,4" ToolTip="{loc:Ui RawHeaderBeforeSectorFixup}"/>
+    <local:HexEvidenceView x:Name="Raw" Height="160" AutomationProperties.Name="{loc:Ui CarvedHeaderBytes}"/>
+   </DockPanel></Border>
+   <Grid>
+    <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Rows" Style="{DynamicResource Desk.LogTable}" IsReadOnly="True" CanUserAddRows="False" CanUserSortColumns="True" Sorting="SortRows" SelectionMode="Single" SelectionUnit="FullRow"
+     AutoGeneratingColumn="MakeColumn" SelectionChanged="RowChanged" AutomationProperties.Name="{loc:Ui RecoveryResultType}"/>
+    <TextBlock x:Name="Hint" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,12" MaxWidth="560" TextWrapping="Wrap" Text="{loc:Ui ScanLogSourceHint}" Foreground="{DynamicResource Desk.Muted}" IsHitTestVisible="False"/>
+   </Grid>
+  </DockPanel>
+ </DockPanel>
+</Window>

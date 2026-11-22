@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="&#10;{0:N0} more" xml:space="preserve"><value>
+ほか {0:N0} 件</value></data>
+  <data name="   {0:P0}   ·   Records: {1}" xml:space="preserve"><value>   {0:P0}   ·   レコード {1} 件</value></data>
+  <data name="   ·   Could not save the attachment for the next session." xml:space="preserve"><value>   ·   次回のセッション用に関連付けを保存できませんでした。</value></data>
+  <data name="   ·   Damaged or unsupported regions: {0:N0}" xml:space="preserve"><value>   ·   破損または未対応の領域 {0:N0} 件</value></data>
+  <data name="   ·   No readable V2, V3, or V4 change records." xml:space="preserve"><value>   ·   読み取り可能な V2、V3、V4 の変更レコードがありません。</value></data>
+  <data name="   ·   Redo is earlier than Undo." xml:space="preserve"><value>   ·   Redo の時刻が Undo より前です。</value></data>
+  <data name="   ·   Regions requiring review: {0:N0}" xml:space="preserve"><value>   ·   要確認領域 {0:N0} 件</value></data>
+  <data name="   ·   Relative offset +0x{0:X}" xml:space="preserve"><value>   ·   相対オフセット +0x{0:X}</value></data>
+  <data name="   ·   {0:N0} records" xml:space="preserve"><value>   ·   {0:N0} 件のレコード</value></data>
+  <data name="   ·   {0:N0}–{1:N0}" xml:space="preserve"><value>   ·   {0:N0}～{1:N0}</value></data>
+  <data name="  (100 ns units since 1970: {0})" xml:space="preserve"><value> （1970 年からの 100 ns 単位：{0}）</value></data>
+  <data name="  ·  {0:N0} bytes" xml:space="preserve"><value>  ·  {0:N0} バイト</value></data>
+  <data name=" Source pairing warning. " xml:space="preserve"><value> 原本の組み合わせに関する警告。 </value></data>
+  <data name=" and {0} more" xml:space="preserve"><value> ほか {0} 件</value></data>
+  <data name=" · Deletion record" xml:space="preserve"><value> · 削除レコード</value></data>
+  <data name=" · Earlier cycle" xml:space="preserve"><value> · 以前のサイクル</value></data>
+  <data name=" · Evidence" xml:space="preserve"><value> · 根拠</value></data>
+  <data name=" · Matching new-name record not found" xml:space="preserve"><value> · 対応する新名のレコードがありません</value></data>
+  <data name=" · Matching old-name record not found" xml:space="preserve"><value> · 対応する旧名のレコードがありません</value></data>
+  <data name=" · Read only" xml:space="preserve"><value> · 読み取り専用</value></data>
+  <data name=" · Tracker results" xml:space="preserve"><value> · Tracker の結果</value></data>
+  <data name="$FILE_NAME attribute start" xml:space="preserve"><value>$FILE_NAME 属性の開始位置</value></data>
+  <data name="$LogFile 0x{0:X}   ·   First {1:N0} header bytes (before fixups)" xml:space="preserve"><value>$LogFile 0x{0:X}   ·   ヘッダーの先頭 {1:N0} バイト（fixup 適用前）</value></data>
+  <data name="$LogFile source information" xml:space="preserve"><value>$LogFile の原本情報</value></data>
+  <data name="$MFT will be saved as a file." xml:space="preserve"><value>$MFT をファイルとして保存します。</value></data>
+  <data name=",Event-time path,Event path basis,Event path explanation" xml:space="preserve"><value>,イベント時点のパス,イベント時点のパスの根拠,イベント時点のパスの説明</value></data>
+  <data name=",Event-time path,Path source,Path assessment,Path evidence,Attached MFT file,MFT SHA-256" xml:space="preserve"><value>,イベント時点のパス,パスの出典,パスの判定,パスの根拠,関連付けた MFT ファイル,MFT SHA-256</value></data>
+  <data name=",MFT acquisition path,Acquisition path basis,Acquisition path explanation,MFT SHA-256" xml:space="preserve"><value>,MFT 取得時のパス,取得時のパスの根拠,取得時のパスの説明,MFT SHA-256</value></data>
+  <data name=". Includes deletion bits reported on close." xml:space="preserve"><value>。クローズ時に記録された削除ビットも対象です。</value></data>
+  <data name="0 bytes" xml:space="preserve"><value>0 バイト</value></data>
+  <data name="0 leads" xml:space="preserve"><value>候補 0 件</value></data>
+  <data name="0x{0:X} ({1:N0} bytes)" xml:space="preserve"><value>0x{0:X} ({1:N0} バイト)</value></data>
+  <data name="100 on each side" xml:space="preserve"><value>前後 100 件ずつ</value></data>
+  <data name="25 on each side" xml:space="preserve"><value>前後 25 件ずつ</value></data>
+  <data name="5 on each side" xml:space="preserve"><value>前後 5 件ずつ</value></data>
+  <data name="&lt;1 ms after" xml:space="preserve"><value>1 ms 未満後</value></data>
+  <data name="&lt;1 ms before" xml:space="preserve"><value>1 ms 未満前</value></data>
+  <data name="A 128-bit identifier cannot be matched directly to a 64-bit MFT reference." xml:space="preserve"><value>128 ビット識別子は 64 ビットの MFT 参照と直接照合できません。</value></data>
+  <data name="A cycle in the parent references prevents reconstruction of the complete path." xml:space="preserve"><value>親参照が循環しているため、完全なパスを復元できません。</value></data>
+  <data name="A file with that name already exists. Choose a new file name." xml:space="preserve"><value>同名のファイルが既に存在します。新しいファイル名を指定してください。</value></data>
+  <data name="A file with this name already exists. Choose a new CSV file name." xml:space="preserve"><value>同名のファイルが既に存在します。別の CSV ファイル名を指定してください。</value></data>
+  <data name="A length was recorded, but no bytes were recovered." xml:space="preserve"><value>長さは記録されていますが、バイトを復元できませんでした。</value></data>
+  <data name="A recorded name cannot be used in a path." xml:space="preserve"><value>記録された名前をパスに使用できません。</value></data>
+  <data name="A recorded name is not a valid path component." xml:space="preserve"><value>記録された名前をパスの要素として使用できません。</value></data>
+  <data name="ADS content change" xml:space="preserve"><value>ADS 内容の変更</value></data>
+  <data name="ADS extended" xml:space="preserve"><value>ADS が拡張</value></data>
+  <data name="ADS overwritten" xml:space="preserve"><value>ADS を上書き</value></data>
+  <data name="ADS truncated" xml:space="preserve"><value>ADS が切り詰められました</value></data>
+  <data name="About NTFS Tracer" xml:space="preserve"><value>NTFS Tracer について</value></data>
+  <data name="Activities: {0:N0}   ·   Source records: {1:N0}" xml:space="preserve"><value>操作 {0:N0} 件   ·   原本レコード {1:N0} 件</value></data>
+  <data name="Add index entry" xml:space="preserve"><value>インデックスエントリを追加</value></data>
+  <data name="Added directory entry" xml:space="preserve"><value>追加されたディレクトリエントリ</value></data>
+  <data name="After" xml:space="preserve"><value>変更後</value></data>
+  <data name="All files|*.*" xml:space="preserve"><value>すべてのファイル|*.*</value></data>
+  <data name="All files|*.*|Evidence images|" xml:space="preserve"><value>すべてのファイル|*.*|証拠イメージ|</value></data>
+  <data name="All reasons" xml:space="preserve"><value>すべての理由</value></data>
+  <data name="Part of the journal between the parent folder record and this event could not be read." xml:space="preserve"><value>上位フォルダーの記録からイベントまでの間に、読み取れなかったジャーナル区間があります。</value></data>
+  <data name="Analysis cancelled." xml:space="preserve"><value>分析をキャンセルしました。</value></data>
+  <data name="Analysis cancelled. " xml:space="preserve"><value>分析をキャンセルしました。 </value></data>
+  <data name="Analysis results are incomplete." xml:space="preserve"><value>分析結果が不完全です。</value></data>
+  <data name="Analyze $LogFile only" xml:space="preserve"><value>$LogFile のみ分析</value></data>
+  <data name="Analyze without {0}" xml:space="preserve"><value>{0} を除外して分析</value></data>
+  <data name="Attach $MFT…" xml:space="preserve"><value>$MFT を関連付け…</value></data>
+  <data name="Attach the $MFT extracted from the same volume" xml:space="preserve"><value>同じボリュームから抽出した $MFT を関連付け</value></data>
+  <data name="Attach the $MFT from the same volume" xml:space="preserve"><value>同じボリュームの $MFT を関連付け</value></data>
+  <data name="Attributes or timestamps changed" xml:space="preserve"><value>属性またはタイムスタンプを変更</value></data>
+  <data name="Auto (sequential)" xml:space="preserve"><value>自動（逐次）</value></data>
+  <data name="Auto (up to 2 in parallel)" xml:space="preserve"><value>自動（最大 2 件を並列処理）</value></data>
+  <data name="Auto-added" xml:space="preserve"><value>自動追加</value></data>
+  <data name="BLOB · {0:N0} bytes" xml:space="preserve"><value>BLOB · {0:N0} バイト</value></data>
+  <data name="Base FILE record start" xml:space="preserve"><value>ベース FILE レコードの開始位置</value></data>
+  <data name="Base MFT entries" xml:space="preserve"><value>MFT ベースエントリ</value></data>
+  <data name="Based on the available CPU and memory, Auto can index up to two sources together when several need a new index." xml:space="preserve"><value>利用可能な CPU とメモリに基づき、新しいインデックスが必要な原本が複数ある場合は最大 2 件を並列処理します。</value></data>
+  <data name="Based on the available CPU and memory, Auto indexes one source at a time." xml:space="preserve"><value>利用可能な CPU とメモリに基づき、原本を 1 つずつインデックス化します。</value></data>
+  <data name="Before" xml:space="preserve"><value>変更前</value></data>
+  <data name="Before   {0}&#10;After   {1}" xml:space="preserve"><value>変更前   {0}
+変更後   {1}</value></data>
+  <data name="Before and after" xml:space="preserve"><value>変更前後の比較</value></data>
+  <data name="Before slack" xml:space="preserve"><value>スラックの手前</value></data>
+  <data name="CSV export cancelled." xml:space="preserve"><value>CSV のエクスポートをキャンセルしました。</value></data>
+  <data name="CSV export cancelled.  " xml:space="preserve"><value>CSV のエクスポートをキャンセルしました。  </value></data>
+  <data name="CSV export failed · " xml:space="preserve"><value>CSV のエクスポートに失敗 · </value></data>
+  <data name="CSV files (*.csv)|*.csv" xml:space="preserve"><value>CSV ファイル (*.csv)|*.csv</value></data>
+  <data name="CSV files|*.csv" xml:space="preserve"><value>CSV ファイル|*.csv</value></data>
+  <data name="CSV save cancelled." xml:space="preserve"><value>CSV の保存をキャンセルしました。</value></data>
+  <data name="CSV with paths and evidence…" xml:space="preserve"><value>パスと根拠を含む CSV…</value></data>
+  <data name="CSV/TSV text" xml:space="preserve"><value>CSV/TSV テキスト</value></data>
+  <data name="Cancel" xml:space="preserve"><value>キャンセル</value></data>
+  <data name="Candidate number,Type,Rule,Observation,Evidence role,Recorded name,Time (KST),Raw FILETIME,USN,File reference (raw bytes),Parent reference (raw bytes),Reason bits,Extraction offset,Continuous segment,Source file,Source SHA-256" xml:space="preserve"><value>候補番号,種類,判定条件,観測内容,証拠の役割,記録された名前,時刻 (KST),元の FILETIME,USN,ファイル参照 (生バイト),親参照 (生バイト),理由ビット,抽出オフセット,連続区間,原本ファイル,原本 SHA-256</value></data>
+  <data name="Candidate {0:N0} · {1} evidence record" xml:space="preserve"><value>候補 {0:N0} · 根拠レコード {1} 件</value></data>
+  <data name="Candidate {0:N0} · {1} evidence records" xml:space="preserve"><value>候補 {0:N0} · 根拠レコード {1} 件</value></data>
+  <data name="Candidates match USN V2/V3 structures. Dump offsets may differ from original volume offsets." xml:space="preserve"><value>候補は USN V2/V3 の構造に一致します。ダンプ内のオフセットは元のボリューム上の位置と異なる場合があります。</value></data>
+  <data name="Candidates {1:N0}–{2:N0} of {0:N0}" xml:space="preserve"><value>候補 {0:N0} 件中 {1:N0}～{2:N0} 件</value></data>
+  <data name="Candidates: {0:N0}" xml:space="preserve"><value>候補 {0:N0} 件</value></data>
+  <data name="Cannot link" xml:space="preserve"><value>関連付け不可</value></data>
+  <data name="Carved candidate" xml:space="preserve"><value>カービング候補</value></data>
+  <data name="Change $MFT…" xml:space="preserve"><value>$MFT を変更…</value></data>
+  <data name="Change attribute sizes" xml:space="preserve"><value>属性サイズを変更</value></data>
+  <data name="Change reason" xml:space="preserve"><value>変更理由</value></data>
+  <data name="Change reasons ({0})" xml:space="preserve"><value>変更理由 ({0})</value></data>
+  <data name="Change records" xml:space="preserve"><value>変更レコード</value></data>
+  <data name="Change the attached $MFT&#10;{0}" xml:space="preserve"><value>関連付けた $MFT を変更
+{0}</value></data>
+  <data name="Changed byte ranges" xml:space="preserve"><value>変更されたバイト範囲</value></data>
+  <data name="Changed extents (start + length): {0}&#10;Extents remaining: {1}" xml:space="preserve"><value>変更エクステント（開始位置 + 長さ）：{0}
+残りのエクステント：{1}</value></data>
+  <data name="Changed extents record" xml:space="preserve"><value>変更エクステントのレコード</value></data>
+  <data name="Changed range · " xml:space="preserve"><value>変更範囲 · </value></data>
+  <data name="Check source pairing" xml:space="preserve"><value>原本の組み合わせを確認</value></data>
+  <data name="Checkpoint" xml:space="preserve"><value>チェックポイント</value></data>
+  <data name="Choose a CSV destination other than the source evidence file." xml:space="preserve"><value>原本とは別のファイルを CSV の保存先に指定してください。</value></data>
+  <data name="Choose a destination other than the source results file." xml:space="preserve"><value>元の結果ファイルとは別の保存先を選択してください。</value></data>
+  <data name="Choose a new CSV file name." xml:space="preserve"><value>新しい CSV ファイル名を指定してください。</value></data>
+  <data name="Choose a type for ‘{0}’ or skip this file." xml:space="preserve"><value>「{0}」の種類を選択するか、このファイルを除外してください。</value></data>
+  <data name="Choose an available folder for extraction." xml:space="preserve"><value>抽出先として使用できるフォルダーを選択してください。</value></data>
+  <data name="Choose an available folder to save the extracted files." xml:space="preserve"><value>抽出したファイルを保存できるフォルダーを選択してください。</value></data>
+  <data name="Choose an available output folder." xml:space="preserve"><value>使用可能な保存先フォルダーを選択してください。</value></data>
+  <data name="Choose type" xml:space="preserve"><value>種類を選択</value></data>
+  <data name="Clear bitmap bits" xml:space="preserve"><value>ビットマップのビットをクリア</value></data>
+  <data name="Clear end of file record" xml:space="preserve"><value>ファイルレコードの末尾をクリア</value></data>
+  <data name="Clear file name search" xml:space="preserve"><value>ファイル名の検索をクリア</value></data>
+  <data name="Clear filters" xml:space="preserve"><value>フィルターをクリア</value></data>
+  <data name="Clipboard unavailable." xml:space="preserve"><value>クリップボードにアクセスできません。</value></data>
+  <data name="Clipboard unavailable. Try again." xml:space="preserve"><value>クリップボードにアクセスできません。もう一度お試しください。</value></data>
+  <data name="Column {0} (unnamed)" xml:space="preserve"><value>列 {0}（名前なし）</value></data>
+  <data name="Comma-separated" xml:space="preserve"><value>コンマ区切り</value></data>
+  <data name="Compare changes · {0}" xml:space="preserve"><value>変更前後の比較 · {0}</value></data>
+  <data name="Compensation log record" xml:space="preserve"><value>補償ログレコード</value></data>
+  <data name="Compression changed" xml:space="preserve"><value>圧縮設定を変更</value></data>
+  <data name="Computing SHA-256" xml:space="preserve"><value>SHA-256 を計算中</value></data>
+  <data name="Computing the SHA-256 hash of the transaction log…" xml:space="preserve"><value>トランザクションログの SHA-256 を計算中…</value></data>
+  <data name="Content indexing changed" xml:space="preserve"><value>コンテンツのインデックス設定を変更</value></data>
+  <data name="Content modified" xml:space="preserve"><value>内容の更新</value></data>
+  <data name="Continue" xml:space="preserve"><value>続行</value></data>
+  <data name="Continue for this session" xml:space="preserve"><value>今回のみ適用</value></data>
+  <data name="Copied" xml:space="preserve"><value>コピーしました</value></data>
+  <data name="Copied source details." xml:space="preserve"><value>原本の詳細をコピーしました。</value></data>
+  <data name="Copy decoded {0} value" xml:space="preserve"><value>{0} のデコード値をコピー</value></data>
+  <data name="Copy full text" xml:space="preserve"><value>全文をコピー</value></data>
+  <data name="Copy selected bytes ({0:N0})" xml:space="preserve"><value>選択したバイトをコピー ({0:N0})</value></data>
+  <data name="Copy value" xml:space="preserve"><value>値をコピー</value></data>
+  <data name="Copy {0} (0x{1:X})" xml:space="preserve"><value>{0} をコピー (0x{1:X})</value></data>
+  <data name="Copy {0} bytes ({1:N0} bytes)" xml:space="preserve"><value>{0} のバイトをコピー ({1:N0} バイト)</value></data>
+  <data name="Could not attach $MFT. " xml:space="preserve"><value>$MFT を関連付けられませんでした。 </value></data>
+  <data name="Could not complete the operation. " xml:space="preserve"><value>操作を完了できませんでした。 </value></data>
+  <data name="Could not list the folder. " xml:space="preserve"><value>フォルダー内のファイルを取得できませんでした。 </value></data>
+  <data name="Could not load journal records. " xml:space="preserve"><value>ジャーナルレコードを読み込めませんでした。 </value></data>
+  <data name="Could not load records." xml:space="preserve"><value>レコードを読み込めませんでした。</value></data>
+  <data name="Could not open nearby records. " xml:space="preserve"><value>周辺のレコードを開けませんでした。 </value></data>
+  <data name="Could not open surrounding records. " xml:space="preserve"><value>周辺のレコードを開けませんでした。 </value></data>
+  <data name="Could not open the selected source record. " xml:space="preserve"><value>選択した原本レコードを開けませんでした。 </value></data>
+  <data name="Could not open the transaction log.  " xml:space="preserve"><value>トランザクションログを開けませんでした。  </value></data>
+  <data name="Could not open {0}. {1}" xml:space="preserve"><value>{0} を開けませんでした。{1}</value></data>
+  <data name="Could not open ‘{0}’. {1}" xml:space="preserve"><value>「{0}」を開けませんでした。{1}</value></data>
+  <data name="Could not read analysis results from the transaction index." xml:space="preserve"><value>トランザクションのインデックスから分析結果を読み取れませんでした。</value></data>
+  <data name="Could not read from the source. " xml:space="preserve"><value>原本を読み取れませんでした。 </value></data>
+  <data name="Could not read results. " xml:space="preserve"><value>結果を読み取れませんでした。 </value></data>
+  <data name="Could not read source bytes at this offset. " xml:space="preserve"><value>このオフセットの原本バイトを読み取れませんでした。 </value></data>
+  <data name="Could not read source details from the journal index." xml:space="preserve"><value>ジャーナルのインデックスから原本の詳細を読み取れませんでした。</value></data>
+  <data name="Could not read source evidence. " xml:space="preserve"><value>原本の根拠データを読み取れませんでした。 </value></data>
+  <data name="Could not read source information. " xml:space="preserve"><value>原本情報を読み取れませんでした。 </value></data>
+  <data name="Could not read the complete source record." xml:space="preserve"><value>原本レコードの全体を読み取れませんでした。</value></data>
+  <data name="Could not read the source SHA-256." xml:space="preserve"><value>原本の SHA-256 を読み取れませんでした。</value></data>
+  <data name="Could not read {1} at source offset 0x{0:X}." xml:space="preserve"><value>原本のオフセット 0x{0:X} で {1} を読み取れませんでした。</value></data>
+  <data name="Could not resolve the path." xml:space="preserve"><value>パスを解決できませんでした。</value></data>
+  <data name="Could not save results. " xml:space="preserve"><value>結果を保存できませんでした。 </value></data>
+  <data name="Could not save the CSV file.  " xml:space="preserve"><value>CSV ファイルを保存できませんでした。  </value></data>
+  <data name="Could not save the CSV. " xml:space="preserve"><value>CSV を保存できませんでした。 </value></data>
+  <data name="Could not save the display language. You can choose it again next time." xml:space="preserve"><value>表示言語を保存できませんでした。次回の起動時に再度選択できます。</value></data>
+  <data name="Could not save the indexing mode. Your selection applies to this session." xml:space="preserve"><value>インデックス作成方式を保存できませんでした。このセッションでは選択した方式を使用します。</value></data>
+  <data name="Could not scan the dump. " xml:space="preserve"><value>ダンプをスキャンできませんでした。 </value></data>
+  <data name="Could not scan. " xml:space="preserve"><value>スキャンできませんでした。 </value></data>
+  <data name="Could not show the file location. {0}" xml:space="preserve"><value>ファイルの場所を表示できませんでした。{0}</value></data>
+  <data name="Could not start the analysis engine." xml:space="preserve"><value>分析エンジンを起動できませんでした。</value></data>
+  <data name="Create attribute" xml:space="preserve"><value>属性を作成</value></data>
+  <data name="Created" xml:space="preserve"><value>作成</value></data>
+  <data name="Creation record" xml:space="preserve"><value>作成レコード</value></data>
+  <data name="Cursor 0x{0:X}   Value 0x{1:X2}" xml:space="preserve"><value>カーソル 0x{0:X}   値 0x{1:X2}</value></data>
+  <data name="Cursor 0x{0:X}   ·   Value 0x{1:X2}" xml:space="preserve"><value>カーソル 0x{0:X}   ·   値 0x{1:X2}</value></data>
+  <data name="Damaged or truncated data" xml:space="preserve"><value>データの破損または欠落</value></data>
+  <data name="Data extended" xml:space="preserve"><value>データが拡張</value></data>
+  <data name="Data from an earlier cycle remains in unused space on the current page. This record was excluded from move and rename correlation." xml:space="preserve"><value>現在のページの未使用領域に以前のサイクルのデータが残っています。このレコードは移動と名前変更の照合から除外しました。</value></data>
+  <data name="Data overwritten" xml:space="preserve"><value>データを上書き</value></data>
+  <data name="Data truncated" xml:space="preserve"><value>データが切り詰められました</value></data>
+  <data name="Date filter" xml:space="preserve"><value>日付フィルター</value></data>
+  <data name="Deallocate file record" xml:space="preserve"><value>ファイルレコードの割り当てを解除</value></data>
+  <data name="Declared client data (B)" xml:space="preserve"><value>宣言されたクライアントデータ長 (B)</value></data>
+  <data name="Decoded log records   {0:N0}" xml:space="preserve"><value>デコードしたログレコード   {0:N0} 件</value></data>
+  <data name="Delete attribute" xml:space="preserve"><value>属性を削除</value></data>
+  <data name="Delete dirty clusters" xml:space="preserve"><value>ダーティクラスターを削除</value></data>
+  <data name="Delete index entry" xml:space="preserve"><value>インデックスエントリを削除</value></data>
+  <data name="Deleted document extensions" xml:space="preserve"><value>削除された文書の拡張子</value></data>
+  <data name="Deletion bit" xml:space="preserve"><value>削除ビット</value></data>
+  <data name="Deletion record" xml:space="preserve"><value>削除レコード</value></data>
+  <data name="Different" xml:space="preserve"><value>相違</value></data>
+  <data name="Different file from reference" xml:space="preserve"><value>基準と異なるファイル</value></data>
+  <data name="Disk image" xml:space="preserve"><value>ディスクイメージ</value></data>
+  <data name="Display language" xml:space="preserve"><value>表示言語</value></data>
+  <data name="Dump 0x{0:X}   ·   {1:N0} header bytes before fixups" xml:space="preserve"><value>ダンプ 0x{0:X}   ·   fixup 適用前のヘッダー {1:N0} バイト</value></data>
+  <data name="Dump offset" xml:space="preserve"><value>ダンプ内オフセット</value></data>
+  <data name="Duplicate file name attribute instance number" xml:space="preserve"><value>ファイル名属性のインスタンス番号が重複しています</value></data>
+  <data name="Earlier records" xml:space="preserve"><value>以前のレコード</value></data>
+  <data name="Edit {0}" xml:space="preserve"><value>{0} を編集</value></data>
+  <data name="Empty string" xml:space="preserve"><value>空文字列</value></data>
+  <data name="Encryption changed" xml:space="preserve"><value>暗号化設定を変更</value></data>
+  <data name="End  {0} {1}" xml:space="preserve"><value>終了  {0} {1}</value></data>
+  <data name="End date" xml:space="preserve"><value>終了日</value></data>
+  <data name="End date missing" xml:space="preserve"><value>終了日が指定されていません</value></data>
+  <data name="End time" xml:space="preserve"><value>終了時刻</value></data>
+  <data name="Enter the USN in decimal, or in hexadecimal with a 0x prefix." xml:space="preserve"><value>USN は 10 進数、または先頭に 0x を付けた 16 進数で入力してください。</value></data>
+  <data name="Enter the end time as 15:00 or 15:00:00.125." xml:space="preserve"><value>終了時刻を 15:00 または 15:00:00.125 の形式で入力してください。</value></data>
+  <data name="Enter the start time as 14:30 or 14:30:00.125." xml:space="preserve"><value>開始時刻を 14:30 または 14:30:00.125 の形式で入力してください。</value></data>
+  <data name="Entry {0}, sequence {1}" xml:space="preserve"><value>エントリ {0}、シーケンス {1}</value></data>
+  <data name="Evidence for {0:N0} candidates saved" xml:space="preserve"><value>候補 {0:N0} 件の根拠を保存しました</value></data>
+  <data name="Evidence records" xml:space="preserve"><value>根拠レコード</value></data>
+  <data name="Expected page size (B)" xml:space="preserve"><value>想定ページサイズ (B)</value></data>
+  <data name="Export all candidates of this type" xml:space="preserve"><value>この種類のすべての候補をエクスポート</value></data>
+  <data name="Export all {0:N0} header candidates as CSV…" xml:space="preserve"><value>ヘッダー候補 {0:N0} 件すべてを CSV に出力…</value></data>
+  <data name="Export all {0:N0} page candidates as CSV…" xml:space="preserve"><value>ページ候補 {0:N0} 件すべてを CSV に出力…</value></data>
+  <data name="Export selected file history ({0:N0} records)" xml:space="preserve"><value>選択したファイルの履歴をエクスポート ({0:N0} 件)</value></data>
+  <data name="Extended attributes changed" xml:space="preserve"><value>拡張属性を変更</value></data>
+  <data name="Extension" xml:space="preserve"><value>拡張子</value></data>
+  <data name="Extension FILE record start" xml:space="preserve"><value>拡張 FILE レコードの開始位置</value></data>
+  <data name="Extract and analyze" xml:space="preserve"><value>抽出して分析</value></data>
+  <data name="Extract files" xml:space="preserve"><value>ファイルを抽出</value></data>
+  <data name="Extracted files|*.*" xml:space="preserve"><value>抽出ファイル|*.*</value></data>
+  <data name="Extracting" xml:space="preserve"><value>抽出中</value></data>
+  <data name="Extracting source files…" xml:space="preserve"><value>原本ファイルを抽出しています…</value></data>
+  <data name="Extraction manifest not found." xml:space="preserve"><value>抽出マニフェストが見つかりません。</value></data>
+  <data name="Fields" xml:space="preserve"><value>フィールド</value></data>
+  <data name="The acquired MFT links the file name to its parent folders." xml:space="preserve"><value>収集時の MFT を使って、ファイル名と上位フォルダーを結び付けました。</value></data>
+  <data name="File attribute timestamps ($STANDARD_INFORMATION)  ·  KST (UTC+09:00)" xml:space="preserve"><value>ファイル属性のタイムスタンプ ($STANDARD_INFORMATION)  ·  KST (UTC+09:00)</value></data>
+  <data name="File closed" xml:space="preserve"><value>ファイルを閉じた</value></data>
+  <data name="File content change" xml:space="preserve"><value>ファイル内容の変更</value></data>
+  <data name="File creation" xml:space="preserve"><value>ファイル作成</value></data>
+  <data name="File deletion" xml:space="preserve"><value>ファイル削除</value></data>
+  <data name="File history - {0}.csv" xml:space="preserve"><value>ファイル履歴 - {0}.csv</value></data>
+  <data name="File history.csv" xml:space="preserve"><value>ファイル履歴.csv</value></data>
+  <data name="File name" xml:space="preserve"><value>ファイル名</value></data>
+  <data name="File name attribute count" xml:space="preserve"><value>ファイル名属性の数</value></data>
+  <data name="File name in {0}" xml:space="preserve"><value>{0} 内のファイル名</value></data>
+  <data name="File name unavailable" xml:space="preserve"><value>ファイル名不明</value></data>
+  <data name="File name,Record time (KST),Change reason,Reason bits,USN,File reference,Parent reference,Extraction offset,Byte length,Raw FILETIME,Source file,SHA-256,USN format,Changed ranges (start + length),Remaining extents,Resynced after damage,Escaped file name code units" xml:space="preserve"><value>ファイル名,記録時刻 (KST),変更理由,理由ビット,USN,ファイル参照,親参照,抽出オフセット,バイト長,元の FILETIME,原本ファイル,SHA-256,USN 形式,変更範囲 (開始位置 + 長さ),残りのエクステント,破損後に再同期,エスケープ済みファイル名コード単位</value></data>
+  <data name="File not found: {0}" xml:space="preserve"><value>ファイルが見つかりません：{0}</value></data>
+  <data name="File path" xml:space="preserve"><value>ファイルパス</value></data>
+  <data name="File reference  ·  " xml:space="preserve"><value>ファイル参照  ·  </value></data>
+  <data name="File rename old name new name" xml:space="preserve"><value>ファイル名の変更 旧名 新名</value></data>
+  <data name="File renamed" xml:space="preserve"><value>ファイル名を変更</value></data>
+  <data name="File size   {0:N0} bytes" xml:space="preserve"><value>ファイルサイズ   {0:N0} バイト</value></data>
+  <data name="Files and folders: {0:N0}   ·   Change records: {1:N0}" xml:space="preserve"><value>ファイルとフォルダー {0:N0} 件   ·   変更レコード {1:N0} 件</value></data>
+  <data name="Filter by start date, end date, or USN." xml:space="preserve"><value>開始日、終了日または USN で絞り込みます。</value></data>
+  <data name="Find non-directory records with FILE_DELETE and a final extension in " xml:space="preserve"><value>FILE_DELETE があり、末尾の拡張子が次のいずれかに一致するファイルレコードを検索します：</value></data>
+  <data name="Finding investigation candidates." xml:space="preserve"><value>調査候補を検索しています。</value></data>
+  <data name="Finding surrounding records…" xml:space="preserve"><value>周辺のレコードを検索中…</value></data>
+  <data name="First mismatched sector (1-based)" xml:space="preserve"><value>最初に不一致となったセクター（1 始まり）</value></data>
+  <data name="First new name" xml:space="preserve"><value>1 回目の新名</value></data>
+  <data name="First old name" xml:space="preserve"><value>1 回目の旧名</value></data>
+  <data name="First valid record after a damaged region." xml:space="preserve"><value>破損領域の直後に見つかった最初の有効なレコードです。</value></data>
+  <data name="Folder" xml:space="preserve"><value>フォルダー</value></data>
+  <data name="Folder name unavailable" xml:space="preserve"><value>フォルダー名不明</value></data>
+  <data name="Forget transaction" xml:space="preserve"><value>トランザクションを破棄</value></data>
+  <data name="Free space (page offset)" xml:space="preserve"><value>空き領域（ページ内オフセット）</value></data>
+  <data name="From {0}" xml:space="preserve"><value>{0} から</value></data>
+  <data name="Hard link changed" xml:space="preserve"><value>ハードリンクを変更</value></data>
+  <data name="Header HEX" xml:space="preserve"><value>ヘッダー HEX</value></data>
+  <data name="Immediate parent only" xml:space="preserve"><value>直近の親フォルダーのみ</value></data>
+  <data name="Incomplete acquisition data" xml:space="preserve"><value>取得資料が不完全</value></data>
+  <data name="Index format {0} · Engine version not recorded" xml:space="preserve"><value>インデックス形式 {0} · エンジンのバージョン記録なし</value></data>
+  <data name="Index format {0} · Rust engine {1}" xml:space="preserve"><value>インデックス形式 {0} · Rust エンジン {1}</value></data>
+  <data name="Indexing file histories and previous names…" xml:space="preserve"><value>ファイル履歴と旧名のインデックスを作成中…</value></data>
+  <data name="Indexing folder paths…" xml:space="preserve"><value>フォルダーパスのインデックスを作成中…</value></data>
+  <data name="Path inferred from MFT" xml:space="preserve"><value>MFT を参照したパス</value></data>
+  <data name="Initialize file record" xml:space="preserve"><value>ファイルレコードを初期化</value></data>
+  <data name="Inside slack" xml:space="preserve"><value>スラック内</value></data>
+  <data name="Insufficient file records to compare sources. Verify that both files came from the same volume." xml:space="preserve"><value>原本同士を比較するためのファイルレコードが不足しています。両方のファイルが同じボリュームのものか確認してください。</value></data>
+  <data name="Invalid USA number" xml:space="preserve"><value>無効な USA 番号</value></data>
+  <data name="Invalid UTF-16 in file name" xml:space="preserve"><value>ファイル名に無効な UTF-16 が含まれています</value></data>
+  <data name="Invalid attribute length or storage format" xml:space="preserve"><value>属性の長さまたは格納形式が無効です</value></data>
+  <data name="Invalid attribute list length" xml:space="preserve"><value>属性リストの長さが無効です</value></data>
+  <data name="Invalid file name length or namespace" xml:space="preserve"><value>ファイル名の長さまたは名前空間が無効です</value></data>
+  <data name="Invalid path separator in file name" xml:space="preserve"><value>ファイル名に無効なパス区切り文字があります</value></data>
+  <data name="Invalid source offset or display range." xml:space="preserve"><value>原本オフセットまたは表示範囲が無効です。</value></data>
+  <data name="Invalid timestamp" xml:space="preserve"><value>無効なタイムスタンプ</value></data>
+  <data name="Invalid timestamp (FILETIME {0})" xml:space="preserve"><value>無効なタイムスタンプ (FILETIME {0})</value></data>
+  <data name="Items {0:N0}–{1:N0}" xml:space="preserve"><value>項目 {0:N0}～{1:N0}</value></data>
+  <data name="Items: {0:N0}" xml:space="preserve"><value>項目 {0:N0} 件</value></data>
+  <data name="Journal record" xml:space="preserve"><value>ジャーナルレコード</value></data>
+  <data name="Journal search results with paths.csv" xml:space="preserve"><value>ジャーナル検索結果（パス付き）.csv</value></data>
+  <data name="Journal search results.csv" xml:space="preserve"><value>ジャーナル検索結果.csv</value></data>
+  <data name="Journal timestamp reversal" xml:space="preserve"><value>ジャーナルの時刻逆転</value></data>
+  <data name="NTFS Tracer {0}&#10;NTFS file investigation" xml:space="preserve"><value>NTFS Tracer {0}
+NTFS ファイル調査</value></data>
+  <data name="Known segments only" xml:space="preserve"><value>判明している区間のみ</value></data>
+  <data name="LSN · Source offset" xml:space="preserve"><value>LSN · 原本オフセット</value></data>
+  <data name="Last accessed" xml:space="preserve"><value>最終アクセス</value></data>
+  <data name="Last end LSN" xml:space="preserve"><value>最後の終了 LSN</value></data>
+  <data name="Later records" xml:space="preserve"><value>以後のレコード</value></data>
+  <data name="Length {0:N0} bytes" xml:space="preserve"><value>長さ {0:N0} バイト</value></data>
+  <data name="Loading file history…" xml:space="preserve"><value>ファイル履歴を読み込み中…</value></data>
+  <data name="Loading record details…" xml:space="preserve"><value>レコードの詳細を読み込み中…</value></data>
+  <data name="Loading records…" xml:space="preserve"><value>レコードを読み込み中…</value></data>
+  <data name="Loading source information…" xml:space="preserve"><value>原本情報を読み込み中…</value></data>
+  <data name="Log query cancelled." xml:space="preserve"><value>ログ検索をキャンセルしました。</value></data>
+  <data name="Looking for volumes and artifacts in the image…" xml:space="preserve"><value>イメージ内のボリュームと解析対象を検索中…</value></data>
+  <data name="MFT attachment cancelled. " xml:space="preserve"><value>MFT の関連付けをキャンセルしました。 </value></data>
+  <data name="MFT lookup" xml:space="preserve"><value>MFT の照合</value></data>
+  <data name="MFT source file" xml:space="preserve"><value>MFT の原本ファイル</value></data>
+  <data name="Matches the complete name of a non-directory record against sdelete.exe, sdelete64.exe or sdelete64a.exe, ignoring case. Identifying the executable or proving execution requires separate evidence." xml:space="preserve"><value>ディレクトリ以外のレコードの完全な名前を、大文字と小文字を区別せず sdelete.exe、sdelete64.exe、sdelete64a.exe と照合します。実行ファイルの同定や実行の立証には別の証拠が必要です。</value></data>
+  <data name="Metadata changed" xml:space="preserve"><value>メタデータの変更</value></data>
+  <data name="Missing FILE signature" xml:space="preserve"><value>FILE シグネチャがありません</value></data>
+  <data name="Missing attribute end marker" xml:space="preserve"><value>属性の終了マーカーがありません</value></data>
+  <data name="Move or rename candidate" xml:space="preserve"><value>移動または名前変更の候補</value></data>
+  <data name="Moved and renamed" xml:space="preserve"><value>移動と名前変更</value></data>
+  <data name="Moved to another folder" xml:space="preserve"><value>別のフォルダーに移動</value></data>
+  <data name="Multiple candidate paths" xml:space="preserve"><value>複数の候補パス</value></data>
+  <data name="Multiple names or folders refer to the same entry. The path actually used to open the file is unknown." xml:space="preserve"><value>複数の名前またはフォルダーが同じエントリを参照しています。実際にファイルを開いたパスは不明です。</value></data>
+  <data name="Name match" xml:space="preserve"><value>名前が一致</value></data>
+  <data name="Name requires verification" xml:space="preserve"><value>名前の確認が必要</value></data>
+  <data name="Name sequence" xml:space="preserve"><value>名前の推移</value></data>
+  <data name="Named streams changed" xml:space="preserve"><value>名前付きストリームを変更</value></data>
+  <data name="New name record" xml:space="preserve"><value>新名のレコード</value></data>
+  <data name="Next Undo LSN   {0}" xml:space="preserve"><value>次の Undo LSN   {0}</value></data>
+  <data name="Next undo LSN" xml:space="preserve"><value>次の Undo LSN</value></data>
+  <data name="No $J, $MFT, or $LogFile was found in this folder. Use Select files… to choose the files directly." xml:space="preserve"><value>このフォルダーに $J、$MFT、$LogFile が見つかりません。「ファイルを選択…」からファイルを直接指定してください。</value></data>
+  <data name="No FILE records with valid offsets and format were found in the first 1 MiB of $MFT." xml:space="preserve"><value>$MFT の先頭 1 MiB に、オフセットと形式が有効な FILE レコードが見つかりません。</value></data>
+  <data name="No MFT is attached." xml:space="preserve"><value>MFT が接続されていません。</value></data>
+  <data name="No MFT record in the acquisition matches this file reference." xml:space="preserve"><value>取得した MFT にこのファイル参照と一致するレコードはありません。</value></data>
+  <data name="No NTFS artifacts were found here." xml:space="preserve"><value>この対象に NTFS の解析資料はありません。</value></data>
+  <data name="No NTFS transaction log headers or records were found." xml:space="preserve"><value>NTFS トランザクションログのヘッダーまたはレコードが見つかりません。</value></data>
+  <data name="No USN Journal attached" xml:space="preserve"><value>USN Journal が接続されていません</value></data>
+  <data name="No active filters" xml:space="preserve"><value>フィルターなし</value></data>
+  <data name="No analysis tables found. Select a results database or CSV saved by Tracker." xml:space="preserve"><value>分析テーブルが見つかりません。Tracker が保存した結果データベースまたは CSV を選択してください。</value></data>
+  <data name="No bits set (0x00000000)" xml:space="preserve"><value>ビットはすべて 0 (0x00000000)</value></data>
+  <data name="No bytes to display." xml:space="preserve"><value>表示するバイトがありません。</value></data>
+  <data name="No candidates for this list." xml:space="preserve"><value>このリストに候補はありません。</value></data>
+  <data name="No collected $J, $MFT or $LogFile entry was identified in this logical image." xml:space="preserve"><value>この論理イメージの収集項目に $J、$MFT、$LogFile が見つかりません。</value></data>
+  <data name="No data for this side could be identified in this operation." xml:space="preserve"><value>この操作では、選択した側のデータを特定できませんでした。</value></data>
+  <data name="No file name was decoded for this operation." xml:space="preserve"><value>この操作のファイル名をデコードできませんでした。</value></data>
+  <data name="No files to display." xml:space="preserve"><value>表示するファイルがありません。</value></data>
+  <data name="No folder data" xml:space="preserve"><value>フォルダー情報なし</value></data>
+  <data name="No indexed extents" xml:space="preserve"><value>インデックスにエクステントの記録なし</value></data>
+  <data name="No leads match this rule." xml:space="preserve"><value>この条件に該当する候補はありません。</value></data>
+  <data name="No link" xml:space="preserve"><value>リンクなし</value></data>
+  <data name="No matching files." xml:space="preserve"><value>一致するファイルがありません。</value></data>
+  <data name="No matching rows." xml:space="preserve"><value>一致する行はありません。</value></data>
+  <data name="No matching transaction records." xml:space="preserve"><value>一致するトランザクションレコードがありません。</value></data>
+  <data name="No name recorded" xml:space="preserve"><value>ファイル名の記録なし</value></data>
+  <data name="No operation" xml:space="preserve"><value>操作なし</value></data>
+  <data name="No path evidence is linked to this record." xml:space="preserve"><value>このレコードに対応するパスの根拠はありません。</value></data>
+  <data name="No ranges recorded" xml:space="preserve"><value>範囲の記録なし</value></data>
+  <data name="No readable $FILE_NAME attribute in this entry." xml:space="preserve"><value>このエントリに読み取り可能な $FILE_NAME 属性はありません。</value></data>
+  <data name="No readable MFT entries. Select an extracted $MFT file." xml:space="preserve"><value>読み取り可能な MFT エントリがありません。抽出した $MFT を選択してください。</value></data>
+  <data name="No readable NTFS volume was found." xml:space="preserve"><value>読み取り可能な NTFS ボリュームが見つかりません。</value></data>
+  <data name="No reason bits" xml:space="preserve"><value>理由ビットなし</value></data>
+  <data name="No records found for LSN 0x{0}." xml:space="preserve"><value>LSN 0x{0} に対応するレコードがありません。</value></data>
+  <data name="No records match your search." xml:space="preserve"><value>検索条件に一致するレコードはありません。</value></data>
+  <data name="No summary in the carving results." xml:space="preserve"><value>カービング結果に概要がありません。</value></data>
+  <data name="No supported volume or collection was found." xml:space="preserve"><value>対応するボリュームまたはコレクションが見つかりません。</value></data>
+  <data name="No table with displayable columns was found." xml:space="preserve"><value>表示可能な列を持つテーブルが見つかりません。</value></data>
+  <data name="No timestamp" xml:space="preserve"><value>タイムスタンプなし</value></data>
+  <data name="No timestamp recorded" xml:space="preserve"><value>タイムスタンプの記録なし</value></data>
+  <data name="No timestamp. Records from the same journal segment are listed in USN order." xml:space="preserve"><value>タイムスタンプがないため、同じジャーナル区間のレコードを USN 順に表示します。</value></data>
+  <data name="No value" xml:space="preserve"><value>値なし</value></data>
+  <data name="None" xml:space="preserve"><value>なし</value></data>
+  <data name="None of the {0} sampled recent files matched on identifier, name and parent. Check the volume and acquisition time of both sources." xml:space="preserve"><value>最近のファイルから抽出した {0} 件に、識別子・名前・親がすべて一致するものはありません。両原本のボリュームと取得時刻を確認してください。</value></data>
+  <data name="Not applicable" xml:space="preserve"><value>該当なし</value></data>
+  <data name="Not decoded" xml:space="preserve"><value>未デコード</value></data>
+  <data name="Not printable" xml:space="preserve"><value>表示できない文字</value></data>
+  <data name="Not recorded" xml:space="preserve"><value>記録なし</value></data>
+  <data name="Not recorded in index" xml:space="preserve"><value>インデックスに記録なし</value></data>
+  <data name="Not specified" xml:space="preserve"><value>指定なし</value></data>
+  <data name="Object ID changed" xml:space="preserve"><value>オブジェクト ID を変更</value></data>
+  <data name="Offset 0 is the start of the selected Redo or Undo data." xml:space="preserve"><value>オフセット 0 は選択した Redo または Undo データの先頭です。</value></data>
+  <data name="Old name record" xml:space="preserve"><value>旧名のレコード</value></data>
+  <data name="Only the old name or deletion of the parent folder remains. Its subsequent location is unknown." xml:space="preserve"><value>親フォルダーには旧名または削除の記録だけが残っています。その後の場所は不明です。</value></data>
+  <data name="Open NTFS Log Tracker results" xml:space="preserve"><value>NTFS Log Tracker の結果を開く</value></data>
+  <data name="Open USN Journal ($J)" xml:space="preserve"><value>USN Journal ($J) を開く</value></data>
+  <data name="Open end date calendar" xml:space="preserve"><value>終了日のカレンダーを開く</value></data>
+  <data name="Open extracted NTFS transaction log ($LogFile)" xml:space="preserve"><value>抽出した NTFS トランザクションログ ($LogFile) を開く</value></data>
+  <data name="Open failed" xml:space="preserve"><value>開けませんでした</value></data>
+  <data name="Open nonresident attribute" xml:space="preserve"><value>非常駐属性を開く</value></data>
+  <data name="Open one disk image at a time and skip the other files." xml:space="preserve"><value>ディスクイメージは 1 つずつ開きます。他のファイルを除外してください。</value></data>
+  <data name="Open start date calendar" xml:space="preserve"><value>開始日のカレンダーを開く</value></data>
+  <data name="Open the source USN Journal to inspect the bytes." xml:space="preserve"><value>バイトを確認するには、元の USN Journal を開いてください。</value></data>
+  <data name="Opening the image was cancelled." xml:space="preserve"><value>イメージを開く操作をキャンセルしました。</value></data>
+  <data name="Opening the transaction log was cancelled.  " xml:space="preserve"><value>トランザクションログを開く操作をキャンセルしました。  </value></data>
+  <data name="Operation cancelled." xml:space="preserve"><value>操作をキャンセルしました。</value></data>
+  <data name="Operations linked by the previous LSN contain one removed entry and one added entry for the same file. Removing and adding different hard links to one file can produce the same pattern." xml:space="preserve"><value>直前の LSN で結ばれた操作に、同じファイルのエントリ削除と追加が 1 件ずつあります。同じファイルの異なるハードリンクを削除・追加した場合も同じパターンが現れます。</value></data>
+  <data name="Other bits 0x{0:X8}" xml:space="preserve"><value>その他のビット 0x{0:X8}</value></data>
+  <data name="Out of display range (100 ns units since 1970: {0})" xml:space="preserve"><value>表示範囲外（1970 年からの 100 ns 単位：{0}）</value></data>
+  <data name="Overlaps slack boundary" xml:space="preserve"><value>スラックの境界にまたがる</value></data>
+  <data name="Page offset" xml:space="preserve"><value>ページ内オフセット</value></data>
+  <data name="Page start (dump offset)" xml:space="preserve"><value>ページ開始位置（ダンプ内オフセット）</value></data>
+  <data name="Parent folder" xml:space="preserve"><value>親フォルダー</value></data>
+  <data name="Parent folder ID" xml:space="preserve"><value>親フォルダー ID</value></data>
+  <data name="Parent folders" xml:space="preserve"><value>親フォルダー</value></data>
+  <data name="Path and SHA-256 of the selected dump" xml:space="preserve"><value>選択したダンプのパスと SHA-256</value></data>
+  <data name="Path unavailable." xml:space="preserve"><value>パスを取得できません。</value></data>
+  <data name="Path unknown" xml:space="preserve"><value>パス不明</value></data>
+  <data name="Permissions changed" xml:space="preserve"><value>アクセス許可を変更</value></data>
+  <data name="Possible move to another folder" xml:space="preserve"><value>別のフォルダーへの移動の可能性</value></data>
+  <data name="Possible rename within the same folder" xml:space="preserve"><value>同一フォルダー内での名前変更の可能性</value></data>
+  <data name="Preparing indexes · {0}" xml:space="preserve"><value>インデックスを準備中 · {0}</value></data>
+  <data name="Previous LSN" xml:space="preserve"><value>直前の LSN</value></data>
+  <data name="Previous LSN   {0}" xml:space="preserve"><value>直前の LSN   {0}</value></data>
+  <data name="Previous record" xml:space="preserve"><value>直前のレコード</value></data>
+  <data name="Query failed" xml:space="preserve"><value>検索に失敗しました</value></data>
+  <data name="Reading MFT file and folder entries…" xml:space="preserve"><value>MFT のファイルとフォルダーのエントリを読み取り中…</value></data>
+  <data name="Reading cancelled." xml:space="preserve"><value>読み取りをキャンセルしました。</value></data>
+  <data name="Reading change records…" xml:space="preserve"><value>変更レコードを読み取り中…</value></data>
+  <data name="Reading file and folder names…" xml:space="preserve"><value>ファイル名とフォルダー名を読み取り中…</value></data>
+  <data name="Reading results…" xml:space="preserve"><value>結果を読み込み中…</value></data>
+  <data name="Reading source bytes…" xml:space="preserve"><value>原本のバイトを読み取り中…</value></data>
+  <data name="Reading the dump." xml:space="preserve"><value>ダンプを読み取っています。</value></data>
+  <data name="Reading the dump. {0:N0} / {1:N0} bytes" xml:space="preserve"><value>ダンプを読み取り中。{0:N0} / {1:N0} バイト</value></data>
+  <data name="Reading transaction records and operation data…" xml:space="preserve"><value>トランザクションレコードと操作データを読み取り中…</value></data>
+  <data name="Reconstructed from USN Journal" xml:space="preserve"><value>USN Journal から復元</value></data>
+  <data name="Record +0x{0:X}" xml:space="preserve"><value>レコード先頭から +0x{0:X}</value></data>
+  <data name="Record CSV…" xml:space="preserve"><value>レコードの CSV…</value></data>
+  <data name="Record header out of bounds" xml:space="preserve"><value>レコードヘッダーが範囲外です</value></data>
+  <data name="Record offset or length extends beyond the extracted file." xml:space="preserve"><value>レコードのオフセットまたは長さが抽出ファイルの範囲を超えています。</value></data>
+  <data name="Record size mismatch" xml:space="preserve"><value>レコードサイズが一致しません</value></data>
+  <data name="Record start 0x{0:X}   ·   {1} bytes   ·   USN {2}" xml:space="preserve"><value>レコード開始 0x{0:X}   ·   {1} バイト   ·   USN {2}</value></data>
+  <data name="Record time ({0})" xml:space="preserve"><value>記録時刻 ({0})</value></data>
+  <data name="Recorded file name,Record time ({0}),Change reason,Reason bits,USN,File ID (raw bytes),Parent ID (raw bytes),Source offset,Byte length,Raw FILETIME,Source file,Source SHA-256,Record format,Source info bits,Security ID,File attribute bits,Changed ranges (start + length),Remaining extents,Resynced after damage,Escaped file name,Continuous segment ID,Analysis method" xml:space="preserve"><value>記録されたファイル名,記録時刻 ({0}),変更理由,理由ビット,USN,ファイル ID (生バイト),親 ID (生バイト),原本オフセット,バイト長,元の FILETIME,原本ファイル,原本 SHA-256,レコード形式,原本情報ビット,セキュリティ ID,ファイル属性ビット,変更範囲 (開始位置 + 長さ),残りのエクステント,破損後に再同期,エスケープ済みファイル名,連続区間 ID,分析方法</value></data>
+  <data name="Records from an earlier cycle in unused space   {0:N0} (excluded from move candidates)" xml:space="preserve"><value>未使用領域に残る以前のサイクルのレコード   {0:N0} 件（移動候補から除外）</value></data>
+  <data name="Records on each side" xml:space="preserve"><value>前後に表示する件数</value></data>
+  <data name="Records written: {0:N0}…" xml:space="preserve"><value>{0:N0} 件のレコードを書き込みました…</value></data>
+  <data name="Records {0:N0}–{1:N0}" xml:space="preserve"><value>レコード {0:N0}～{1:N0}</value></data>
+  <data name="Records: {0:N0}" xml:space="preserve"><value>レコード {0:N0} 件</value></data>
+  <data name="Redo and Undo operations could not be decoded for this record." xml:space="preserve"><value>このレコードの Redo と Undo の操作をデコードできませんでした。</value></data>
+  <data name="Redo and Undo operations do not apply to checkpoint records." xml:space="preserve"><value>チェックポイントレコードには Redo と Undo の操作はありません。</value></data>
+  <data name="Reference" xml:space="preserve"><value>基準</value></data>
+  <data name="Removed directory entry" xml:space="preserve"><value>削除されたディレクトリエントリ</value></data>
+  <data name="Rename record" xml:space="preserve"><value>名前変更レコード</value></data>
+  <data name="Reparse point changed" xml:space="preserve"><value>再解析ポイントを変更</value></data>
+  <data name="Repeated rename followed by deletion" xml:space="preserve"><value>繰り返し名前を変更した後に削除</value></data>
+  <data name="Resident attribute data out of bounds" xml:space="preserve"><value>常駐属性のデータが範囲外です</value></data>
+  <data name="Residual path after deletion" xml:space="preserve"><value>削除後の残存パス</value></data>
+  <data name="Resolving paths · {0:N0} records" xml:space="preserve"><value>パスを解決中 · {0:N0} 件</value></data>
+  <data name="Resolving path…" xml:space="preserve"><value>パスを解決中…</value></data>
+  <data name="Restore default location" xml:space="preserve"><value>既定の場所に戻す</value></data>
+  <data name="Results" xml:space="preserve"><value>結果</value></data>
+  <data name="Reversed timestamp" xml:space="preserve"><value>逆転したタイムスタンプ</value></data>
+  <data name="Row {0:N0} has {1} columns. The header has {2}." xml:space="preserve"><value>{0:N0} 行目は {1} 列、ヘッダーは {2} 列です。</value></data>
+  <data name="Rows {0:N0}–{1:N0}" xml:space="preserve"><value>行 {0:N0}～{1:N0}</value></data>
+  <data name="Run the search again to see candidates." xml:space="preserve"><value>候補を表示するには再検索してください。</value></data>
+  <data name="SDelete file name match" xml:space="preserve"><value>SDelete のファイル名と一致</value></data>
+  <data name="Same" xml:space="preserve"><value>一致</value></data>
+  <data name="Same file as reference" xml:space="preserve"><value>基準と同じファイル</value></data>
+  <data name="Same time" xml:space="preserve"><value>同時刻</value></data>
+  <data name="Save all candidates and evidence records for the selected type" xml:space="preserve"><value>選択した種類のすべての候補と根拠レコードを保存</value></data>
+  <data name="Save all matching records to a new CSV file" xml:space="preserve"><value>条件に一致する全レコードを新しい CSV に保存</value></data>
+  <data name="Save all matching rows" xml:space="preserve"><value>条件に一致するすべての行を保存</value></data>
+  <data name="Save matching transaction records to a new CSV file" xml:space="preserve"><value>条件に一致するトランザクションレコードを新しい CSV ファイルに保存</value></data>
+  <data name="Saving all candidates and evidence records for “{0}”." xml:space="preserve"><value>「{0}」のすべての候補と根拠レコードを保存しています。</value></data>
+  <data name="Saving all matching records to CSV…" xml:space="preserve"><value>条件に一致する全レコードを CSV に保存中…</value></data>
+  <data name="Saving all matching records…" xml:space="preserve"><value>条件に一致する全レコードを保存中…</value></data>
+  <data name="Saving file history…" xml:space="preserve"><value>ファイル履歴を保存中…</value></data>
+  <data name="Saving search results…" xml:space="preserve"><value>検索結果を保存中…</value></data>
+  <data name="Saving the entire list to CSV." xml:space="preserve"><value>一覧全体を CSV に保存しています。</value></data>
+  <data name="Scan cancelled." xml:space="preserve"><value>スキャンをキャンセルしました。</value></data>
+  <data name="Scan failed · " xml:space="preserve"><value>スキャン失敗 · </value></data>
+  <data name="Scan files directly inside the selected folder." xml:space="preserve"><value>選択したフォルダーの直下にあるファイルをスキャンします。</value></data>
+  <data name="Scan stopped. Results from {0:N0} completed sources are available." xml:space="preserve"><value>スキャンを停止しました。完了した原本 {0:N0} 件の結果を表示できます。</value></data>
+  <data name="Scanned {0:N0} journal records" xml:space="preserve"><value>ジャーナルレコード {0:N0} 件をスキャンしました</value></data>
+  <data name="Scanned {0:N0} journal records." xml:space="preserve"><value>ジャーナルレコード {0:N0} 件をスキャンしました。</value></data>
+  <data name="Scanning journal records in source order." xml:space="preserve"><value>原本内の順序でジャーナルレコードをスキャンしています。</value></data>
+  <data name="Searching…" xml:space="preserve"><value>検索中…</value></data>
+  <data name="Second new name" xml:space="preserve"><value>2 回目の新名</value></data>
+  <data name="Second old name" xml:space="preserve"><value>2 回目の旧名</value></data>
+  <data name="Sector trailer before fixup: {0}" xml:space="preserve"><value>fixup 適用前のセクター末尾：{0}</value></data>
+  <data name="Sector trailer mismatch" xml:space="preserve"><value>セクター末尾が不一致</value></data>
+  <data name="Select a $J or $LogFile." xml:space="preserve"><value>$J または $LogFile を選択してください。</value></data>
+  <data name="Select a dump to scan for $LogFile records" xml:space="preserve"><value>$LogFile レコードを検索するダンプを選択</value></data>
+  <data name="Select a file" xml:space="preserve"><value>ファイルを選択</value></data>
+  <data name="Select a folder to scan (top-level files only)" xml:space="preserve"><value>スキャンするフォルダーを選択（直下のファイルのみ）</value></data>
+  <data name="Select a start date or enter it as YYYY-MM-DD." xml:space="preserve"><value>開始日を選択するか、YYYY-MM-DD 形式で入力してください。</value></data>
+  <data name="Select a volume or collection." xml:space="preserve"><value>ボリュームまたはコレクションを選択してください。</value></data>
+  <data name="Select an end date or enter it as YYYY-MM-DD." xml:space="preserve"><value>終了日を選択するか、YYYY-MM-DD 形式で入力してください。</value></data>
+  <data name="Select at least one file to analyze." xml:space="preserve"><value>分析するファイルを 1 つ以上選択してください。</value></data>
+  <data name="Select date" xml:space="preserve"><value>日付を選択</value></data>
+  <data name="Select source files to scan for USN records" xml:space="preserve"><value>USN レコードを検索するファイルを選択</value></data>
+  <data name="Select the artifacts to extract." xml:space="preserve"><value>抽出する資料を選択してください。</value></data>
+  <data name="Select the first EWF segment." xml:space="preserve"><value>最初の EWF 分割ファイルを選択してください。</value></data>
+  <data name="Selection: {0:N0} bytes   ·   0x{1:X}–0x{2:X}" xml:space="preserve"><value>選択範囲 {0:N0} バイト   ·   0x{1:X}～0x{2:X}</value></data>
+  <data name="Set bitmap bits" xml:space="preserve"><value>ビットマップのビットを設定</value></data>
+  <data name="Set index cluster number" xml:space="preserve"><value>インデックスのクラスター番号を設定</value></data>
+  <data name="Several files have the same type. Select one file per type." xml:space="preserve"><value>同じ種類のファイルが複数あります。種類ごとに 1 つ選択してください。</value></data>
+  <data name="Show candidate paths ({0})" xml:space="preserve"><value>候補パスを表示 ({0})</value></data>
+  <data name="Show full path and evidence" xml:space="preserve"><value>フルパスと根拠を表示</value></data>
+  <data name="Show in folder" xml:space="preserve"><value>フォルダーで表示</value></data>
+  <data name="Show records that match any selected reason." xml:space="preserve"><value>選択した理由のいずれかに該当するレコードを表示します。</value></data>
+  <data name="Skip" xml:space="preserve"><value>除外</value></data>
+  <data name="Slack boundary" xml:space="preserve"><value>スラックの境界</value></data>
+  <data name="Some MFT names could not be read. Other names or locations may exist." xml:space="preserve"><value>MFT の名前を一部読み取れませんでした。別の名前や場所が存在する可能性があります。</value></data>
+  <data name="Some folder names come from the last journal record before this event. Those names or locations may have changed afterward." xml:space="preserve"><value>一部の上位フォルダーには、イベント前にジャーナルに最後に記録された名前を使いました。その後、名前や場所が変わった可能性があります。</value></data>
+  <data name="Some parent names could not be read. The path may not be unique." xml:space="preserve"><value>一部の親フォルダー名を読み取れませんでした。別のパスが存在する可能性があります。</value></data>
+  <data name="Sorting all matching records…" xml:space="preserve"><value>該当する全レコードを並べ替え中…</value></data>
+  <data name="Source   {0}" xml:space="preserve"><value>原本   {0}</value></data>
+  <data name="Source 0x{0:X}   ·   {1}" xml:space="preserve"><value>原本 0x{0:X}   ·   {1}</value></data>
+  <data name="Source file" xml:space="preserve"><value>原本ファイル</value></data>
+  <data name="Source file   {0}" xml:space="preserve"><value>原本ファイル   {0}</value></data>
+  <data name="Source journal   " xml:space="preserve"><value>原本ジャーナル   </value></data>
+  <data name="Source offset" xml:space="preserve"><value>原本オフセット</value></data>
+  <data name="Source offset   {0}" xml:space="preserve"><value>原本オフセット   {0}</value></data>
+  <data name="Source offset 0x{0:X}" xml:space="preserve"><value>原本オフセット 0x{0:X}</value></data>
+  <data name="Source offset 0x{0:X}   ·   {1} bytes" xml:space="preserve"><value>原本オフセット 0x{0:X}   ·   {1} バイト</value></data>
+  <data name="Source offset 0x{0:X}  ·  {1:N0} bytes" xml:space="preserve"><value>原本オフセット 0x{0:X}  ·  {1:N0} バイト</value></data>
+  <data name="Source offset and entry number do not match" xml:space="preserve"><value>原本オフセットとエントリ番号が一致しません</value></data>
+  <data name="Source pairing warning" xml:space="preserve"><value>原本の組み合わせに関する警告</value></data>
+  <data name="Source records ({0})" xml:space="preserve"><value>原本レコード ({0})</value></data>
+  <data name="Sources scanned: {0:N0}" xml:space="preserve"><value>スキャン済みの原本 {0:N0} 件</value></data>
+  <data name="Start  {0} {1}" xml:space="preserve"><value>開始  {0} {1}</value></data>
+  <data name="Start + length   " xml:space="preserve"><value>開始位置 + 長さ   </value></data>
+  <data name="Start date" xml:space="preserve"><value>開始日</value></data>
+  <data name="Start date missing" xml:space="preserve"><value>開始日が指定されていません</value></data>
+  <data name="Start time" xml:space="preserve"><value>開始時刻</value></data>
+  <data name="Storage class changed" xml:space="preserve"><value>記憶域クラスを変更</value></data>
+  <data name="Stream changed by TxF" xml:space="preserve"><value>TxF がストリームを変更</value></data>
+  <data name="Stream integrity settings changed" xml:space="preserve"><value>ストリームの整合性設定を変更</value></data>
+  <data name="Structure" xml:space="preserve"><value>構造</value></data>
+  <data name="Surrounding records · " xml:space="preserve"><value>周辺のレコード · </value></data>
+  <data name="Tab-separated" xml:space="preserve"><value>タブ区切り</value></data>
+  <data name="Target MFT record number" xml:space="preserve"><value>対象 MFT レコード番号</value></data>
+  <data name="Target disk clusters (LCN)" xml:space="preserve"><value>対象ディスククラスター (LCN)</value></data>
+  <data name="The CSV file name must end in .csv." xml:space="preserve"><value>CSV ファイル名の末尾には .csv が必要です。</value></data>
+  <data name="The EWF segment set is damaged or incomplete." xml:space="preserve"><value>EWF の分割ファイルが破損または欠落しています。</value></data>
+  <data name="The MFT contains no surviving name for the parent folder." xml:space="preserve"><value>MFT に親フォルダーの名前が残っていません。</value></data>
+  <data name="The MFT entry referenced as the parent is not a directory." xml:space="preserve"><value>親として参照された MFT エントリはディレクトリではありません。</value></data>
+  <data name="The MFT entry was reused for another file. The historical path cannot be determined." xml:space="preserve"><value>この MFT エントリは別のファイルに再利用されており、過去のパスは特定できません。</value></data>
+  <data name="The MFT index does not match the selected source." xml:space="preserve"><value>MFT インデックスが選択した原本と一致しません。</value></data>
+  <data name="The MFT lacks a required file name or parent folder." xml:space="preserve"><value>必要なファイル名または親フォルダーが MFT にありません。</value></data>
+  <data name="Names missing from the journal ({0}) come from the MFT at acquisition. Their names and locations at the time of the event are unknown." xml:space="preserve"><value>ジャーナルで確認できない上位フォルダー名（{0}）は、収集時の MFT から補いました。イベント発生時も同じ名前と場所だったかは確認できません。</value></data>
+  <data name="The attribute type in {0} is inferred from its position and timestamp values." xml:space="preserve"><value>{0} の属性の種類は、その位置とタイムスタンプの値から推定しています。</value></data>
+  <data name="The carved name cannot be verified as a single path component." xml:space="preserve"><value>カービングで取得した名前が単一のパス要素か確認できません。</value></data>
+  <data name="The carved record does not establish its parent path." xml:space="preserve"><value>カービングしたレコードから親フォルダーのパスを特定できません。</value></data>
+  <data name="The end of the range must be later than its start. Adjust the end date or time." xml:space="preserve"><value>終了日時は開始日時より後に設定してください。</value></data>
+  <data name="The engine could not read the source." xml:space="preserve"><value>エンジンが原本を読み取れませんでした。</value></data>
+  <data name="The evidence record was not found in the index." xml:space="preserve"><value>根拠となるレコードがインデックスに見つかりません。</value></data>
+  <data name="The field's byte range is unavailable in this record." xml:space="preserve"><value>このレコードではフィールドのバイト範囲を特定できません。</value></data>
+  <data name="The file for the selected record could not be found in the list." xml:space="preserve"><value>選択したレコードのファイルが一覧に見つかりません。</value></data>
+  <data name="The file identifiers differ. These records cannot be compared as changes to the same file." xml:space="preserve"><value>ファイル ID が異なるため、同じファイルの変更として比較できません。</value></data>
+  <data name="The first 100 are listed in source offset order." xml:space="preserve"><value>原本オフセット順に先頭 100 件を表示します。</value></data>
+  <data name="The folder chain exceeds the supported display depth." xml:space="preserve"><value>フォルダーの階層が表示できる深さを超えています。</value></data>
+  <data name="The immediate parent name was observed in the same journal segment. Higher folders are unknown." xml:space="preserve"><value>同じジャーナル区間に直近の親フォルダー名が記録されています。それより上位のフォルダーは不明です。</value></data>
+  <data name="The index belongs to another module or has invalid version information." xml:space="preserve"><value>インデックスが別のモジュールのものか、バージョン情報が無効です。</value></data>
+  <data name="The index hash does not match the selected source." xml:space="preserve"><value>インデックスのハッシュが選択した原本と一致しません。</value></data>
+  <data name="The index identifier or format version does not match this module." xml:space="preserve"><value>インデックス識別子または形式のバージョンがこのモジュールと一致しません。</value></data>
+  <data name="The indexed source hash or size does not match the module output." xml:space="preserve"><value>インデックス内の原本のハッシュまたはサイズがモジュールの出力と一致しません。</value></data>
+  <data name="The journal does not identify the parent folder at this time. Attach the MFT from the same volume to investigate the path." xml:space="preserve"><value>この時点の親フォルダーをジャーナルから特定できません。パスを調査するには、同じボリュームの MFT を関連付けてください。</value></data>
+  <data name="The journal file name cannot be read as a single path component." xml:space="preserve"><value>ジャーナルのファイル名を単一のパス要素として読み取れません。</value></data>
+  <data name="The journal records the volume root referencing itself." xml:space="preserve"><value>ジャーナルには、ボリュームのルートが自分自身を参照する記録があります。</value></data>
+  <data name="The journal references NTFS root record 5." xml:space="preserve"><value>ジャーナルは NTFS のルートレコード 5 を参照しています。</value></data>
+  <data name="The journal root identifier does not match the acquired MFT root." xml:space="preserve"><value>ジャーナルのルート識別子が、取得した MFT のルートと一致しません。</value></data>
+  <data name="The old name comes from a later rename of the parent folder." xml:space="preserve"><value>この旧名は、後の親フォルダー名変更レコードに記録されています。</value></data>
+  <data name="The parent folder’s MFT entry was already unallocated at acquisition. It does not establish the folder’s former location." xml:space="preserve"><value>収集時、上位フォルダーの MFT エントリはすでに割り当てが解除されていました。このエントリから以前の場所は確認できません。</value></data>
+  <data name="The parent chain exceeds the supported display depth." xml:space="preserve"><value>親参照の階層が表示できる深さを超えています。</value></data>
+  <data name="The parent folder cannot be identified in this journal segment. No MFT is attached." xml:space="preserve"><value>このジャーナル区間では親フォルダーを特定できません。MFT が接続されていません。</value></data>
+  <data name="The parent folder has evidence of multiple linked names. No single path can be determined." xml:space="preserve"><value>親フォルダーに複数のリンク名の記録があるため、パスを一意に特定できません。</value></data>
+  <data name="The parent folder has several recorded names or locations. The path used at the time of the event is unknown." xml:space="preserve"><value>上位フォルダーには複数の名前や場所が記録されています。イベント発生時のパスは一つに絞れません。</value></data>
+  <data name="The parent folder’s creation or new-name records all come after this event. Its name at the time of the event is unknown." xml:space="preserve"><value>上位フォルダーの作成や新しい名前の記録はいずれもイベント後のものです。イベント発生時の名前は確認できません。</value></data>
+  <data name="The parent folder's name or location differs before and after this event. The time of the change cannot be narrowed down." xml:space="preserve"><value>このイベントの前後で親フォルダーの名前または場所が異なります。変更時点を特定できません。</value></data>
+  <data name="The parent location observed after this event differs from its location at acquisition. Its event-time location is unknown." xml:space="preserve"><value>このイベントより後に記録された親の場所と、取得時の場所が異なります。イベント時点の場所は不明です。</value></data>
+  <data name="The parent name cannot be read as one path component." xml:space="preserve"><value>親の名前を単一のパス要素として読み取れません。</value></data>
+  <data name="The parent reference does not refer to a directory." xml:space="preserve"><value>親参照の対象はディレクトリではありません。</value></data>
+  <data name="The parent references contain a cycle." xml:space="preserve"><value>親参照が循環しています。</value></data>
+  <data name="The path could not be resolved." xml:space="preserve"><value>パスを解決できませんでした。</value></data>
+  <data name="The previously attached $MFT could not be found. Use Attach $MFT to select it again." xml:space="preserve"><value>前回関連付けた $MFT が見つかりません。「$MFT を関連付け」で選び直してください。</value></data>
+  <data name="The record at 0x{0:X} does not match the index. Reopen the matching extraction." xml:space="preserve"><value>0x{0:X} のレコードがインデックスと一致しません。対応する抽出ファイルを開き直してください。</value></data>
+  <data name="The recorded data length is zero." xml:space="preserve"><value>記録されたデータ長は 0 です。</value></data>
+  <data name="The journal links this file name to its parent folders up to the volume root." xml:space="preserve"><value>ジャーナルに記録されたファイル名と上位フォルダーをたどり、ボリュームのルートまでパスを確認しました。</value></data>
+  <data name="The recorded parent reference identifies the volume root." xml:space="preserve"><value>記録された親参照はボリュームのルートを示しています。</value></data>
+  <data name="The reference record is unavailable in this index." xml:space="preserve"><value>このインデックスに基準レコードがありません。</value></data>
+  <data name="The requested file could not be found in this list." xml:space="preserve"><value>指定したファイルがこの一覧に見つかりません。</value></data>
+  <data name="The required entry is absent from the acquired MFT. It may have been deleted or omitted during acquisition." xml:space="preserve"><value>必要なエントリが取得した MFT にありません。削除済みか、取得時に欠落した可能性があります。</value></data>
+  <data name="The results file has an unclosed quoted field." xml:space="preserve"><value>結果ファイルに引用符が閉じていないフィールドがあります。</value></data>
+  <data name="The results file has no column names." xml:space="preserve"><value>結果ファイルに列名がありません。</value></data>
+  <data name="The results file is empty." xml:space="preserve"><value>結果ファイルが空です。</value></data>
+  <data name="The root reference has no sequence number, so the volume root cannot be confirmed." xml:space="preserve"><value>ルート参照にシーケンス番号がなく、ボリュームのルートか確認できません。</value></data>
+  <data name="The same file was selected for more than one source. Check the file for each source." xml:space="preserve"><value>同じファイルが複数の原本に指定されています。原本ごとのファイルを確認してください。</value></data>
+  <data name="The save folder is unavailable. Windows will use its default location." xml:space="preserve"><value>保存先フォルダーにアクセスできません。Windows の既定の場所を使用します。</value></data>
+  <data name="The selected log record was not found." xml:space="preserve"><value>選択したログレコードが見つかりません。</value></data>
+  <data name="The source SHA-256 differs from the index summary." xml:space="preserve"><value>原本の SHA-256 がインデックスの概要と一致しません。</value></data>
+  <data name="The source and index hashes differ." xml:space="preserve"><value>原本とインデックスのハッシュが一致しません。</value></data>
+  <data name="The source changed after the last scan. Scan again." xml:space="preserve"><value>前回のスキャン後に原本が変更されました。再度スキャンしてください。</value></data>
+  <data name="The source file size changed during analysis." xml:space="preserve"><value>分析中に原本ファイルのサイズが変わりました。</value></data>
+  <data name="The source hash or file size in the index does not match the extracted file." xml:space="preserve"><value>インデックス内の原本のハッシュまたはファイルサイズが抽出ファイルと一致しません。</value></data>
+  <data name="The source identifier is unavailable in the index." xml:space="preserve"><value>インデックスに原本の識別情報がありません。</value></data>
+  <data name="The time of the log operation is not recorded." xml:space="preserve"><value>ログ操作の実行時刻は記録されていません。</value></data>
+  <data name="The {0} file could not be found.&#10;{1}" xml:space="preserve"><value>{0} が見つかりません。
+{1}</value></data>
+  <data name="This $MFT differs from the previous source. Verify that it came from the same volume, then select it again." xml:space="preserve"><value>この $MFT は前回の原本と異なります。同じボリュームのものか確認して再度選択してください。</value></data>
+  <data name="This 128-bit journal identifier cannot be directly linked to a 64-bit MFT reference." xml:space="preserve"><value>この 128 ビットのジャーナル識別子を 64 ビットの MFT 参照に直接関連付けることはできません。</value></data>
+  <data name="This QCOW image requires a backing file." xml:space="preserve"><value>この QCOW イメージにはバッキングファイルが必要です。</value></data>
+  <data name="This activity does not contain both records from the same rename." xml:space="preserve"><value>この操作には、同じ名前変更に対応する両方のレコードがありません。</value></data>
+  <data name="This file already exists. Choose a new CSV file name." xml:space="preserve"><value>このファイルは既に存在します。新しい CSV ファイル名を指定してください。</value></data>
+  <data name="This identifier is incompatible with MFT file references. The acquisition path is unavailable." xml:space="preserve"><value>この識別子は MFT ファイル参照と互換性がなく、取得時のパスを特定できません。</value></data>
+  <data name="This journal identifier cannot identify an MFT entry." xml:space="preserve"><value>このジャーナル識別子では MFT エントリを特定できません。</value></data>
+  <data name="This journal record lacks the event-time file name required to construct a path." xml:space="preserve"><value>パスの作成に必要なイベント時点のファイル名が、このジャーナルレコードにありません。</value></data>
+  <data name="This name survives in an unallocated entry. The path may not have existed at acquisition." xml:space="preserve"><value>この名前は未割り当てのエントリに残存しています。取得時にはそのパスが存在しなかった可能性があります。</value></data>
+  <data name="This record contains no file name." xml:space="preserve"><value>このレコードにはファイル名がありません。</value></data>
+  <data name="This record was read immediately after a damaged segment." xml:space="preserve"><value>このレコードは破損区間の直後に読み取ったものです。</value></data>
+  <data name="Through {0}" xml:space="preserve"><value>{0} まで</value></data>
+  <data name="Time difference" xml:space="preserve"><value>時刻差</value></data>
+  <data name="To attach $MFT, select $J from the same volume." xml:space="preserve"><value>$MFT を関連付けるには、同じボリュームの $J を選択してください。</value></data>
+  <data name="To attach an $MFT, select the $J extracted from the same volume." xml:space="preserve"><value>$MFT を関連付けるには、同じボリュームから抽出した $J を選択してください。</value></data>
+  <data name="Tracker results database" xml:space="preserve"><value>Tracker の結果データベース</value></data>
+  <data name="Tracker results|*.db;*.sqlite;*.sqlite3;*.csv|All files|*.*" xml:space="preserve"><value>Tracker の結果|*.db;*.sqlite;*.sqlite3;*.csv|すべてのファイル|*.*</value></data>
+  <data name="Transaction ID" xml:space="preserve"><value>トランザクション ID</value></data>
+  <data name="Transaction ID   {0} ({1})" xml:space="preserve"><value>トランザクション ID   {0} ({1})</value></data>
+  <data name="Transaction IDs can be reused." xml:space="preserve"><value>トランザクション ID は再利用される場合があります。</value></data>
+  <data name="Transaction overview copied." xml:space="preserve"><value>トランザクションの概要をコピーしました。</value></data>
+  <data name="Transaction records.csv" xml:space="preserve"><value>トランザクションレコード.csv</value></data>
+  <data name="Truncated" xml:space="preserve"><value>末尾の欠落</value></data>
+  <data name="Truncated attribute header" xml:space="preserve"><value>属性ヘッダーの末尾が欠落しています</value></data>
+  <data name="Truncated attribute list header" xml:space="preserve"><value>属性リストのヘッダーが途中で切れています</value></data>
+  <data name="Truncated file name attribute" xml:space="preserve"><value>ファイル名属性の末尾が欠落しています</value></data>
+  <data name="Truncated file name data" xml:space="preserve"><value>ファイル名データの末尾が欠落しています</value></data>
+  <data name="Truncated final record" xml:space="preserve"><value>最後のレコードの末尾が欠落しています</value></data>
+  <data name="Type code" xml:space="preserve"><value>種類コード</value></data>
+  <data name="USA match" xml:space="preserve"><value>USA 一致</value></data>
+  <data name="USN Journal ($J) and $MFT source information" xml:space="preserve"><value>USN Journal ($J) と $MFT の原本情報</value></data>
+  <data name="USN Journal ($J) source information" xml:space="preserve"><value>USN Journal ($J) の原本情報</value></data>
+  <data name="Unavailable" xml:space="preserve"><value>取得不能</value></data>
+  <data name="Unavailable in this data" xml:space="preserve"><value>このデータにはありません</value></data>
+  <data name="Undecodable name characters are displayed as their original UTF-16 code units." xml:space="preserve"><value>デコードできない名前の文字は元の UTF-16 コード単位で表示します。</value></data>
+  <data name="Undetermined" xml:space="preserve"><value>判定不能</value></data>
+  <data name="Unknown bits 0x{0:X8}" xml:space="preserve"><value>未知のビット 0x{0:X8}</value></data>
+  <data name="Unknown folder" xml:space="preserve"><value>フォルダー不明</value></data>
+  <data name="Unknown new folder" xml:space="preserve"><value>変更後のフォルダー不明</value></data>
+  <data name="Unknown parent path" xml:space="preserve"><value>親パス不明</value></data>
+  <data name="Unknown path" xml:space="preserve"><value>パス不明</value></data>
+  <data name="Unknown previous folder" xml:space="preserve"><value>変更前のフォルダー不明</value></data>
+  <data name="Unknown slack location" xml:space="preserve"><value>スラックの位置不明</value></data>
+  <data name="Unnamed range record" xml:space="preserve"><value>名前のない範囲レコード</value></data>
+  <data name="Unsupported USN V{0}" xml:space="preserve"><value>未対応の USN V{0}</value></data>
+  <data name="Unsupported or damaged image header. For segmented evidence select the first segment or descriptor." xml:space="preserve"><value>イメージのヘッダーが未対応または破損しています。分割された証拠では先頭のセグメント、または記述ファイルを選択してください。</value></data>
+  <data name="Up to {0} candidate paths are shown." xml:space="preserve"><value>候補パスは最大 {0} 件まで表示します。</value></data>
+  <data name="Update disk cluster mapping" xml:space="preserve"><value>ディスククラスターのマッピングを更新</value></data>
+  <data name="Update indexed file name" xml:space="preserve"><value>インデックス内のファイル名を更新</value></data>
+  <data name="Update nonresident attribute value" xml:space="preserve"><value>非常駐属性の値を更新</value></data>
+  <data name="Update resident attribute value" xml:space="preserve"><value>常駐属性の値を更新</value></data>
+  <data name="Update sequence mismatch at sector boundary" xml:space="preserve"><value>セクター境界の更新シーケンスが一致しません</value></data>
+  <data name="Use Windows language ({0})" xml:space="preserve"><value>Windows の言語を使用 ({0})</value></data>
+  <data name="VMDK snapshots require a verified parent chain." xml:space="preserve"><value>VMDK スナップショットは親ディスクの連鎖を検証する必要があります。</value></data>
+  <data name="Validation" xml:space="preserve"><value>検証結果</value></data>
+  <data name="Value in Redo" xml:space="preserve"><value>Redo の値</value></data>
+  <data name="Value in Undo" xml:space="preserve"><value>Undo の値</value></data>
+  <data name="Verifying extracted files" xml:space="preserve"><value>抽出したファイルを検証中</value></data>
+  <data name="Verifying the SHA-256 hash of the selected MFT…" xml:space="preserve"><value>選択した MFT の SHA-256 を検証しています…</value></data>
+  <data name="Verifying the source file’s SHA-256 hash…" xml:space="preserve"><value>原本ファイルの SHA-256 を検証しています…</value></data>
+  <data name="Verifying the source hash against the index." xml:space="preserve"><value>原本のハッシュをインデックスと照合しています。</value></data>
+  <data name="Volume root" xml:space="preserve"><value>ボリュームのルート</value></data>
+  <data name="Wait for the current operation to finish, then try again." xml:space="preserve"><value>現在の操作が完了してから再度お試しください。</value></data>
+  <data name="Wait for the current operation to finish." xml:space="preserve"><value>現在の操作が完了するまでお待ちください。</value></data>
+  <data name="Warnings reported by the engine   {0:N0}" xml:space="preserve"><value>エンジンが報告した警告   {0:N0} 件</value></data>
+  <data name="Within 512 consecutive records of one segment, two old/new name pairs and a deletion share a full file reference. Each pair has distinct names, a matching timestamp and standalone rename reasons. USNs increase and names and parent references link across both pairs and the deletion." xml:space="preserve"><value>同じ区間の連続する 512 件以内に、完全なファイル参照が一致する名前変更 2 組と削除 1 件が記録されています。各組の旧名と新名は異なり、時刻が一致し、変更理由は名前変更のみです。USN は増加し、前後の名前と親参照が 2 組の変更から削除まで連続しています。</value></data>
+  <data name="Within one continuous segment, two adjacent physical records have increasing USNs, but the second timestamp is at least 60 seconds earlier." xml:space="preserve"><value>同一連続区間で物理的に隣接する 2 件のレコードの USN は増加していますが、後者の記録時刻が 60 秒以上前になっています。</value></data>
+  <data name="Write attribute names" xml:space="preserve"><value>属性名を書き込み</value></data>
+  <data name="Write dirty page table" xml:space="preserve"><value>ダーティページテーブルを書き込み</value></data>
+  <data name="Write end of index buffer" xml:space="preserve"><value>インデックスバッファーの末尾に書き込み</value></data>
+  <data name="Write open attribute table" xml:space="preserve"><value>開いている属性のテーブルを書き込み</value></data>
+  <data name="Yes" xml:space="preserve"><value>はい</value></data>
+  <data name="_results.csv" xml:space="preserve"><value>_結果.csv</value></data>
+  <data name="s" xml:space="preserve"><value>秒</value></data>
+  <data name="{0:N0} / {1:N0}   ·   Scanning {2}" xml:space="preserve"><value>{0:N0} / {1:N0}   ·   {2} をスキャン中</value></data>
+  <data name="{0:N0} bytes  ·  {1}: {2:N0}" xml:space="preserve"><value>{0:N0} バイト  ·  {1}：{2:N0}</value></data>
+  <data name="{0:N0} candidates saved" xml:space="preserve"><value>候補 {0:N0} 件を保存しました</value></data>
+  <data name="{0:N0} matching rows saved" xml:space="preserve"><value>条件に一致した {0:N0} 行を保存しました</value></data>
+  <data name="{0:N0} records   ·   {1:N0} files and folders" xml:space="preserve"><value>レコード {0:N0} 件   ·   ファイルとフォルダー {1:N0} 件</value></data>
+  <data name="{0:N0} records saved" xml:space="preserve"><value>{0:N0} 件のレコードを保存しました</value></data>
+  <data name="{0:N0}–{1:N0} of {2:N0}" xml:space="preserve"><value>{2:N0} 件中 {0:N0}～{1:N0} 件</value></data>
+  <data name="{0:N1} seconds earlier than the previous record." xml:space="preserve"><value>直前のレコードより {0:N1} 秒前です。</value></data>
+  <data name="{0}&#10;SHA-256  {1}&#10;{2:N0} bytes · {3:N0} page candidates ({4:N0} USA matches) · {5:N0} record header candidates · {6:N0} signatures excluded by header checks" xml:space="preserve"><value>{0}
+SHA-256  {1}
+{2:N0} バイト · ページ候補 {3:N0} 件（USA 一致 {4:N0} 件）· レコードヘッダー候補 {5:N0} 件 · ヘッダー検査で除外したシグネチャ {6:N0} 件</value></data>
+  <data name="{0}&#10;The highlighted {1} bytes store the file name in UTF-16LE." xml:space="preserve"><value>{0}
+強調表示された {1} バイトは UTF-16LE で記録されたファイル名です。</value></data>
+  <data name="{0}&#10;The highlighted {1} bytes store this field." xml:space="preserve"><value>{0}
+強調表示された {1} バイトがこのフィールドの値です。</value></data>
+  <data name="{0}&#10;{1}&#10;SHA-256  {2}&#10;{3}&#10;Read warnings  {4}&#10;{5}" xml:space="preserve"><value>{0}
+{1}
+SHA-256  {2}
+{3}
+読み取り警告  {4}
+{5}</value></data>
+  <data name="{0}   ·   Declared {1:N0} B / recovered {2:N0} B" xml:space="preserve"><value>{0}   ·   宣言長 {1:N0} B / 復元長 {2:N0} B</value></data>
+  <data name="{0}   ·   Length not recorded" xml:space="preserve"><value>{0}   ·   長さの記録なし</value></data>
+  <data name="{0}   ·   Read only   ·   Times and paths come from Tracker. Open the extracted files to verify them against the source logs." xml:space="preserve"><value>{0}   ·   読み取り専用   ·   時刻とパスは Tracker の出力です。元のログと照合するには抽出ファイルを開いてください。</value></data>
+  <data name="{0}   ·   Records: {1:N0}" xml:space="preserve"><value>{0}   ·   レコード {1:N0} 件</value></data>
+  <data name="{0}   ·   Unreadable MFT records: {1:N0}" xml:space="preserve"><value>{0}   ·   読み取れない MFT レコード {1:N0} 件</value></data>
+  <data name="{0}   ·   {1}   ·   Start 0x{2:X}" xml:space="preserve"><value>{0}   ·   {1}   ·   開始 0x{2:X}</value></data>
+  <data name="{0}  (earlier journal record)" xml:space="preserve"><value>{0}（先行するジャーナルレコード）</value></data>
+  <data name="{0}  (inferred)" xml:space="preserve"><value>{0}（推定）</value></data>
+  <data name="{0}  (sequence number unavailable)" xml:space="preserve"><value>{0}（シーケンス番号不明）</value></data>
+  <data name="{0} (column {1})" xml:space="preserve"><value>{0}（列 {1}）</value></data>
+  <data name="{0} (compared using record and sequence numbers)" xml:space="preserve"><value>{0}（レコード番号とシーケンス番号で比較）</value></data>
+  <data name="{0} bytes" xml:space="preserve"><value>{0} バイト</value></data>
+  <data name="{0} file · {1}" xml:space="preserve"><value>{0} ファイル · {1}</value></data>
+  <data name="{0} items" xml:space="preserve"><value>{0} 件</value></data>
+  <data name="{0} path evidence   ·   {1}" xml:space="preserve"><value>{0} のパスの根拠   ·   {1}</value></data>
+  <data name="{0} record" xml:space="preserve"><value>{0} 件</value></data>
+  <data name="{0} records" xml:space="preserve"><value>{0} 件</value></data>
+  <data name="{0} {1}   ·   Stored length {2} bytes" xml:space="preserve"><value>{0} {1}   ·   記録長 {2} バイト</value></data>
+  <data name="… marks parent folders that cannot be identified from this operation." xml:space="preserve"><value>… はこの操作から特定できない親フォルダーを表します。</value></data>
+  <data name="   ·   Remaining indexes cancelled" xml:space="preserve"><value>   ·   残りの索引作成をキャンセルしました</value></data>
+  <data name="The end is before the start. Adjust the end date or time." xml:space="preserve"><value>終了が開始より前です。終了日または終了時刻を変更してください。</value></data>
+  <data name="Scanned {0:N0} USN records" xml:space="preserve"><value>USN レコード {0:N0} 件を確認しました</value></data>
+  <data name="No leads match this type." xml:space="preserve"><value>この種類に該当する候補はありません。</value></data>
+  <data name="Scanning the file." xml:space="preserve"><value>ファイルをスキャンしています。</value></data>
+  <data name="Scanning the file. {0:N0} / {1:N0} bytes" xml:space="preserve"><value>ファイルをスキャンしています。{0:N0} / {1:N0} バイト</value></data>
+  <data name="Could not scan the file. " xml:space="preserve"><value>ファイルをスキャンできませんでした。 </value></data>
+  <data name="File offset 0x{0:X}   ·   {1:N0} header bytes before fixups" xml:space="preserve"><value>ファイル内オフセット 0x{0:X}   ·   補正前のヘッダー {1:N0} バイト</value></data>
+</root>

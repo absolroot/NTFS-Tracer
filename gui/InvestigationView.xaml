@@ -1,0 +1,88 @@
+<UserControl x:Class="JournalDesk.InvestigationView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Language="{Binding Language,Source={x:Static loc:L.Text}}" xmlns:loc="clr-namespace:JournalDesk" xmlns:local="clr-namespace:JournalDesk" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <UserControl.Resources>
+  <Style TargetType="DataGrid" BasedOn="{StaticResource Desk.LogTable}">
+   <Setter Property="IsReadOnly" Value="True"/><Setter Property="SelectionUnit" Value="FullRow"/><Setter Property="SelectionMode" Value="Single"/>
+   <Setter Property="AutoGenerateColumns" Value="False"/><Setter Property="CanUserSortColumns" Value="False"/><Setter Property="CanUserReorderColumns" Value="False"/>
+   <Setter Property="CanUserAddRows" Value="False"/><Setter Property="HeadersVisibility" Value="Column"/><Setter Property="GridLinesVisibility" Value="Horizontal"/>
+   <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource Desk.Hairline}"/><Setter Property="BorderThickness" Value="0"/>
+  </Style>
+ </UserControl.Resources>
+ <DockPanel>
+  <Border DockPanel.Dock="Bottom" Padding="10,3" Background="{DynamicResource Desk.Panel}" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource Desk.Rule}">
+   <DockPanel>
+    <local:CopyText x:Name="SourceLabel" DockPanel.Dock="Right" Margin="12,0,0,0" MaxWidth="250" Foreground="{DynamicResource Desk.Muted}"/>
+    <TextBlock x:Name="Status" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" FontSize="12"
+     Foreground="{DynamicResource Desk.Muted}" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}" AutomationProperties.LiveSetting="Polite"/>
+   </DockPanel>
+  </Border>
+  <Grid><Grid.RowDefinitions>
+   <RowDefinition Height="Auto"/><RowDefinition Height="*" MinHeight="88"/><RowDefinition Height="Auto"/>
+   <RowDefinition x:Name="EvidenceHeight" Height="152" MinHeight="56"/>
+  </Grid.RowDefinitions>
+   <Border Style="{DynamicResource Desk.LogToolbar}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1">
+    <StackPanel>
+     <DockPanel Margin="0,0,0,3">
+      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+       <Button x:Name="Retry" Click="RetryClick" Visibility="Collapsed" Style="{DynamicResource Desk.IconButton}" Content="&#xE72C;" ToolTip="{loc:Ui RefreshInvestigationLeads}" AutomationProperties.Name="{loc:Ui RefreshInvestigationLeads}"/>
+       <Button x:Name="Stop" Click="StopClick" Visibility="Collapsed" Style="{DynamicResource Desk.IconButton}" Content="&#xE71A;" ToolTip="{loc:Ui CancelOperation}" AutomationProperties.Name="{loc:Ui CancelOperation}"/>
+      </StackPanel>
+      <TextBlock DockPanel.Dock="Left" Text="{loc:Ui LeadType}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+      <ComboBox x:Name="Rules" AutomationProperties.Name="{loc:Ui LeadTypesAndCounts}" DisplayMemberPath="Display" MinWidth="200" MaxWidth="340" MinHeight="30"
+       HorizontalAlignment="Left" SelectionChanged="RuleChanged" ToolTip="{Binding SelectedItem.Display,RelativeSource={RelativeSource Self}}"/>
+     </DockPanel>
+     <Expander x:Name="RuleDetails" Style="{DynamicResource Desk.PathEvidence}" Header="{loc:Ui LeadCriteria}">
+      <local:CopyText x:Name="Criterion" TextWrapping="Wrap" Margin="12,2,8,3" Foreground="{DynamicResource Desk.Muted}"/>
+     </Expander>
+    </StackPanel>
+   </Border>
+   <Grid Grid.Row="1">
+    <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+    <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Leads" CanUserSortColumns="True" Sorting="SortLeads" AutomationProperties.Name="{loc:Ui InvestigationLeads}" SelectionChanged="LeadChanged" MouseDoubleClick="LeadDoubleClick" PreviewKeyDown="OpenFromGrid">
+     <DataGrid.Columns>
+      <DataGridTextColumn Header="{loc:Ui Lead}" SortMemberPath="Number" Binding="{Binding Number}" Width="72" ElementStyle="{StaticResource Desk.LogNumber}"/>
+      <DataGridTextColumn Header="{Binding RecordedHeader,Source={x:Static loc:DisplayTimeZone.Current}}" SortMemberPath="Time" Binding="{Binding Anchor.Time}" Width="226" ElementStyle="{StaticResource Desk.LogMono}"/>
+      <DataGridTextColumn Header="{loc:Ui RecordedName}" SortMemberPath="Name" Binding="{Binding Anchor.DisplayName}" Width="*" MinWidth="140" ElementStyle="{StaticResource Desk.LogText}"/>
+      <DataGridTextColumn x:Name="ObservationColumn" Header="{loc:Ui Observation}" SortMemberPath="Observation" Binding="{Binding Detail}" Width="1.2*" MinWidth="150" ElementStyle="{StaticResource Desk.LogText}"/>
+     </DataGrid.Columns>
+    </DataGrid>
+    <TextBlock x:Name="Empty" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="20" Foreground="{DynamicResource Desk.Muted}" IsHitTestVisible="False"/>
+    <Border Grid.Row="1" Padding="8,2" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0" Background="{DynamicResource Desk.Panel}">
+     <DockPanel>
+      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+       <TextBlock x:Name="PageCounter" VerticalAlignment="Center" FontSize="12" Foreground="{DynamicResource Desk.Muted}" Margin="0,0,9,0"/>
+       <Button x:Name="Prev" Click="PrevClick" IsEnabled="False" Style="{DynamicResource Desk.IconButton}" Content="&#xE76B;" ToolTip="{loc:Ui PreviousPage}" AutomationProperties.Name="{loc:Ui PreviousPage}"/>
+       <Button x:Name="Next" Click="NextClick" IsEnabled="False" Margin="3,0,0,0" Style="{DynamicResource Desk.IconButton}" Content="&#xE76C;" ToolTip="{loc:Ui NextPage}" AutomationProperties.Name="{loc:Ui NextPage}"/>
+      </StackPanel>
+      <Menu DockPanel.Dock="Left" IsMainMenu="False" Padding="0" VerticalAlignment="Center" Background="Transparent">
+       <Menu.Resources><ResourceDictionary Source="CompactMenu.xaml"/></Menu.Resources>
+       <MenuItem x:Name="ExportButton" IsEnabled="False" Header="{loc:Ui Export}" HeaderTemplate="{DynamicResource Desk.ExportHeader}" ToolTip="{loc:Ui ExportLeadsOfTheSelectedTypeAsCsv}"><MenuItem Header="{loc:Ui ExportAsCsv}" Click="ExportClick"/></MenuItem>
+      </Menu>
+      <Border/>
+     </DockPanel>
+    </Border>
+   </Grid>
+   <GridSplitter Grid.Row="2" Style="{DynamicResource Desk.RowSplitter}" Height="4" HorizontalAlignment="Stretch"
+    ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
+   <DockPanel Grid.Row="3">
+   <DockPanel DockPanel.Dock="Top" Margin="10,2,8,3">
+    <Button DockPanel.Dock="Right" x:Name="Go" Content="{loc:Ui OpenLeadEvidence}" IsEnabled="False" Click="GoClick" Padding="8,3" MinHeight="26"/>
+    <TextBlock x:Name="EvidenceTitle" Text="{loc:Ui SupportingRecords}" FontWeight="SemiBold" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"
+     ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}" Margin="0,0,8,0"/>
+   </DockPanel>
+   <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Evidence" AutomationProperties.Name="{loc:Ui SupportingRecordList}" SelectionChanged="EvidenceChanged" MouseDoubleClick="EvidenceDoubleClick" PreviewKeyDown="OpenFromGrid">
+    <DataGrid.Columns>
+     <DataGridTextColumn Header="{loc:Ui LeadEvidenceRole}" Binding="{Binding Role}" Width="110" ElementStyle="{StaticResource Desk.LogText}"/>
+     <DataGridTextColumn Header="{Binding RecordedHeader,Source={x:Static loc:DisplayTimeZone.Current}}" Binding="{Binding Record.Time}" Width="226" ElementStyle="{StaticResource Desk.LogMono}"/>
+     <DataGridTextColumn Header="{loc:Ui RecordedName}" Binding="{Binding Record.DisplayName}" Width="*" MinWidth="145" ElementStyle="{StaticResource Desk.LogText}"/>
+     <DataGridTextColumn Header="{loc:Ui LeadSourceOffset}" Binding="{Binding Record.Offset}" Width="117" ElementStyle="{StaticResource Desk.LogMono}"/>
+     <DataGridTextColumn Header="USN" Binding="{Binding Record.Usn}" Width="105" ElementStyle="{StaticResource Desk.LogMono}"/>
+     <DataGridTextColumn Header="{loc:Ui LeadReasons}" Binding="{Binding Record.ReasonNames}" Width="185" ElementStyle="{StaticResource Desk.LogText}"/>
+     <DataGridTextColumn Header="{loc:Ui ReasonFlags}" Binding="{Binding Record.ReasonText}" Width="122" ElementStyle="{StaticResource Desk.LogMono}"/>
+     <DataGridTextColumn Header="{loc:Ui FileReference}" Binding="{Binding Record.FileText}" Width="206" ElementStyle="{StaticResource Desk.LogText}"/>
+    </DataGrid.Columns>
+   </DataGrid>
+   </DockPanel>
+  </Grid>
+ </DockPanel>
+</UserControl>
+

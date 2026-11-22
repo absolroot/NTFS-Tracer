@@ -1,0 +1,29 @@
+<UserControl x:Class="JournalDesk.RecordSearchFields" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:loc="clr-namespace:JournalDesk">
+ <Expander x:Name="Section" Style="{DynamicResource Desk.PathEvidence}" Margin="0,3,0,0" HorizontalContentAlignment="Stretch"
+  AutomationProperties.Name="{loc:Ui PathReferenceFilters}">
+  <StackPanel Margin="0,4,0,2">
+   <WrapPanel>
+     <StackPanel Width="260" Margin="0,0,8,4">
+      <TextBlock Text="{loc:Ui FilterRecordedPath}" Margin="1,0,0,2" Foreground="{DynamicResource Desk.Muted}"/>
+      <TextBox x:Name="PathInput" Style="{DynamicResource Desk.SearchInput}" TextChanged="FieldChanged"
+       AutomationProperties.Name="{loc:Ui FilterRecordedPath}"/>
+     </StackPanel>
+     <StackPanel Width="176" Margin="0,0,8,4">
+      <TextBlock Text="{loc:Ui FilterFileId}" Margin="1,0,0,2" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource Desk.Muted}"/>
+      <loc:HintTextBox x:Name="FileInput" Hint="{loc:Ui PasteRecordId}" Style="{DynamicResource Desk.SearchInput}" TextChanged="FieldChanged"
+       AutomationProperties.Name="{loc:Ui FilterFileId}" ToolTip="{loc:Ui ReferenceNumberHint}"/>
+     </StackPanel>
+     <StackPanel Width="176" Margin="0,0,8,4">
+      <TextBlock Text="{loc:Ui FilterParentId}" Margin="1,0,0,2" TextTrimming="CharacterEllipsis" Foreground="{DynamicResource Desk.Muted}"/>
+      <loc:HintTextBox x:Name="ParentInput" Hint="{loc:Ui PasteRecordId}" Style="{DynamicResource Desk.SearchInput}" TextChanged="FieldChanged"
+       AutomationProperties.Name="{loc:Ui FilterParentId}" ToolTip="{loc:Ui ReferenceNumberHint}"/>
+     </StackPanel>
+    <Button x:Name="Clear" VerticalAlignment="Bottom" Margin="0,0,0,4" Style="{DynamicResource Desk.IconButton}" Content="&#xE711;" Visibility="Collapsed"
+     Click="ClearClick" AutomationProperties.Name="{loc:Ui ClearPathReferenceFilters}" ToolTip="{loc:Ui ClearPathReferenceFilters}"/>
+   </WrapPanel>
+   <TextBlock x:Name="Error" Text="{loc:Ui ReferenceNumberInvalid}" Margin="1,1,0,2" TextWrapping="Wrap"
+    Visibility="Collapsed" Foreground="{DynamicResource Desk.WarnText}" AutomationProperties.LiveSetting="Polite"/>
+  </StackPanel>
+ </Expander>
+</UserControl>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="Attach $MFT…" xml:space="preserve"><value>Підключити $MFT…</value></data>
+  <data name="CSV with paths and evidence…" xml:space="preserve"><value>CSV зі шляхами й обґрунтуваннями…</value></data>
+  <data name="Cancel" xml:space="preserve"><value>Скасувати</value></data>
+  <data name="Change reason" xml:space="preserve"><value>Причина зміни</value></data>
+  <data name="Continue" xml:space="preserve"><value>Далі</value></data>
+  <data name="Copied" xml:space="preserve"><value>Скопійовано</value></data>
+  <data name="Copy full text" xml:space="preserve"><value>Копіювати весь текст</value></data>
+  <data name="Creation record" xml:space="preserve"><value>Запис про створення</value></data>
+  <data name="Date filter" xml:space="preserve"><value>Фільтр за датою</value></data>
+  <data name="Deletion record" xml:space="preserve"><value>Запис про видалення</value></data>
+  <data name="Display language" xml:space="preserve"><value>Мова інтерфейсу</value></data>
+  <data name="File path" xml:space="preserve"><value>Шлях у записі</value></data>
+  <data name="File renamed" xml:space="preserve"><value>Файл перейменовано</value></data>
+  <data name="Files and folders: {0:N0}   ·   Change records: {1:N0}" xml:space="preserve"><value>Файли й папки: {0:N0}   ·   Записи про зміни: {1:N0}</value></data>
+  <data name="Loading records…" xml:space="preserve"><value>Завантаження записів…</value></data>
+  <data name="Moved to another folder" xml:space="preserve"><value>Переміщено до іншої папки</value></data>
+  <data name="Names missing from the journal ({0}) come from the MFT at acquisition. Their names and locations at the time of the event are unknown." xml:space="preserve"><value>Назв батьківських папок ({0}) немає в журналі. Їх узято зі зібраної MFT. Назви й розташування на момент події невідомі.</value></data>
+  <data name="New name record" xml:space="preserve"><value>Запис про нову назву</value></data>
+  <data name="No matching records." xml:space="preserve"><value>Відповідних записів не знайдено.</value></data>
+  <data name="Old name record" xml:space="preserve"><value>Запис про попередню назву</value></data>
+  <data name="Path inferred from MFT" xml:space="preserve"><value>Шлях відновлено за MFT</value></data>
+  <data name="Path unavailable." xml:space="preserve"><value>Шлях недоступний.</value></data>
+  <data name="Record CSV…" xml:space="preserve"><value>Записи у CSV…</value></data>
+  <data name="Record time ({0})" xml:space="preserve"><value>Час запису ({0})</value></data>
+  <data name="Recorded file name" xml:space="preserve"><value>Назва файлу в записі</value></data>
+  <data name="Recorded path" xml:space="preserve"><value>Шлях у записі</value></data>
+  <data name="Resolving path…" xml:space="preserve"><value>Відновлення шляху…</value></data>
+  <data name="Some folder names come from the last journal record before this event. Those names or locations may have changed afterward." xml:space="preserve"><value>Деякі назви взято з останніх записів про папки до події. Згодом назва або розташування могли змінитися.</value></data>
+  <data name="Source file" xml:space="preserve"><value>Вихідний файл</value></data>
+  <data name="The acquired MFT links the file name to its parent folders." xml:space="preserve"><value>Зібрана MFT пов’язує назву файлу з батьківськими папками.</value></data>
+  <data name="The journal links this file name to its parent folders up to the volume root." xml:space="preserve"><value>Журнал пов’язує назву файлу з батьківськими папками аж до кореня тому.</value></data>
+  <data name="The parent folder cannot be identified in this journal segment. No MFT is attached." xml:space="preserve"><value>У цьому фрагменті журналу бракує даних про батьківську папку. MFT не підключено.</value></data>
+  <data name="Unknown path" xml:space="preserve"><value>Невідомий шлях</value></data>
+  <data name="Use Windows language ({0})" xml:space="preserve"><value>Використовувати мову Windows ({0})</value></data>
+  <data name="Records: {0:N0}" xml:space="preserve"><value>Записи: {0:N0}</value></data>
+  <data name="Records {0:N0}–{1:N0}" xml:space="preserve"><value>Записи {0:N0}–{1:N0}</value></data>
+  <data name="Auto (sequential)" xml:space="preserve"><value>Авто (послідовно)</value></data>
+  <data name="Auto (up to 2 in parallel)" xml:space="preserve"><value>Авто (до 2 паралельно)</value></data>
+  <data name="Extract and analyze" xml:space="preserve"><value>Видобути й проаналізувати</value></data>
+  <data name="Extract files" xml:space="preserve"><value>Видобути файли</value></data>
+  <data name="Preparing indexes · {0}" xml:space="preserve"><value>Підготовка індексів · {0}</value></data>
+  <data name="Sorting all matching records…" xml:space="preserve"><value>Сортування відповідних записів…</value></data>
+  <data name="Data overwritten" xml:space="preserve"><value>Дані перезаписано</value></data>
+  <data name="Data extended" xml:space="preserve"><value>Дані розширено</value></data>
+  <data name="Data truncated" xml:space="preserve"><value>Дані скорочено</value></data>
+  <data name="File closed" xml:space="preserve"><value>Файл закрито</value></data>
+  <data name="Attributes or timestamps changed" xml:space="preserve"><value>Атрибути або позначки часу змінено</value></data>
+  <data name="{0}   ·   Records: {1:N0}" xml:space="preserve"><value>{0}   ·   Записи: {1:N0}</value></data>
+  <data name="No records match your search." xml:space="preserve"><value>Відповідних записів не знайдено.</value></data>
+  <data name="Source offset 0x{0:X}  ·  {1:N0} bytes" xml:space="preserve"><value>Зміщення 0x{0:X}  ·  {1:N0} Б</value></data>
+</root>

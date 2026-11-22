@@ -1,0 +1,46 @@
+<Window x:Class="JournalDesk.SourceInfoWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ Language="{Binding Language,Source={x:Static loc:L.Text}}" xmlns:loc="clr-namespace:JournalDesk" xmlns:local="clr-namespace:JournalDesk" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="{loc:Ui AttachedSourceInformation}" Width="700" Height="460" MinWidth="460" MinHeight="280"
+ WindowStartupLocation="CenterOwner" Background="{DynamicResource Desk.Canvas}" Foreground="{DynamicResource Desk.Text}" FontFamily="Segoe UI, Malgun Gothic">
+ <Window.Resources>
+  <Style x:Key="Label" TargetType="local:CopyText" BasedOn="{StaticResource {x:Type local:CopyText}}">
+   <Setter Property="Foreground" Value="{DynamicResource Desk.Muted}"/><Setter Property="Margin" Value="0,1,10,1"/><Setter Property="VerticalAlignment" Value="Top"/><Setter Property="TextWrapping" Value="Wrap"/>
+  </Style>
+ </Window.Resources>
+ <TabControl Style="{DynamicResource Desk.InspectorTabs}" Margin="10,6" AutomationProperties.Name="{loc:Ui SourceInformationLabel}">
+  <TabItem Header="{loc:Ui AttachedSources}"><DockPanel>
+  <Border DockPanel.Dock="Bottom" Padding="10,4" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0">
+   <DockPanel><Button x:Name="Copy" DockPanel.Dock="Right" Click="CopyInfo" Style="{DynamicResource Desk.IconButton}" Content="&#xE8C8;" ToolTip="{loc:Ui CopySourceInformation}" AutomationProperties.Name="{loc:Ui CopySourceInformation}"/>
+    <TextBlock x:Name="Feedback" VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite" Foreground="{DynamicResource Desk.Muted}"/></DockPanel>
+  </Border>
+  <ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="10,8" Grid.IsSharedSizeScope="True">
+   <ItemsControl x:Name="Sources"><ItemsControl.ItemTemplate><DataTemplate>
+    <Border BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1" Padding="0,6,0,8">
+     <StackPanel><local:CopyText Text="{Binding Title,Mode=OneWay}" FontWeight="SemiBold" FontSize="16" Margin="0,0,0,5"/>
+      <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto" MaxWidth="155" SharedSizeGroup="SourceField"/><ColumnDefinition/></Grid.ColumnDefinitions>
+       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+       <local:CopyText Text="{loc:Ui FileLocation}" Style="{StaticResource Label}"/><local:CopyText Grid.Column="1" Text="{Binding SourcePath,Mode=OneWay}" TextWrapping="Wrap" AutomationProperties.Name="{loc:Ui ExtractedFilePath}"/>
+       <local:CopyText Grid.Row="1" Text="SHA-256" Style="{StaticResource Label}"/><local:CopyText Grid.Row="1" Grid.Column="1" Text="{Binding Digest,Mode=OneWay}" TextWrapping="Wrap" FontFamily="Consolas" AutomationProperties.Name="{loc:Ui SourceSha256}"/>
+       <local:CopyText Grid.Row="2" Text="{loc:Ui ParseResults}" Style="{StaticResource Label}"/><local:CopyText Grid.Row="2" Grid.Column="1" Text="{Binding Result,Mode=OneWay}" Margin="0,1" TextWrapping="Wrap"/>
+       <local:CopyText Grid.Row="3" Text="{loc:Ui ParseWarnings}" Style="{StaticResource Label}"/><local:CopyText Grid.Row="3" Grid.Column="1" Text="{Binding Diagnostic,Mode=OneWay}" Margin="0,1" TextWrapping="Wrap"/>
+       <local:CopyText Grid.Row="4" Text="{loc:Ui IndexVersion}" Style="{StaticResource Label}"/><local:CopyText Grid.Row="4" Grid.Column="1" Text="{Binding Engine,Mode=OneWay}" Margin="0,1" Foreground="{DynamicResource Desk.Muted}"/>
+      </Grid>
+     </StackPanel>
+    </Border>
+   </DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
+   <local:CopyText x:Name="PairNote" TextWrapping="Wrap" Foreground="{DynamicResource Desk.Muted}" Margin="0,9,0,4"/>
+  </StackPanel></ScrollViewer>
+  </DockPanel></TabItem>
+  <TabItem Header="{loc:Ui SourceGuide}">
+   <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="10,8" MaxWidth="620" HorizontalAlignment="Left">
+     <TextBlock Text="USN Journal ($J)" FontWeight="SemiBold"/>
+     <TextBlock Text="{loc:Ui EachRecordContainsAFileNameAParent}" TextWrapping="Wrap" Margin="0,3,0,14"/>
+     <TextBlock Text="Master File Table ($MFT)" FontWeight="SemiBold"/>
+     <TextBlock Text="{loc:Ui TheMftPathInFileHistoryComesFrom}" TextWrapping="Wrap" Margin="0,3,0,14"/>
+     <TextBlock Text="Hex" FontWeight="SemiBold"/>
+     <TextBlock Text="{loc:Ui AddressesAreByteOffsetsFromTheStartOf}" TextWrapping="Wrap" Margin="0,3,0,0"/>
+    </StackPanel>
+   </ScrollViewer>
+  </TabItem>
+ </TabControl>
+</Window>
