@@ -1,6 +1,6 @@
 # Third-party notices
 
-Dependency notices are collected under `Notices/` in the Windows ZIPs. In this source tree, see [the application notices](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/gui/Notices), [the engine](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/engine), and [the image module](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/modules/EvidenceImage).
+Dependency notices are collected under `Notices/` in the Windows ZIPs. In this source tree, see [the application notices](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/gui/Notices), [the engine](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/engine), and [the image module](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/modules/EvidenceImage).
 
 | Component | License | Included notice or source |
 | --- | --- | --- |
@@ -19,6 +19,6 @@ Dependency notices are collected under `Notices/` in the Windows ZIPs. In this s
 
 ## Replacing libewf
 
-NTFS Tracer uses libewf for EWF images. The Windows packages ship the library as the separate `JournalDesk.libewf.dll`. The app loads that DLL from the application directory. You may replace it with an interface-compatible modified build and reverse engineer the combined work to debug modifications to the library, as provided by the LGPL.
+NTFS Tracer uses libewf for EWF images. The Windows packages ship the library as the separate `NtfsTracer.libewf.dll`. The app loads that DLL from the application directory. You may replace it with an interface-compatible modified build and reverse engineer the combined work to debug modifications to the library, as provided by the LGPL.
 
 Both ZIPs contain the source for the shipped library, the zlib source it builds with, the GPL and LGPL license texts, and the CMake recipe. Follow `Notices/ewf/README.md` in the ZIP to rebuild the DLL and install it next to `NtfsTracer.exe`.

@@ -16,7 +16,7 @@ NTFS Tracer is a Windows workbench for the USN change journal, Master File Table
 
 [![English NTFS Tracer demo showing a journal search and the old and new names in a file's rename history](docs/media/investigation.gif)](docs/media/investigation.gif)
 
-**Search for `report` → open file history → check the previous and new names.** The v0.8.29 demo uses 391 synthetic records across 131 files.
+**Search for `report` → open file history → check the previous and new names.** The demo follows both names back to the USN records that support the rename.
 
 [Journal search](docs/media/journal-search.png) · [File history](docs/media/file-history.png)
 
@@ -43,7 +43,7 @@ NTFS Tracer is a Windows workbench for the USN change journal, Master File Table
 | VMDK | Single sparse, stream-optimized, and descriptors referencing FLAT extents in the same directory. Parent chains are unsupported. |
 | AFF (`.aff`) | Single AFF1 with uncompressed, zlib, or zero pages |
 
-Physical images must contain a readable NTFS volume. A locked BitLocker volume must be unlocked outside NTFS Tracer. See the [image module](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/modules/EvidenceImage/README.md) for the full variant limits.
+Physical images must contain a readable NTFS volume. A locked BitLocker volume must be unlocked outside NTFS Tracer. See the [image module](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.30/modules/EvidenceImage/README.md) for the full variant limits.
 
 ### Extracted artifacts and existing results
 
@@ -68,30 +68,56 @@ You can also select a folder containing extracted artifacts. The app opens evide
 
 ## Compare workflows
 
-Suppose you know a file's current name and want to find its previous name and surrounding activity. The tools differ in where you narrow the evidence and what you get back.
+**You know the file is now called `report-final.docx`. What was it called before?** We tried this on the same USN journal in both apps.
 
-| Tool | Start with | How you find the rename | What you work with |
-| --- | --- | --- | --- |
-| **NTFS Tracer** | An extracted `$J` or a supported disk image | Search the current name with **Include previous names** enabled, then open **File history**. | A per-file timeline with the previous and new names together, the contributing USN records underneath, and a return path to the original search. |
-| [MFTECmd](https://github.com/EricZimmerman/MFTECmd) | An extracted `$J`; optionally a matching `$MFT` | Export with the CLI, then filter rows for the same file reference and compare the rename reasons. | CSV or JSON with one row per journal record. With `-m`, MFTECmd can reconstruct historical parent paths by rewinding directory changes. |
-| [NTFS Log Tracker](https://sites.google.com/site/forensicnote/ntfs-log-tracker) | Extracted NTFS artifacts | Analyze the artifacts in the GUI and search its results by name or file reference. When `$LogFile` is available, check Tracker’s reconstructed rename or move events as additional evidence. | Searchable and exportable results from USN records and, when supplied, reconstructed `$LogFile` events. |
-| [Velociraptor](https://docs.velociraptor.app/artifact_references/pages/windows.forensics.usn/) | A Windows endpoint or collected `$J` | Run `Windows.Forensics.Usn`. Use `FileNameRegex` to find the file, then clear the filename filter and query by `MFT_ID_Regex` to include changes under other names. | Filtered records as artifact results, which can be collected from multiple endpoints and queried further. |
+| | Steps | What appeared |
+| --- | --- | --- |
+| **NTFS Tracer** | Search for `report-final.docx` with **Include previous names** enabled, then choose **Open file history**. | The search found all five records associated with the file. The history grouped the rename into one event and displayed both names. |
+| **NTFS Log Tracker 1.9** | Search **File/Directory Name** for `report-final.docx`. Copy the **FileReferenceNumber** from a result, clear the filename filter, and search again by that reference. | The first search showed two rows containing the current name. Searching by reference returned five rows, including the old-name record. |
 
-This table compares documented steps and outputs. The timings below come from a separate lookup workload.
+Both workflows found the name change from `report-draft.docx` (USN 38648) to `report-final.docx` (USN 38744). When following a move, the same file reference also lets you trace records across parent folders. A full path depends on the available directory evidence.
+
+<details>
+<summary>Cross-check against MFTECmd</summary>
+
+[MFTECmd](https://github.com/EricZimmerman/MFTECmd) 2026.11.1 exported the same five records for file reference `42-1`, with matching names, USNs, and source offsets.
+
+```powershell
+.\MFTECmd.exe -f '.\$J' --csv .\out --csvf rename.csv --co false
+```
+
+</details>
+
+[![File history showing the old and new names in one rename activity, with both USN records beneath it](docs/media/file-history.png)](docs/media/file-history.png)
+
+### Inspecting a transaction in `$LogFile`
+
+| Tool | What the documented or tested view exposes |
+| --- | --- |
+| **ArtiFast Windows** | Its Windows LogFile artifact view lists entry offsets, record pages, current and previous LSNs, client Undo LSNs, and record types. Selecting a row exposes individual fields, including the transaction ID and Redo/Undo operations. |
+| **NTFS Tracer** | Open **NTFS transactions**, search for the LSN, and select the record. The overview shows the source location and related LSNs. If the payload contains file attribute timestamps, it displays creation, content modification, metadata change, and last access values side by side for Redo and Undo. |
+
+The ArtiFast row describes the published interface. [ArtiFast's Windows LogFile documentation](https://forensafe.com/blogs/windowslogfile.html)
+
+### Designed around the analyst's place in the investigation
+
+An analyst should be able to follow a name change without remembering a file reference between searches, and should be able to return to a selected record after closing the app. Experiments on interrupted tasks show that cues from the original task can help people resume it. That research informed these design choices. The timings below measure elapsed workflow time on the sample journal. [Altmann and Trafton, *Task Interruption: Resumption Lag and the Role of Cues*](https://interruptions.net/literature/Altmann-CogSci04.pdf)
+
+On a build that includes investigation sessions, use **File → Save investigation…** and later **Resume last investigation** or **Open investigation…**. The saved file contains source paths and hashes, the active workspace, and the supported search and selection state. Keep the source files with the investigation. NTFS Tracer verifies their SHA-256 hashes when reopening and reuses compatible local indexes.
 
 ## Performance
 
-The Rust engine parses NTFS artifacts into reusable SQLite indexes. When indexing multiple sources, the app can start showing USN records once the journal index is ready, while MFT and transaction indexing continue. The investigation view pages through results and can reuse a verified path-sort cache.
+### NTFS Tracer vs. NTFS Log Tracker
 
-### 16 file-reference lookups on 480,000 records
+We started with an extracted USN journal and two current filenames. For each name, the task was to find what the file was called before. We used the steps above, including the second search by file reference in Tracker and opening **File history** in Tracer.
 
-| Method | Index creation | Time to retrieve the records |
+| What we timed | NTFS Tracer development build | NTFS Log Tracker 1.9 |
 | --- | ---: | ---: |
-| [Sootmark USN](https://github.com/Sootmark/usn) harness, all 16 references known in advance | — | **444 ms** in one pass |
-| Sootmark USN harness, 16 separate lookups | — | **6.66 s** across 16 passes |
-| **NTFS Tracer**, 16 indexed lookups | **2.67 s** once | **3.10 ms** after indexing |
+| Start analysis on a fresh database and wait for the first USN list | **1.08 s** | 3.25 s |
+| Start analysis and find both names for `report-final.docx` | **1.30 s** | 3.50 s |
+| With the same journal open, find both names for `budget-final.docx` | 127 ms | 154 ms |
 
-For a known list, a single scan returns results without waiting for an index. A reusable index saves time when new questions come up during an investigation. All methods returned the same names, USNs, and source offsets. These are backend measurements from a synthetic journal. The comparison above describes workflows for MFTECmd, NTFS Log Tracker, and Velociraptor. [Measurement method and raw timings](docs/performance.md)
+The table shows the median of ten paired trials on one PC using a small synthetic journal (6.1 MB, 63,007 records). Tracer reached the first file’s previous name sooner in all ten. For the second file, Tracer was faster in seven runs and Tracker in three. The timings cover automated app actions from the start button or search to the results. They exclude time spent choosing files, typing, or reading the records. [Steps, result checks, and all ten timings](docs/performance.md#finding-a-previous-name-from-the-current-name)
 
 ## Build from source
 
@@ -103,9 +129,9 @@ dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o ar
 ./lint.ps1
 ```
 
-For EWF support, build `JournalDesk.libewf.dll` using the [libewf instructions](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/modules/EvidenceImage/Logical/Native/README.md) before publishing.
+For EWF support, build `NtfsTracer.libewf.dll` using the [libewf instructions](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md) before publishing.
 
-[Rust engine](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/engine) · [Index format](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/engine/INDEX_FORMAT.md) · [WPF app](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/gui) · [Regression tests](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/tests)
+[Rust engine](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/engine) · [Index format](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.30/engine/INDEX_FORMAT.md) · [WPF app](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/gui) · [Regression tests](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/tests)
 
 ## Display language
 
