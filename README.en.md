@@ -16,8 +16,7 @@
 
 - **Open file history directly from a search result.** Find a file by its current name, then choose **Open file history** to see its previous name and the supporting records.
 - **Optimized database setup, USN indexing, and filename search.** The Rust engine reads the USN journal and builds a searchable database. Typical filename searches start without a fixed delay. On the same sample USN journal, the time from starting analysis to seeing the first record list was **1.08 seconds** in the NTFS Tracer development build and **3.25 seconds** in NTFS Log Tracker 1.9. These are medians from ten runs per tool. [Benchmark setup and results](docs/performance.md#finding-a-previous-name-from-the-current-name)
-
-Investigation tools include lead review, copying evidence values to the clipboard, CSV export, and saving work to resume later.
+- **Designed for everyday investigations.** Open supporting records from an investigation lead, copy the fields you need into your notes, and save your place so you can resume with the same search and selected record.
 
 ## Quick start
 
