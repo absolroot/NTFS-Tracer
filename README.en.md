@@ -4,8 +4,6 @@
 
 <h1 align="center">NTFS Tracer</h1>
 
-<p align="center"><strong>Faster NTFS log analysis. A clearer view of what changed.</strong></p>
-
 <p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64 or x86</a></strong> · <a href="#quick-start">Quick start</a> · <a href="#investigation-features">Investigation features</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#investigation-examples-and-tool-comparisons">Investigation examples</a></p>
 
 <p align="center"><a href="README.ko.md">한국어</a> · <a href="README.ja.md">日本語</a></p>
@@ -14,7 +12,7 @@
 
 ## Why use NTFS Tracer?
 
-- **Open a disk image and extract the NTFS logs in one workflow.** Select an NTFS volume, then extract and index its `$J`, `$MFT`, and `$LogFile` in the app. For regular log parsing, NTFS Log Tracker 1.9 expects files extracted with another tool. [Tracker input requirements](https://sites.google.com/site/forensicnote/ntfs-log-tracker)
+- **Open a disk image and extract the NTFS logs in one workflow.** Select an NTFS volume, then extract and index its `$J`, `$MFT`, and `$LogFile` in the app.
 - **Open file history directly from a search result.** Find a file by its current name, then choose **Open file history** to see its previous name and the supporting records.
 - **Find a file's previous name in about one-ninth the time.** On a 378,975-record USN journal, the first lookup including analysis took a median of 2.24 s in NTFS Tracer 0.8.32 and 20.01 s in NTFS Log Tracker 1.9. [USN journal benchmark](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
 
@@ -64,7 +62,7 @@ Inspect decoded fields, Hex, or JSON, export results to CSV, or scan source file
 | VMDK | Single sparse, stream-optimized, and descriptors referencing FLAT extents in the same directory. Parent chains are unsupported. |
 | AFF | `.aff`. Single AFF1 with uncompressed, zlib, or zero pages |
 
-Physical images must contain a readable NTFS volume. A locked BitLocker volume must be unlocked outside NTFS Tracer. See the [image module](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.32/modules/EvidenceImage/README.md) for the full variant limits.
+Physical images must contain a readable NTFS volume. A locked BitLocker volume must be unlocked outside NTFS Tracer. See the [image module](modules/EvidenceImage/README.md) for the full variant limits.
 
 ### Extracted artifacts and existing results
 
@@ -75,7 +73,7 @@ Physical images must contain a readable NTFS volume. A locked BitLocker volume m
 | `$LogFile` | NTFS transactions, LSNs, and Redo/Undo payloads |
 | NTFS Log Tracker SQLite, CSV or TSV | Browse and filter existing results in the read-only viewer |
 
-You can also select a folder containing extracted artifacts. The app opens evidence read-only and writes extractions and indexes separately. New installations use `%LOCALAPPDATA%\NtfsTracer`. Existing JournalDesk settings and indexes can be reused.
+The app opens evidence read-only and writes extractions and indexes separately. New installations use `%LOCALAPPDATA%\NtfsTracer`. Existing JournalDesk settings and indexes can be reused.
 
 <a id="compare-workflows"></a>
 <a id="performance"></a>
@@ -105,7 +103,7 @@ We ran the same workflow on a 92.34 MiB USN journal with 378,975 records extract
 | First previous name, including analysis | **2.24 s** | 20.01 s |
 | Second previous name with the journal open | **216 ms** | 356 ms |
 
-NTFS Tracer finished the second lookup first in all six runs. Both tools agreed on the old and new names, USNs, change reasons, and timestamps at the precision shown by Tracker. [Test setup and six runs](docs/performance.md#previous-name-lookup-on-a-378975-record-journal) · [MFTECmd cross-check for the example above](docs/performance.md#cross-checking-the-demo-with-mftecmd)
+Both tools agreed on the old and new names, USNs, change reasons, and timestamps at the precision shown by Tracker. [Test setup and six runs](docs/performance.md#previous-name-lookup-on-a-378975-record-journal) · [MFTECmd cross-check for the example above](docs/performance.md#cross-checking-the-demo-with-mftecmd)
 
 ## Build from source
 
@@ -125,19 +123,13 @@ cargo build --release --locked --target i686-pc-windows-msvc --manifest-path eng
 dotnet publish gui/NtfsTracer.csproj -c Release -r win-x86 -p:PublishProfile=Portable -o artifacts/win-x86
 ```
 
-For EWF support, build `NtfsTracer.libewf.dll` using the [libewf instructions](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md) before publishing.
-
-[Rust engine](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/engine) · [Index format](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.32/engine/INDEX_FORMAT.md) · [WPF app](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/gui) · [Regression tests](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/tests)
+For EWF support, build `NtfsTracer.libewf.dll` using the [libewf instructions](modules/EvidenceImage/Logical/Native/README.md) before publishing.
 
 ## Display language
 
 Choose from 16 interface languages under **View → Display language**. Changes apply immediately.
 
 English · 한국어 · 日本語 · Deutsch · Español · Français · Bahasa Indonesia · Italiano · Polski · Português (Brasil) · Türkçe · Tiếng Việt · Русский · Українська · 简体中文 · 繁體中文
-
-## Third-party notices
-
-[Dependency and redistribution notices](THIRD-PARTY-NOTICES.md)
 
 ## License
 

@@ -1,14 +1,12 @@
 # NTFS Tracer
 
-**NTFS ログ解析をもっと速く。ファイルの変化がひと目でわかる。**
-
 **NTFS Tracer は、NTFS ログを検索し、見つけたレコードからファイルの変更履歴をたどる Windows 向けフォレンジックツールです。**
 
 [Windows x64・x86 版をダウンロード](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [한국어](README.ko.md) · [English](README.md)
 
 ## NTFS Tracer を使う理由
 
-- **ディスクイメージから NTFS ログを直接取り込めます。** アプリでイメージと NTFS ボリュームを選ぶと、`$J`、`$MFT`、`$LogFile`を抽出して解析できます。NTFS Log Tracker 1.9 で通常のログ解析を行うには、別のツールで先にファイルを抽出します。 [Tracker の入力形式](https://sites.google.com/site/forensicnote/ntfs-log-tracker)
+- **ディスクイメージから NTFS ログを直接取り込めます。** アプリでイメージと NTFS ボリュームを選ぶと、`$J`、`$MFT`、`$LogFile`を抽出して解析できます。
 - **検索結果からファイル履歴を直接開けます。** 現在のファイル名で見つけた行からファイル履歴を開くと、変更前の名前と根拠となるレコードを確認できます。
 - **ファイルの変更前の名前を約9分の1の時間で確認できました。** 378,975件のUSNレコードを解析し、最初のファイルの変更前の名前を確認するまでの時間の中央値は、NTFS Tracer 0.8.32で2.24秒、NTFS Log Tracker 1.9で20.01秒でした。 [大規模な USN ジャーナルでの測定結果](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
 
@@ -54,7 +52,7 @@ Windows のアーキテクチャ (x64 または x86) に合った ZIP を展開�
 | `$LogFile` | トランザクション、ログの順序番号 (LSN)、Redo と Undo の内容。 |
 | NTFS Log Tracker の SQLite DB・CSV・TSV | **ファイル → Tracker の結果を開く…**から読み取り専用で開けます。TSV が一覧に出ない場合は、すべてのファイルを表示してください。 |
 
-ディスクイメージでは NTFS ボリュームを指定して調査に必要なファイルを抽出します。論理証拠イメージでは、収集済みのファイル一覧から必要なものを選びます。
+論理証拠イメージでは、収集済みのファイル一覧から必要なものを選びます。
 
 | イメージ形式 | 対応範囲 |
 | --- | --- |
@@ -66,7 +64,7 @@ Windows のアーキテクチャ (x64 または x86) に合った ZIP を展開�
 | VMDK | 単一の sparse イメージ、stream-optimized イメージ、同じフォルダーにある FLAT ファイルを参照するディスク記述子 |
 | AFF1 | 非圧縮、zlib 圧縮、ゼロ埋めのページを含む単一イメージ |
 
-BitLocker でロックされているボリュームは、事前に外部ツールでロックを解除してください。対応形式の詳細は[イメージモジュールの説明](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.32/modules/EvidenceImage/README.md)を参照してください。
+BitLocker でロックされているボリュームは、事前に外部ツールでロックを解除してください。対応形式の詳細は[イメージモジュールの説明](modules/EvidenceImage/README.md)を参照してください。
 
 証拠ファイルは読み取り専用で開きます。抽出したファイルと SQLite インデックスは別の場所に保存します。既定の保存先は `%LOCALAPPDATA%\NtfsTracer` です。旧版の JournalDesk から更新した場合は、既存の設定とインデックスを引き続き使えます。
 
@@ -99,7 +97,7 @@ BitLocker でロックされているボリュームは、事前に外部ツー�
 
 ## ビルド
 
-[ビルド手順と依存関係](README.md#build-from-source) · [EWF ライブラリのビルド](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md) · [インデックス形式](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.32/engine/INDEX_FORMAT.md)
+[ビルド手順と依存関係](README.md#build-from-source) · [EWF ライブラリのビルド](modules/EvidenceImage/Logical/Native/README.md)
 
 ## 表示言語
 

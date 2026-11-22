@@ -1,14 +1,12 @@
 # NTFS Tracer
 
-**NTFS 로그 분석은 빠르게, 파일의 변화는 한눈에.**
-
 **NTFS Tracer는 NTFS 로그를 검색하고, 찾은 기록에서 파일의 변경 이력을 추적하는 Windows 포렌식 도구입니다.**
 
 [Windows x64·x86 다운로드](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [English](README.md) · [日本語](README.ja.md)
 
 ## 왜 NTFS Tracer를 쓰나요?
 
-- **디스크 이미지에서 NTFS 로그를 바로 가져옵니다.** 앱에서 이미지와 NTFS 볼륨을 선택하면 `$J`, `$MFT`, `$LogFile`을 추출해 분석할 수 있습니다. NTFS Log Tracker 1.9로 일반 로그를 분석하려면 다른 도구로 해당 파일을 먼저 추출해야 합니다. [Tracker 입력 형식](https://sites.google.com/site/forensicnote/ntfs-log-tracker)
+- **디스크 이미지에서 NTFS 로그를 바로 가져옵니다.** 앱에서 이미지와 NTFS 볼륨을 선택하면 `$J`, `$MFT`, `$LogFile`을 추출해 분석할 수 있습니다.
 - **검색 결과에서 파일 이력으로 바로 이동합니다.** 현재 파일명으로 찾은 행에서 **파일 이력 보기**를 선택하면 이전 이름과 근거 기록을 확인할 수 있습니다.
 - **파일의 이전 이름을 찾는 데 걸린 시간이 약 9분의 1이었습니다.** USN 레코드 378,975건을 분석하고 첫 파일의 이전 이름을 확인하기까지 NTFS Tracer 0.8.32는 중앙값 2.24초, NTFS Log Tracker 1.9는 20.01초가 걸렸습니다. [대용량 저널 실험 결과](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
 
@@ -56,7 +54,7 @@ Windows 아키텍처(x64 또는 x86)에 맞는 ZIP을 풀고 `NtfsTracer.exe`를
 | `$LogFile` | 트랜잭션 기록, 로그 순서 번호(LSN), Redo·Undo 정보를 확인합니다. |
 | NTFS Log Tracker의 SQLite DB·CSV·TSV | **파일** 메뉴에서 기존 결과를 읽기 전용으로 열어 검색할 수 있습니다. TSV 파일을 고를 때는 파일 선택 창에서 **모든 파일**을 선택하세요. |
 
-디스크 이미지에서는 NTFS 볼륨을 선택하면 분석에 필요한 파일을 추출할 수 있습니다. 논리 증거 이미지에서는 이미 수집된 파일 목록에서 필요한 자료를 고릅니다.
+논리 증거 이미지에서는 이미 수집된 파일 목록에서 필요한 자료를 고릅니다.
 
 | 이미지 형식 | 지원 범위 |
 | --- | --- |
@@ -68,7 +66,7 @@ Windows 아키텍처(x64 또는 x86)에 맞는 ZIP을 풀고 `NtfsTracer.exe`를
 | VMDK | 단일 희소(sparse) 이미지, 스트림 최적화 이미지, 같은 폴더의 FLAT 파일을 참조하는 디스크 설명자 |
 | AFF1 | 무압축 페이지, zlib 압축 페이지 또는 0으로 채운 페이지를 담은 단일 이미지 |
 
-잠겨 있는 BitLocker 볼륨은 외부 도구에서 잠금을 해제한 뒤 열 수 있습니다. 이미지 형식별 세부 조건은 [이미지 모듈 안내](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.32/modules/EvidenceImage/README.md)에서 확인할 수 있습니다.
+잠겨 있는 BitLocker 볼륨은 외부 도구에서 잠금을 해제한 뒤 열 수 있습니다. 이미지 형식별 세부 조건은 [이미지 모듈 안내](modules/EvidenceImage/README.md)에서 확인할 수 있습니다.
 
 앱은 원본을 읽기 전용으로 열고, 추출한 파일과 SQLite 색인은 별도 경로에 저장합니다. 기본 저장 위치는 `%LOCALAPPDATA%\NtfsTracer`입니다. 기존 JournalDesk에서 사용한 설정과 색인도 이어서 사용할 수 있습니다.
 
@@ -109,9 +107,7 @@ dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o ar
 ./lint.ps1
 ```
 
-EWF 이미지를 열 수 있는 배포본을 만들려면 `NtfsTracer.libewf.dll`을 빌드한 뒤 `modules/EvidenceImage/Logical/Native/`에 두고 다시 게시하세요. [libewf 빌드 방법](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md)
-
-소스는 Rust 색인 엔진, WPF 앱, 이미지 판독 모듈로 구성됩니다. [엔진](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/engine) · [WPF 앱](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/gui) · [이미지 모듈](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/modules/EvidenceImage) · [회귀 검사](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.32/tests)
+EWF 이미지를 열 수 있는 배포본을 만들려면 `NtfsTracer.libewf.dll`을 빌드한 뒤 `modules/EvidenceImage/Logical/Native/`에 두고 다시 게시하세요. [libewf 빌드 방법](modules/EvidenceImage/Logical/Native/README.md)
 
 ## 표시 언어
 
