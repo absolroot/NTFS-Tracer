@@ -64,8 +64,8 @@ NTFS Tracer는 **Rust 엔진으로 NTFS 로그를 빠르게 색인**하는 Windo
 
 | 도구 | 이전 이름을 찾은 방법 |
 | --- | --- |
-| **NTFS Tracer** | **이전 이름 포함**을 켜고 `report-final.docx`를 검색한 뒤 **파일 이력 보기**를 선택했습니다. 검색에서 같은 파일의 기록 5건을 찾았고, 파일 이력에서는 이름 변경 한 건에 이전 이름과 새 이름이 함께 표시됐습니다. |
-| **NTFS Log Tracker 1.9** | **File/Directory Name**으로 `report-final.docx`를 검색해 기록 2건을 찾았습니다. 결과에서 NTFS가 파일을 식별하는 **FileReferenceNumber**를 복사하고 이름 조건을 지운 뒤, 그 번호로 다시 검색해 이전 이름이 포함된 기록 5건을 찾았습니다. |
+| <img src="docs/media/logo.svg" width="18" height="18" alt=""> **NTFS Tracer** | **이전 이름 포함**을 켜고 `report-final.docx`를 검색한 뒤 **파일 이력 보기**를 선택했습니다. 검색에서 같은 파일의 기록 5건을 찾았고, 파일 이력에서는 이름 변경 한 건에 이전 이름과 새 이름이 함께 표시됐습니다. |
+| <img src="docs/media/ntfs-log-tracker-icon.png" width="18" height="18" alt=""> **[NTFS Log Tracker 1.9](https://sites.google.com/site/forensicnote/ntfs-log-tracker)** | **File/Directory Name**으로 `report-final.docx`를 검색해 기록 2건을 찾았습니다. 결과에서 NTFS가 파일을 식별하는 **FileReferenceNumber**를 복사하고 이름 조건을 지운 뒤, 그 번호로 다시 검색해 이전 이름이 포함된 기록 5건을 찾았습니다. |
 
 두 도구에서 이전 이름이 **`report-draft.docx`**였음을 확인했습니다. 아래 화면에는 NTFS Tracer가 이름 변경 전후를 한 항목으로 표시하고 각각의 USN 기록을 연결한 모습이 나옵니다.
 

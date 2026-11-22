@@ -64,8 +64,8 @@ BitLocker でロックされているボリュームは、事前に外部ツー�
 
 | ツール | 変更前の名前を調べた手順 |
 | --- | --- |
-| **NTFS Tracer** | 以前の名前を含める設定を有効にして `report-final.docx` を検索し、ファイル履歴を開きました。同じファイルの記録が 5 件見つかり、ファイル履歴では変更前後の名前が一つの名前変更として表示されました。 |
-| **NTFS Log Tracker 1.9** | **File/Directory Name** で `report-final.docx` を検索すると、2 件の記録が見つかりました。結果から NTFS のファイル識別子である **FileReferenceNumber** をコピーし、名前の条件を消してその番号で検索し直しました。変更前の名前を含む 5 件が見つかりました。 |
+| <img src="docs/media/logo.svg" width="18" height="18" alt=""> **NTFS Tracer** | 以前の名前を含める設定を有効にして `report-final.docx` を検索し、ファイル履歴を開きました。同じファイルの記録が 5 件見つかり、ファイル履歴では変更前後の名前が一つの名前変更として表示されました。 |
+| <img src="docs/media/ntfs-log-tracker-icon.png" width="18" height="18" alt=""> **[NTFS Log Tracker 1.9](https://sites.google.com/site/forensicnote/ntfs-log-tracker)** | **File/Directory Name** で `report-final.docx` を検索すると、2 件の記録が見つかりました。結果から NTFS のファイル識別子である **FileReferenceNumber** をコピーし、名前の条件を消してその番号で検索し直しました。変更前の名前を含む 5 件が見つかりました。 |
 
 どちらのツールでも、変更前の名前は **`report-draft.docx`** でした。下の画面では、NTFS Tracer が変更前後の名前と、その根拠となる二つの USN レコードを表示しています。
 

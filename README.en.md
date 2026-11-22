@@ -42,13 +42,13 @@ Inspect decoded fields, Hex, or JSON, export results to CSV, or scan source file
 
 | Format | Supported variants |
 | --- | --- |
-| RAW (`.raw`, `.img`, `.dd`) | NTFS volume or MBR/GPT disk. Consecutive split RAW sets start at `.000` or `.001`. |
-| EnCase EWF (`.E01`, `.Ex01`) | Physical images. Select the first segment and keep the complete set together. Encryption and bzip2 are unsupported. |
-| Logical EWF (`.L01`, `.Lx01`) | Select the first segment and choose artifacts from the collected file catalog. The same EWF limits apply. |
-| QCOW / QCOW2 | Standalone QCOW1 and QCOW2 v2/v3 with standard L2 tables. Backing files, external data, and encryption are unsupported. |
-| VHD / VHDX | Fixed and dynamic VHD and standalone VHDX. Differencing disks are unsupported. |
+| RAW | `.raw`, `.img`, `.dd`. NTFS volume or MBR/GPT disk. Consecutive split RAW sets start at `.000` or `.001`. |
+| EnCase EWF | `.E01`, `.Ex01`. Physical images. Select the first segment and keep the complete set together. Encryption and bzip2 are unsupported. |
+| Logical EWF | `.L01`, `.Lx01`. Select the first segment and choose artifacts from the collected file catalog. The same EWF limits apply. |
+| QCOW/QCOW2 | Standalone QCOW1 and QCOW2 v2/v3 with standard L2 tables. Backing files, external data, and encryption are unsupported. |
+| VHD/VHDX | Fixed and dynamic VHD and standalone VHDX. Differencing disks are unsupported. |
 | VMDK | Single sparse, stream-optimized, and descriptors referencing FLAT extents in the same directory. Parent chains are unsupported. |
-| AFF (`.aff`) | Single AFF1 with uncompressed, zlib, or zero pages |
+| AFF | `.aff`. Single AFF1 with uncompressed, zlib, or zero pages |
 
 Physical images must contain a readable NTFS volume. A locked BitLocker volume must be unlocked outside NTFS Tracer. See the [image module](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.30/modules/EvidenceImage/README.md) for the full variant limits.
 
@@ -74,8 +74,8 @@ You found `report-final.docx` in the collected evidence and want to know what it
 
 | Tool | How we found the previous name |
 | --- | --- |
-| **NTFS Tracer** | With **Include previous names** enabled, we searched for `report-final.docx` and chose **Open file history**. The search found five records for the file. Its history showed the old and new names together in one rename event. |
-| **NTFS Log Tracker 1.9** | We searched **File/Directory Name** for `report-final.docx` and found two records. We copied the **FileReferenceNumber**, the NTFS identifier for the file, cleared the name filter, and searched by that number. This returned five records, including the old name. |
+| <img src="docs/media/logo.svg" width="18" height="18" alt=""> **NTFS Tracer** | With **Include previous names** enabled, we searched for `report-final.docx` and chose **Open file history**. The search found five records for the file. Its history showed the old and new names together in one rename event. |
+| <img src="docs/media/ntfs-log-tracker-icon.png" width="18" height="18" alt=""> **[NTFS Log Tracker 1.9](https://sites.google.com/site/forensicnote/ntfs-log-tracker)** | We searched **File/Directory Name** for `report-final.docx` and found two records. We copied the **FileReferenceNumber**, the NTFS identifier for the file, cleared the name filter, and searched by that number. This returned five records, including the old name. |
 
 Both tools identified **`report-draft.docx`** as the previous name. The NTFS Tracer screenshot shows the two names and the USN records that support the rename.
 
