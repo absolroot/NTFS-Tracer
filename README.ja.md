@@ -100,6 +100,8 @@ ArtiFast Windows の製品資料では、Windows LogFile の一覧で LSN を探
 
 **表示 → 表示言語**で 16 種類の言語から選べます。変更はすぐに反映されます。
 
+English · 한국어 · 日本語 · Deutsch · Español · Français · Bahasa Indonesia · Italiano · Polski · Português (Brasil) · Türkçe · Tiếng Việt · Русский · Українська · 简体中文 · 繁體中文
+
 ## ライセンス
 
 プロジェクト独自のコードは PolyForm Noncommercial 1.0.0 の下で公開しています。営利企業での社内調査、有償の受託調査、商用製品への組み込みには、事前に書面で許可を得る必要があります。[プロジェクトのライセンス](LICENSE)

@@ -110,6 +110,8 @@ EWF 이미지를 열 수 있는 배포본을 만들려면 `NtfsTracer.libewf.dll
 
 **보기 → 표시 언어**에서 16개 언어 중 하나를 선택할 수 있습니다. 선택한 언어는 즉시 적용됩니다.
 
+English · 한국어 · 日本語 · Deutsch · Español · Français · Bahasa Indonesia · Italiano · Polski · Português (Brasil) · Türkçe · Tiếng Việt · Русский · Українська · 简体中文 · 繁體中文
+
 ## 라이선스
 
 프로젝트 자체 코드는 PolyForm Noncommercial 1.0.0에 따라 공개합니다. 영리 기업이 내부 조사에 사용하거나, 고객을 대상으로 유료 조사를 수행하거나, 상용 제품에 포함하려면 사전에 서면 허가를 받아야 합니다. [프로젝트 라이선스](LICENSE)

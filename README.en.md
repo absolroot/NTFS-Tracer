@@ -120,6 +120,8 @@ For EWF support, build `NtfsTracer.libewf.dll` using the [libewf instructions](h
 
 Choose from 16 interface languages under **View → Display language**. Changes apply immediately.
 
+English · 한국어 · 日本語 · Deutsch · Español · Français · Bahasa Indonesia · Italiano · Polski · Português (Brasil) · Türkçe · Tiếng Việt · Русский · Українська · 简体中文 · 繁體中文
+
 ## Third-party notices
 
 [Dependency and redistribution notices](THIRD-PARTY-NOTICES.md)
