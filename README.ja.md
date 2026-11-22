@@ -22,11 +22,11 @@ Windows x64 の配布 ZIP をすべて展開し、`NtfsTracer.exe` を実行し�
 
 物理ディスクイメージから解析に必要なファイルを抽出できるのは NTFS ボリュームです。FAT32、exFAT、ReFS などは解析対象外です。論理証拠イメージ（L01・Lx01）では、収集済みのファイルから NTFS の解析に必要なものを選べます。
 
-元の証拠ファイルは読み取り専用で開きます。抽出したファイルと SQLite インデックスは別の場所に保存します。新規インストール時の既定の保存先は `%LOCALAPPDATA%\NtfsTracer` です。JournalDesk から更新した場合は、既存の設定とインデックスを引き続き使用できます。対応形式と制約は [イメージモジュールの説明](modules/EvidenceImage/README.md) に記載しています。
+元の証拠ファイルは読み取り専用で開きます。抽出したファイルと SQLite インデックスは別の場所に保存します。新規インストール時の既定の保存先は `%LOCALAPPDATA%\NtfsTracer` です。JournalDesk から更新した場合は、既存の設定とインデックスを引き続き使用できます。対応形式と制約は [イメージモジュールの説明](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/modules/EvidenceImage/README.md) に記載しています。
 
 ## ビルド
 
-[ビルド手順と依存関係](README.md#build-from-source) · [EWF ライブラリのビルド](modules/EvidenceImage/Logical/Native/README.md) · [インデックス形式](engine/INDEX_FORMAT.md)
+[ビルド手順と依存関係](README.md#build-from-source) · [EWF ライブラリのビルド](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/modules/EvidenceImage/Logical/Native/README.md) · [インデックス形式](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/engine/INDEX_FORMAT.md)
 
 
 ## ライセンス

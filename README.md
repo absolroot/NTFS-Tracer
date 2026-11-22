@@ -6,65 +6,91 @@
 
 <p align="center"><strong>Search NTFS changes, trace a file's history, and verify the original bytes.</strong></p>
 
-<p align="center">Windows x64 · Rust indexing engine · C# / WPF desktop app</p>
+<p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64</a></strong> · <a href="#quick-start">Quick start</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#performance">Performance</a></p>
 
-<p align="center"><a href="README.ko.md">한국어</a> · <a href="README.ja.md">日本語</a> · <a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows</a> · <a href="#quick-start">Quick start</a> · <a href="#performance">Performance</a></p>
+<p align="center"><a href="README.ko.md">한국어</a> · <a href="README.ja.md">日本語</a></p>
 
-NTFS Tracer is a Windows forensic workbench for the USN change journal, Master File Table, and NTFS transaction log. Open extracted artifacts or a supported disk image, search across the journal, then follow a rename or move from the file's history to its underlying records. Each source record can be checked at its original offset.
+NTFS Tracer is a Windows workbench for the USN change journal, Master File Table, and NTFS transaction log. Exporting records, reapplying filters, and switching tools can interrupt an investigation. NTFS Tracer keeps search, file history, and source Hex together so an analyst can answer **what happened to this file, and which records show it?** The desktop app supports **16 interface languages** with live switching.
 
 ## From a search hit to the evidence
 
-![English NTFS Tracer demo showing journal search, a rename with two source records, and the selected record in Hex](docs/media/investigation.gif)
+[![English NTFS Tracer demo showing journal search, a rename with two source records, and the selected record in Hex](docs/media/investigation.gif)](docs/media/investigation.gif)
 
-The demo uses a synthetic USN journal. Search for `report`, open the file's rename history, then inspect the new-name record in Hex at source offset `0x1D0`.
+**Search for `report` → open file history → compare both rename records → inspect Hex.** The v0.8.29 demo uses 391 synthetic records across 131 files. The new name is at offset `0x9758` within `$J`.
 
 [Journal search](docs/media/journal-search.png) · [Rename history](docs/media/file-history.png) · [Source Hex](docs/media/source-hex.png)
 
-| What you want to do | What NTFS Tracer shows |
+## Quick start
+
+1. Extract the Windows x64 ZIP and run **NtfsTracer.exe**. The shared-runtime ZIP requires **.NET 10 Windows Desktop Runtime (x64)**.
+2. Open the source that matches your evidence.
+   - **Extracted artifacts** · Choose **Select files…** or **Select extracted folder…**, then **Start analysis**. A `$J` alone is enough for USN history.
+   - **Disk image** · Choose **Select files…**, select the NTFS volume and artifacts, then **Extract and analyze**.
+   - **Tracker results** · Choose **File → Open Tracker results…**. For TSV, choose **All files** in the file picker.
+3. Search **All records**, open **File history**, or switch to **NTFS transactions**. Select a record to inspect the source. **F1** opens the in-app guide.
+
+## Supported inputs
+
+### Disk and evidence images
+
+| Format | Supported variants |
 | --- | --- |
-| Find a past file or folder | Search by current or previous file name, path, file ID, or parent ID. Refine by time, change reason, or exact USN. |
-| Reconstruct a rename or move | Follow one file across its history, compare old and new names and paths, and open the source record for each side. |
-| Check how a path was resolved | See whether a path comes from journal evidence or was supplemented from the acquired MFT. MFT-derived portions may reflect the acquisition-time location. |
-| Inspect an NTFS transaction | Search the transaction log, inspect LSNs and Redo/Undo data, and jump to the source offset. |
-| Verify, pivot, and export | Inspect decoded fields, Hex, or JSON for a USN record, view nearby records, return to the search, and export matching records or a file history to CSV. |
-| Examine incomplete material | Scan supplied files for candidate USN or transaction records, inspect investigation leads, or open NTFS Log Tracker SQLite and CSV results. |
+| RAW (`.raw`, `.img`, `.dd`) | NTFS volume or MBR/GPT disk. Consecutive split RAW sets start at `.000` or `.001`. |
+| EnCase EWF (`.E01`, `.Ex01`) | Physical images. Select the first segment and keep the complete set together. Encryption and bzip2 are unsupported. |
+| Logical EWF (`.L01`, `.Lx01`) | Select the first segment and choose artifacts from the collected file catalog. The same EWF limits apply. |
+| QCOW / QCOW2 | Standalone QCOW1 and QCOW2 v2/v3 with standard L2 tables. Backing files, external data, and encryption are unsupported. |
+| VHD / VHDX | Fixed and dynamic VHD and standalone VHDX. Differencing disks are unsupported. |
+| VMDK | Single sparse, stream-optimized, and descriptors referencing FLAT extents in the same directory. Parent chains are unsupported. |
+| AFF (`.aff`) | Single AFF1 with uncompressed, zlib, or zero pages |
 
-### Working with NTFS Log Tracker results
+Physical images must contain a readable NTFS volume. A locked BitLocker volume must be unlocked outside NTFS Tracer. See the [image module](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/modules/EvidenceImage/README.md) for the full variant limits.
 
-Open an existing [NTFS Log Tracker](https://sites.google.com/site/forensicnote/ntfs-log-tracker) SQLite database or CSV through the read-only results viewer. To follow a journal record into file history and verify its original bytes, open the extracted NTFS artifacts in NTFS Tracer. The timings below compare versions of NTFS Tracer on the same inputs.
+### Extracted artifacts and existing results
+
+| Input | Use it for |
+| --- | --- |
+| `$J` / `$UsnJrnl:$J` | USN change search, file history, and investigation leads |
+| `$MFT` from the same volume | Attach to `$J` or `$LogFile` to supplement paths using file and folder names recorded at acquisition |
+| `$LogFile` | NTFS transactions, LSNs, and Redo/Undo payloads |
+| NTFS Log Tracker SQLite, CSV or TSV | Browse and filter existing results in the read-only viewer |
+
+You can also select a folder containing extracted artifacts. The app opens evidence read-only and writes extractions and indexes separately. New installations use `%LOCALAPPDATA%\NtfsTracer`. Existing JournalDesk settings and indexes can be reused.
+
+## Investigation features
+
+| Task | What you can check |
+| --- | --- |
+| Find a file | Search names, aliases, paths, file IDs and parent IDs. Refine USN results by time, reason, or exact USN. |
+| Reconstruct an event | Follow one file through changes, compare the two sides of a rename or move, and see which path portions came from the journal or the acquired MFT. |
+| Verify and export | Inspect fields, Hex, JSON, nearby records, or transaction LSNs and Redo/Undo data. Return to your search or export to CSV. |
+| Examine incomplete evidence | Scan supplied files for candidate records. Check investigation leads and carving results against the source bytes. |
+
+## Compare workflows
+
+| Tool | Workflow it is suited to |
+| --- | --- |
+| **NTFS Tracer** | Interactive Windows investigation. Search the journal, trace one file across events, and verify the contributing records at their original offsets. |
+| [MFTECmd](https://github.com/EricZimmerman/MFTECmd) | Command-line parsing and batch CSV/JSON exports across several NTFS artifacts. |
+| [NTFS Log Tracker](https://sites.google.com/site/forensicnote/ntfs-log-tracker) | GUI-based NTFS event reconstruction, searches, and export. Open existing Tracker SQLite and CSV results in NTFS Tracer's read-only viewer. |
+| [Velociraptor](https://docs.velociraptor.app/artifact_references/pages/windows.forensics.usn/) | Endpoint collection and VQL queries, including USN filtering and collection across hosts. |
 
 ## Performance
 
 The Rust engine parses NTFS artifacts into reusable SQLite indexes. When indexing multiple sources, the app can start showing USN records once the journal index is ready, while MFT and transaction indexing continue. The investigation view pages through results and can reuse a verified path-sort cache.
 
-| Measured operation | Before | After |
+### 16 file-reference lookups on 480,000 records
+
+| Method | Index creation | Time to retrieve the records |
 | --- | ---: | ---: |
-| First USN results from an empty app index, app 0.8.13 → 0.8.14 | 3.88 s | **1.97 s** |
-| Inspect source Hex in the same workflow | 3.96 s | **2.03 s** |
-| Complete all three artifact indexes in the same workflow | 3.64 s | 3.71 s |
-| Index a transaction log with 171,581 records, Rust engine 0.4.0 → 0.4.1 | 1.17 s | **0.84 s** |
-| Reopen the path sort for 333,831 records after app restart, app 0.8.12 | 3.63 s first sort | **186 ms** with cache |
+| [Sootmark USN](https://github.com/Sootmark/usn) harness, all 16 references known in advance | — | **444 ms** in one pass |
+| Sootmark USN harness, 16 separate lookups | — | **6.66 s** across 16 passes |
+| **NTFS Tracer**, 16 indexed lookups | **2.67 s** once | **3.10 ms** after indexing |
 
-The first three figures are medians of three runs per version using the same extracted artifacts, a warm OS file cache, and one logical processor. The standalone engine figures are medians of three runs per version on the same transaction log. The path-sort figures are single GUI runs. See [benchmark details](docs/performance.md) for inputs and evidence checks.
-
-## Quick start
-
-1. Download and extract the [Windows x64 package](https://github.com/absolroot/NTFS-Tracer/releases/latest) and run **NtfsTracer.exe**. The full package includes the runtime. The shared-runtime package requires **.NET 10 Windows Desktop Runtime (x64)**.
-2. In **Settings**, select extracted files, an extraction folder, or a disk image. For an image, choose the NTFS volume and artifacts before extracting and analyzing.
-3. Search **All Records**, open **File History**, or switch to **NTFS Transactions**. Select a record to inspect its details and source bytes. Press **F1** for the in-app guide.
-
-| Input | Use it for |
-| --- | --- |
-| `$J` | USN changes, names, file history, and investigation leads |
-| `$MFT` from the same volume | Supplement paths in the journal and transaction log |
-| `$LogFile` | LSNs, transactions, and Redo/Undo payloads |
-| Disk or logical evidence image | Extract NTFS artifacts to analyze in the same workflow |
-
-Supported image families include RAW, E01/Ex01, L01/Lx01, QCOW/QCOW2, VHD/VHDX, VMDK, and selected AFF1 variants. See the [image format and variant matrix](modules/EvidenceImage/README.md). Physical images must contain an NTFS volume. The app opens evidence read-only and writes extractions and indexes separately. New installations use `%LOCALAPPDATA%\NtfsTracer`. Existing JournalDesk settings and indexes can be reused.
+For a known list, a single scan returns results without waiting for an index. A reusable index saves time when new questions come up during an investigation. All methods returned the same names, USNs, and source offsets. These are backend measurements from a synthetic journal. The comparison above describes workflows for MFTECmd, NTFS Log Tracker, and Velociraptor. [Measurement method and raw timings](docs/performance.md)
 
 ## Build from source
 
-On Windows x64, install the .NET 10 SDK, the Rust MSVC toolchain, and Visual Studio C++ Build Tools. For linting, install the Rust components `rustfmt` and `clippy`.
+The desktop app uses C# and WPF and the indexing engine uses Rust. On Windows x64, install the .NET 10 SDK, the Rust MSVC toolchain, and Visual Studio C++ Build Tools. For linting, install `rustfmt` and `clippy`.
 
 ```powershell
 cargo build --release --locked --manifest-path engine/Cargo.toml
@@ -72,15 +98,13 @@ dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o ar
 ./lint.ps1
 ```
 
-For EWF support, build `JournalDesk.libewf.dll` using the [libewf instructions](modules/EvidenceImage/Logical/Native/README.md) before publishing.
+For EWF support, build `JournalDesk.libewf.dll` using the [libewf instructions](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/modules/EvidenceImage/Logical/Native/README.md) before publishing.
 
-[Rust engine](engine/) · [Index format](engine/INDEX_FORMAT.md) · [WPF app](gui/) · [Image module](modules/EvidenceImage/) · [Regression tests](tests/) · [Image fixtures](tests/EvidenceImage/README.md)
+[Rust engine](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/engine) · [Index format](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/engine/INDEX_FORMAT.md) · [WPF app](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/gui) · [Regression tests](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/tests)
 
 ## Third-party notices
 
 [Dependency and redistribution notices](THIRD-PARTY-NOTICES.md)
-
-
 
 ## License
 

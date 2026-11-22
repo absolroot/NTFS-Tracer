@@ -1,6 +1,8 @@
 # NTFS Tracer
 
-NTFS Tracer는 Windows에서 NTFS 변경 이력과 트랜잭션 로그를 조사하는 데스크톱 도구입니다. 파일명, 경로, 파일 ID로 기록을 찾고 원본 오프셋과 Hex까지 확인할 수 있습니다.
+NTFS Tracer는 Windows에서 NTFS 변경 이력과 트랜잭션 로그를 조사하는 데스크톱 도구입니다. 명령줄 파서로 자료를 내보낸 뒤, 결과 표에서 검색하고 원본을 다시 여는 과정에서 분석가는 여러 화면을 오가게 됩니다. NTFS Tracer는 이 작업을 한 화면 흐름으로 연결했습니다. 저널 색인이 준비되면 검색을 시작하고, 파일별 이력에서 이름 변경이나 이동을 추적해 해당 기록의 원본 바이트까지 확인할 수 있습니다. 원본을 확인한 뒤에는 기존 검색 결과로 돌아올 수 있습니다.
+
+앱을 재시작하지 않고 16개 표시 언어를 전환할 수 있습니다. [v0.8.29 영어 데모](docs/media/investigation.gif)에서는 파일 131개가 포함된 합성 저널로 이 조사 과정을 보여 줍니다.
 
 [English](README.md) · [日本語](README.ja.md)
 
@@ -31,7 +33,19 @@ Windows x64에서 배포 ZIP의 압축을 모두 푼 뒤 `NtfsTracer.exe`를 실
 
 물리 디스크 이미지에서 NTFS 볼륨을 찾아 분석에 필요한 파일을 추출합니다. FAT32, exFAT, ReFS 등 다른 파일 시스템은 분석하지 않습니다. 논리 증거 이미지(L01·Lx01)에서는 수집된 파일 목록에서 NTFS 분석에 필요한 파일을 선택할 수 있습니다.
 
-RAW, E01·Ex01, L01·Lx01, QCOW·QCOW2, VHD·VHDX, VMDK와 AFF1의 일부 형식을 읽습니다. 암호화, 스냅숏 의존 체인과 같은 제약은 [이미지 모듈 안내](modules/EvidenceImage/README.md)에 정리되어 있습니다.
+### 디스크 이미지와 논리 증거 이미지
+
+| 형식 | 지원 범위 |
+| --- | --- |
+| RAW | NTFS 볼륨, MBR·GPT 디스크, `.000` 또는 `.001`부터 시작하는 연속 분할 이미지 |
+| E01·Ex01 | 물리 EWF. 첫 세그먼트를 선택하며, 암호화 및 bzip2 압축은 지원 범위에서 제외됩니다. |
+| L01·Lx01 | 논리 EWF. 수집 파일 목록에서 NTFS 아티팩트를 고릅니다. |
+| QCOW·QCOW2 | 독립형 QCOW1, 표준 L2를 사용하는 QCOW2 v2·v3 |
+| VHD·VHDX | 고정·동적 VHD와 독립형 VHDX |
+| VMDK | 단일 sparse, stream-optimized, 같은 폴더의 FLAT extent를 참조하는 descriptor |
+| AFF1 | 단일 이미지의 무압축·zlib·제로 페이지 |
+
+세부 제약은 [이미지 모듈 안내](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/modules/EvidenceImage/README.md)를 참고하세요.
 
 원본은 읽기 전용으로 열고, 추출물과 SQLite 색인은 별도 경로에 저장합니다. 새로 설치하면 기본 저장 경로로 `%LOCALAPPDATA%\NtfsTracer`를 사용합니다. 기존 JournalDesk 데이터 폴더가 있으면 해당 경로의 설정과 색인을 이어서 사용할 수 있습니다.
 
@@ -45,13 +59,13 @@ dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o ar
 ./lint.ps1
 ```
 
-EWF 기능을 사용하려면 [libewf 빌드 안내](modules/EvidenceImage/Logical/Native/README.md)에 따라 `JournalDesk.libewf.dll`을 빌드하세요. 완성한 DLL을 같은 소스 폴더에 두고 다시 게시하면 배포 파일에 포함됩니다.
+EWF 기능을 사용하려면 [libewf 빌드 안내](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/modules/EvidenceImage/Logical/Native/README.md)에 따라 `JournalDesk.libewf.dll`을 빌드하세요. 완성한 DLL을 같은 소스 폴더에 두고 다시 게시하면 배포 파일에 포함됩니다.
 
-Rust 엔진은 [`engine/`](engine/), WPF 앱은 [`gui/`](gui/), 이미지 모듈은 [`modules/EvidenceImage/`](modules/EvidenceImage/), 회귀 검사는 [`tests/`](tests/)에 있습니다. [색인 형식](engine/INDEX_FORMAT.md)과 [이미지 테스트 자료 생성 절차](tests/EvidenceImage/README.md)도 소스에 포함되어 있습니다.
+Rust 엔진은 [`engine/`](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/engine), WPF 앱은 [`gui/`](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/gui), 이미지 모듈은 [`modules/EvidenceImage/`](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/modules/EvidenceImage), 회귀 검사는 [`tests/`](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/tests)에 있습니다. [색인 형식](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/engine/INDEX_FORMAT.md)과 [이미지 테스트 자료 생성 절차](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/tests/EvidenceImage/README.md)도 소스에 포함되어 있습니다.
 
 ## 외부 구성 요소
 
-[Sootmark USN](engine/sootmark-LICENSE.txt) · [Sootmark NTFS log](engine/vendor/sootmark-ntfslog/) · [DiscUtils](modules/EvidenceImage/Notices/DiscUtils.txt) · [libewf 및 zlib](modules/EvidenceImage/Logical/Native/README.md) · [Fluent System Icons](gui/Notices/Fluent-System-Icons.txt)
+[Sootmark USN](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/engine/sootmark-LICENSE.txt) · [Sootmark NTFS log](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/engine/vendor/sootmark-ntfslog) · [DiscUtils](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/modules/EvidenceImage/Notices/DiscUtils.txt) · [libewf 및 zlib](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/modules/EvidenceImage/Logical/Native/README.md) · [Fluent System Icons](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/gui/Notices/Fluent-System-Icons.txt)
 
 
 

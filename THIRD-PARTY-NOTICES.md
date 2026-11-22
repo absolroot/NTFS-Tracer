@@ -1,6 +1,6 @@
 # Third-party notices
 
-Dependency notices are collected under `Notices/` in the Windows ZIPs. In this source tree, see [the application notices](gui/Notices/), [the engine](engine/), and [the image module](modules/EvidenceImage/).
+Dependency notices are collected under `Notices/` in the Windows ZIPs. In this source tree, see [the application notices](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/gui/Notices), [the engine](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/engine), and [the image module](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/modules/EvidenceImage).
 
 | Component | License | Included notice or source |
 | --- | --- | --- |
