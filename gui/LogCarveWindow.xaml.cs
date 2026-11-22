@@ -196,7 +196,7 @@ public partial class LogCarveWindow : Window
         using var work = CancellationTokenSource.CreateLinkedTokenSource(lifetime);
         current = work;
         Busy(true);
-        string temp = Path.Combine(Path.GetTempPath(), "JournalDesk-logcarve-" + Guid.NewGuid().ToString("N") + ".sqlite");
+        string temp = Path.Combine(Path.GetTempPath(), "NtfsTracer-logcarve-" + Guid.NewGuid().ToString("N") + ".sqlite");
         FileStream? locked = null;
         try
         {

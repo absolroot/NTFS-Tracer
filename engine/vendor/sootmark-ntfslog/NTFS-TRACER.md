@@ -1,4 +1,4 @@
-JournalDesk vendors sootmark-ntfslog 0.1.0 from crates.io (upstream commit
+NTFS Tracer vendors sootmark-ntfslog 0.1.0 from crates.io (upstream commit
 `b88585646801ee2c1e2acf91a078da6ab57af778`, MIT or Apache-2.0). The upstream
 README and both license texts accompany the source.
 

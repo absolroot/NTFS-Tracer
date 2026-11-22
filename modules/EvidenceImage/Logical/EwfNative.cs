@@ -6,7 +6,8 @@ namespace EvidenceImage;
 // Windows x64 ABI from libewf 20260924. Load only from the application directory.
 internal static class EwfNative
 {
-    private const string Dll = "JournalDesk.libewf.dll";
+    private const string Dll = "NtfsTracer.libewf.dll";
+    private const string LegacyDll = "JournalDesk.libewf.dll";
     [DllImport(Dll)] internal static extern IntPtr libewf_get_version();
     [DllImport(Dll, CharSet = CharSet.Unicode, ExactSpelling = true)] internal static extern int libewf_glob_wide(string path, nuint length, byte format, out IntPtr names, out int count, out IntPtr error);
     [DllImport(Dll)] internal static extern int libewf_glob_wide_free(IntPtr names, int count, IntPtr error);
@@ -36,7 +37,14 @@ internal static class EwfNative
     static EwfNative()
     {
         NativeLibrary.SetDllImportResolver(typeof(EwfNative).Assembly, (name, _, _) =>
-            name == Dll ? NativeLibrary.Load(Path.Combine(AppContext.BaseDirectory, Dll)) : IntPtr.Zero);
+        {
+            if (name != Dll)
+                return IntPtr.Zero;
+
+            var path = Path.Combine(AppContext.BaseDirectory, Dll);
+            var legacyPath = Path.Combine(AppContext.BaseDirectory, LegacyDll);
+            return NativeLibrary.Load(!File.Exists(path) && File.Exists(legacyPath) ? legacyPath : path);
+        });
     }
     internal static void ReleaseEntry(ref IntPtr entry)
     {

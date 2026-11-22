@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.21)
-project(JournalDeskEwf C)
+project(NtfsTracerEwf C)
 if(NOT MSVC OR NOT IS_DIRECTORY "${EWF_SOURCE}/libewf")
   message(FATAL_ERROR "Select MSVC and set EWF_SOURCE to the extracted libewf-python 20260924 source directory")
 endif()

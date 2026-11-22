@@ -62,7 +62,7 @@ internal sealed class TrackerResult : IDisposable
     {
         original = new FileStream(source, FileMode.Open, FileAccess.Read, FileShare.Read);
         temporary = csv;
-        database = csv ? Path.Combine(Path.GetTempPath(), "journaldesk-tracker-" + Guid.NewGuid().ToString("N") + ".sqlite") : original.Name;
+        database = csv ? Path.Combine(Path.GetTempPath(), "ntfstracer-tracker-" + Guid.NewGuid().ToString("N") + ".sqlite") : original.Name;
     }
     public static TrackerResult Load(string path, CancellationToken token)
     {
