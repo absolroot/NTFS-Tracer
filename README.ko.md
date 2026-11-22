@@ -9,7 +9,7 @@
 ## 왜 NTFS Tracer를 쓰나요?
 
 - **검색 결과에서 파일 이력으로 바로 이동합니다.** 현재 파일명으로 찾은 행에서 **파일 이력 보기**를 선택하면 이전 이름과 근거 기록을 확인할 수 있습니다.
-- **첫 결과를 빠르게 확인할 수 있습니다.** 같은 예제 USN 저널에서 분석 시작부터 첫 목록이 표시되기까지 NTFS Tracer 개발 빌드 **1.08초**, NTFS Log Tracker 1.9 **3.25초**가 걸렸습니다. 각 도구를 10회씩 실행한 중앙값입니다. [측정 조건과 결과](docs/performance.md#finding-a-previous-name-from-the-current-name)
+- **결과 DB 생성, USN 색인, 파일명 검색을 최적화했습니다.** Rust 엔진이 USN 저널을 읽어 검색용 DB를 만들며, 일반 파일명 검색은 입력 후 일정 시간을 기다리지 않고 시작합니다. 같은 예제 USN 저널에서 분석 시작부터 첫 목록이 표시되기까지 NTFS Tracer 개발 빌드 **1.08초**, NTFS Log Tracker 1.9 **3.25초**가 걸렸습니다. 각 도구를 10회씩 실행한 중앙값입니다. [측정 조건과 결과](docs/performance.md#finding-a-previous-name-from-the-current-name)
 
 조사 후보 검토, 근거 값 복사, CSV 내보내기, 조사 저장과 재개 등 다양한 기능을 지원합니다.
 
