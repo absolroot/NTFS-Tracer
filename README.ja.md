@@ -21,26 +21,26 @@ NTFS Tracer は、NTFS 上のファイルに何が起きたかを調べる Windo
 <table>
   <tr>
     <td width="50%" valign="top">
+      <a href="docs/media/search-demo.gif"><img src="docs/media/search-demo-preview.gif" width="460" alt="ファイル名の入力に応じて絞り込まれる USN 検索結果"></a><br>
       <strong>変更ジャーナルを検索</strong><br>
-      現在や過去の名前、パス、ファイル参照番号で対象を探します。USN レコードは期間や変更理由で絞り込めます。<br><br>
-      <a href="docs/media/search-demo.gif"><img src="docs/media/search-demo.gif" width="460" alt="ファイル名の入力に応じて絞り込まれる USN 検索結果"></a>
+      現在や過去の名前、パス、ファイル参照番号で対象を探します。USN レコードは期間や変更理由で絞り込めます。
     </td>
     <td width="50%" valign="top">
+      <a href="docs/media/investigation.gif"><img src="docs/media/investigation.gif" width="460" alt="ファイル履歴を開き、名前変更の前後を示すレコードを選択する画面"></a><br>
       <strong>ファイルの変更履歴をたどる</strong><br>
-      検索結果からファイル履歴を開きます。名前の変更や移動について、変更前後の値とそれぞれの根拠を確認できます。収集時点の MFT で補ったパスには、その出典が表示されます。<br><br>
-      <a href="docs/media/investigation.gif"><img src="docs/media/investigation.gif" width="460" alt="ファイル履歴を開き、名前変更の前後を示すレコードを選択する画面"></a>
+      検索結果からファイル履歴を開きます。名前の変更や移動について、変更前後の値とそれぞれの根拠を確認できます。収集時点の MFT で補ったパスには、その出典が表示されます。
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
+      <a href="docs/media/transaction-timestamps.png"><img src="docs/media/transaction-timestamps-preview.png" width="460" alt="四つのファイル属性の時刻を Undo と Redo に分けて表示する画面"></a><br>
       <strong>トランザクションで変更前後を比較</strong><br>
-      トランザクションログで LSN を検索します。Undo と Redo の両方に値があれば、ファイルの時刻を比較できます。<br><br>
-      <a href="docs/media/transaction-timestamps.png"><img src="docs/media/transaction-timestamps.png" width="460" alt="四つのファイル属性の時刻を Undo と Redo に分けて表示する画面"></a>
+      トランザクションログで LSN を検索します。Undo と Redo の両方に値があれば、ファイルの時刻を比較できます。
     </td>
     <td width="50%" valign="top">
+      <a href="docs/media/investigation-leads.png"><img src="docs/media/investigation-leads-preview.png" width="460" alt="模擬ジャーナルから抽出した SDelete 関連の候補と根拠となる USN レコード"></a><br>
       <strong>調査候補と根拠を確認</strong><br>
-      名前が繰り返し変更された後に削除されたファイルや、SDelete 関連の記録、時刻の変更などの候補を調べます。候補ごとに根拠となるレコードを開けます。<br><br>
-      <a href="docs/media/investigation-leads.png"><img src="docs/media/investigation-leads.png" width="460" alt="模擬ジャーナルから抽出した SDelete 関連の候補と根拠となる USN レコード"></a>
+      名前が繰り返し変更された後に削除されたファイルや、SDelete 関連の記録、時刻の変更などの候補を調べます。候補ごとに根拠となるレコードを開けます。
     </td>
   </tr>
 </table>

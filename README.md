@@ -28,26 +28,26 @@ Before closing the app, choose **File → Save investigation…**. On your next 
 <table>
   <tr>
     <td width="50%" valign="top">
+      <a href="docs/media/search-demo.gif"><img src="docs/media/search-demo-preview.gif" width="460" alt="USN results narrowing as a filename is typed"></a><br>
       <strong>Search the change journal</strong><br>
-      Find a file by its current or previous name, path, or reference number. Narrow the USN journal by time or change reason.<br><br>
-      <a href="docs/media/search-demo.gif"><img src="docs/media/search-demo.gif" width="460" alt="USN results narrowing as a filename is typed"></a>
+      Find a file by its current or previous name, path, or reference number. Narrow the USN journal by time or change reason.
     </td>
     <td width="50%" valign="top">
+      <a href="docs/media/investigation.gif"><img src="docs/media/investigation.gif" width="460" alt="Opening file history and selecting the old and new names of a rename"></a><br>
       <strong>Follow one file through changes</strong><br>
-      Open the file history from a search result. Review a rename or move and see the records that support each side. Paths filled in from the acquired MFT are labeled with their source.<br><br>
-      <a href="docs/media/investigation.gif"><img src="docs/media/investigation.gif" width="460" alt="Opening file history and selecting the old and new names of a rename"></a>
+      Open the file history from a search result. Review a rename or move and see the records that support each side. Paths filled in from the acquired MFT are labeled with their source.
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
+      <a href="docs/media/transaction-timestamps.png"><img src="docs/media/transaction-timestamps-preview.png" width="460" alt="Four file attribute timestamps with Undo and Redo values"></a><br>
       <strong>Compare transaction values</strong><br>
-      Find a record by LSN in the transaction log. Compare file timestamps when both Undo and Redo contain values.<br><br>
-      <a href="docs/media/transaction-timestamps.png"><img src="docs/media/transaction-timestamps.png" width="460" alt="Four file attribute timestamps with Undo and Redo values"></a>
+      Find a record by LSN in the transaction log. Compare file timestamps when both Undo and Redo contain values.
     </td>
     <td width="50%" valign="top">
+      <a href="docs/media/investigation-leads.png"><img src="docs/media/investigation-leads-preview.png" width="460" alt="Synthetic SDelete-related investigation leads and a supporting USN record"></a><br>
       <strong>Review investigation leads</strong><br>
-      Review candidates such as repeated renames before deletion, SDelete-related records, or timestamp changes. Open the supporting records to assess the lead.<br><br>
-      <a href="docs/media/investigation-leads.png"><img src="docs/media/investigation-leads.png" width="460" alt="Synthetic SDelete-related investigation leads and a supporting USN record"></a>
+      Review candidates such as repeated renames before deletion, SDelete-related records, or timestamp changes. Open the supporting records to assess the lead.
     </td>
   </tr>
 </table>
