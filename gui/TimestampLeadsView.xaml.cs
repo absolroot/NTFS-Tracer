@@ -19,7 +19,7 @@ internal sealed record TimestampLead(long Id, int FieldIndex, string Lsn, long? 
     };
 
     private static string Stamp(long value) => DisplayTimeZone.Current.Zone.At(DateTimeOffset.UnixEpoch.AddTicks(value))
-        .ToString("yyyy-MM-dd HH:mm:ss.fffffff zzz", CultureInfo.InvariantCulture);
+        .ToString("yyyy-MM-dd HH:mm:ss.FFFFFFF zzz", CultureInfo.InvariantCulture);
     public string Field => FieldLabel(FieldIndex);
     public string LsnText => "0x" + Lsn;
     public string Before => Stamp(Old);

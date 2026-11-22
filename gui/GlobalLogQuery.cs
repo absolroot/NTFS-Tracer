@@ -79,6 +79,9 @@ public sealed record GlobalLogFilter(string Name = "", bool AllNames = true, lon
 
     internal static string PreciseTime(long value, JournalTimeZone zone) =>
         TimeText(value, zone, zone.WindowsZone == null ? "yyyy-MM-dd HH:mm:ss.fffffff" : "yyyy-MM-dd HH:mm:ss.fffffff zzz");
+
+    internal static string DisplayTime(long value, JournalTimeZone zone) =>
+        TimeText(value, zone, zone.WindowsZone == null ? "yyyy-MM-dd HH:mm:ss.FFFFFFF" : "yyyy-MM-dd HH:mm:ss.FFFFFFF zzz");
 }
 
 public sealed record GlobalLogRow(byte[] FileId, Entry Record, JournalTimeZone TimeZone)
@@ -87,7 +90,7 @@ public sealed record GlobalLogRow(byte[] FileId, Entry Record, JournalTimeZone T
     public override string ToString() => $"{TimeText} · {Name} · {ReasonsText} · USN {Usn}";
     public string Name => Record.RecordedName;
     public System.Windows.Media.ImageSource? Icon => Record.Icon;
-    public string TimeText => Record.Timestamp is long stamp ? GlobalLogFilter.TimeText(stamp, TimeZone, "yyyy-MM-dd HH:mm:ss.fff") : L.T("시각이 기록되지 않음", "No timestamp recorded");
+    public string TimeText => Record.Timestamp is long stamp ? GlobalLogFilter.TimeText(stamp, TimeZone, "yyyy-MM-dd HH:mm:ss.FFF") : L.T("시각이 기록되지 않음", "No timestamp recorded");
     public string TimeDetail => Record.DetailedTime(TimeZone);
     public long? Timestamp => Record.Timestamp;
     public long Usn => Record.Usn;

@@ -623,7 +623,7 @@ internal sealed class TransactionQuery(string path, TransactionMft? mft = null)
         try
         {
             var time = utc.At(DateTimeOffset.UnixEpoch.AddTicks(value.Value));
-            return time.ToString(utc.WindowsZone == null ? "yyyy-MM-dd HH:mm:ss.fffffff" : "yyyy-MM-dd HH:mm:ss.fffffff zzz", CultureInfo.InvariantCulture)
+            return time.ToString(utc.WindowsZone == null ? "yyyy-MM-dd HH:mm:ss.FFFFFFF" : "yyyy-MM-dd HH:mm:ss.FFFFFFF zzz", CultureInfo.InvariantCulture)
                 + L.T("  (1970년 기준 100ns 단위 값 {0})", "  (100 ns units since 1970: {0})", value);
         }
         catch (ArgumentOutOfRangeException) { return L.T("표시 범위 밖 (1970년 기준 100ns 단위 값 {0})", "Out of display range (100 ns units since 1970: {0})", value); }

@@ -89,11 +89,11 @@ public sealed record Entry(long Position, int Size, int Version, byte[] Parent, 
         return string.Join(" · ", labels);
     }
     public string FlagsText => FormatFlags(Reason, false);
-    public string Time => Timestamp is long value ? FormatTime(value, "HH:mm:ss.fff") : L.T("시각 없음", "No timestamp");
+    public string Time => Timestamp is long value ? FormatTime(value, "HH:mm:ss.FFF") : L.T("시각 없음", "No timestamp");
     public string RecordLabel => Version == 4 ? L.T("변경된 바이트 범위", "Changed byte ranges") + " · " + FlagsText : FormatFlags(Reason, true);
     public string ProofReason => RecordLabel;
     public string DetailedTime(JournalTimeZone utc) => Timestamp is long stamp
-        ? GlobalLogFilter.PreciseTime(stamp, utc) + (utc.WindowsZone == null ? " " + utc.Code : "")
+        ? GlobalLogFilter.DisplayTime(stamp, utc) + (utc.WindowsZone == null ? " " + utc.Code : "")
         : L.T("시각이 기록되지 않음", "No timestamp recorded");
     public string Day => Timestamp is long value ? FormatTime(value, "yyyy-MM-dd") : "";
     public static string FormatTime(long value, string format) => GlobalLogFilter.TimeText(value, DisplayTimeZone.Current.Zone, format);

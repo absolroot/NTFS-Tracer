@@ -540,6 +540,10 @@ long summerUtc = new DateTime(2026, 7, 15, 12, 0, 0, DateTimeKind.Utc).ToFileTim
 Require(GlobalLogFilter.PreciseTime(winterUtc, pacific) == "2026-01-15 04:00:00.0000000 -08:00" &&
     GlobalLogFilter.PreciseTime(summerUtc, pacific) == "2026-07-15 05:00:00.0000000 -07:00",
     "Windows zone must use the offset valid at each record timestamp");
+Require(GlobalLogFilter.DisplayTime(winterUtc, pacific) == "2026-01-15 04:00:00 -08:00" &&
+    GlobalLogFilter.DisplayTime(winterUtc + 1_200_000, pacific) == "2026-01-15 04:00:00.12 -08:00" &&
+    GlobalLogFilter.DisplayTime(winterUtc + 1, pacific) == "2026-01-15 04:00:00.0000001 -08:00",
+    "Displayed timestamps omit trailing zeroes and preserve significant fractional digits");
 Require(GlobalLogFilter.TryTime("2026-03-08", pacific, out long spring) &&
     GlobalLogFilter.TryUpperTime("2026-03-08", pacific, out long afterSpring) &&
     afterSpring - spring == TimeSpan.FromHours(23).Ticks &&

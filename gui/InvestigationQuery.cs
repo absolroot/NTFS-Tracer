@@ -30,7 +30,7 @@ public sealed record LeadObservation(long Position, long Usn, long? Stamp, long 
     string Name, long Segment)
 {
     public string Time => InZone(DisplayTimeZone.Current.Zone);
-    internal string InZone(JournalTimeZone utc) => Stamp is long stamp ? GlobalLogFilter.TimeText(stamp, utc, "yyyy-MM-dd HH:mm:ss.fffffff") : L.T("시각 없음", "No timestamp");
+    internal string InZone(JournalTimeZone utc) => Stamp is long stamp ? GlobalLogFilter.TimeText(stamp, utc, "yyyy-MM-dd HH:mm:ss.FFFFFFF") : L.T("시각 없음", "No timestamp");
     public string Offset => $"0x{Position:X}";
     public string ReasonText => $"0x{Reason:X8}";
     public string DisplayName => Name.Length == 0 ? L.T("이름 기록 없음", "No name recorded") : Name;
