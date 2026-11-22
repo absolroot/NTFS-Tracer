@@ -4,21 +4,21 @@
 
 <h1 align="center">NTFS Tracer</h1>
 
-<p align="center"><strong>Search NTFS changes, trace a file's history, and verify the original bytes.</strong></p>
+<p align="center"><strong>Search NTFS changes and follow what happened to a file.</strong></p>
 
 <p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64</a></strong> · <a href="#quick-start">Quick start</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#performance">Performance</a></p>
 
 <p align="center"><a href="README.ko.md">한국어</a> · <a href="README.ja.md">日本語</a></p>
 
-NTFS Tracer is a Windows workbench for the USN change journal, Master File Table, and NTFS transaction log. Exporting records, reapplying filters, and switching tools can interrupt an investigation. NTFS Tracer keeps search, file history, and source Hex together so an analyst can answer **what happened to this file, and which records show it?** The desktop app supports **16 interface languages** with live switching.
+NTFS Tracer is a Windows workbench for the USN change journal, Master File Table, and NTFS transaction log. Exporting records, reapplying filters, and switching tools can interrupt an investigation. NTFS Tracer brings journal search and per-file timelines together so an analyst can see when a file was created, renamed, moved, or deleted, and which records support that sequence. The desktop app supports **16 interface languages** with live switching.
 
 ## From a search hit to the evidence
 
-[![English NTFS Tracer demo showing journal search, a rename with two source records, and the selected record in Hex](docs/media/investigation.gif)](docs/media/investigation.gif)
+[![English NTFS Tracer demo showing a journal search and the old and new names in a file's rename history](docs/media/investigation.gif)](docs/media/investigation.gif)
 
-**Search for `report` → open file history → compare both rename records → inspect Hex.** The v0.8.29 demo uses 391 synthetic records across 131 files. The new name is at offset `0x9758` within `$J`.
+**Search for `report` → open file history → check the previous and new names.** The v0.8.29 demo uses 391 synthetic records across 131 files.
 
-[Journal search](docs/media/journal-search.png) · [Rename history](docs/media/file-history.png) · [Source Hex](docs/media/source-hex.png)
+[Journal search](docs/media/journal-search.png) · [File history](docs/media/file-history.png)
 
 ## Quick start
 
@@ -27,7 +27,7 @@ NTFS Tracer is a Windows workbench for the USN change journal, Master File Table
    - **Extracted artifacts** · Choose **Select files…** or **Select extracted folder…**, then **Start analysis**. A `$J` alone is enough for USN history.
    - **Disk image** · Choose **Select files…**, select the NTFS volume and artifacts, then **Extract and analyze**.
    - **Tracker results** · Choose **File → Open Tracker results…**. For TSV, choose **All files** in the file picker.
-3. Search **All records**, open **File history**, or switch to **NTFS transactions**. Select a record to inspect the source. **F1** opens the in-app guide.
+3. Search **All records**, open **File history**, or switch to **NTFS transactions**. Select an event to see its details and contributing records. **F1** opens the in-app guide.
 
 ## Supported inputs
 
@@ -62,17 +62,22 @@ You can also select a folder containing extracted artifacts. The app opens evide
 | --- | --- |
 | Find a file | Search names, aliases, paths, file IDs and parent IDs. Refine USN results by time, reason, or exact USN. |
 | Reconstruct an event | Follow one file through changes, compare the two sides of a rename or move, and see which path portions came from the journal or the acquired MFT. |
-| Verify and export | Inspect fields, Hex, JSON, nearby records, or transaction LSNs and Redo/Undo data. Return to your search or export to CSV. |
+| Review transactions | Inspect LSNs and Redo/Undo details and use nearby records for context. |
+| Inspect and export | Review decoded fields, [Hex](docs/media/source-hex.png), or JSON. Return to your search or export results to CSV. |
 | Examine incomplete evidence | Scan supplied files for candidate records. Check investigation leads and carving results against the source bytes. |
 
 ## Compare workflows
 
-| Tool | Workflow it is suited to |
-| --- | --- |
-| **NTFS Tracer** | Interactive Windows investigation. Search the journal, trace one file across events, and verify the contributing records at their original offsets. |
-| [MFTECmd](https://github.com/EricZimmerman/MFTECmd) | Command-line parsing and batch CSV/JSON exports across several NTFS artifacts. |
-| [NTFS Log Tracker](https://sites.google.com/site/forensicnote/ntfs-log-tracker) | GUI-based NTFS event reconstruction, searches, and export. Open existing Tracker SQLite and CSV results in NTFS Tracer's read-only viewer. |
-| [Velociraptor](https://docs.velociraptor.app/artifact_references/pages/windows.forensics.usn/) | Endpoint collection and VQL queries, including USN filtering and collection across hosts. |
+Suppose you know a file's current name and want to find its previous name and surrounding activity. The tools differ in where you narrow the evidence and what you get back.
+
+| Tool | Start with | How you find the rename | What you work with |
+| --- | --- | --- | --- |
+| **NTFS Tracer** | An extracted `$J` or a supported disk image | Search the current name with **Include previous names** enabled, then open **File history**. | A per-file timeline with the previous and new names together, the contributing USN records underneath, and a return path to the original search. |
+| [MFTECmd](https://github.com/EricZimmerman/MFTECmd) | An extracted `$J`; optionally a matching `$MFT` | Export with the CLI, then filter rows for the same file reference and compare the rename reasons. | CSV or JSON with one row per journal record. With `-m`, MFTECmd can reconstruct historical parent paths by rewinding directory changes. |
+| [NTFS Log Tracker](https://sites.google.com/site/forensicnote/ntfs-log-tracker) | Extracted NTFS artifacts | Analyze the artifacts in the GUI and search its results by name or file reference. When `$LogFile` is available, check Tracker’s reconstructed rename or move events as additional evidence. | Searchable and exportable results from USN records and, when supplied, reconstructed `$LogFile` events. |
+| [Velociraptor](https://docs.velociraptor.app/artifact_references/pages/windows.forensics.usn/) | A Windows endpoint or collected `$J` | Run `Windows.Forensics.Usn`. Use `FileNameRegex` to find the file, then clear the filename filter and query by `MFT_ID_Regex` to include changes under other names. | Filtered records as artifact results, which can be collected from multiple endpoints and queried further. |
+
+This table compares documented steps and outputs. The timings below come from a separate lookup workload.
 
 ## Performance
 
