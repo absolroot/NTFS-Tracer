@@ -25,12 +25,14 @@ Before closing the app, choose **File → Save investigation…**. On your next 
 
 ## Investigation features
 
-[![The full app opens the demo. The view then zooms in on the filename search and the records behind a rename.](docs/media/investigation-focus.gif)](docs/media/investigation-focus.gif)
+[![Full NTFS Tracer window showing journal search, file history, transactions, and investigation leads](docs/media/full-app-walkthrough.gif)](docs/media/full-app-walkthrough.gif)
 
-- **Search the change journal**. Find a file by its current or previous name, path, or reference number. Narrow the USN journal by time or change reason. [View screen](docs/media/search-demo.gif)
+The demo uses a synthetic USN journal and transaction log.
+
+- **Search the change journal**. Find a file by its current or previous name, path, or reference number. Narrow the USN journal by time or change reason.
 - **Follow one file through changes**. Open the file history from a search result. Review a rename or move and see the records that support each side. Paths filled in from the acquired MFT are labeled with their source.
-- **Compare transaction values**. Find a record by LSN in the transaction log. Compare file timestamps when both Undo and Redo contain values. [View screen](docs/media/transaction-timestamps.png)
-- **Review investigation leads**. Review candidates such as repeated renames before deletion, SDelete-related records, or timestamp changes. Open the supporting records to assess the lead. [View screen](docs/media/investigation-leads.png)
+- **Compare transaction values**. Find a record by LSN in the transaction log. Compare file timestamps when both Undo and Redo contain values.
+- **Review investigation leads**. Review candidates such as repeated renames before deletion, SDelete-related records, or timestamp changes. Open the supporting records to assess the lead.
 
 Inspect decoded fields, Hex, or JSON, export results to CSV, or scan source files for remnants of USN and transaction records.
 
