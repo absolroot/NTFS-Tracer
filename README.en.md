@@ -12,12 +12,12 @@
 
 **NTFS Tracer is a Windows forensic tool for searching NTFS logs and tracing file changes from the records you find.** Its Rust engine indexes the USN journal and NTFS transaction log. File history shows renames, moves, and deletions in order. Each rename brings both names and their supporting USN records together. You can also open existing NTFS Log Tracker SQLite, CSV, and TSV results in read-only mode.
 
-**Copy evidence for your notes** straight to the clipboard, including full paths, individual field values, and transaction summaries. Review investigation leads and the records behind them, export results to CSV, or save the investigation and pick up where you left off.
-
 ## Why use NTFS Tracer?
 
 - **Open file history directly from a search result.** Find a file by its current name, then choose **Open file history** to see its previous name and the supporting records.
 - **Get to the first results quickly.** On the same sample USN journal, the time from starting analysis to seeing the first record list was **1.08 seconds** in the NTFS Tracer development build and **3.25 seconds** in NTFS Log Tracker 1.9. These are medians from ten runs per tool. [Benchmark setup and results](docs/performance.md#finding-a-previous-name-from-the-current-name)
+
+You can also review investigation leads, copy evidence values, export to CSV, and save and resume an investigation.
 
 ## Quick start
 
