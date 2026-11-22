@@ -12,10 +12,10 @@
 
 ## Why use NTFS Tracer?
 
-- **Open a disk image and extract the NTFS logs in one workflow.** Select an NTFS volume, then extract and index its `$J`, `$MFT`, and `$LogFile` in the app.
-- **Trace a rename back to the journal.** Search by the current or previous filename, open the file history, and inspect the USN record and raw bytes for each name.
-- **Find a file's previous name in about one-ninth the time.** On a 378,975-record USN journal, the first lookup including analysis took a median of 2.24 s in NTFS Tracer 0.8.32 and 20.01 s in NTFS Log Tracker 1.9. [USN journal benchmark](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
-- **Pick up where you left off.** Return from a file history to the same search result, or save the investigation and reopen it with the same search settings and selected record.
+- Extract and analyze `$J`, `$MFT`, and `$LogFile` directly from a disk image.
+- Search by either filename and open the USN record and raw bytes behind each side of a rename.
+- Find the first previous name in **about one-ninth the time**, including analysis (2.24 s vs. 20.01 s median on 378,975 records, compared with NTFS Log Tracker 1.9). [Benchmark](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
+- Reopen a saved investigation with its search settings and selected record.
 
 ## Quick start
 
