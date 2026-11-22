@@ -2,7 +2,9 @@
 
 **NTFS 로그 분석은 빠르게, 파일의 변화는 한눈에.**
 
-NTFS Tracer는 Windows에서 NTFS 파일의 변경 이력을 조사하는 도구입니다. 파일명이나 경로로 기록을 찾은 뒤, 파일별 이력에서 생성·수정·이름 변경·이동·삭제 기록을 시간순으로 볼 수 있습니다. 이름이 바뀐 경우에는 이전 이름과 새 이름을 함께 표시하고, 각각의 근거가 된 USN 기록을 연결합니다.
+NTFS Tracer는 **Rust 엔진으로 NTFS 로그를 빠르게 색인**하는 Windows 포렌식 도구입니다. 현재 이름과 이전 이름, 경로, 파일 참조 번호로 기록을 빠르게 찾을 수 있습니다. 검색 결과에서 파일 이력을 열면 이름이 바뀌거나 파일이 이동·삭제된 과정을 근거 기록과 함께 확인할 수 있습니다.
+
+**전체 경로, 개별 필드 값, 트랜잭션 개요**를 클립보드에 복사해 조사 메모에 옮길 수 있습니다. 조사 후보에서 관련 기록을 확인하고, 결과를 CSV로 내보내거나 조사 상태를 저장해 나중에 이어서 볼 수 있습니다. [색인과 검색 시간 측정 결과](docs/performance.md#finding-a-previous-name-from-the-current-name)
 
 [Windows x64 다운로드](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [English](README.md) · [日本語](README.ja.md)
 
@@ -21,8 +23,6 @@ NTFS Tracer는 Windows에서 NTFS 파일의 변경 이력을 조사하는 도구
 ## 조사 기능
 
 [![NTFS Tracer 전체 창에서 저널 검색, 파일 이력, 트랜잭션, 조사 후보를 차례로 확인하는 데모](docs/media/full-app-walkthrough-color.gif)](docs/media/full-app-walkthrough-color.gif)
-
-데모는 검증용으로 만든 USN 저널과 트랜잭션 로그를 사용합니다.
 
 - **변경 기록 검색**. 현재 이름이나 이전 이름, 경로, 파일 참조 번호로 대상을 찾습니다. 기간이나 변경 사유로 USN 기록을 좁힐 수 있습니다.
 - **파일 하나의 변경 이력 추적**. 검색 결과에서 파일 이력을 엽니다. 이름이나 위치가 바뀐 경우에는 변경 전후와 각각의 근거 기록을 함께 봅니다. 수집 시점의 MFT로 경로를 보완한 경우에는 그 근거도 표시합니다.

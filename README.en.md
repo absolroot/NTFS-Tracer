@@ -10,7 +10,9 @@
 
 <p align="center"><a href="README.ko.md">한국어</a> · <a href="README.ja.md">日本語</a></p>
 
-NTFS Tracer is a Windows workbench for the USN change journal, Master File Table, and NTFS transaction log. Exporting records, reapplying filters, and switching tools can interrupt an investigation. NTFS Tracer brings journal search and per-file timelines together so an analyst can see when a file was created, renamed, moved, or deleted, and which records support that sequence.
+NTFS Tracer is a Windows forensic workbench that **quickly indexes NTFS logs with Rust** and makes it easy to search current and previous filenames, paths, or file references. Open a result to see how a file was renamed, moved, or deleted, then follow the event to its supporting records.
+
+**Copy evidence for your notes** straight to the clipboard, including full paths, individual field values, and transaction summaries. Review investigation leads and the records behind them, export results to CSV, or save the investigation and pick up where you left off. [See the indexing and search measurements](docs/performance.md#finding-a-previous-name-from-the-current-name)
 
 ## Quick start
 
@@ -26,8 +28,6 @@ Before closing the app, choose **File → Save investigation…**. On your next 
 ## Investigation features
 
 [![Full NTFS Tracer window showing journal search, file history, transactions, and investigation leads](docs/media/full-app-walkthrough-color.gif)](docs/media/full-app-walkthrough-color.gif)
-
-The demo uses a synthetic USN journal and transaction log.
 
 - **Search the change journal**. Find a file by its current or previous name, path, or reference number. Narrow the USN journal by time or change reason.
 - **Follow one file through changes**. Open the file history from a search result. Review a rename or move and see the records that support each side. Paths filled in from the acquired MFT are labeled with their source.
