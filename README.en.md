@@ -10,9 +10,9 @@
 
 <p align="center"><a href="README.ko.md">한국어</a> · <a href="README.ja.md">日本語</a></p>
 
-NTFS Tracer is a Windows forensic workbench that **quickly indexes NTFS logs with Rust** and makes it easy to search current and previous filenames, paths, or file references. Open a result to see how a file was renamed, moved, or deleted, then follow the event to its supporting records.
+**NTFS Tracer is a Windows forensic workbench for analysts familiar with NTFS Log Tracker.** It uses a Rust indexing engine and opens file history directly from a filename search result. On the same synthetic USN journal, the first record list appeared in **1.08 seconds** after starting analysis in NTFS Tracer, compared with **3.25 seconds** in NTFS Log Tracker 1.9. These are medians from ten runs per tool. [Benchmark setup and results](docs/performance.md#finding-a-previous-name-from-the-current-name)
 
-**Copy evidence for your notes** straight to the clipboard, including full paths, individual field values, and transaction summaries. Review investigation leads and the records behind them, export results to CSV, or save the investigation and pick up where you left off. [See the indexing and search measurements](docs/performance.md#finding-a-previous-name-from-the-current-name)
+**Copy evidence for your notes** straight to the clipboard, including full paths, individual field values, and transaction summaries. Review investigation leads and the records behind them, export results to CSV, or save the investigation and pick up where you left off.
 
 ## Quick start
 

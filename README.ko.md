@@ -2,9 +2,9 @@
 
 **NTFS 로그 분석은 빠르게, 파일의 변화는 한눈에.**
 
-NTFS Tracer는 **Rust 엔진으로 NTFS 로그를 빠르게 색인**하는 Windows 포렌식 도구입니다. 현재 이름과 이전 이름, 경로, 파일 참조 번호로 기록을 빠르게 찾을 수 있습니다. 검색 결과에서 파일 이력을 열면 이름이 바뀌거나 파일이 이동·삭제된 과정을 근거 기록과 함께 확인할 수 있습니다.
+**NTFS Tracer는 NTFS Log Tracker에 익숙한 분석가를 위한 Windows 포렌식 도구입니다.** Rust 엔진으로 NTFS 로그를 색인하고, 파일명으로 찾은 기록에서 파일별 이력을 바로 열 수 있습니다. 같은 합성 USN 저널에서 분석을 시작해 첫 목록을 보기까지 NTFS Tracer는 **1.08초**, NTFS Log Tracker 1.9는 **3.25초**가 걸렸습니다. 각 도구를 10회씩 실행한 결과의 중앙값입니다. [측정 조건과 결과](docs/performance.md#finding-a-previous-name-from-the-current-name)
 
-**전체 경로, 개별 필드 값, 트랜잭션 개요**를 클립보드에 복사해 조사 메모에 옮길 수 있습니다. 조사 후보에서 관련 기록을 확인하고, 결과를 CSV로 내보내거나 조사 상태를 저장해 나중에 이어서 볼 수 있습니다. [색인과 검색 시간 측정 결과](docs/performance.md#finding-a-previous-name-from-the-current-name)
+**전체 경로, 개별 필드 값, 트랜잭션 개요**를 클립보드에 복사해 조사 메모에 옮길 수 있습니다. 조사 후보에서 관련 기록을 확인하고, 결과를 CSV로 내보내거나 조사 상태를 저장해 나중에 이어서 볼 수 있습니다.
 
 [Windows x64 다운로드](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [English](README.md) · [日本語](README.ja.md)
 

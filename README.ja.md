@@ -2,9 +2,9 @@
 
 **NTFS ログ解析をもっと速く。ファイルの変化がひと目でわかる。**
 
-NTFS Tracer は、**Rust エンジンで NTFS ログをすばやくインデックス化する** Windows 向けフォレンジックツールです。現在や過去のファイル名、パス、ファイル参照番号ですばやく検索できます。結果からファイル履歴を開くと、名前の変更、移動、削除の経過を根拠となるレコードとともに確認できます。
+**NTFS Tracer は、NTFS Log Tracker を使い慣れた分析担当者向けの Windows フォレンジックツールです。** Rust エンジンで NTFS ログをインデックス化し、ファイル名の検索結果から履歴を直接開けます。同じ模擬 USN ジャーナルで解析を開始してから最初の一覧が表示されるまで、NTFS Tracer は **1.08 秒**、NTFS Log Tracker 1.9 は **3.25 秒**でした。各ツールを 10 回ずつ実行した結果の中央値です。 [測定条件と結果](docs/performance.md#finding-a-previous-name-from-the-current-name)
 
-**フルパス、個々のフィールド値、トランザクションの概要**はクリップボードにコピーして調査メモに貼り付けられます。調査候補の根拠を確認し、結果を CSV に出力したり、調査を保存して後から再開したりできます。 [インデックス作成と検索の測定結果](docs/performance.md#finding-a-previous-name-from-the-current-name)
+**フルパス、個々のフィールド値、トランザクションの概要**はクリップボードにコピーして調査メモに貼り付けられます。調査候補の根拠を確認し、結果を CSV に出力したり、調査を保存して後から再開したりできます。
 
 [Windows x64 版をダウンロード](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [한국어](README.ko.md) · [English](README.md)
 
