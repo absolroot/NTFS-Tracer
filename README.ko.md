@@ -2,7 +2,7 @@
 
 NTFS Tracer는 Windows에서 NTFS 변경 이력과 트랜잭션 로그를 조사하는 데스크톱 도구입니다. 명령줄 파서로 자료를 내보낸 뒤, 결과 표에서 검색하고 원본을 다시 여는 과정에서 분석가는 여러 화면을 오가게 됩니다. NTFS Tracer는 이 작업을 한 화면 흐름으로 연결했습니다. 저널 색인이 준비되면 검색을 시작하고, 파일별 이력에서 이름 변경이나 이동을 추적해 변경 전후 이름과 위치를 비교할 수 있습니다. 사건에 연결된 기록을 확인한 뒤 기존 검색 결과로 돌아올 수 있습니다.
 
-앱을 재시작하지 않고 16개 표시 언어를 전환할 수 있습니다. [v0.8.29 영어 데모](docs/media/investigation.gif)에서는 파일 131개가 포함된 합성 저널로 이 조사 과정을 보여 줍니다.
+[v0.8.29 영어 데모](docs/media/investigation.gif)에서는 파일 131개가 포함된 합성 저널로 이 조사 과정을 보여 줍니다.
 
 [English](README.md) · [日本語](README.ja.md)
 
@@ -62,6 +62,10 @@ dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o ar
 EWF 기능을 사용하려면 [libewf 빌드 안내](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/modules/EvidenceImage/Logical/Native/README.md)에 따라 `JournalDesk.libewf.dll`을 빌드하세요. 완성한 DLL을 같은 소스 폴더에 두고 다시 게시하면 배포 파일에 포함됩니다.
 
 Rust 엔진은 [`engine/`](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/engine), WPF 앱은 [`gui/`](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/gui), 이미지 모듈은 [`modules/EvidenceImage/`](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/modules/EvidenceImage), 회귀 검사는 [`tests/`](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/tests)에 있습니다. [색인 형식](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/engine/INDEX_FORMAT.md)과 [이미지 테스트 자료 생성 절차](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/tests/EvidenceImage/README.md)도 소스에 포함되어 있습니다.
+
+## 표시 언어
+
+**보기 → 표시 언어**에서 16개 언어를 선택할 수 있습니다. 변경 사항은 즉시 적용됩니다.
 
 ## 외부 구성 요소
 

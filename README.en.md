@@ -10,7 +10,7 @@
 
 <p align="center"><a href="README.ko.md">한국어</a> · <a href="README.ja.md">日本語</a></p>
 
-NTFS Tracer is a Windows workbench for the USN change journal, Master File Table, and NTFS transaction log. Exporting records, reapplying filters, and switching tools can interrupt an investigation. NTFS Tracer brings journal search and per-file timelines together so an analyst can see when a file was created, renamed, moved, or deleted, and which records support that sequence. The desktop app supports **16 interface languages** with live switching.
+NTFS Tracer is a Windows workbench for the USN change journal, Master File Table, and NTFS transaction log. Exporting records, reapplying filters, and switching tools can interrupt an investigation. NTFS Tracer brings journal search and per-file timelines together so an analyst can see when a file was created, renamed, moved, or deleted, and which records support that sequence.
 
 ## From a search hit to the evidence
 
@@ -106,6 +106,10 @@ dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o ar
 For EWF support, build `JournalDesk.libewf.dll` using the [libewf instructions](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/modules/EvidenceImage/Logical/Native/README.md) before publishing.
 
 [Rust engine](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/engine) · [Index format](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.29/engine/INDEX_FORMAT.md) · [WPF app](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/gui) · [Regression tests](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.29/tests)
+
+## Display language
+
+Choose from 16 interface languages under **View → Display language**. Changes apply immediately.
 
 ## Third-party notices
 
