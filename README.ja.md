@@ -20,7 +20,7 @@ NTFS Tracer は、NTFS 上のファイルに何が起きたかを調べる Windo
 
 ## 調査機能
 
-[![NTFS Tracer のウィンドウ全体で、ジャーナル検索、ファイル履歴、トランザクション、調査候補を順に確認するデモ](docs/media/full-app-walkthrough.gif)](docs/media/full-app-walkthrough.gif)
+[![NTFS Tracer のウィンドウ全体で、ジャーナル検索、ファイル履歴、トランザクション、調査候補を順に確認するデモ](docs/media/full-app-walkthrough-color.gif)](docs/media/full-app-walkthrough-color.gif)
 
 デモには検証用の模擬 USN ジャーナルとトランザクションログを使用しています。
 

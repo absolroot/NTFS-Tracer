@@ -25,7 +25,7 @@ Before closing the app, choose **File → Save investigation…**. On your next 
 
 ## Investigation features
 
-[![Full NTFS Tracer window showing journal search, file history, transactions, and investigation leads](docs/media/full-app-walkthrough.gif)](docs/media/full-app-walkthrough.gif)
+[![Full NTFS Tracer window showing journal search, file history, transactions, and investigation leads](docs/media/full-app-walkthrough-color.gif)](docs/media/full-app-walkthrough-color.gif)
 
 The demo uses a synthetic USN journal and transaction log.
 

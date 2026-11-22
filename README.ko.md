@@ -20,7 +20,7 @@ NTFS Tracer는 Windows에서 NTFS 파일의 변경 이력을 조사하는 도구
 
 ## 조사 기능
 
-[![NTFS Tracer 전체 창에서 저널 검색, 파일 이력, 트랜잭션, 조사 후보를 차례로 확인하는 데모](docs/media/full-app-walkthrough.gif)](docs/media/full-app-walkthrough.gif)
+[![NTFS Tracer 전체 창에서 저널 검색, 파일 이력, 트랜잭션, 조사 후보를 차례로 확인하는 데모](docs/media/full-app-walkthrough-color.gif)](docs/media/full-app-walkthrough-color.gif)
 
 데모는 검증용으로 만든 USN 저널과 트랜잭션 로그를 사용합니다.
 
