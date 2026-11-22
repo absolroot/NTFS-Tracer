@@ -22,7 +22,7 @@ NTFS Tracer は、**Rust エンジンで NTFS ログをすばやくインデッ�
 
 ## 調査機能
 
-[![NTFS Tracer のウィンドウ全体で、ジャーナル検索、ファイル履歴、トランザクション、調査候補を順に確認するデモ](docs/media/full-app-walkthrough-color.gif)](docs/media/full-app-walkthrough-color.gif)
+[![NTFS Tracer のウィンドウ全体で、ジャーナル検索、ファイル履歴、トランザクション、調査候補を順に確認するデモ](docs/media/full-app-walkthrough-timestamps.gif)](docs/media/full-app-walkthrough-timestamps.gif)
 
 - **変更ジャーナルを検索**. 現在や過去の名前、パス、ファイル参照番号で対象を探します。USN レコードは期間や変更理由で絞り込めます。
 - **ファイルの変更履歴をたどる**. 検索結果からファイル履歴を開きます。名前の変更や移動について、変更前後の値とそれぞれの根拠を確認できます。収集時点の MFT で補ったパスには、その出典が表示されます。
