@@ -6,19 +6,11 @@
 
 <p align="center"><strong>Search NTFS changes and follow what happened to a file.</strong></p>
 
-<p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64</a></strong> · <a href="#quick-start">Quick start</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#investigation-examples-and-tool-comparisons">Investigation examples</a></p>
+<p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64</a></strong> · <a href="#quick-start">Quick start</a> · <a href="#investigation-features">Investigation features</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#investigation-examples-and-tool-comparisons">Investigation examples</a></p>
 
 <p align="center"><a href="README.ko.md">한국어</a> · <a href="README.ja.md">日本語</a></p>
 
 NTFS Tracer is a Windows workbench for the USN change journal, Master File Table, and NTFS transaction log. Exporting records, reapplying filters, and switching tools can interrupt an investigation. NTFS Tracer brings journal search and per-file timelines together so an analyst can see when a file was created, renamed, moved, or deleted, and which records support that sequence.
-
-## From a search hit to the evidence
-
-[![English NTFS Tracer demo showing a journal search and the old and new names in a file's rename history](docs/media/investigation.gif)](docs/media/investigation.gif)
-
-**Search for `report` → open file history → check the previous and new names.** The demo follows both names back to the USN records that support the rename.
-
-[Journal search](docs/media/journal-search.png) · [File history](docs/media/file-history.png)
 
 ## Quick start
 
@@ -30,6 +22,37 @@ NTFS Tracer is a Windows workbench for the USN change journal, Master File Table
 3. Search **All records**, open **File history**, or switch to **NTFS transactions**. Select an event to see its details and contributing records. **F1** opens the in-app guide.
 
 Before closing the app, choose **File → Save investigation…**. On your next launch, choose **Resume last investigation** to return to the saved sources, search settings, and selected record. NTFS Tracer checks the source SHA-256 hashes and reuses compatible indexes.
+
+## Investigation features
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>Search the change journal</strong><br>
+      Find a file by its current or previous name, path, or reference number. Narrow the USN journal by time or change reason.<br><br>
+      <a href="docs/media/search-demo.gif"><img src="docs/media/search-demo.gif" width="460" alt="USN results narrowing as a filename is typed"></a>
+    </td>
+    <td width="50%" valign="top">
+      <strong>Follow one file through changes</strong><br>
+      Open the file history from a search result. Review a rename or move and see the records that support each side. Paths filled in from the acquired MFT are labeled with their source.<br><br>
+      <a href="docs/media/investigation.gif"><img src="docs/media/investigation.gif" width="460" alt="Opening file history and selecting the old and new names of a rename"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>Compare transaction values</strong><br>
+      Find a record by LSN in the transaction log. Compare file timestamps when both Undo and Redo contain values.<br><br>
+      <a href="docs/media/transaction-timestamps.png"><img src="docs/media/transaction-timestamps.png" width="460" alt="Four file attribute timestamps with Undo and Redo values"></a>
+    </td>
+    <td width="50%" valign="top">
+      <strong>Review investigation leads</strong><br>
+      Review candidates such as repeated renames before deletion, SDelete-related records, or timestamp changes. Open the supporting records to assess the lead.<br><br>
+      <a href="docs/media/investigation-leads.png"><img src="docs/media/investigation-leads.png" width="460" alt="Synthetic SDelete-related investigation leads and a supporting USN record"></a>
+    </td>
+  </tr>
+</table>
+
+Inspect decoded fields, Hex, or JSON, export results to CSV, or scan source files for remnants of USN and transaction records.
 
 ## Supported inputs
 
@@ -57,16 +80,6 @@ Physical images must contain a readable NTFS volume. A locked BitLocker volume m
 | NTFS Log Tracker SQLite, CSV or TSV | Browse and filter existing results in the read-only viewer |
 
 You can also select a folder containing extracted artifacts. The app opens evidence read-only and writes extractions and indexes separately. New installations use `%LOCALAPPDATA%\NtfsTracer`. Existing JournalDesk settings and indexes can be reused.
-
-## Investigation features
-
-| Task | What you can check |
-| --- | --- |
-| Find a file | Search names, aliases, paths, file IDs and parent IDs. Refine USN results by time, reason, or exact USN. |
-| Reconstruct an event | Follow one file through changes, compare the two sides of a rename or move, and see which path portions came from the journal or the acquired MFT. |
-| Review transactions | Inspect LSNs and Redo/Undo details and use nearby records for context. |
-| Inspect and export | Review decoded fields, [Hex](docs/media/source-hex.png), or JSON. Return to your search or export results to CSV. |
-| Examine incomplete evidence | Scan supplied files for candidate records. Check investigation leads and carving results against the source bytes. |
 
 <a id="compare-workflows"></a>
 <a id="performance"></a>

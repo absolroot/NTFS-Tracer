@@ -4,10 +4,6 @@ NTFS Tracer는 Windows에서 NTFS 파일의 변경 이력을 조사하는 도구
 
 [Windows x64 다운로드](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [English](README.md) · [日本語](README.ja.md)
 
-[![파일명을 검색하고 파일 이력에서 이름 변경 전후를 확인하는 영어 데모](docs/media/investigation.gif)](docs/media/investigation.gif)
-
-데모는 파일 131개의 변경 기록 391건이 담긴 합성 저널을 사용합니다. `report`를 검색하고 파일 이력을 열면, `report-draft.docx`가 `report-final.docx`로 바뀐 기록을 확인할 수 있습니다.
-
 ## 시작하기
 
 배포 ZIP의 압축을 푼 뒤 `NtfsTracer.exe`를 실행하세요. 경량판을 실행하려면 .NET 10 Windows Desktop Runtime(x64)이 필요합니다.
@@ -19,6 +15,37 @@ NTFS Tracer는 Windows에서 NTFS 파일의 변경 이력을 조사하는 도구
 3. 기록을 선택하면 개요에 변경 사유, 경로를 판단한 근거, 원본 파일 안에서의 위치가 표시됩니다. `F1`을 누르면 사용 안내가 열립니다.
 
 작업을 중단할 때는 **파일 → 조사 저장…**을 선택하세요. 다음 실행 때 **마지막 조사 이어서 열기**를 선택하면 저장한 자료와 검색 조건, 선택한 기록으로 돌아갈 수 있습니다. 앱은 원본의 SHA-256을 대조하고 사용할 수 있는 색인을 다시 엽니다.
+
+## 조사 기능
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>변경 기록 검색</strong><br>
+      현재 이름이나 이전 이름, 경로, 파일 참조 번호로 대상을 찾습니다. 기간이나 변경 사유로 USN 기록을 좁힐 수 있습니다.<br><br>
+      <a href="docs/media/search-demo.gif"><img src="docs/media/search-demo.gif" width="460" alt="파일명을 입력하면서 USN 검색 결과가 좁혀지는 화면"></a>
+    </td>
+    <td width="50%" valign="top">
+      <strong>파일 하나의 변경 이력 추적</strong><br>
+      검색 결과에서 파일 이력을 엽니다. 이름이나 위치가 바뀐 경우에는 변경 전후와 각각의 근거 기록을 함께 봅니다. 수집 시점의 MFT로 경로를 보완한 경우에는 그 근거도 표시합니다.<br><br>
+      <a href="docs/media/investigation.gif"><img src="docs/media/investigation.gif" width="460" alt="파일 이력을 열고 이름 변경 전후의 근거 기록을 선택하는 화면"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>트랜잭션의 변경 전후 비교</strong><br>
+      트랜잭션 로그에서 LSN으로 기록을 찾습니다. Undo와 Redo 양쪽에 값이 남아 있으면 파일 시각을 비교할 수 있습니다.<br><br>
+      <a href="docs/media/transaction-timestamps.png"><img src="docs/media/transaction-timestamps.png" width="460" alt="파일 시각 네 항목에 Undo와 Redo 값이 표시된 화면"></a>
+    </td>
+    <td width="50%" valign="top">
+      <strong>조사 후보와 근거 확인</strong><br>
+      반복해서 이름이 바뀐 뒤 삭제된 파일, SDelete 관련 기록, 파일 시각 변경 같은 후보를 확인합니다. 후보마다 연결된 근거 기록을 열 수 있습니다.<br><br>
+      <a href="docs/media/investigation-leads.png"><img src="docs/media/investigation-leads.png" width="460" alt="합성 저널에서 찾은 SDelete 관련 후보와 근거 USN 기록"></a>
+    </td>
+  </tr>
+</table>
+
+개별 기록은 상세 필드, Hex, JSON으로 확인할 수 있습니다. 결과를 CSV로 저장하거나, 입력 파일에서 USN 및 트랜잭션 기록의 잔여물을 찾을 수도 있습니다.
 
 ## 어떤 자료를 열 수 있나요?
 
@@ -44,13 +71,6 @@ NTFS Tracer는 Windows에서 NTFS 파일의 변경 이력을 조사하는 도구
 잠겨 있는 BitLocker 볼륨은 외부 도구에서 잠금을 해제한 뒤 열 수 있습니다. 이미지 형식별 세부 조건은 [이미지 모듈 안내](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.30/modules/EvidenceImage/README.md)에서 확인할 수 있습니다.
 
 앱은 원본을 읽기 전용으로 열고, 추출한 파일과 SQLite 색인은 별도 경로에 저장합니다. 기본 저장 위치는 `%LOCALAPPDATA%\NtfsTracer`입니다. 기존 JournalDesk에서 사용한 설정과 색인도 이어서 사용할 수 있습니다.
-
-## 조사 기능
-
-- **검색 조건을 좁힙니다.** 파일명, 경로, 파일 ID, 상위 폴더 ID로 검색할 수 있습니다. USN 기록은 기간이나 변경 사유로도 좁힐 수 있습니다.
-- **파일의 변경 과정을 읽습니다.** 파일 이력에서 이름과 위치가 어떻게 바뀌었는지 확인합니다. 수집 시점의 `$MFT`로 보완한 경로는 변경 당시의 경로와 다를 수 있습니다. 앱은 경로를 구성할 때 참고한 자료를 표시합니다.
-- **개별 기록을 살펴보거나 결과를 저장합니다.** 레코드 상세, Hex, JSON으로 기록을 자세히 확인할 수 있습니다. 검색 결과나 선택한 파일의 이력은 CSV로 내보낼 수 있습니다.
-- **남은 기록을 찾습니다.** 입력 파일에서 USN 저널이나 트랜잭션 기록으로 보이는 부분을 찾을 수 있습니다. 조사 후보가 발견되면 연결된 원본 기록을 대조하세요.
 
 ## 조사 예시와 도구 비교
 

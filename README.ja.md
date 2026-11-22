@@ -4,10 +4,6 @@ NTFS Tracer は、NTFS 上のファイルに何が起きたかを調べる Windo
 
 [Windows x64 版をダウンロード](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [한국어](README.ko.md) · [English](README.md)
 
-[![ファイル名を検索し、変更前と変更後の名前をファイル履歴で確認する英語版のデモ](docs/media/investigation.gif)](docs/media/investigation.gif)
-
-デモでは、131 ファイルの変更を記録した 391 件の模擬データを使っています。`report` を検索してファイル履歴を開くと、`report-draft.docx` が `report-final.docx` に変更されたことが分かります。
-
 ## 使い方
 
 配布 ZIP を展開し、`NtfsTracer.exe` を実行してください。ランタイムを同梱していない軽量版には、.NET 10 Windows Desktop Runtime (x64) が必要です。
@@ -19,6 +15,37 @@ NTFS Tracer は、NTFS 上のファイルに何が起きたかを調べる Windo
 3. レコードを選ぶと、変更理由、パスの根拠、元のファイル内の位置が表示されます。`F1` でアプリ内ガイドを開けます。
 
 中断する前に **ファイル → 調査を保存…** を選びます。次回起動時に **前回の調査を再開** を選ぶと、保存した資料、検索条件、選択したレコードに戻れます。再開時には元ファイルの SHA-256 を照合し、利用できるインデックスを再利用します。
+
+## 調査機能
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>変更ジャーナルを検索</strong><br>
+      現在や過去の名前、パス、ファイル参照番号で対象を探します。USN レコードは期間や変更理由で絞り込めます。<br><br>
+      <a href="docs/media/search-demo.gif"><img src="docs/media/search-demo.gif" width="460" alt="ファイル名の入力に応じて絞り込まれる USN 検索結果"></a>
+    </td>
+    <td width="50%" valign="top">
+      <strong>ファイルの変更履歴をたどる</strong><br>
+      検索結果からファイル履歴を開きます。名前の変更や移動について、変更前後の値とそれぞれの根拠を確認できます。収集時点の MFT で補ったパスには、その出典が表示されます。<br><br>
+      <a href="docs/media/investigation.gif"><img src="docs/media/investigation.gif" width="460" alt="ファイル履歴を開き、名前変更の前後を示すレコードを選択する画面"></a>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <strong>トランザクションで変更前後を比較</strong><br>
+      トランザクションログで LSN を検索します。Undo と Redo の両方に値があれば、ファイルの時刻を比較できます。<br><br>
+      <a href="docs/media/transaction-timestamps.png"><img src="docs/media/transaction-timestamps.png" width="460" alt="四つのファイル属性の時刻を Undo と Redo に分けて表示する画面"></a>
+    </td>
+    <td width="50%" valign="top">
+      <strong>調査候補と根拠を確認</strong><br>
+      名前が繰り返し変更された後に削除されたファイルや、SDelete 関連の記録、時刻の変更などの候補を調べます。候補ごとに根拠となるレコードを開けます。<br><br>
+      <a href="docs/media/investigation-leads.png"><img src="docs/media/investigation-leads.png" width="460" alt="模擬ジャーナルから抽出した SDelete 関連の候補と根拠となる USN レコード"></a>
+    </td>
+  </tr>
+</table>
+
+個々のレコードは詳細フィールド、Hex、JSON で確認できます。検索結果は CSV に出力でき、入力ファイルから USN やトランザクションの残存レコードを探すこともできます。
 
 ## 対応する入力
 
@@ -44,13 +71,6 @@ NTFS Tracer は、NTFS 上のファイルに何が起きたかを調べる Windo
 BitLocker でロックされているボリュームは、事前に外部ツールでロックを解除してください。対応形式の詳細は[イメージモジュールの説明](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.30/modules/EvidenceImage/README.md)を参照してください。
 
 証拠ファイルは読み取り専用で開きます。抽出したファイルと SQLite インデックスは別の場所に保存します。既定の保存先は `%LOCALAPPDATA%\NtfsTracer` です。旧版の JournalDesk から更新した場合は、既存の設定とインデックスを引き続き使えます。
-
-## 調査機能
-
-- ファイル名、パス、ファイル ID、親フォルダー ID で検索できます。USN レコードは期間や変更理由でも絞り込めます。
-- ファイル履歴では、移動や名前の変更を前後の記録と合わせて確認できます。収集時点の `$MFT` で補ったパスは、変更が起きた時点のパスと異なることがあります。パスの表示には、その根拠も添えています。
-- 個々の記録は詳細フィールド、Hex、JSON で確認できます。検索結果やファイル履歴は CSV に出力できます。
-- 入力ファイルを調べ、USN レコードやトランザクションの候補を見つける機能もあります。候補が見つかった場合は、対応する元の記録を確認してください。
 
 ## 調査例とツールの比較
 
