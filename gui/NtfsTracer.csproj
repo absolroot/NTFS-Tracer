@@ -11,7 +11,7 @@
     <Product>NTFS Tracer</Product>
     <ApplicationIcon>Assets/NtfsTracer.ico</ApplicationIcon>
     <JournalIndexPath Condition="'$(JournalIndexPath)' == ''">../engine/target/release/journal-index.exe</JournalIndexPath>
-    <Version>0.8.30</Version>
+    <Version>0.8.31</Version>
     <PublishSingleFile>true</PublishSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <DebugType>embedded</DebugType>

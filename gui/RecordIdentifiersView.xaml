@@ -18,14 +18,14 @@
   </DataTemplate>
   <ItemsPanelTemplate x:Key="IdsPanel"><WrapPanel/></ItemsPanelTemplate>
  </UserControl.Resources>
- <Grid Margin="0,2,0,1">
+ <Grid Margin="0,0,0,1">
   <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition/></Grid.ColumnDefinitions>
   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-  <loc:CopyText HorizontalAlignment="Left" Text="{loc:Ui FilterFileId}" ToolTip="{loc:Ui FileIdDefinition}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+  <loc:CopyText HorizontalAlignment="Left" Text="{loc:Ui FilterFileId}" ToolTip="{loc:Ui FileIdDefinition}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Top" Margin="0,0,8,0"/>
   <ItemsControl x:Name="FileIds" Grid.Column="1" ItemsPanel="{StaticResource IdsPanel}" ItemTemplate="{StaticResource RecordId}"/>
-  <TextBlock x:Name="MissingFile" Grid.Column="1" Text="—" ToolTip="{loc:Ui RecordIdMissing}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Center" Visibility="Collapsed"/>
-  <loc:CopyText HorizontalAlignment="Left" Grid.Row="1" Text="{loc:Ui FilterParentId}" ToolTip="{loc:Ui ParentIdDefinition}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+  <loc:CopyText x:Name="MissingFile" Grid.Column="1" Text="—" ToolTip="{loc:Ui RecordIdMissing}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Center" Visibility="Collapsed"/>
+  <loc:CopyText HorizontalAlignment="Left" Grid.Row="1" Text="{loc:Ui FilterParentId}" ToolTip="{loc:Ui ParentIdDefinition}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Top" Margin="0,0,8,0"/>
   <ItemsControl x:Name="ParentIds" Grid.Row="1" Grid.Column="1" ItemsPanel="{StaticResource IdsPanel}" ItemTemplate="{StaticResource RecordId}"/>
-  <TextBlock x:Name="MissingParent" Grid.Row="1" Grid.Column="1" Text="—" ToolTip="{loc:Ui RecordIdMissing}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Center" Visibility="Collapsed"/>
+  <loc:CopyText x:Name="MissingParent" Grid.Row="1" Grid.Column="1" Text="—" ToolTip="{loc:Ui RecordIdMissing}" Foreground="{DynamicResource Desk.Muted}" VerticalAlignment="Center" Visibility="Collapsed"/>
  </Grid>
 </UserControl>

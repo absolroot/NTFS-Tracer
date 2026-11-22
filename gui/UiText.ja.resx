@@ -434,4 +434,12 @@
   <data name="OpenInvestigation" xml:space="preserve"><value>調査を開く…</value></data>
   <data name="ResumeInvestigation" xml:space="preserve"><value>前回の調査を再開</value></data>
   <data name="SaveInvestigation" xml:space="preserve"><value>調査を保存…</value></data>
+  <data name="TxTarget" xml:space="preserve"><value>対象ファイル</value></data>
+  <data name="TxOperationAndLocation" xml:space="preserve"><value>操作とログ内の位置</value></data>
+  <data name="TxFileTimes" xml:space="preserve"><value>ファイルに保存された時刻</value></data>
+  <data name="TxBefore" xml:space="preserve"><value>変更前 (Undo)</value></data>
+  <data name="TxAfter" xml:space="preserve"><value>変更後 (Redo)</value></data>
+  <data name="TxPathUnavailable" xml:space="preserve"><value>パスを確認できません</value></data>
+  <data name="TxFileTimesNotEvent" xml:space="preserve"><value>ファイル属性に保存された値です。このレコードには操作時刻がありません。</value></data>
+  <data name="TxFileTimesInferred" xml:space="preserve"><value>記録位置と値から時刻属性を推定しています。このレコードには操作時刻がありません。</value></data>
 </root>

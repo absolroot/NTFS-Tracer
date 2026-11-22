@@ -9,9 +9,13 @@ public partial class RecordOverviewView : UserControl
 
     internal void SetTime(Entry entry, JournalTimeZone utc) => EventTime.Text = entry.DetailedTime(utc);
 
-    internal void SetRecord(Entry entry, JournalTimeZone utc, string reasons, string location, string notes)
+    internal void SetRecord(Entry entry, byte[] fileId, JournalTimeZone utc, string reasons, string location, string notes)
     {
         SetTime(entry, utc);
+        Identifiers.SetIds(
+            NtfsReference.DisplayId(fileId) is string file ? [file] : [],
+            NtfsReference.DisplayId(entry.Parent) is string parent ? [parent] : []);
+        Identifiers.Visibility = Visibility.Visible;
         Reasons.Text = reasons;
         Reasons.ToolTip = entry.RawReason;
         LocationText.Text = location;

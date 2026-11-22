@@ -29,7 +29,7 @@ public partial class TransactionView : UserControl
     private CancellationTokenSource? importing, reading, exporting;
     private FileStream? evidence;
     private TransactionQuery? query;
-    private double preferredDetailHeight = 264;
+    private double? preferredDetailHeight;
     private bool restoreRecordAfterSource;
     internal bool CanShowSourceInfo => evidence != null && query != null && importing == null;
     internal string? SourcePath => evidence?.Name;
@@ -62,7 +62,12 @@ public partial class TransactionView : UserControl
     {
         InitializeComponent();
         Identifiers.SearchRequested += SearchRecordId;
-        PropertyChangedEventManager.AddHandler(DisplayTimeZone.Current, (_, _) => AdditionalFields.Items.Refresh(), nameof(DisplayTimeZone.Code));
+        PropertyChangedEventManager.AddHandler(DisplayTimeZone.Current, (_, _) =>
+        {
+            AdditionalFields.Items.Refresh();
+            TimestampRows.Items.Refresh();
+            TimestampTitle.GetBindingExpression(TextBlock.TextProperty)?.UpdateTarget();
+        }, nameof(DisplayTimeZone.Code));
         PropertyChangedEventManager.AddHandler(JournalPathPreference.Current, PathDisplayChanged, nameof(JournalPathPreference.Enabled));
         UpdatePathColumn();
         Splitter.DragCompleted += (_, e) =>
@@ -800,7 +805,7 @@ public partial class TransactionView : UserControl
         double available = Math.Max(90, Layout.ActualHeight - Layout.RowDefinitions[0].ActualHeight - Layout.RowDefinitions[1].MinHeight - Splitter.Height - Layout.RowDefinitions[4].ActualHeight);
         DetailHeight.MaxHeight = available;
         DetailHeight.MinHeight = 90;
-        DetailHeight.Height = new(Math.Min(preferredDetailHeight, available));
+        DetailHeight.Height = new(Math.Min(preferredDetailHeight ?? Math.Clamp(available * 0.55, 300, 520), available));
     }
     private void OpenDetail()
     {

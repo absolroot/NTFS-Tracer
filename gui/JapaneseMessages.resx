@@ -733,7 +733,6 @@ SHA-256  {2}
   <data name="File timestamp changes" xml:space="preserve"><value>ファイル時刻の変更</value></data>
   <data name="Timestamp evidence" xml:space="preserve"><value>時刻変更の根拠</value></data>
   <data name="Source byte range" xml:space="preserve"><value>元ファイル内のバイト範囲</value></data>
-  <data name="Shows a file timestamp when the log contains two different values for it. The difference is the new value minus the old value. The type of file attribute is inferred from its location and values." xml:space="preserve"><value>ログに異なる変更前後の値がそろっているファイル時刻を表示します。差は変更後から変更前を引いた値です。ファイル属性の種類は位置と値から推定しています。</value></data>
   <data name="Reading file timestamp changes…" xml:space="preserve"><value>ファイル時刻の変更を読み込んでいます…</value></data>
   <data name="No timestamp changes with both values available." xml:space="preserve"><value>変更前後の値がそろう時刻変更はありません。</value></data>
   <data name="Could not read timestamp changes. " xml:space="preserve"><value>時刻変更を読み込めませんでした。 </value></data>
@@ -749,4 +748,8 @@ SHA-256  {2}
   <data name="The name matches an SDelete executable." xml:space="preserve"><value>SDelete の実行ファイル名と一致します。</value></data>
   <data name="A Prefetch file named for SDelete was created." xml:space="preserve"><value>SDelete の名前を含む Prefetch ファイルが作成されました。</value></data>
   <data name="A Prefetch file named for SDelete was updated." xml:space="preserve"><value>SDelete の名前を含む Prefetch ファイルの内容が変更されました。</value></data>
+  <data name="A file timestamp appears here when the log contains both its old and new values and they differ. For example, a creation time that changes from 10 a.m. to 9 a.m. has a difference of −1 hour. The file attribute type is inferred from where the values appear in the log and what they contain." xml:space="preserve"><value>ログに同じファイル時刻の変更前後の値がそろい、値が異なる場合に表示します。例えば、作成時刻が午前10時から午前9時に変わった場合、差は −1 時間です。ファイル属性の種類は、ログ内の位置と値から推定します。</value></data>
+  <data name="Target MFT entry" xml:space="preserve"><value>対象 MFT 番号</value></data>
+  <data name="Disk clusters (LCN)" xml:space="preserve"><value>ディスククラスター (LCN)</value></data>
+  <data name="100 ns units since 1970: {0}" xml:space="preserve"><value>1970年からの100ナノ秒単位の値 {0}</value></data>
 </root>

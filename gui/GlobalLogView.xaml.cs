@@ -313,7 +313,7 @@ public partial class GlobalLogView : UserControl
         RefreshSearch(fileNameChanged: true);
     }
     private void RecordFieldsChanged(object? sender, EventArgs e) => RefreshSearch();
-    private void SearchRecordId(RecordIdChoice choice)
+    internal void SearchRecordId(RecordIdChoice choice)
     {
         if (query == null)
             return;
@@ -1208,11 +1208,7 @@ public partial class GlobalLogView : UserControl
         if (entry.Escaped)
             notes.Add(L.T("읽을 수 없는 파일명 부분은 원래 UTF-16 코드값으로 표시했습니다.", "Undecodable name characters are displayed as their original UTF-16 code units."));
         string location = original == null ? entry.RawLocation : Path.GetFileName(original) + "   ·   " + entry.RawLocation;
-        OverviewPanel.SetRecord(entry, utc, row.ReasonsText, location, string.Join(Environment.NewLine, notes));
-        OverviewPanel.Identifiers.SetIds(
-            NtfsReference.DisplayId(row.FileId) is string fileId ? [fileId] : [],
-            NtfsReference.DisplayId(entry.Parent) is string parentId ? [parentId] : []);
-        OverviewPanel.Identifiers.Visibility = Visibility.Visible;
+        OverviewPanel.SetRecord(entry, row.FileId, utc, row.ReasonsText, location, string.Join(Environment.NewLine, notes));
     }
 
     private async Task UpdateRecordPath(Entry entry, byte[] file, long revision)

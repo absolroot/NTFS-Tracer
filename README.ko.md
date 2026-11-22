@@ -26,7 +26,7 @@
 
 ## 조사 기능
 
-[![NTFS Tracer 전체 창에서 저널 검색, 파일 이력, 트랜잭션, 조사 후보를 차례로 확인하는 데모](docs/media/full-app-walkthrough-timestamps.gif)](docs/media/full-app-walkthrough-timestamps.gif)
+[![NTFS Tracer 전체 창에서 저널 검색, 파일 이력, 트랜잭션, 조사 후보를 차례로 확인하는 데모](docs/media/full-app-walkthrough-v0.8.31.gif)](docs/media/full-app-walkthrough-v0.8.31.gif)
 
 - **변경 기록 검색**. 현재 이름이나 이전 이름, 경로, 파일 참조 번호로 대상을 찾습니다. 기간이나 변경 사유로 USN 기록을 좁힐 수 있습니다.
 - **파일 하나의 변경 이력 추적**. 검색 결과에서 파일 이력을 엽니다. 이름이나 위치가 바뀐 경우에는 변경 전후와 각각의 근거 기록을 함께 봅니다. 수집 시점의 MFT로 경로를 보완한 경우에는 그 근거도 표시합니다.
@@ -56,7 +56,7 @@
 | VMDK | 단일 희소(sparse) 이미지, 스트림 최적화 이미지, 같은 폴더의 FLAT 파일을 참조하는 디스크 설명자 |
 | AFF1 | 무압축 페이지, zlib 압축 페이지 또는 0으로 채운 페이지를 담은 단일 이미지 |
 
-잠겨 있는 BitLocker 볼륨은 외부 도구에서 잠금을 해제한 뒤 열 수 있습니다. 이미지 형식별 세부 조건은 [이미지 모듈 안내](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.30/modules/EvidenceImage/README.md)에서 확인할 수 있습니다.
+잠겨 있는 BitLocker 볼륨은 외부 도구에서 잠금을 해제한 뒤 열 수 있습니다. 이미지 형식별 세부 조건은 [이미지 모듈 안내](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.31/modules/EvidenceImage/README.md)에서 확인할 수 있습니다.
 
 앱은 원본을 읽기 전용으로 열고, 추출한 파일과 SQLite 색인은 별도 경로에 저장합니다. 기본 저장 위치는 `%LOCALAPPDATA%\NtfsTracer`입니다. 기존 JournalDesk에서 사용한 설정과 색인도 이어서 사용할 수 있습니다.
 
@@ -104,7 +104,7 @@ dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o ar
 
 EWF 이미지를 열 수 있는 배포본을 만들려면 `NtfsTracer.libewf.dll`을 빌드한 뒤 `modules/EvidenceImage/Logical/Native/`에 두고 다시 게시하세요. [libewf 빌드 방법](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md)
 
-소스는 Rust 색인 엔진, WPF 앱, 이미지 판독 모듈로 구성됩니다. [엔진](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/engine) · [WPF 앱](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/gui) · [이미지 모듈](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/modules/EvidenceImage) · [회귀 검사](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/tests)
+소스는 Rust 색인 엔진, WPF 앱, 이미지 판독 모듈로 구성됩니다. [엔진](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/engine) · [WPF 앱](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/gui) · [이미지 모듈](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/modules/EvidenceImage) · [회귀 검사](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/tests)
 
 ## 표시 언어
 

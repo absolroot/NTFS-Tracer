@@ -34,7 +34,9 @@
    <Setter Property="BorderThickness" Value="0,0,0,1"/>
    <Setter Property="Padding" Value="12,8"/>
   </Style>
-  <Style x:Key="StorageBrowse" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+  <Style x:Key="StorageBrowse" TargetType="Button">
+   <Setter Property="Background" Value="{DynamicResource Desk.Inset}"/>
+   <Setter Property="BorderBrush" Value="{DynamicResource Desk.Rule}"/>
    <Setter Property="MinHeight" Value="30"/><Setter Property="VerticalAlignment" Value="Center"/>
    <Setter Property="Margin" Value="8,0,0,0"/><Setter Property="Padding" Value="12,2"/>
    <Setter Property="Content" Value="{loc:Ui IntakeBrowse}"/>

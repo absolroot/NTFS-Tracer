@@ -27,8 +27,13 @@
        <Button x:Name="Stop" Click="StopClick" Visibility="Collapsed" Style="{DynamicResource Desk.IconButton}" Content="&#xE71A;" ToolTip="{loc:Ui CancelOperation}" AutomationProperties.Name="{loc:Ui CancelOperation}"/>
       </StackPanel>
       <TextBlock DockPanel.Dock="Left" Text="{loc:Ui LeadType}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+      <StackPanel Orientation="Horizontal">
       <ComboBox x:Name="Rules" AutomationProperties.Name="{loc:Ui LeadTypesAndCounts}" DisplayMemberPath="Display" MinWidth="200" MaxWidth="340" MinHeight="30"
        HorizontalAlignment="Left" SelectionChanged="RuleChanged" ToolTip="{Binding SelectedItem.Display,RelativeSource={RelativeSource Self}}"/>
+      <ContentControl Style="{DynamicResource Desk.CriteriaHelp}" AutomationProperties.HelpText="{Binding Content,ElementName=Criterion}">
+       <ContentControl.ToolTip><ToolTip x:Name="Criterion" Style="{DynamicResource Desk.CriteriaToolTip}"/></ContentControl.ToolTip>
+      </ContentControl>
+      </StackPanel>
      </DockPanel>
     </StackPanel>
    </Border>
@@ -60,9 +65,7 @@
    </Grid>
    <GridSplitter Grid.Row="2" Style="{DynamicResource Desk.RowSplitter}" Height="4" HorizontalAlignment="Stretch"
     ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
-   <TabControl Grid.Row="3" Style="{DynamicResource Desk.InspectorTabs}">
-    <TabItem x:Name="EvidenceTab" Header="{loc:Ui SupportingRecords}">
-     <DockPanel>
+   <DockPanel Grid.Row="3">
    <DockPanel DockPanel.Dock="Top" Margin="10,2,8,3">
     <Button DockPanel.Dock="Right" x:Name="GoHex" IsEnabled="False" Click="GoHexClick" Margin="4,0,0,0" Padding="8,3" MinHeight="26"/>
     <Button DockPanel.Dock="Right" x:Name="Go" Content="{loc:Ui OpenLeadEvidence}" IsEnabled="False" Click="GoClick" Padding="8,3" MinHeight="26"/>
@@ -82,13 +85,6 @@
     </DataGrid.Columns>
    </DataGrid>
      </DockPanel>
-    </TabItem>
-    <TabItem x:Name="CriterionTab" Header="{loc:Ui LeadCriteria}">
-     <loc:CopyText x:Name="Criterion" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
-                   HorizontalAlignment="Left" VerticalContentAlignment="Top" MaxWidth="680" Margin="10,6" Foreground="{DynamicResource Desk.Text}"
-                   AutomationProperties.Name="{loc:Ui LeadCriteria}"/>
-    </TabItem>
-   </TabControl>
   </Grid>
  </DockPanel>
 </UserControl>

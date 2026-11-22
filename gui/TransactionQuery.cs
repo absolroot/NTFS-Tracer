@@ -24,10 +24,28 @@ internal sealed record TxFact(string Label, string Text, Func<JournalTimeZone, s
 {
     public string Value => Format?.Invoke(DisplayTimeZone.Current.Zone) ?? Text;
 }
+internal sealed record TxTimestamp(string Name, long? Old, long? New)
+{
+    public string Before => TransactionQuery.Stamp(Old, DisplayTimeZone.Current.Zone);
+    public string After => TransactionQuery.Stamp(New, DisplayTimeZone.Current.Zone);
+    public string? BeforeRaw => Raw(Old);
+    public string? AfterRaw => Raw(New);
+    private static string? Raw(long? ticks) => ticks is long value
+        ? L.T("1970년 기준 100ns 단위 값 {0}", "100 ns units since 1970: {0}", value.ToString(CultureInfo.InvariantCulture))
+        : null;
+}
+
 internal sealed record TxDetail(TxRow Record, IReadOnlyList<TxFact> Facts, long Position, byte[] Header, TxPayload Redo, TxPayload Undo,
     string PreviousLsn, string NextUndoLsn, string? NonUpdateType)
 {
-    public string Info => string.Join(Environment.NewLine, Facts.Select(f => f.Label.Length == 0 ? f.Value : f.Label + "   " + f.Value));
+    public IReadOnlyList<TxTimestamp> Timestamps { get; init; } = [];
+    public string TimestampNotes { get; init; } = "";
+    public string TimestampTitle => Timestamps.Count == 0 ? "" : $"{L.Caption("TxFileTimes")} · {DisplayTimeZone.Current.Zone.Caption}";
+    public string OverviewPath => Record.PathText == "—" ? L.Caption("TxPathUnavailable") : Record.PathText;
+    public string Info => string.Join(Environment.NewLine,
+        Facts.Select(f => f.Label.Length == 0 ? f.Value : f.Label + "   " + f.Value)
+            .Concat(Timestamps.Count == 0 ? [] : new[] { TimestampTitle, TimestampNotes })
+            .Concat(Timestamps.Select(t => $"{t.Name}   Undo {t.Before} [{t.BeforeRaw}]   Redo {t.After} [{t.AfterRaw}]")));
     public string OriginalPosition => L.T("0x{0:X} ({1:N0}바이트)", "0x{0:X} ({1:N0} bytes)", Position, Position);
     public string TransactionIdNote { get; } = L.T("트랜잭션 ID는 재사용될 수 있습니다.", "Transaction IDs can be reused.");
     public string CopyText() => string.Join(Environment.NewLine, new[]{
@@ -548,9 +566,9 @@ internal sealed class TransactionQuery(string path, TransactionMft? mft = null)
             var decodedType = r.GetString(3);
             nonUpdate = decodedType == "Checkpoint" || decodedType.StartsWith("RecordType ", StringComparison.Ordinal) ? decodedType : null;
             if (!r.IsDBNull(10))
-                Fact(L.T("대상 MFT 레코드 번호", "Target MFT record number"), L.T("{0}  (재사용 순번 미포함)", "{0}  (sequence number unavailable)", r.GetInt64(10)));
+                Fact(L.T("대상 MFT 번호", "Target MFT entry"), L.T("{0}  (재사용 순번 미포함)", "{0}  (sequence number unavailable)", r.GetInt64(10)));
             if (!r.IsDBNull(9) && r.GetString(9).Length != 0)
-                Fact(L.T("대상 디스크 클러스터 (LCN)", "Target disk clusters (LCN)"), r.GetString(9));
+                Fact(L.T("디스크 클러스터 (LCN)", "Disk clusters (LCN)"), r.GetString(9));
             TxPayload ReadPayload(int op, int len, int data) => new(
                 nonUpdate is "Checkpoint" or "RecordType 2" ? L.T("해당 없음", "Not applicable") :
                     nonUpdate != null || r.IsDBNull(op) ? L.T("작업 미판독", "Not decoded") : r.GetString(op),
@@ -587,44 +605,41 @@ internal sealed class TransactionQuery(string path, TransactionMft? mft = null)
         using (var r = cmd.ExecuteReader())
             while (r.Read())
                 stamps.Add((r.GetString(0), Enumerable.Range(1, 4).Select(i => r.IsDBNull(i) ? (long?)null : r.GetInt64(i)).ToArray()));
+        List<TxTimestamp> timestamps = [];
+        string timestampNotes = "";
         if (stamps.Count != 0)
         {
-            string timesLabel = L.T("파일 속성 시각 ($STANDARD_INFORMATION)  ·  KST (UTC+09:00)", "File attribute timestamps ($STANDARD_INFORMATION)  ·  KST (UTC+09:00)");
-            facts.Add(new("", timesLabel, zone => timesLabel.Replace("KST (UTC+09:00)", zone.Caption, StringComparison.Ordinal)));
-            var inferred = stamps.Where(s => (s.Side == "redo" ? redo : undo).Operation == "UpdateResidentValue")
-                .Select(s => s.Side == "redo" ? "Redo" : "Undo").Distinct().ToArray();
-            if (inferred.Length > 0)
-                Note(L.T("{0}의 속성 종류는 레코드 안의 위치와 시각 값으로 추정했습니다.", "The attribute type in {0} is inferred from its position and timestamp values.", string.Join(" / ", inferred)));
-            Note(L.T("이 로그 작업의 발생 시각은 기록되지 않았습니다.", "The time of the log operation is not recorded."));
             var before = stamps.FirstOrDefault(x => x.Side == "undo").Times;
             var after = stamps.FirstOrDefault(x => x.Side == "redo").Times;
             string[] labels = [L.T("만든 시각", "Created"), L.T("내용 수정 시각", "Content modified"), L.T("메타데이터 변경 시각", "Metadata changed"), L.T("마지막 접근 시각", "Last accessed")];
             for (int i = 0; i < labels.Length; i++)
             {
                 long? old = before?[i], newer = after?[i];
-                if (old == null && newer == null)
-                    continue;
-                Note($"{labels[i]}{(newer < old ? L.T("   ·   Redo 값이 더 이릅니다.", "   ·   Redo is earlier than Undo.") : "")}");
-                facts.Add(new(L.T("Undo에 기록된 값", "Value in Undo"), "", zone => Stamp(old, zone)));
-                facts.Add(new(L.T("Redo에 기록된 값", "Value in Redo"), "", zone => Stamp(newer, zone)));
+                if (old != null || newer != null)
+                    timestamps.Add(new(labels[i], old, newer));
             }
+            bool inferred = stamps.Any(s => (s.Side == "redo" ? redo : undo).Operation == "UpdateResidentValue");
+            timestampNotes = L.Caption(inferred ? "TxFileTimesInferred" : "TxFileTimesNotEvent");
         }
         using var file = new FileStream(original, FileMode.Open, FileAccess.Read, FileShare.Read);
         file.Position = position;
         byte[] header = new byte[48];
         file.ReadExactly(header);
-        return new(row, facts, position, header, redo, undo, previousLsn, nextUndoLsn, nonUpdate);
+        return new(row, facts, position, header, redo, undo, previousLsn, nextUndoLsn, nonUpdate)
+        {
+            Timestamps = timestamps,
+            TimestampNotes = timestampNotes
+        };
     }
 
-    private static string Stamp(long? value, JournalTimeZone utc)
+    internal static string Stamp(long? value, JournalTimeZone utc)
     {
         if (!value.HasValue)
             return L.T("데이터에서 확인되지 않음", "Unavailable in this data");
         try
         {
             var time = utc.At(DateTimeOffset.UnixEpoch.AddTicks(value.Value));
-            return time.ToString(utc.WindowsZone == null ? "yyyy-MM-dd HH:mm:ss.FFFFFFF" : "yyyy-MM-dd HH:mm:ss.FFFFFFF zzz", CultureInfo.InvariantCulture)
-                + L.T("  (1970년 기준 100ns 단위 값 {0})", "  (100 ns units since 1970: {0})", value);
+            return time.ToString(utc.WindowsZone == null ? "yyyy-MM-dd HH:mm:ss.FFFFFFF" : "yyyy-MM-dd HH:mm:ss.FFFFFFF zzz", CultureInfo.InvariantCulture);
         }
         catch (ArgumentOutOfRangeException) { return L.T("표시 범위 밖 (1970년 기준 100ns 단위 값 {0})", "Out of display range (100 ns units since 1970: {0})", value); }
     }

@@ -434,4 +434,12 @@
   <data name="OpenInvestigation" xml:space="preserve"><value>Open investigation…</value></data>
   <data name="ResumeInvestigation" xml:space="preserve"><value>Resume last investigation</value></data>
   <data name="SaveInvestigation" xml:space="preserve"><value>Save investigation…</value></data>
+  <data name="TxTarget" xml:space="preserve"><value>File affected</value></data>
+  <data name="TxOperationAndLocation" xml:space="preserve"><value>Operation and log location</value></data>
+  <data name="TxFileTimes" xml:space="preserve"><value>Stored file timestamps</value></data>
+  <data name="TxBefore" xml:space="preserve"><value>Before (Undo)</value></data>
+  <data name="TxAfter" xml:space="preserve"><value>After (Redo)</value></data>
+  <data name="TxPathUnavailable" xml:space="preserve"><value>Path unavailable</value></data>
+  <data name="TxFileTimesNotEvent" xml:space="preserve"><value>These values come from the file attributes. The record does not contain the time of the operation.</value></data>
+  <data name="TxFileTimesInferred" xml:space="preserve"><value>The timestamp attribute is inferred from its location and values. The record does not contain the time of the operation.</value></data>
 </root>

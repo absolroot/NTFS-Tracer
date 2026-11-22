@@ -31,7 +31,7 @@ Before closing the app, choose **File → Save investigation…**. On your next 
 
 ## Investigation features
 
-[![Full NTFS Tracer window showing journal search, file history, transactions, and investigation leads](docs/media/full-app-walkthrough-timestamps.gif)](docs/media/full-app-walkthrough-timestamps.gif)
+[![Full NTFS Tracer window showing journal search, file history, transactions, and investigation leads](docs/media/full-app-walkthrough-v0.8.31.gif)](docs/media/full-app-walkthrough-v0.8.31.gif)
 
 - **Search the change journal**. Find a file by its current or previous name, path, or reference number. Narrow the USN journal by time or change reason.
 - **Follow one file through changes**. Open the file history from a search result. Review a rename or move and see the records that support each side. Paths filled in from the acquired MFT are labeled with their source.
@@ -54,7 +54,7 @@ Inspect decoded fields, Hex, or JSON, export results to CSV, or scan source file
 | VMDK | Single sparse, stream-optimized, and descriptors referencing FLAT extents in the same directory. Parent chains are unsupported. |
 | AFF | `.aff`. Single AFF1 with uncompressed, zlib, or zero pages |
 
-Physical images must contain a readable NTFS volume. A locked BitLocker volume must be unlocked outside NTFS Tracer. See the [image module](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.30/modules/EvidenceImage/README.md) for the full variant limits.
+Physical images must contain a readable NTFS volume. A locked BitLocker volume must be unlocked outside NTFS Tracer. See the [image module](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.31/modules/EvidenceImage/README.md) for the full variant limits.
 
 ### Extracted artifacts and existing results
 
@@ -114,7 +114,7 @@ dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o ar
 
 For EWF support, build `NtfsTracer.libewf.dll` using the [libewf instructions](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md) before publishing.
 
-[Rust engine](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/engine) · [Index format](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.30/engine/INDEX_FORMAT.md) · [WPF app](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/gui) · [Regression tests](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.30/tests)
+[Rust engine](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/engine) · [Index format](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.31/engine/INDEX_FORMAT.md) · [WPF app](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/gui) · [Regression tests](https://github.com/absolroot/NTFS-Tracer/tree/v0.8.31/tests)
 
 ## Display language
 

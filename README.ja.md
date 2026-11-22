@@ -26,7 +26,7 @@
 
 ## 調査機能
 
-[![NTFS Tracer のウィンドウ全体で、ジャーナル検索、ファイル履歴、トランザクション、調査候補を順に確認するデモ](docs/media/full-app-walkthrough-timestamps.gif)](docs/media/full-app-walkthrough-timestamps.gif)
+[![NTFS Tracer のウィンドウ全体で、ジャーナル検索、ファイル履歴、トランザクション、調査候補を順に確認するデモ](docs/media/full-app-walkthrough-v0.8.31.gif)](docs/media/full-app-walkthrough-v0.8.31.gif)
 
 - **変更ジャーナルを検索**. 現在や過去の名前、パス、ファイル参照番号で対象を探します。USN レコードは期間や変更理由で絞り込めます。
 - **ファイルの変更履歴をたどる**. 検索結果からファイル履歴を開きます。名前の変更や移動について、変更前後の値とそれぞれの根拠を確認できます。収集時点の MFT で補ったパスには、その出典が表示されます。
@@ -56,7 +56,7 @@
 | VMDK | 単一の sparse イメージ、stream-optimized イメージ、同じフォルダーにある FLAT ファイルを参照するディスク記述子 |
 | AFF1 | 非圧縮、zlib 圧縮、ゼロ埋めのページを含む単一イメージ |
 
-BitLocker でロックされているボリュームは、事前に外部ツールでロックを解除してください。対応形式の詳細は[イメージモジュールの説明](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.30/modules/EvidenceImage/README.md)を参照してください。
+BitLocker でロックされているボリュームは、事前に外部ツールでロックを解除してください。対応形式の詳細は[イメージモジュールの説明](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.31/modules/EvidenceImage/README.md)を参照してください。
 
 証拠ファイルは読み取り専用で開きます。抽出したファイルと SQLite インデックスは別の場所に保存します。既定の保存先は `%LOCALAPPDATA%\NtfsTracer` です。旧版の JournalDesk から更新した場合は、既存の設定とインデックスを引き続き使えます。
 
@@ -94,7 +94,7 @@ ArtiFast Windows の製品資料では、Windows LogFile の一覧で LSN を探
 
 ## ビルド
 
-[ビルド手順と依存関係](README.md#build-from-source) · [EWF ライブラリのビルド](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md) · [インデックス形式](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.30/engine/INDEX_FORMAT.md)
+[ビルド手順と依存関係](README.md#build-from-source) · [EWF ライブラリのビルド](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md) · [インデックス形式](https://github.com/absolroot/NTFS-Tracer/blob/v0.8.31/engine/INDEX_FORMAT.md)
 
 ## 表示言語
 

@@ -62,7 +62,6 @@ public partial class InvestigationView : UserControl
 
     internal void FocusEvidence()
     {
-        EvidenceTab.IsSelected = true;
         if (Evidence.SelectedItem is LeadEvidence selected)
         {
             Evidence.ScrollIntoView(selected);
@@ -247,7 +246,7 @@ public partial class InvestigationView : UserControl
 
     private void UpdateRule(LeadRule rule)
     {
-        Criterion.Text = rule.Criterion;
+        Criterion.Content = rule.Criterion;
         ObservationColumn.Header = rule.Kind switch
         {
             LeadKind.DocumentDelete => L.T("확장자", "Extension"),

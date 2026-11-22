@@ -74,7 +74,10 @@ public partial class App : Application
     private static void EnableCellSelection(object sender, RoutedEventArgs e)
     {
         if (sender is Window window && ReferenceEquals(window, e.OriginalSource))
+        {
+            ApplyWindowTheme(window);
             CellInteractions.GetValue(window, static w => new CellTextSelection(w));
+        }
     }
     protected override void OnExit(ExitEventArgs e)
     {
@@ -145,6 +148,13 @@ public partial class App : Application
         }, DispatcherPriority.Background);
     }
 
+    private static void ApplyWindowTheme(Window window)
+    {
+#pragma warning disable WPF0001
+        window.ThemeMode = IsDark ? System.Windows.ThemeMode.Dark : System.Windows.ThemeMode.Light;
+#pragma warning restore WPF0001
+    }
+
     private static void Apply(bool dark)
     {
         IsDark = dark;
@@ -170,6 +180,8 @@ public partial class App : Application
             SetFluentBrushes("Disabled", "ButtonForegroundDisabled", "ComboBoxForegroundDisabled", "ComboBoxDropDownGlyphForegroundDisabled");
             SetFluentBrushes("Accent", "ComboBoxItemPillFillBrush");
         }
+        foreach (Window window in Current.Windows)
+            ApplyWindowTheme(window);
         AppearanceChanged?.Invoke(null, EventArgs.Empty);
     }
 

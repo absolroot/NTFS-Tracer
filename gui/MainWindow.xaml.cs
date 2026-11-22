@@ -52,6 +52,11 @@ public partial class MainWindow : Window
         }, nameof(DisplayTimeZone.Code));
         WindowLayoutPreference.Attach(this);
         Setup.Host = this;
+        OverviewPanel.Identifiers.SearchRequested += choice =>
+        {
+            GlobalTab.IsSelected = true;
+            GlobalView.SearchRecordId(choice);
+        };
         Setup.AnalysisRequested += AnalyzeFromSettings;
         SettingsTab.IsSelected = true;
         PropertyChangedEventManager.AddHandler(JournalPathPreference.Current, HistoryPathModeChanged, nameof(JournalPathPreference.Enabled));
@@ -1363,7 +1368,7 @@ public partial class MainWindow : Window
                 notes.Add(L.T("손상 구간 뒤에서 형식을 다시 확인한 첫 기록입니다.", "First valid record after a damaged region."));
             if (entry.Escaped)
                 notes.Add(L.T("문자로 해석할 수 없는 파일명 부분은 원래 UTF-16 코드값으로 표시합니다.", "Undecodable name characters are displayed as their original UTF-16 code units."));
-            OverviewPanel.SetRecord(entry, DisplayTimeZone.Current.Zone, reasons, Path.GetFileName(original.Name) + "   ·   " + entry.RawLocation, string.Join(Environment.NewLine, notes));
+            OverviewPanel.SetRecord(entry, file.Id, DisplayTimeZone.Current.Zone, reasons, Path.GetFileName(original.Name) + "   ·   " + entry.RawLocation, string.Join(Environment.NewLine, notes));
             var fields = UsnEvidence.RecordFields(entry, file.Id);
             fields.Add(new(L.T("원본 파일", "Source file"), original.Name));
             fields.Add(new("SHA-256", digest));

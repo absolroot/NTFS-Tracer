@@ -114,8 +114,9 @@ public partial class TimestampLeadsView : UserControl
         AutomationProperties.SetName(Candidates, L.T("파일 시각 변경 후보", "File timestamp changes"));
         AutomationProperties.SetName(Evidence, L.T("시각 변경 근거", "Timestamp evidence"));
         AutomationProperties.SetName(Fragments, L.T("원본 바이트 범위", "Source byte range"));
-        Criterion.Text = L.T("파일에 저장된 시각이 바뀌었고, 이전 값과 이후 값을 모두 읽을 수 있을 때 표시합니다. 차이는 이후 값에서 이전 값을 뺀 값입니다. 어떤 종류의 파일 속성인지는 기록 안의 위치와 값으로 추정합니다.",
-            "Shows a file timestamp when the log contains two different values for it. The difference is the new value minus the old value. The type of file attribute is inferred from its location and values.");
+        LeadTypeName.Text = L.T("파일 시각 변경", "File timestamp changes");
+        Criterion.Content = L.T("같은 파일 시각의 이전 값과 이후 값이 로그에 모두 남아 있고, 두 값이 다르면 후보로 표시합니다. 예를 들어 만든 시각이 오전 10시에서 오전 9시로 바뀌면 차이는 −1시간입니다. 로그에서 시각이 기록된 위치와 값으로 파일 속성의 종류를 추정합니다.",
+            "A file timestamp appears here when the log contains both its old and new values and they differ. For example, a creation time that changes from 10 a.m. to 9 a.m. has a difference of −1 hour. The file attribute type is inferred from where the values appear in the log and what they contain.");
         Candidates.Items.Refresh();
         UpdateEvidence();
     }
@@ -248,7 +249,6 @@ public partial class TimestampLeadsView : UserControl
 
     internal void FocusEvidence()
     {
-        EvidenceTab.IsSelected = true;
         Evidence.Focus();
     }
 

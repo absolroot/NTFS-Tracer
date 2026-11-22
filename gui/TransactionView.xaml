@@ -73,17 +73,50 @@
      <Style x:Key="OverviewLabel" TargetType="local:CopyText" BasedOn="{StaticResource {x:Type local:CopyText}}">
       <Setter Property="Foreground" Value="{DynamicResource Desk.Muted}"/>
       <Setter Property="Margin" Value="0,0,8,0"/>
-      <Setter Property="MaxWidth" Value="152"/>
+      <Setter Property="MaxWidth" Value="220"/>
+      <Setter Property="VerticalContentAlignment" Value="Top"/>
       <Setter Property="ToolTip" Value="{Binding Text,RelativeSource={RelativeSource Self}}"/>
      </Style>
+     <Style x:Key="OverviewSection" TargetType="TextBlock">
+      <Setter Property="FontWeight" Value="SemiBold"/>
+      <Setter Property="Margin" Value="4,9,4,3"/>
+     </Style>
     </ScrollViewer.Resources>
-    <StackPanel Margin="4,4" Grid.IsSharedSizeScope="True">
+    <StackPanel Margin="8,4" Grid.IsSharedSizeScope="True">
+     <StackPanel DataContext="{Binding DataContext,ElementName=OverviewSummary}">
+      <StackPanel.Style><Style TargetType="StackPanel"><Setter Property="Visibility" Value="Visible"/><Style.Triggers>
+       <DataTrigger Binding="{Binding Timestamps.Count}" Value="0"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+       <DataTrigger Binding="{Binding}" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger>
+      </Style.Triggers></Style></StackPanel.Style>
+      <TextBlock x:Name="TimestampTitle" Text="{Binding TimestampTitle}" Style="{StaticResource OverviewSection}"/>
+      <Grid Margin="0,0,0,2">
+       <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+       <TextBlock Grid.Column="1" Text="{loc:Ui TxBefore}" Margin="4,0" Foreground="{DynamicResource Desk.Muted}"/>
+       <TextBlock Grid.Column="2" Text="{loc:Ui TxAfter}" Margin="4,0" Foreground="{DynamicResource Desk.Muted}"/>
+      </Grid>
+      <ItemsControl x:Name="TimestampRows" ItemsSource="{Binding Timestamps}">
+       <ItemsControl.ItemTemplate><DataTemplate>
+        <Border BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0">
+         <Grid>
+          <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+          <local:CopyText Text="{Binding Name,Mode=OneWay}" Style="{StaticResource OverviewLabel}"/>
+          <local:CopyText Grid.Column="1" Text="{Binding Before,Mode=OneWay}" ToolTip="{Binding BeforeRaw}" AutomationProperties.Name="{loc:Ui TxBefore}"/>
+          <local:CopyText Grid.Column="2" Text="{Binding After,Mode=OneWay}" ToolTip="{Binding AfterRaw}" AutomationProperties.Name="{loc:Ui TxAfter}"/>
+         </Grid>
+        </Border>
+       </DataTemplate></ItemsControl.ItemTemplate>
+      </ItemsControl>
+      <local:CopyText Text="{Binding TimestampNotes,Mode=OneWay}" Foreground="{DynamicResource Desk.Muted}" Margin="0,3,0,0"/>
+     </StackPanel>
+     <TextBlock Text="{loc:Ui TxTarget}" Style="{StaticResource OverviewSection}" Visibility="{Binding Visibility,ElementName=OverviewSummary}"/>
      <Grid Margin="0,0,0,4" Visibility="{Binding Visibility,ElementName=OverviewSummary}" DataContext="{Binding DataContext.Record,ElementName=OverviewSummary}">
       <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
       <local:CopyText Style="{StaticResource OverviewLabel}" HorizontalAlignment="Left" Text="{loc:Ui Path}"/>
-      <local:CopyText Grid.Column="1" Text="{Binding PathText,Mode=OneWay}" TextWrapping="Wrap" MaxHeight="44" VerticalScrollBarVisibility="Auto" ToolTip="{Binding PathText}" AutomationProperties.Name="{loc:Ui Path}"/>
-      <TextBlock Grid.Column="2" Text="{Binding PathSource}" Foreground="{DynamicResource Desk.Muted}" Margin="8,0,4,0" VerticalAlignment="Center" AutomationProperties.Name="{loc:Ui PathSourceColumn}"/>
+      <local:CopyText Grid.Column="1" Text="{Binding DataContext.OverviewPath,ElementName=OverviewSummary,Mode=OneWay}" TextWrapping="Wrap" MaxHeight="44" VerticalScrollBarVisibility="Auto" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}" AutomationProperties.Name="{loc:Ui Path}"/>
+      <TextBlock Grid.Column="2" Text="{Binding PathSource}" Foreground="{DynamicResource Desk.Muted}" Margin="8,0,4,0" VerticalAlignment="Center" AutomationProperties.Name="{loc:Ui PathSourceColumn}">
+       <TextBlock.Style><Style TargetType="TextBlock"><Style.Triggers><DataTrigger Binding="{Binding PathSource}" Value="—"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></TextBlock.Style>
+      </TextBlock>
       <local:RecordIdentifiersView x:Name="Identifiers" Grid.Row="1" Grid.ColumnSpan="3"/>
       <Expander x:Name="TransactionPathEvidence" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Style="{DynamicResource Desk.PathEvidence}" Header="{loc:Ui PathEvidence}">
        <StackPanel Margin="12,1,4,4">
@@ -96,6 +129,7 @@
        </StackPanel>
       </Expander>
      </Grid>
+     <TextBlock Text="{loc:Ui TxOperationAndLocation}" Style="{StaticResource OverviewSection}" Visibility="{Binding Visibility,ElementName=OverviewSummary}"/>
      <Grid x:Name="OverviewSummary" Visibility="Collapsed">
       <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>

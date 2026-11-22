@@ -40,6 +40,31 @@
     </ControlTemplate.Triggers>
    </ControlTemplate></Setter.Value></Setter>
   </Style>
+  <Style x:Key="Desk.CriteriaToolTip" TargetType="ToolTip">
+   <Setter Property="ShowsToolTipOnKeyboardFocus" Value="True"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ToolTip">
+    <Border Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}"
+            BorderThickness="1" CornerRadius="3" Padding="10,8" MaxWidth="400">
+     <TextBlock Text="{TemplateBinding Content}" TextWrapping="Wrap" Foreground="{DynamicResource Desk.Text}"/>
+    </Border>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <Style x:Key="Desk.CriteriaHelp" TargetType="ContentControl">
+   <Setter Property="Focusable" Value="True"/>
+   <Setter Property="FocusVisualStyle" Value="{StaticResource Desk.KeyboardOutline}"/>
+   <Setter Property="Width" Value="26"/><Setter Property="Height" Value="26"/>
+   <Setter Property="VerticalAlignment" Value="Center"/>
+   <Setter Property="ToolTipService.InitialShowDelay" Value="250"/>
+   <Setter Property="ToolTipService.ShowDuration" Value="30000"/>
+   <Setter Property="AutomationProperties.Name" Value="{loc:Ui LeadCriteria}"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ContentControl">
+    <Grid Background="Transparent">
+     <Border Width="16" Height="16" CornerRadius="8" BorderThickness="1" BorderBrush="{DynamicResource Desk.Muted}">
+      <TextBlock Text="?" FontSize="11" FontWeight="SemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+     </Border>
+    </Grid>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
   <Style x:Key="Desk.OpenInWindow" TargetType="Button">
    <Setter Property="Width" Value="28"/><Setter Property="Height" Value="28"/>
    <Setter Property="Margin" Value="2,0"/><Setter Property="VerticalAlignment" Value="Center"/>
@@ -61,7 +86,8 @@
   <Style x:Key="Desk.LogToolbar" TargetType="Border">
    <Setter Property="Padding" Value="10,6"/>
   </Style>
-  <Style x:Key="Desk.PageSizePicker" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+  <Style x:Key="Desk.PageSizePicker" TargetType="ComboBox">
+   <Setter Property="Template" Value="{DynamicResource DefaultComboBoxTemplate}"/>
    <Setter Property="Background" Value="{DynamicResource Desk.Panel}"/>
    <Setter Property="BorderBrush" Value="{DynamicResource Desk.Rule}"/>
    <Setter Property="MinHeight" Value="30"/>
