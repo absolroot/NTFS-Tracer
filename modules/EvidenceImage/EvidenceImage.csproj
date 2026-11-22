@@ -13,8 +13,9 @@
     <PackageReference Include="LTRData.DiscUtils.Vhdx" Version="1.0.91" />
     <PackageReference Include="LTRData.DiscUtils.Vmdk" Version="1.0.91" />
     <None Update="Notices/DiscUtils.txt" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
-    <None Update="Logical/Native/NtfsTracer.libewf.dll" Link="NtfsTracer.libewf.dll" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
-    <None Update="Logical/Native/JournalDesk.libewf.dll" Condition="!Exists('Logical/Native/NtfsTracer.libewf.dll')" Link="NtfsTracer.libewf.dll" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
+    <None Update="Logical/Native/NtfsTracer.libewf.dll" Condition="'$(EwfRuntimeIdentifier)' != 'win-x86'" Link="NtfsTracer.libewf.dll" CopyToOutputDirectory="Always" ExcludeFromSingleFile="true" />
+    <None Update="Logical/Native/JournalDesk.libewf.dll" Condition="'$(EwfRuntimeIdentifier)' != 'win-x86' and !Exists('Logical/Native/NtfsTracer.libewf.dll')" Link="NtfsTracer.libewf.dll" CopyToOutputDirectory="Always" ExcludeFromSingleFile="true" />
+    <None Update="Logical/Native/NtfsTracer.libewf.x86.dll" Condition="'$(EwfRuntimeIdentifier)' == 'win-x86'" Link="NtfsTracer.libewf.dll" CopyToOutputDirectory="Always" ExcludeFromSingleFile="true" />
     <None Update="Logical/Native/COPYING*;Logical/Native/CMakeLists.txt;Logical/Native/*.md;Logical/Native/*.tar.gz" Link="Notices/ewf/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true" />
   </ItemGroup>
 </Project>

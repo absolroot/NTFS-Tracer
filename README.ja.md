@@ -4,7 +4,7 @@
 
 **NTFS Tracer は、NTFS ログを検索し、見つけたレコードからファイルの変更履歴をたどる Windows 向けフォレンジックツールです。**
 
-[Windows x64 版をダウンロード](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [한국어](README.ko.md) · [English](README.md)
+[Windows x64・x86 版をダウンロード](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [한국어](README.ko.md) · [English](README.md)
 
 ## NTFS Tracer を使う理由
 
@@ -16,7 +16,7 @@
 
 ### アプリで調査する
 
-配布 ZIP を展開し、`NtfsTracer.exe` を実行してください。ランタイムを同梱していない軽量版には、.NET 10 Windows Desktop Runtime (x64) が必要です。
+Windows のアーキテクチャ (x64 または x86) に合った ZIP を展開し、`NtfsTracer.exe` を実行してください。軽量版には、同じアーキテクチャの .NET 10 Windows Desktop Runtime が必要です。
 
 1. ファイルを指定せずに起動すると、**設定**画面が開きます。
    - **抽出済みのファイルがある場合**は、`$J`、`$MFT`、`$LogFile` のいずれか、またはそれらを含むフォルダーを選び、**解析を開始**を押します。ウィンドウにドラッグして指定することもできます。

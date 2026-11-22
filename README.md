@@ -6,7 +6,7 @@
 
 <p align="center"><strong>Faster NTFS log analysis. A clearer view of what changed.</strong></p>
 
-<p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64</a></strong> · <a href="#quick-start">Quick start</a> · <a href="#investigation-features">Investigation features</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#investigation-examples-and-tool-comparisons">Investigation examples</a></p>
+<p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64 or x86</a></strong> · <a href="#quick-start">Quick start</a> · <a href="#investigation-features">Investigation features</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#investigation-examples-and-tool-comparisons">Investigation examples</a></p>
 
 <p align="center"><a href="README.ko.md">한국어</a> · <a href="README.ja.md">日本語</a></p>
 
@@ -22,7 +22,7 @@
 
 ### Investigate in the desktop app
 
-1. Extract the Windows x64 ZIP and run **NtfsTracer.exe**. The shared-runtime ZIP requires **.NET 10 Windows Desktop Runtime (x64)**.
+1. Extract the ZIP for your Windows architecture (x64 or x86) and run **NtfsTracer.exe**. The shared-runtime ZIP requires **.NET 10 Windows Desktop Runtime** for the same architecture.
 2. Open the source that matches your evidence.
    - **Extracted artifacts** · Choose **Select files…** or **Select extracted folder…**, then **Start analysis**. A `$J` alone is enough for USN history.
    - **Disk image** · Choose **Select files…**. The first readable NTFS volume is selected automatically. Choose the volume and artifacts you need, then select **Extract and analyze**.
@@ -115,6 +115,14 @@ The desktop app uses C# and WPF and the indexing engine uses Rust. On Windows x6
 cargo build --release --locked --manifest-path engine/Cargo.toml
 dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o artifacts/portable
 ./lint.ps1
+```
+
+For Windows x86, install the MSVC x86 tools and build the 32-bit engine before publishing:
+
+```powershell
+rustup target add i686-pc-windows-msvc
+cargo build --release --locked --target i686-pc-windows-msvc --manifest-path engine/Cargo.toml
+dotnet publish gui/NtfsTracer.csproj -c Release -r win-x86 -p:PublishProfile=Portable -o artifacts/win-x86
 ```
 
 For EWF support, build `NtfsTracer.libewf.dll` using the [libewf instructions](https://github.com/absolroot/NTFS-Tracer/blob/main/modules/EvidenceImage/Logical/Native/README.md) before publishing.

@@ -96,7 +96,6 @@ fn inspect(b: &[u8], pos: u64, pages: &mut Statement, records: &mut Statement) -
         let length = u32_at(h, 24) as usize;
         let kind = u32_at(h, 32);
         let flags = u16_at(h, 40);
-        let end = at + HEADER + length;
         // Without restart geometry only the page-relative bits of an LSN can be verified.
         let candidate = lsn > (layout.size / 8) as u64
             && (lsn as usize & (layout.size / 8 - 1)) == at / 8
@@ -106,11 +105,12 @@ fn inspect(b: &[u8], pos: u64, pages: &mut Statement, records: &mut Statement) -
             && matches!(kind, 1 | 2)
             && length >= if kind == 1 { 32 } else { 64 }
             && flags & 1 == 0
-            && end <= layout.size;
+            && length <= fixed.len() - at - HEADER;
         if !candidate {
             at += 8;
             continue;
         }
+        let end = at + HEADER + length;
         let region = match layout.next {
             0 => "unknown",
             n if at >= n => "slack",

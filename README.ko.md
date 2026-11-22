@@ -4,7 +4,7 @@
 
 **NTFS Tracer는 NTFS 로그를 검색하고, 찾은 기록에서 파일의 변경 이력을 추적하는 Windows 포렌식 도구입니다.**
 
-[Windows x64 다운로드](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [English](README.md) · [日本語](README.ja.md)
+[Windows x64·x86 다운로드](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [English](README.md) · [日本語](README.ja.md)
 
 ## 왜 NTFS Tracer를 쓰나요?
 
@@ -16,7 +16,7 @@
 
 ### 앱에서 조사하기
 
-배포 ZIP의 압축을 푼 뒤 `NtfsTracer.exe`를 실행하세요. 경량판을 실행하려면 .NET 10 Windows Desktop Runtime(x64)이 필요합니다.
+Windows 아키텍처(x64 또는 x86)에 맞는 ZIP을 풀고 `NtfsTracer.exe`를 실행하세요. 경량판에는 같은 아키텍처의 .NET 10 Windows Desktop Runtime이 필요합니다.
 
 1. 처음 실행하면 **설정** 창이 열립니다. 준비한 자료에 따라 다음 방법으로 분석을 시작하세요.
    - **이미 추출한 자료가 있으면** `$J`, `$MFT`, `$LogFile` 또는 이 파일들이 들어 있는 폴더를 선택하고 **분석 시작**을 누르세요. 개별 파일이나 폴더를 창에 끌어 놓을 수도 있습니다.
