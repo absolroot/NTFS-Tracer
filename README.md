@@ -83,7 +83,7 @@ You found `report-final.docx` in the collected evidence and want to know what it
 
 Both tools identified **`report-draft.docx`** as the previous name. The NTFS Tracer screenshot shows the two names and the USN records that support the rename.
 
-[![File history showing the rename from report-draft.docx to report-final.docx and its two USN records](docs/media/file-history.png)](docs/media/file-history.png)
+[![File history showing the rename from report-draft.docx to report-final.docx and its two USN records](docs/media/file-history-dark.png)](docs/media/file-history-dark.png)
 
 **Time to reach the previous name**
 

@@ -73,7 +73,7 @@ BitLocker でロックされているボリュームは、事前に外部ツー�
 
 どちらのツールでも、変更前の名前は **`report-draft.docx`** でした。下の画面では、NTFS Tracer が変更前後の名前と、その根拠となる二つの USN レコードを表示しています。
 
-[![report-draft.docx から report-final.docx への名前変更と二つの USN レコードを表示したファイル履歴](docs/media/file-history.png)](docs/media/file-history.png)
+[![report-draft.docx から report-final.docx への名前変更と二つの USN レコードを表示したファイル履歴](docs/media/file-history-dark.png)](docs/media/file-history-dark.png)
 
 **変更前の名前が表示されるまでの時間**
 

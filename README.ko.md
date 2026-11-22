@@ -73,7 +73,7 @@
 
 두 도구에서 이전 이름이 **`report-draft.docx`**였음을 확인했습니다. 아래 화면에는 NTFS Tracer가 이름 변경 전후를 한 항목으로 표시하고 각각의 USN 기록을 연결한 모습이 나옵니다.
 
-[![NTFS Tracer 파일 이력에 report-draft.docx에서 report-final.docx로 이름이 변경된 내역과 두 USN 기록이 표시된 화면](docs/media/file-history.png)](docs/media/file-history.png)
+[![NTFS Tracer 파일 이력에 report-draft.docx에서 report-final.docx로 이름이 변경된 내역과 두 USN 기록이 표시된 화면](docs/media/file-history-dark.png)](docs/media/file-history-dark.png)
 
 **이전 이름을 찾기까지 걸린 시간**
 
