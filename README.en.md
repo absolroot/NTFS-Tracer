@@ -4,7 +4,7 @@
 
 <h1 align="center">NTFS Tracer</h1>
 
-<p align="center"><strong>Search NTFS changes and follow what happened to a file.</strong></p>
+<p align="center"><strong>Faster NTFS log analysis. A clearer view of what changed.</strong></p>
 
 <p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64</a></strong> · <a href="#quick-start">Quick start</a> · <a href="#investigation-features">Investigation features</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#investigation-examples-and-tool-comparisons">Investigation examples</a></p>
 

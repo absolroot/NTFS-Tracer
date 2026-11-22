@@ -1,5 +1,7 @@
 # NTFS Tracer
 
+**NTFS 로그 분석은 빠르게, 파일의 변화는 한눈에.**
+
 NTFS Tracer는 Windows에서 NTFS 파일의 변경 이력을 조사하는 도구입니다. 파일명이나 경로로 기록을 찾은 뒤, 파일별 이력에서 생성·수정·이름 변경·이동·삭제 기록을 시간순으로 볼 수 있습니다. 이름이 바뀐 경우에는 이전 이름과 새 이름을 함께 표시하고, 각각의 근거가 된 USN 기록을 연결합니다.
 
 [Windows x64 다운로드](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [English](README.md) · [日本語](README.ja.md)

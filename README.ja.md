@@ -1,5 +1,7 @@
 # NTFS Tracer
 
+**NTFS ログ解析をもっと速く。ファイルの変化がひと目でわかる。**
+
 NTFS Tracer は、NTFS 上のファイルに何が起きたかを調べる Windows 用のフォレンジックツールです。ファイル名やパスから記録を探し、作成、更新、名前の変更、移動、削除をファイルごとの履歴でたどれます。名前が変わったときは、変更前と変更後の名前を並べて表示し、それぞれに対応する USN レコードを確認できます。
 
 [Windows x64 版をダウンロード](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [한국어](README.ko.md) · [English](README.md)
