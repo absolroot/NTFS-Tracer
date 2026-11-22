@@ -2,11 +2,16 @@
 
 **NTFS ログ解析をもっと速く。ファイルの変化がひと目でわかる。**
 
-**NTFS Tracer は、NTFS Log Tracker を使い慣れた分析担当者向けの Windows フォレンジックツールです。** Rust エンジンで NTFS ログをインデックス化し、ファイル名の検索結果から履歴を直接開けます。同じ模擬 USN ジャーナルで解析を開始してから最初の一覧が表示されるまで、NTFS Tracer は **1.08 秒**、NTFS Log Tracker 1.9 は **3.25 秒**でした。各ツールを 10 回ずつ実行した結果の中央値です。 [測定条件と結果](docs/performance.md#finding-a-previous-name-from-the-current-name)
+**NTFS Tracer は、NTFS ログを検索し、見つけたレコードからファイルの変更履歴をたどる Windows 向けフォレンジックツールです。** Rust エンジンで USN ジャーナルと NTFS トランザクションログをインデックス化します。ファイル履歴では名前の変更、移動、削除を時系列で確認できます。名前の変更では、変更前後の名前とそれぞれの根拠となる USN レコードを一つの項目にまとめて表示します。NTFS Log Tracker の SQLite・CSV・TSV 結果も読み取り専用で開けます。
 
 **フルパス、個々のフィールド値、トランザクションの概要**はクリップボードにコピーして調査メモに貼り付けられます。調査候補の根拠を確認し、結果を CSV に出力したり、調査を保存して後から再開したりできます。
 
 [Windows x64 版をダウンロード](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [한국어](README.ko.md) · [English](README.md)
+
+## NTFS Tracer を使う理由
+
+- **検索結果からファイル履歴を直接開けます。** 現在のファイル名で見つけた行からファイル履歴を開くと、変更前の名前と根拠となるレコードを確認できます。
+- **最初の結果をすばやく確認できます。** 同じサンプルの USN ジャーナルで、解析開始から最初の一覧が表示されるまでにかかった時間は、NTFS Tracer 開発版が **1.08 秒**、NTFS Log Tracker 1.9 が **3.25 秒**でした。各ツールを 10 回ずつ実行した結果の中央値です。 [測定条件と結果](docs/performance.md#finding-a-previous-name-from-the-current-name)
 
 ## 使い方
 

@@ -2,11 +2,16 @@
 
 **NTFS 로그 분석은 빠르게, 파일의 변화는 한눈에.**
 
-**NTFS Tracer는 NTFS Log Tracker에 익숙한 분석가를 위한 Windows 포렌식 도구입니다.** Rust 엔진으로 NTFS 로그를 색인하고, 파일명으로 찾은 기록에서 파일별 이력을 바로 열 수 있습니다. 같은 합성 USN 저널에서 분석을 시작해 첫 목록을 보기까지 NTFS Tracer는 **1.08초**, NTFS Log Tracker 1.9는 **3.25초**가 걸렸습니다. 각 도구를 10회씩 실행한 결과의 중앙값입니다. [측정 조건과 결과](docs/performance.md#finding-a-previous-name-from-the-current-name)
+**NTFS Tracer는 NTFS 로그를 검색하고, 찾은 기록에서 파일의 변경 이력을 추적하는 Windows 포렌식 도구입니다.** Rust 엔진으로 USN 저널과 NTFS 트랜잭션 로그를 색인합니다. 파일 이력에서는 이름 변경·이동·삭제를 시간순으로 볼 수 있으며, 이름 변경 전후의 이름과 각각의 근거가 된 USN 기록을 한 항목에서 확인할 수 있습니다. NTFS Log Tracker로 만들어 둔 SQLite·CSV·TSV 결과도 읽기 전용으로 열 수 있습니다.
 
 **전체 경로, 개별 필드 값, 트랜잭션 개요**를 클립보드에 복사해 조사 메모에 옮길 수 있습니다. 조사 후보에서 관련 기록을 확인하고, 결과를 CSV로 내보내거나 조사 상태를 저장해 나중에 이어서 볼 수 있습니다.
 
 [Windows x64 다운로드](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [English](README.md) · [日本語](README.ja.md)
+
+## 왜 NTFS Tracer를 쓰나요?
+
+- **검색 결과에서 파일 이력으로 바로 이동합니다.** 현재 파일명으로 찾은 행에서 **파일 이력 보기**를 선택하면 이전 이름과 근거 기록을 확인할 수 있습니다.
+- **첫 결과를 빠르게 확인할 수 있습니다.** 같은 예제 USN 저널에서 분석 시작부터 첫 목록이 표시되기까지 NTFS Tracer 개발 빌드 **1.08초**, NTFS Log Tracker 1.9 **3.25초**가 걸렸습니다. 각 도구를 10회씩 실행한 중앙값입니다. [측정 조건과 결과](docs/performance.md#finding-a-previous-name-from-the-current-name)
 
 ## 시작하기
 
