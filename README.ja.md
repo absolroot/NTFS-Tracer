@@ -4,7 +4,7 @@
 
 <p align="center"><strong>Windows アプリひとつでファイル名を検索し、名前の変更、移動、削除の履歴を元のレコードまでたどれます。</strong></p>
 
-<p align="center">378,975件の USN レコードの解析開始から最初のファイルの旧名を確認するまで、<strong>NTFS Log Tracker 1.9 の8倍以上の速さ</strong>でした。</p>
+<p align="center">USN ジャーナルの解析開始から最初のファイルの旧名を確認するまで、<strong>NTFS Log Tracker 1.9 の8倍以上の速さ</strong>でした。</p>
 
 [Windows x64・x86 版をダウンロード](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [한국어](README.ko.md) · [English](README.md)
 

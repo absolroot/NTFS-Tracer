@@ -4,7 +4,7 @@
 
 <p align="center"><strong>Windows 앱 하나에서 파일 이름을 검색하고, 이름 변경·이동·삭제 이력을 원본 기록까지 추적할 수 있습니다.</strong></p>
 
-<p align="center">USN 기록 378,975건의 분석을 시작해 첫 파일의 이전 이름을 찾기까지 <strong>NTFS Log Tracker 1.9보다 8배 이상 빨랐습니다</strong>.</p>
+<p align="center">USN 저널 분석을 시작해 첫 파일의 이전 이름을 찾기까지 <strong>NTFS Log Tracker 1.9보다 8배 이상 빨랐습니다</strong>.</p>
 
 [Windows x64·x86 다운로드](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [English](README.md) · [日本語](README.ja.md)
 
