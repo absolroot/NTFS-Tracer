@@ -18,7 +18,9 @@
     <DebugType>embedded</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="../modules/EvidenceImage/EvidenceImage.csproj" AdditionalProperties="EwfRuntimeIdentifier=$(RuntimeIdentifier)"/>
+    <ProjectReference Include="../modules/EvidenceImage/EvidenceImage.csproj">
+      <AdditionalProperties Condition="'$(RuntimeIdentifier)' != ''">EwfRuntimeIdentifier=$(RuntimeIdentifier)</AdditionalProperties>
+    </ProjectReference>
     <Resource Include="$(ApplicationIcon)"/>
     <None Update="Notices/Fluent-System-Icons.txt" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
     <None Update="Notices/licenses/**/*" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
