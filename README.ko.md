@@ -1,6 +1,8 @@
 # NTFS Tracer
 
-**NTFS Tracer는 NTFS 로그에서 파일의 이름 변경, 이동, 삭제 이력을 추적하는 Windows 포렌식 도구입니다.**
+### 별도 추출 도구 없이 디스크 이미지에서 바로 NTFS 로그를 분석하세요.
+
+**Windows 앱 하나에서 파일 이름을 검색하고, 이름 변경·이동·삭제 이력을 원본 기록까지 추적할 수 있습니다.**
 
 [Windows x64·x86 다운로드](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [English](README.md) · [日本語](README.ja.md)
 
@@ -8,7 +10,7 @@
 
 - 디스크 이미지에서 `$J`, `$MFT`, `$LogFile`을 바로 추출해 분석할 수 있습니다.
 - 현재 이름이나 이전 이름으로 파일을 검색하고, 이름 변경 전후의 USN 기록과 원본 바이트를 확인할 수 있습니다.
-- USN 기록 378,975건을 분석해 첫 파일의 이전 이름을 찾기까지 **NTFS Log Tracker 1.9보다 약 9배 빨랐습니다**(중앙값 2.24초 대 20.01초). [벤치마크](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
+- USN 기록 378,975건의 분석을 시작해 첫 파일의 이전 이름을 찾기까지 **NTFS Log Tracker 1.9보다 8배 이상 빨랐습니다**(중앙값 2.24초 대 20.01초). [벤치마크](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
 - 저장한 조사를 다시 열면 검색 조건과 선택한 기록이 복원됩니다.
 
 ## 시작하기
