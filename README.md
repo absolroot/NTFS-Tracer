@@ -6,7 +6,7 @@
 
 <h3 align="center">Analyze NTFS logs straight from a disk image.</h3>
 
-<p align="center"><strong>Open the image, search filenames, and trace renames, moves, and deletions back to the original records, all in one Windows app.</strong></p>
+<p align="center"><strong>Search filenames and trace file changes back to the original records.</strong></p>
 
 <p align="center">In the first previous-name lookup, including analysis time, NTFS Tracer was <strong>over 8× as fast as NTFS Log Tracker 1.9</strong>.</p>
 
