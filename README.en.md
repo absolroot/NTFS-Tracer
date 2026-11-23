@@ -8,7 +8,7 @@
 
 <p align="center"><strong>Open the image, search filenames, and trace renames, moves, and deletions back to the original records, all in one Windows app.</strong></p>
 
-<p align="center">From analysis start to the first previous filename, NTFS Tracer was <strong>over 8× as fast as NTFS Log Tracker 1.9</strong> (median 2.24 s vs. 20.01 s on 378,975 USN records). <a href="docs/performance.md#previous-name-lookup-on-a-378975-record-journal">Benchmark</a></p>
+<p align="center">From analysis start to the first previous filename, NTFS Tracer was <strong>over 8× as fast as NTFS Log Tracker 1.9</strong>.</p>
 
 <p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64 or x86</a></strong> · <a href="#quick-start">Quick start</a> · <a href="#investigation-features">Investigation features</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#investigation-examples-and-tool-comparisons">Investigation examples</a></p>
 
