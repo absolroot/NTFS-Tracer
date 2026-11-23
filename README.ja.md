@@ -6,6 +6,11 @@
 
 <p align="center">USN ジャーナルの解析開始から最初のファイルの旧名を確認するまで、<strong>NTFS Log Tracker 1.9 の8倍以上の速さ</strong>でした。</p>
 
+<p align="center">
+  <a href="https://www.codefactor.io/repository/github/absolroot/ntfs-tracer/issues/main"><img src="https://www.codefactor.io/repository/github/absolroot/ntfs-tracer/badge/main" alt="CodeFactor のコード品質評価"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/absolroot/NTFS-Tracer?color=blue" alt="Apache 2.0 ライセンス"></a>
+</p>
+
 [Windows x64・x86 版をダウンロード](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [한국어](README.ko.md) · [English](README.md)
 
 ## NTFS Tracer を使う理由

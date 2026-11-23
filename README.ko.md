@@ -6,6 +6,11 @@
 
 <p align="center">USN 저널 분석을 시작해 첫 파일의 이전 이름을 찾기까지 <strong>NTFS Log Tracker 1.9보다 8배 이상 빨랐습니다</strong>.</p>
 
+<p align="center">
+  <a href="https://www.codefactor.io/repository/github/absolroot/ntfs-tracer/issues/main"><img src="https://www.codefactor.io/repository/github/absolroot/ntfs-tracer/badge/main" alt="CodeFactor 코드 품질 등급"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/absolroot/NTFS-Tracer?color=blue" alt="Apache 2.0 라이선스"></a>
+</p>
+
 [Windows x64·x86 다운로드](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [English](README.md) · [日本語](README.ja.md)
 
 ## 왜 NTFS Tracer를 쓰나요?
