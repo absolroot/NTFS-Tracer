@@ -78,6 +78,7 @@
   <Setter Property="Background" Value="{DynamicResource Desk.Canvas}"/>
   <Setter Property="Foreground" Value="{DynamicResource Desk.Text}"/>
   <Style.Triggers>
+   <Trigger Property="ItemsControl.AlternationIndex" Value="1"><Setter Property="Background" Value="{DynamicResource Desk.LogAlternate}"/></Trigger>
    <Trigger Property="IsMouseOver" Value="True"><Setter Property="Background" Value="{DynamicResource Desk.Hover}"/></Trigger>
    <Trigger Property="IsSelected" Value="True"><Setter Property="Background" Value="{DynamicResource Desk.Selected}"/></Trigger>
   </Style.Triggers>
@@ -100,6 +101,9 @@
   <Setter Property="ColumnHeaderStyle" Value="{StaticResource Desk.LogHeader}"/>
   <Setter Property="RowStyle" Value="{StaticResource Desk.LogRow}"/>
   <Setter Property="CellStyle" Value="{StaticResource Desk.LogCell}"/>
+ </Style>
+ <Style x:Key="Desk.StripedLogTable" TargetType="DataGrid" BasedOn="{StaticResource Desk.LogTable}">
+  <Setter Property="AlternationCount" Value="2"/>
  </Style>
  <Style x:Key="Desk.LogText" TargetType="TextBlock">
   <Setter Property="Padding" Value="7,0,25,0"/>

@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -204,8 +205,11 @@ internal sealed class CellTextSelection
                 DependencyObject? row = block;
                 while (row != null && row is not (DataGridRow or ListBoxItem))
                     row = Parent(row);
-                Editor.SetResourceReference(Control.BackgroundProperty,
-                    row != null && Selector.GetIsSelected(row) ? "Desk.Selected" : "Desk.Canvas");
+                if (row is DataGridRow dataRow && ItemsControl.ItemsControlFromItemContainer(dataRow) is DataGrid { AlternationCount: 2 })
+                    Editor.SetBinding(Control.BackgroundProperty, new Binding(nameof(Control.Background)) { Source = dataRow });
+                else
+                    Editor.SetResourceReference(Control.BackgroundProperty,
+                        row != null && Selector.GetIsSelected(row) ? "Desk.Selected" : "Desk.Canvas");
             }
             else
                 Editor.Background = Brushes.Transparent;

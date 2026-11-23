@@ -101,7 +101,7 @@
   </Border>
   <Grid Grid.Row="1">
    <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-   <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Records" Style="{StaticResource Desk.LogTable}" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False"
+   <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Records" Style="{StaticResource Desk.StripedLogTable}" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False"
     CanUserSortColumns="True" Sorting="SortRecords" CanUserReorderColumns="True" FrozenColumnCount="1" SelectionUnit="FullRow" SelectionMode="Single" EnableRowVirtualization="True"
     ClipboardCopyMode="IncludeHeader" AutomationProperties.Name="{loc:Ui JournalRecords}" ItemsSource="{x:Null}"
     SelectionChanged="RecordChanged" MouseLeftButtonUp="ReopenRecord" MouseDoubleClick="DoubleClickRow" PreviewKeyDown="GridKeyDown">

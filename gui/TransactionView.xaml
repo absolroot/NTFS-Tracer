@@ -29,7 +29,7 @@
   </Border>
   <Grid x:Name="Results" Grid.Row="1">
    <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-  <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Rows" Grid.Row="0" Style="{StaticResource Desk.LogTable}" IsReadOnly="True" CanUserAddRows="False" CanUserSortColumns="True" Sorting="SortRows"
+  <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Rows" Grid.Row="0" Style="{StaticResource Desk.StripedLogTable}" IsReadOnly="True" CanUserAddRows="False" CanUserSortColumns="True" Sorting="SortRows"
             SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" SelectionChanged="Selected" AutomationProperties.Name="{loc:Ui NtfsTransactionRecords}">
    <DataGrid.Columns>
     <DataGridTextColumn x:Name="LsnColumn" Header="LSN" Binding="{Binding Lsn}" Width="158" ElementStyle="{StaticResource Desk.LogMono}"/>
