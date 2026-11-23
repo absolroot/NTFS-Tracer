@@ -1,8 +1,10 @@
 # NTFS Tracer
 
-### ディスクイメージから NTFS ログを直接解析できます。
+<h3 align="center">ディスクイメージから NTFS ログを直接解析できます。</h3>
 
-**Windows アプリひとつでファイル名を検索し、名前の変更、移動、削除の履歴を元のレコードまでたどれます。**
+<p align="center"><strong>Windows アプリひとつでファイル名を検索し、名前の変更、移動、削除の履歴を元のレコードまでたどれます。</strong></p>
+
+<p align="center">378,975件の USN レコードの解析開始から最初のファイルの旧名を確認するまで、<strong>NTFS Log Tracker 1.9 の8倍以上の速さ</strong>でした（中央値は2.24秒対20.01秒）。 <a href="docs/performance.md#previous-name-lookup-on-a-378975-record-journal">測定結果</a></p>
 
 [Windows x64・x86 版をダウンロード](https://github.com/absolroot/NTFS-Tracer/releases/latest) · [한국어](README.ko.md) · [English](README.md)
 
@@ -10,7 +12,6 @@
 
 - ディスクイメージから `$J`、`$MFT`、`$LogFile` を直接抽出して解析できます。
 - 現在または変更前の名前で検索し、それぞれの USN レコードと元のバイト列を確認できます。
-- 378,975件の USN レコードの解析開始から最初のファイルの旧名を確認するまで、**NTFS Log Tracker 1.9 の8倍以上の速さ**でした（中央値は2.24秒対20.01秒）。 [測定結果](docs/performance.md#previous-name-lookup-on-a-378975-record-journal)
 - 保存した調査を開き直すと、検索条件と選択したレコードが復元されます。
 
 ## 使い方
