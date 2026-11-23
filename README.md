@@ -4,7 +4,7 @@
 
 <h1 align="center">NTFS Tracer</h1>
 
-<h3 align="center">Analyze NTFS logs straight from a disk image.</h3>
+<h3 align="center">Fast NTFS log analysis, straight from a disk image.</h3>
 
 <p align="center"><strong>Search filenames and trace file changes back to the original records.</strong></p>
 
