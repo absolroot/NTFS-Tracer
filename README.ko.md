@@ -21,11 +21,22 @@
 - 현재 이름이나 이전 이름으로 파일을 검색하고, 이름 변경 전후의 USN 기록과 원본 바이트를 확인할 수 있습니다.
 - 저장한 조사를 다시 열면 검색 조건과 선택한 기록이 복원됩니다.
 
+## 조사 기능
+
+[![NTFS Tracer 전체 창에서 저널 검색, 파일 이력, 트랜잭션, 조사 후보를 차례로 확인하는 데모](docs/media/full-app-walkthrough-dark.gif)](docs/media/full-app-walkthrough-dark.gif)
+
+- **변경 기록 검색** 현재 이름이나 이전 이름, 경로, 파일 참조 번호로 대상을 찾습니다. 기간이나 변경 사유로 검색 결과를 좁힐 수 있습니다.
+- **파일별 변경 이력** 검색 결과에서 파일 이력을 엽니다. 이름이나 경로가 바뀌면 변경 전후의 값과 근거 기록을 함께 확인할 수 있습니다. 수집한 MFT로 경로를 보완한 경우에는 그 출처도 표시합니다.
+- **트랜잭션 변경 전후 비교** 트랜잭션 로그에서 LSN으로 기록을 찾습니다. Undo와 Redo 양쪽에 값이 남아 있으면 파일 타임스탬프를 비교할 수 있습니다.
+- **조사 후보와 근거 확인** 반복해서 이름이 바뀐 뒤 삭제된 파일, SDelete 관련 기록, 타임스탬프 변경 같은 단서를 확인합니다. 후보마다 연결된 근거 기록을 열 수 있습니다.
+
+각 기록의 상세 필드, 원본 바이트(Hex), JSON을 볼 수 있습니다. 결과를 CSV로 저장하거나, 입력 파일에서 남아 있는 USN·트랜잭션 기록을 찾을 수도 있습니다.
+
 ## 시작하기
 
 ### 앱에서 조사하기
 
-64비트 Windows에서는 x64 ZIP을, 32비트 Windows에서는 x86 ZIP을 내려받으세요. 압축을 풀고 `NtfsTracer.exe`를 실행하세요. 일반판에는 실행에 필요한 .NET이 포함되어 있습니다. 경량판(`shared-runtime`)에는 ZIP과 같은 아키텍처의 .NET 10 Windows Desktop Runtime이 필요합니다.
+64비트 Windows에서는 x64 ZIP을, 32비트 Windows에서는 x86 ZIP을 내려받으세요. 압축을 풀고 `NtfsTracer.exe`를 실행하세요. Portable ZIP에는 런타임이 포함되어 있습니다. 경량판(Shared Runtime ZIP)에는 ZIP과 같은 아키텍처(x64 또는 x86)의 .NET 10 Windows Desktop Runtime이 필요합니다.
 
 1. 처음 실행하면 **설정** 창이 열립니다. 자료에 맞는 방법으로 분석을 시작하세요.
    - **이미 추출한 자료가 있으면** `$J`, `$MFT`, `$LogFile` 또는 이 파일들이 들어 있는 폴더를 선택하고 **분석 시작**을 누르세요. 개별 파일이나 폴더를 창에 끌어 놓을 수도 있습니다.
@@ -44,17 +55,6 @@
 ```powershell
 .\ntfstracer-cli.exe usn-csv '.\$J' '.\usn.csv'
 ```
-
-## 조사 기능
-
-[![NTFS Tracer 전체 창에서 저널 검색, 파일 이력, 트랜잭션, 조사 후보를 차례로 확인하는 데모](docs/media/full-app-walkthrough-dark.gif)](docs/media/full-app-walkthrough-dark.gif)
-
-- **변경 기록 검색** 현재 이름이나 이전 이름, 경로, 파일 참조 번호로 대상을 찾습니다. 기간이나 변경 사유로 검색 결과를 좁힐 수 있습니다.
-- **파일별 변경 이력** 검색 결과에서 파일 이력을 엽니다. 이름이나 경로가 바뀌면 변경 전후의 값과 근거 기록을 함께 확인할 수 있습니다. 수집한 MFT로 경로를 보완한 경우에는 그 출처도 표시합니다.
-- **트랜잭션 변경 전후 비교** 트랜잭션 로그에서 LSN으로 기록을 찾습니다. Undo와 Redo 양쪽에 값이 남아 있으면 파일 타임스탬프를 비교할 수 있습니다.
-- **조사 후보와 근거 확인** 반복해서 이름이 바뀐 뒤 삭제된 파일, SDelete 관련 기록, 타임스탬프 변경 같은 단서를 확인합니다. 후보마다 연결된 근거 기록을 열 수 있습니다.
-
-각 기록의 상세 필드, 원본 바이트(Hex), JSON을 볼 수 있습니다. 결과를 CSV로 저장하거나, 입력 파일에서 남아 있는 USN·트랜잭션 기록을 찾을 수도 있습니다.
 
 ## 어떤 자료를 열 수 있나요?
 
@@ -123,8 +123,6 @@ dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o ar
 ```
 
 EWF 이미지를 열 수 있는 배포본을 만들려면 `NtfsTracer.libewf.dll`을 빌드한 뒤 `modules/EvidenceImage/Logical/Native/`에 두고 다시 게시하세요. [libewf 빌드 방법](modules/EvidenceImage/Logical/Native/README.md)
-
-[릴리스 ZIP 만들기](README.md#package-a-release)에서 실행 파일 ZIP, libewf 소스 ZIP, SHA-256 체크섬을 함께 생성하는 방법을 확인할 수 있습니다.
 
 ## 표시 언어
 

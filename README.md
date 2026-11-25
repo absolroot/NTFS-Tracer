@@ -17,7 +17,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/github/license/absolroot/NTFS-Tracer?color=blue" alt="Apache 2.0 license"></a>
 </p>
 
-<p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64 or x86</a></strong> · <a href="#quick-start">Quick start</a> · <a href="#investigation-features">Investigation features</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#investigation-examples-and-tool-comparisons">Investigation examples</a></p>
+<p align="center"><strong><a href="https://github.com/absolroot/NTFS-Tracer/releases/latest">Download for Windows x64 or x86</a></strong> · <a href="#investigation-features">Investigation features</a> · <a href="#quick-start">Quick start</a> · <a href="#supported-inputs">Supported inputs</a> · <a href="#investigation-examples-and-tool-comparisons">Investigation examples</a></p>
 
 <p align="center"><a href="README.ko.md">한국어</a> · <a href="README.ja.md">日本語</a></p>
 
@@ -27,11 +27,22 @@
 - Search by either filename and open the USN record and raw bytes behind each side of a rename.
 - Reopen a saved investigation with its search settings and selected record.
 
+## Investigation features
+
+[![Full NTFS Tracer window showing journal search, file history, transactions, and investigation leads](docs/media/full-app-walkthrough-dark.gif)](docs/media/full-app-walkthrough-dark.gif)
+
+- **Search the change journal**. Find a file by its current or previous name, path, or reference number. Narrow the USN journal by time or change reason.
+- **Follow one file through changes**. Open the file history from a search result. Review a rename or move and see the records that support each side. Paths filled in from the acquired MFT are labeled with their source.
+- **Compare transaction values**. Find a record by LSN in the transaction log. Compare file timestamps when both Undo and Redo contain values.
+- **Review investigation leads**. Review candidates such as repeated renames before deletion, SDelete-related records, or timestamp changes. Open the supporting records to assess the lead.
+
+Inspect decoded fields, Hex, or JSON, export results to CSV, or scan source files for remnants of USN and transaction records.
+
 ## Quick start
 
 ### Investigate in the desktop app
 
-1. Extract the Windows x64 or x86 ZIP for your PC and run **NtfsTracer.exe**. The regular ZIP includes the runtime. The shared-runtime ZIP requires **.NET 10 Windows Desktop Runtime** for the same architecture.
+1. Extract the ZIP for your Windows architecture (x64 or x86) and run **NtfsTracer.exe**. The Portable ZIP includes the runtime. The Shared Runtime ZIP requires **.NET 10 Windows Desktop Runtime** for the same architecture.
 2. Open the source that matches your evidence.
    - **Extracted artifacts** · Choose **Select files…** or **Select extracted folder…**, then **Start analysis**. A `$J` alone is enough for USN history.
    - **Disk image** · Choose **Select files…**. The first readable NTFS volume is selected automatically. Choose the volume and artifacts you need, then select **Extract and analyze**.
@@ -47,17 +58,6 @@ In the extracted release folder, run the command below with a `$J` containing on
 ```powershell
 .\ntfstracer-cli.exe usn-csv '.\$J' '.\usn.csv'
 ```
-
-## Investigation features
-
-[![Full NTFS Tracer window showing journal search, file history, transactions, and investigation leads](docs/media/full-app-walkthrough-dark.gif)](docs/media/full-app-walkthrough-dark.gif)
-
-- **Search the change journal**. Find a file by its current or previous name, path, or reference number. Narrow the USN journal by time or change reason.
-- **Follow one file through changes**. Open the file history from a search result. Review a rename or move and see the records that support each side. Paths filled in from the acquired MFT are labeled with their source.
-- **Compare transaction values**. Find a record by LSN in the transaction log. Compare file timestamps when both Undo and Redo contain values.
-- **Review investigation leads**. Review candidates such as repeated renames before deletion, SDelete-related records, or timestamp changes. Open the supporting records to assess the lead.
-
-Inspect decoded fields, Hex, or JSON, export results to CSV, or scan source files for remnants of USN and transaction records.
 
 ## Supported inputs
 
@@ -138,16 +138,6 @@ dotnet publish gui/NtfsTracer.csproj -c Release -r win-x86 -p:PublishProfile=Por
 
 For EWF support, build `NtfsTracer.libewf.dll` using the [libewf instructions](modules/EvidenceImage/Logical/Native/README.md) before publishing.
 
-### Package a release
-
-Build both libewf DLLs and install Python 3.11 or later before packaging. The Rust toolchain needs the x86 target and the `rust-docs` component for its license notices.
-
-```powershell
-python scripts/package-windows.py artifacts/windows-release --runtime-version 10.0.11
-```
-
-Upload the four Windows ZIPs, the matching `libewf-source.zip`, and `SHA256SUMS.txt` to the same release.
-
 ## Display language
 
 Choose from 16 interface languages under **View → Display language**. Changes apply immediately.
@@ -159,3 +149,13 @@ English · 한국어 · 日本語 · Deutsch · Español · Français · Bahasa 
 Project-owned code is licensed under the [Apache License 2.0](LICENSE).
 
 Third-party components retain their own terms and may be used under those terms. See [third-party notices](THIRD-PARTY-NOTICES.md), including the terms and replacement instructions for libewf.
+
+### Package a release
+
+Build both libewf DLLs and install Python 3.11 or later before packaging. The Rust toolchain needs the x86 target and the `rust-docs` component for its license notices.
+
+```powershell
+python scripts/package-windows.py artifacts/windows-release --runtime-version 10.0.11
+```
+
+Upload the four Windows ZIPs, the matching `libewf-source.zip`, and `SHA256SUMS.txt` to the same release.
