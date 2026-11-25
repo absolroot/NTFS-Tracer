@@ -8,7 +8,7 @@ using DiscUtils.Streams;
 namespace EvidenceImage;
 
 /// <summary>Read-only image access. Each operation owns its streams. Offsets are in decoded disk bytes.</summary>
-public static class ImageEvidence
+public static partial class ImageEvidence
 {
     internal static readonly ArtifactRequest[] JournalArtifacts = [
         new("journal", @"\$Extend\$UsnJrnl", "$J", "$J"),
@@ -212,6 +212,8 @@ public static class ImageEvidence
             }
             using var input = opened;
             ulong reference = unchecked((ulong)fs.GetFileId(artifact.NtfsPath));
+            if (artifact.ExpectedFileReference is { } expected && reference != expected)
+                throw new InvalidDataException($"The NTFS file reference changed: {path}");
             refs.Add(new
             {
                 artifact.Key,
@@ -253,7 +255,7 @@ public static class ImageEvidence
                 throw new ArgumentException("Artifact keys must be unique.");
             if (string.IsNullOrWhiteSpace(a.NtfsPath) || !a.NtfsPath.StartsWith('\\') || a.NtfsPath[1..].Split('\\').Any(p => p.Length == 0 || p is "." or "..")
                 || a.NtfsPath.IndexOfAny(['/', '\0']) >= 0 || (!logical && a.NtfsPath.Contains(':'))
-                || a.StreamName != null && (a.StreamName.Length == 0 || a.StreamName.IndexOfAny(['/', '\\', ':', '\0']) >= 0))
+                || (a.StreamName != null && (a.StreamName.Length == 0 || a.StreamName.IndexOfAny(['/', '\\', ':', '\0']) >= 0)))
                 throw new ArgumentException("Specify an absolute volume-relative NTFS path and a separate stream name.");
             string n = a.OutputName;
             if (string.IsNullOrWhiteSpace(n) || n.EndsWith('.') || n.EndsWith(' ') || n.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0 || n.IndexOfAny(['/', '\\', ':']) >= 0

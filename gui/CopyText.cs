@@ -91,12 +91,12 @@ public sealed class CopyText : TextBox
                 return;
             Clipboard.SetDataObject(data, true);
             copy.Content = "\uE73E";
-            copy.ToolTip = L.T("복사됨", "Copied");
+            copy.ToolTip = CopyLabel("복사됨", "Copied");
         }
         catch (ExternalException)
         {
             copy.Content = "\uE7BA";
-            copy.ToolTip = L.T("클립보드에 접근할 수 없습니다. 다시 시도하세요.", "Clipboard unavailable. Try again.");
+            copy.ToolTip = CopyLabel("클립보드에 접근할 수 없습니다. 다시 시도하세요.", "Clipboard unavailable. Try again.");
         }
         e.Handled = true;
         if (feedback == null)
@@ -108,12 +108,24 @@ public sealed class CopyText : TextBox
         feedback.Start();
     }
 
+#if MAIL_VIEWER
+    private string CopyLabel(string korean, string english) =>
+        Language.IetfLanguageTag.StartsWith("ko", StringComparison.OrdinalIgnoreCase) ? korean : english;
+#else
+    private static string CopyLabel(string _, string english) => english switch
+    {
+        "Copied" => L.T("복사됨", "Copied"),
+        "Clipboard unavailable. Try again." => L.T("클립보드에 접근할 수 없습니다. 다시 시도하세요.", "Clipboard unavailable. Try again."),
+        _ => L.T("전체 텍스트 복사", "Copy full text")
+    };
+#endif
+
     private void ResetFeedback()
     {
         feedback?.Stop();
         if (copy == null)
             return;
-        string action = L.T("전체 텍스트 복사", "Copy full text");
+        string action = CopyLabel("전체 텍스트 복사", "Copy full text");
         copy.Content = "\uE8C8";
         copy.ToolTip = action;
         AutomationProperties.SetName(copy, action);

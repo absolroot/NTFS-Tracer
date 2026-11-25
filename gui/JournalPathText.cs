@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Windows;
 using System.Windows.Automation;
@@ -110,6 +111,15 @@ public sealed class JournalPathText : TextBlock
     {
         get => (bool)GetValue(BasisOnlyProperty); set => SetValue(BasisOnlyProperty, value);
     }
+    public static readonly DependencyProperty KeepPathEndProperty = DependencyProperty.Register(nameof(KeepPathEnd),
+        typeof(bool), typeof(JournalPathText), new PropertyMetadata(false, Changed));
+
+    public bool KeepPathEnd
+    {
+        get => (bool)GetValue(KeepPathEndProperty);
+        set => SetValue(KeepPathEndProperty, value);
+    }
+
     private CancellationTokenSource? pending;
     private bool refreshQueued;
     private string copyText = "";
@@ -123,6 +133,11 @@ public sealed class JournalPathText : TextBlock
         TextTrimming = TextTrimming.CharacterEllipsis;
         Loaded += (_, _) => Refresh();
         Unloaded += (_, _) => pending?.Cancel();
+        SizeChanged += (_, e) =>
+        {
+            if (e.WidthChanged && KeepPathEnd)
+                UpdateDisplayedText();
+        };
         IsVisibleChanged += (_, _) => Refresh();
         ContextMenu = sharedCopyMenu ??= CreateCopyMenu();
     }
@@ -157,9 +172,36 @@ public sealed class JournalPathText : TextBlock
     {
         if (copyText == value)
             return;
-        copyText = Text = value;
+        copyText = value;
+        UpdateDisplayedText();
         AutomationProperties.SetName(this, value);
     }
+    private void UpdateDisplayedText()
+    {
+        string displayed = copyText;
+        double available = ActualWidth - Padding.Left - Padding.Right;
+        if (KeepPathEnd && available > 0 && !Fits(displayed, available))
+        {
+            int separator = displayed.IndexOf('\\');
+            while (separator >= 0)
+            {
+                string suffix = "…" + displayed[separator..];
+                if (Fits(suffix, available))
+                {
+                    Text = suffix;
+                    return;
+                }
+                separator = displayed.IndexOf('\\', separator + 1);
+            }
+            displayed = ShortText;
+        }
+        Text = displayed;
+    }
+
+    private bool Fits(string text, double width) => new FormattedText(text, CultureInfo.CurrentUICulture,
+        FlowDirection, new Typeface(FontFamily, FontStyle, FontWeight, FontStretch), FontSize, Foreground,
+        VisualTreeHelper.GetDpi(this).PixelsPerDip).WidthIncludingTrailingWhitespace <= width;
+
     private void Refresh()
     {
         pending?.Cancel();

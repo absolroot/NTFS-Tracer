@@ -11,21 +11,35 @@ namespace JournalDesk;
 public static class L
 {
     private static readonly ResourceManager Captions = new("JournalDesk.UiText", typeof(L).Assembly);
+#if !MAIL_VIEWER
     private static readonly ResourceManager JapaneseMessages = new("JournalDesk.JapaneseMessages", typeof(L).Assembly);
     private static readonly ResourceManager Messages = new("JournalDesk.Messages", typeof(L).Assembly);
     private static CultureInfo systemCulture = CultureInfo.CurrentUICulture;
+#endif
     public static LanguageCatalog Text { get; } = new();
     public static string Code { get; private set; } = "ko";
     public static bool IsEnglish => Code == "en";
+#if !MAIL_VIEWER
     public static string Preference { get; private set; } = "system";
     internal static bool ChooseOnStartup
     {
         get; private set;
     }
     internal static Locale SystemLocale => Resolve("system", systemCulture);
+#endif
     private static CultureInfo DisplayCulture { get; set; } = CultureInfo.GetCultureInfo("ko-KR");
     public static XmlLanguage XmlLanguage => XmlLanguage.GetLanguage(DisplayCulture.Name);
 
+#if MAIL_VIEWER
+    internal static void ApplyMailLanguage(bool english)
+    {
+        Code = english ? "en" : "ko";
+        DisplayCulture = CultureInfo.GetCultureInfo(english ? "en-US" : "ko-KR");
+        Text.Refresh();
+    }
+
+    public static string T(string korean, string english) => IsEnglish ? english : korean;
+#else
     internal static void Initialize()
     {
         systemCulture = CultureInfo.CurrentUICulture;
@@ -96,6 +110,8 @@ public static class L
         "en" => english,
         _ => Messages.GetString(english, DisplayCulture) ?? english
     };
+
+#endif
 
     public static string T(string korean, string english, params object?[] values) =>
         string.Format(DisplayCulture, T(korean, english), values);

@@ -60,8 +60,8 @@
    <Border/>
   </DockPanel></Border>
   </Grid>
-  <GridSplitter x:Name="Splitter" Grid.Row="2" Height="4" Visibility="Collapsed" Style="{DynamicResource Desk.RowSplitter}" HorizontalAlignment="Stretch" Background="{DynamicResource Desk.Rule}" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
-  <Border Grid.Row="3" x:Name="Inspector" Visibility="Collapsed" Padding="10,3" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0"><DockPanel>
+  <loc:PaneSplitter x:Name="Splitter" Grid.Row="2" Height="4" Visibility="Collapsed" Style="{DynamicResource Desk.PaneSplitter}" HorizontalAlignment="Stretch" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
+  <Border Grid.Row="3" x:Name="Inspector" Style="{StaticResource Desk.WorkspacePane}" Visibility="Collapsed" Padding="10,3"><DockPanel>
    <DockPanel DockPanel.Dock="Top" Margin="2,0,0,1">
     <Button x:Name="CloseInspector" DockPanel.Dock="Right" Style="{DynamicResource Desk.IconButton}" Content="&#xE711;" Click="CloseInspectorClick" ToolTip="{loc:Ui CollapseDetailsEsc}" AutomationProperties.Name="{loc:Ui CollapseTransactionDetails}"/>
     <local:CopyText x:Name="RecordTitle" TextWrapping="NoWrap" VerticalAlignment="Center" FontWeight="SemiBold" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
@@ -90,7 +90,7 @@
       </Style.Triggers></Style></StackPanel.Style>
       <TextBlock x:Name="TimestampTitle" Text="{Binding TimestampTitle}" Style="{StaticResource OverviewSection}"/>
       <Grid Margin="0,0,0,2">
-       <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition Width="*" MaxWidth="260"/><ColumnDefinition Width="*" MaxWidth="260"/></Grid.ColumnDefinitions>
        <TextBlock Grid.Column="1" Text="{loc:Ui TxBefore}" Margin="4,0" Foreground="{DynamicResource Desk.Muted}"/>
        <TextBlock Grid.Column="2" Text="{loc:Ui TxAfter}" Margin="4,0" Foreground="{DynamicResource Desk.Muted}"/>
       </Grid>
@@ -98,7 +98,7 @@
        <ItemsControl.ItemTemplate><DataTemplate>
         <Border BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0">
          <Grid>
-          <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+          <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition Width="*" MaxWidth="260"/><ColumnDefinition Width="*" MaxWidth="260"/></Grid.ColumnDefinitions>
           <local:CopyText Text="{Binding Name,Mode=OneWay}" Style="{StaticResource OverviewLabel}"/>
           <local:CopyText Grid.Column="1" Text="{Binding Before,Mode=OneWay}" ToolTip="{Binding BeforeRaw}" AutomationProperties.Name="{loc:Ui TxBefore}"/>
           <local:CopyText Grid.Column="2" Text="{Binding After,Mode=OneWay}" ToolTip="{Binding AfterRaw}" AutomationProperties.Name="{loc:Ui TxAfter}"/>
@@ -129,15 +129,17 @@
        </StackPanel>
       </Expander>
      </Grid>
-     <TextBlock Text="{loc:Ui TxOperationAndLocation}" Style="{StaticResource OverviewSection}" Visibility="{Binding Visibility,ElementName=OverviewSummary}"/>
+     <DockPanel Visibility="{Binding Visibility,ElementName=OverviewSummary}">
+      <Button x:Name="CopyOverview" DockPanel.Dock="Right" Style="{DynamicResource Desk.IconButton}" Content="&#xE8C8;" ToolTip="{loc:Ui CopyOverview}" AutomationProperties.Name="{loc:Ui CopyTransactionOverview}" Click="CopyOverviewClick"/>
+      <TextBlock Text="{loc:Ui TxOperationAndLocation}" Style="{StaticResource OverviewSection}" VerticalAlignment="Center"/>
+     </DockPanel>
      <Grid x:Name="OverviewSummary" Visibility="Collapsed">
-      <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="RecordOverviewLabel"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
       <local:CopyText HorizontalAlignment="Left" Style="{StaticResource OverviewLabel}" Text="Redo"/>
       <local:CopyText HorizontalAlignment="Left" Grid.Column="1" TextWrapping="Wrap" Text="{Binding Redo.Operation,Mode=OneWay}" AutomationProperties.Name="Redo"/>
       <local:CopyText HorizontalAlignment="Left" Grid.Column="2" Style="{StaticResource OverviewLabel}" Text="{loc:Ui PreviousLsn}"/>
       <local:CopyText HorizontalAlignment="Left" Grid.Column="3" TextWrapping="Wrap" Text="{Binding PreviousLsn,Mode=OneWay}" AutomationProperties.Name="{loc:Ui PreviousLsn}"/>
-      <Button x:Name="CopyOverview" Grid.Column="4" Grid.RowSpan="3" VerticalAlignment="Top" Style="{DynamicResource Desk.IconButton}" Content="&#xE8C8;" ToolTip="{loc:Ui CopyOverview}" AutomationProperties.Name="{loc:Ui CopyTransactionOverview}" Click="CopyOverviewClick"/>
       <local:CopyText HorizontalAlignment="Left" Grid.Row="1" Style="{StaticResource OverviewLabel}" Text="Undo"/>
       <local:CopyText HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Text="{Binding Undo.Operation,Mode=OneWay}" AutomationProperties.Name="Undo"/>
       <local:CopyText HorizontalAlignment="Left" Grid.Row="1" Grid.Column="2" Style="{StaticResource OverviewLabel}" Text="{loc:Ui NextUndoLsn}"/>
@@ -185,7 +187,7 @@
   <Border x:Name="Welcome" Grid.RowSpan="4" Background="{DynamicResource Desk.Canvas}">
    <Button x:Name="OpenLog" Content="{loc:Ui OpenLogfile}" Click="Pick" HorizontalAlignment="Center" VerticalAlignment="Center"/>
   </Border>
-  <Border Grid.Row="4" Padding="10,3" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0">
+  <Border Grid.Row="4" Padding="10,3" Style="{StaticResource Desk.StatusBar}">
    <DockPanel>
     <Button x:Name="ViewSource" DockPanel.Dock="Right" Click="SourceClick" Content="{loc:Ui SourceInformationLabel}" MinHeight="22" Style="{DynamicResource Desk.EvidenceLink}" ToolTip="{loc:Ui PathSha256AndParseResultsForThe}"/>
     <Button x:Name="StopLog" DockPanel.Dock="Right" Click="Stop" Visibility="Collapsed" Style="{DynamicResource Desk.IconButton}" Content="&#xE71A;" ToolTip="{loc:Ui CancelOpeningTransactionLog}" AutomationProperties.Name="{loc:Ui CancelOpeningTransactionLog}"/>

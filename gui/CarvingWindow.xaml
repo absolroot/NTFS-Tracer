@@ -2,9 +2,9 @@
  <DockPanel>
   <Border DockPanel.Dock="Top" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1" Style="{DynamicResource Desk.LogToolbar}">
    <WrapPanel>
-    <Button x:Name="ScanOpenSource" Click="ScanLoaded" Content="{loc:Ui ScanOpenJournal}" Visibility="Collapsed" Margin="0,0,6,0" MinHeight="30" Padding="8,2"/>
-    <Button x:Name="PickFiles" Click="AddFiles" Content="{loc:Ui ChooseScanFile}" MinHeight="30" Padding="8,2"/>
-    <Button x:Name="PickFolder" Click="AddFolder" Margin="6,0,0,0" Content="{loc:Ui SelectFolder}" MinHeight="30" Padding="8,2"/>
+    <Button x:Name="ScanOpenSource" Style="{StaticResource Desk.FormButton}" Click="ScanLoaded" Content="{loc:Ui ScanOpenJournal}" Visibility="Collapsed" Margin="0,0,6,0"/>
+    <Button x:Name="PickFiles" Style="{StaticResource Desk.FormButton}" Click="AddFiles" Content="{loc:Ui ChooseScanFile}"/>
+    <Button x:Name="PickFolder" Style="{StaticResource Desk.FormButton}" Click="AddFolder" Margin="6,0,0,0" Content="{loc:Ui SelectFolder}"/>
     <Button x:Name="Stop" Visibility="Collapsed" Click="StopScan" Style="{DynamicResource Desk.IconButton}" Content="&#xE71A;" ToolTip="{loc:Ui CancelScan}" AutomationProperties.Name="{loc:Ui CancelScan}"/>
    </WrapPanel>
   </Border>
@@ -44,7 +44,7 @@
       <TextBlock Text="{Binding Summary}" Foreground="{DynamicResource Desk.Muted}" FontSize="12" TextTrimming="CharacterEllipsis" ToolTip="{Binding Summary}"/>
      </StackPanel></DataTemplate></ListBox.ItemTemplate>
     </ListBox></DockPanel>
-   <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Background="{DynamicResource Desk.Rule}" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ScannedSources}"/>
+   <loc:PaneSplitter Grid.Column="1" HorizontalAlignment="Stretch" Style="{StaticResource Desk.PaneSplitter}" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ScannedSources}"/>
    <local:GlobalLogView x:Name="Results" Grid.Column="2" Visibility="Collapsed" IsCarvedSource="True"/>
    <TextBlock x:Name="ResultNotice" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="18" MaxWidth="450" TextAlignment="Center" TextWrapping="Wrap" Foreground="{DynamicResource Desk.Muted}"/>
   </Grid>

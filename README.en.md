@@ -31,7 +31,7 @@
 
 ### Investigate in the desktop app
 
-1. Extract the ZIP for your Windows architecture (x64 or x86) and run **NtfsTracer.exe**. The shared-runtime ZIP requires **.NET 10 Windows Desktop Runtime** for the same architecture.
+1. Extract the Windows x64 or x86 ZIP for your PC and run **NtfsTracer.exe**. The regular ZIP includes the runtime. The shared-runtime ZIP requires **.NET 10 Windows Desktop Runtime** for the same architecture.
 2. Open the source that matches your evidence.
    - **Extracted artifacts** · Choose **Select files…** or **Select extracted folder…**, then **Start analysis**. A `$J` alone is enough for USN history.
    - **Disk image** · Choose **Select files…**. The first readable NTFS volume is selected automatically. Choose the volume and artifacts you need, then select **Extract and analyze**.
@@ -63,26 +63,28 @@ Inspect decoded fields, Hex, or JSON, export results to CSV, or scan source file
 
 ### Disk and evidence images
 
-| Format | Supported variants |
-| --- | --- |
-| RAW | `.raw`, `.img`, `.dd`. NTFS volume or MBR/GPT disk. Consecutive split RAW sets start at `.000` or `.001`. |
-| EnCase EWF | `.E01`, `.Ex01`. Physical images. Select the first segment and keep the complete set together. Encryption and bzip2 are unsupported. |
-| Logical EWF | `.L01`, `.Lx01`. Select the first segment and choose artifacts from the collected file catalog. The same EWF limits apply. |
-| QCOW/QCOW2 | Standalone QCOW1 and QCOW2 v2/v3 with standard L2 tables. Backing files, external data, and encryption are unsupported. |
-| VHD/VHDX | Fixed and dynamic VHD and standalone VHDX. Differencing disks are unsupported. |
-| VMDK | Single sparse, stream-optimized, and descriptors referencing FLAT extents in the same directory. Parent chains are unsupported. |
-| AFF | `.aff`. Single AFF1 with uncompressed, zlib, or zero pages |
+| Format | Extensions | Support |
+| --- | --- | :---: |
+| RAW | `.raw`, `.img`, `.dd`, `.000` / `.001` | ✓ |
+| Physical EWF | `.e01`, `.ex01` | ✓ |
+| Logical EWF | `.l01`, `.lx01` | ✓ |
+| QCOW / QCOW2 | `.qcow`, `.qcow2`, `.qcow3` | ✓ |
+| VHD / VHDX | `.vhd`, `.vhdx` | ✓ |
+| VMDK | `.vmdk` | ✓ |
+| AFF1 | `.aff` | ✓ |
 
-Physical images must contain a readable NTFS volume. A locked BitLocker volume must be unlocked outside NTFS Tracer. See the [image module](modules/EvidenceImage/README.md) for the full variant limits.
+Physical images require a readable NTFS volume. Select the first segment of a split image and unlock locked BitLocker volumes first. [Image variant limits](modules/EvidenceImage/README.md)
 
 ### Extracted artifacts and existing results
 
-| Input | Use it for |
-| --- | --- |
-| `$J` / `$UsnJrnl:$J` | USN change search, file history, and investigation leads |
-| `$MFT` from the same volume | Attach to `$J` or `$LogFile` to supplement paths using file and folder names recorded at acquisition |
-| `$LogFile` | NTFS transactions, LSNs, and Redo/Undo payloads |
-| NTFS Log Tracker SQLite, CSV or TSV | Browse and filter existing results in the read-only viewer |
+| Input | Support |
+| --- | :---: |
+| `$J` / `$UsnJrnl:$J` | ✓ |
+| `$MFT` | ✓ |
+| `$LogFile` | ✓ |
+| NTFS Log Tracker `.db`, `.sqlite`, `.sqlite3`, `.csv`, `.tsv` | ✓ |
+
+Use `$MFT` from the same volume with `$J` or `$LogFile` to fill in paths. To open TSV files, choose **All files** in the file picker.
 
 The app opens evidence read-only and writes extractions and indexes separately. New installations use `%LOCALAPPDATA%\NtfsTracer`. Existing JournalDesk settings and indexes can be reused.
 
@@ -135,6 +137,16 @@ dotnet publish gui/NtfsTracer.csproj -c Release -r win-x86 -p:PublishProfile=Por
 ```
 
 For EWF support, build `NtfsTracer.libewf.dll` using the [libewf instructions](modules/EvidenceImage/Logical/Native/README.md) before publishing.
+
+### Package a release
+
+Build both libewf DLLs and install Python 3.11 or later before packaging. The Rust toolchain needs the x86 target and the `rust-docs` component for its license notices.
+
+```powershell
+python scripts/package-windows.py artifacts/windows-release --runtime-version 10.0.11
+```
+
+Upload the four Windows ZIPs, the matching `libewf-source.zip`, and `SHA256SUMS.txt` to the same release.
 
 ## Display language
 

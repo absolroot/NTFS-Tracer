@@ -9,7 +9,7 @@ internal static class EvidencePaneNavigation
     internal static bool MoveFocus(KeyEventArgs e, DataGrid table, FrameworkElement inspector, TabControl tabs)
     {
         if (e.Key != Key.F6 || Keyboard.Modifiers is not (ModifierKeys.None or ModifierKeys.Shift)
-            || !inspector.IsVisible || !table.IsKeyboardFocusWithin && !inspector.IsKeyboardFocusWithin
+            || !inspector.IsVisible || (!table.IsKeyboardFocusWithin && !inspector.IsKeyboardFocusWithin)
             || table.SelectedItem == null || tabs.SelectedItem is not TabItem tab)
             return false;
         e.Handled = true;

@@ -94,7 +94,7 @@ internal sealed class QcowMedia : Stream
                 if (version != 1 && (pointer & ~(DiskOffset | (1UL << 63) | (version == 3 ? 1UL : 0UL))) != 0)
                     throw new InvalidDataException("Invalid QCOW data mapping.");
                 long start = checked((long)(version == 1 ? pointer : pointer & DiskOffset));
-                if (start == 0 || version == 3 && (pointer & 1) != 0)
+                if (start == 0 || (version == 3 && (pointer & 1) != 0))
                     target.Clear();
                 else
                 {

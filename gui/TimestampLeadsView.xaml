@@ -29,14 +29,14 @@
       </ContentControl>
    </StackPanel>
   </Border>
-   <DataGrid Grid.Row="1" x:Name="Candidates" ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" SelectionChanged="CandidateChanged">
+   <DataGrid Grid.Row="1" x:Name="Candidates" ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" SelectionChanged="CandidateChanged" SizeChanged="CandidateTableSizeChanged">
    <DataGrid.Columns>
-    <DataGridTextColumn Header="LSN" Binding="{Binding LsnText}" Width="146" MinWidth="146" ElementStyle="{StaticResource TimestampMono}"/>
-    <DataGridTextColumn Header="MFT" Binding="{Binding Slot}" Width="63" MinWidth="63" ElementStyle="{StaticResource TimestampMono}"/>
+    <DataGridTextColumn x:Name="CandidateLsnColumn" Header="LSN" Binding="{Binding LsnText}" Width="146" MinWidth="146" ElementStyle="{StaticResource TimestampMono}"/>
+    <DataGridTextColumn x:Name="CandidateMftColumn" Header="MFT" Binding="{Binding Slot}" Width="63" MinWidth="63" ElementStyle="{StaticResource TimestampMono}"/>
     <DataGridTextColumn x:Name="FieldColumn" Binding="{Binding Field}" Width="*" MinWidth="144" ElementStyle="{StaticResource TimestampText}"/>
-    <DataGridTextColumn x:Name="BeforeColumn" Binding="{Binding Before}" Width="232" MinWidth="232" ElementStyle="{StaticResource TimestampValue}"/>
-    <DataGridTextColumn x:Name="AfterColumn" Binding="{Binding After}" Width="232" MinWidth="232" ElementStyle="{StaticResource TimestampValue}"/>
-    <DataGridTextColumn x:Name="DifferenceColumn" Binding="{Binding Difference}" Width="138" MinWidth="138" ElementStyle="{StaticResource TimestampMono}"/>
+    <DataGridTextColumn x:Name="BeforeColumn" Binding="{Binding Before}" Width="218" MinWidth="218" ElementStyle="{StaticResource TimestampValue}"/>
+    <DataGridTextColumn x:Name="AfterColumn" Binding="{Binding After}" Width="218" MinWidth="218" ElementStyle="{StaticResource TimestampValue}"/>
+    <DataGridTextColumn x:Name="DifferenceColumn" Binding="{Binding Difference}" Width="124" MinWidth="124" ElementStyle="{StaticResource TimestampMono}"/>
    </DataGrid.Columns>
   </DataGrid>
   <TextBlock Grid.Row="1" x:Name="Empty" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="18"
@@ -48,10 +48,10 @@
      <Button x:Name="Previous" Click="PreviousClick" Style="{DynamicResource Desk.IconButton}" Content="&#xE76B;" ToolTip="{loc:Ui PreviousPage}" AutomationProperties.Name="{loc:Ui PreviousPage}"/>
      <Button x:Name="Next" Click="NextClick" Style="{DynamicResource Desk.IconButton}" Content="&#xE76C;" ToolTip="{loc:Ui NextPage}" AutomationProperties.Name="{loc:Ui NextPage}"/>
     </StackPanel>
-    <loc:CopyText x:Name="Source" Margin="0,0,8,0" Foreground="{DynamicResource Desk.Muted}"/>
+    <loc:CopyText x:Name="Source" Margin="0,0,8,0" TextWrapping="NoWrap" Foreground="{DynamicResource Desk.Muted}"/>
    </DockPanel>
   </Border>
-  <GridSplitter Grid.Row="3" Style="{DynamicResource Desk.RowSplitter}" HorizontalAlignment="Stretch"
+  <loc:PaneSplitter Grid.Row="3" Style="{DynamicResource Desk.RowSplitter}" HorizontalAlignment="Stretch"
                 ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
   <DockPanel Grid.Row="4">
    <DockPanel DockPanel.Dock="Top" Margin="8,3">

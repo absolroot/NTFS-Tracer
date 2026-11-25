@@ -5,9 +5,9 @@
  Language="{Binding Language,Source={x:Static loc:L.Text}}" FontFamily="Segoe UI, Malgun Gothic"
  Background="{DynamicResource Desk.Canvas}" Foreground="{DynamicResource Desk.Text}">
  <DockPanel>
-  <Border x:Name="ProgressBar" DockPanel.Dock="Bottom" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0" Padding="20,6">
+  <Border x:Name="ProgressBar" DockPanel.Dock="Bottom" Style="{StaticResource Desk.StatusBar}" Padding="24,6">
    <DockPanel>
-    <Button DockPanel.Dock="Right" Click="CancelWork" Content="{loc:Ui IntakeCancel}" Padding="12,3" MinHeight="30" Margin="12,0,0,0"/>
+    <Button DockPanel.Dock="Right" Click="CancelWork" Style="{StaticResource Desk.FormButton}" Content="{loc:Ui CancelOperation}" Margin="12,0,0,0"/>
     <TextBlock x:Name="ProgressText" VerticalAlignment="Center" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite"/>
    </DockPanel>
   </Border>

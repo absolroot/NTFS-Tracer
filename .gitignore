@@ -42,6 +42,7 @@ $LogFile
 *.db-*
 *.sqlite
 *.sqlite-*
+!/gui/Notices/licenses/Microsoft.Data.Sqlite-MIT.txt
 *.sqlite3
 *.sqlite3-*
 *.ntfs-tracer-case

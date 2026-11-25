@@ -11,6 +11,12 @@ public static class ImageFileTypes
     private static readonly HashSet<string> PickerExtensions = PickerPatterns.Split(';')
         .Select(pattern => pattern[1..]).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
+    public static bool HasImageExtension(string path)
+    {
+        string extension = Path.GetExtension(path);
+        return PickerExtensions.Contains(extension) || SegmentFamily(extension) != null;
+    }
+
     public static bool IsImage(FileStream file, ReadOnlySpan<byte> header)
     {
         ArgumentNullException.ThrowIfNull(file);
@@ -39,7 +45,7 @@ public static class ImageFileTypes
                 !path.AsSpan(0, path.Length - suffix.Length).Equals(stem, StringComparison.OrdinalIgnoreCase))
                 return null;
             bool startsSet = family == "." ? suffix == ".001" : suffix.EndsWith("01", StringComparison.Ordinal);
-            if (suffix == ".000" || first == null && startsSet)
+            if (suffix == ".000" || (first == null && startsSet))
                 first = path;
         }
         return first;

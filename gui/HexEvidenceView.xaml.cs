@@ -15,6 +15,9 @@ namespace JournalDesk;
 
 public partial class HexEvidenceView : UserControl
 {
+    public static GridLength CopyGutterWidth { get; } = new(24);
+    internal double RequiredByteViewportWidth => Math.Ceiling(Body.ByteTableWidth) + SystemParameters.VerticalScrollBarWidth + CopyGutterWidth.Value;
+
     private byte[] bytes = [];
     private IReadOnlyList<HexField> fields = [];
     private HexField? comparisonField;
@@ -39,6 +42,7 @@ public partial class HexEvidenceView : UserControl
         get; private set;
     }
     internal HexField? HighlightedField => comparisonField ?? SelectedField;
+    internal HexField? WarningField => fields.FirstOrDefault(item => item.IsWarning);
     public string SelectionSummary => SelectedOffset < 0 ? "" :
         $"{CursorValueLabel.Text} {CursorValue.Text}  {ByteValueLabel.Text} {ByteValue.Text}  Little-endian  UInt8 {UInt8.Text}  UInt16 {UInt16.Text}  UInt32 {UInt32.Text}  UInt64 {UInt64.Text}  {FieldValue.Text}";
     public string Text
@@ -209,7 +213,12 @@ public partial class HexEvidenceView : UserControl
     private void RevealIntegerValues(object sender, RoutedEventArgs e)
     {
         if (IsVisible)
-            Dispatcher.BeginInvoke(DispatcherPriority.Loaded, () => ShowNumbers.BringIntoView());
+            Dispatcher.BeginInvoke(DispatcherPriority.Loaded, () =>
+            {
+                if (ShowNumbers.IsExpanded && InspectorScroll.ViewportHeight > 0)
+                    ShowNumbers.BringIntoView(new Rect(0, 0, ShowNumbers.ActualWidth,
+                        Math.Min(ShowNumbers.ActualHeight, InspectorScroll.ViewportHeight)));
+            });
     }
     private void UpdateIntegers()
     {
@@ -230,7 +239,7 @@ public partial class HexEvidenceView : UserControl
         if (ActualWidth <= 0)
             return;
         bool shallow = ActualHeight is > 0 and < 118;
-        double byteWidth = Math.Ceiling(Body.ByteTableWidth) + SystemParameters.VerticalScrollBarWidth;
+        double byteWidth = RequiredByteViewportWidth;
         double inspectorMinimum = shallow ? 190 : 224;
         bool below = ActualWidth < byteWidth + inspectorMinimum && !(shallow && ActualWidth >= 440);
         bool showField = FieldControl.Visibility == Visibility.Visible;
@@ -575,6 +584,9 @@ public sealed class HexStrip : Control
         int first = Math.Max(0, (int)Math.Floor(view.Top / RowHeight));
         int last = Math.Min((data.Length + 15) / 16, (int)Math.Ceiling((view.Top + Math.Max(RowHeight, view.VisibleHeight)) / RowHeight) + 1);
         var field = view.HighlightedField;
+        var warning = view.WarningField;
+        var warningInk = Ink("WarningText", SystemColors.WindowTextBrush);
+        var warningOutline = warning is null ? null : new Pen(warningInk, 1);
         for (int row = first; row < last; row++)
         {
             int start = row * 16, count = Math.Min(16, data.Length - start);
@@ -604,10 +616,35 @@ public sealed class HexStrip : Control
                 drawingContext.DrawRectangle(selectedFill, outline, new Rect(ascii + selected * c, y + 1, c, RowHeight - 2));
             }
             drawingContext.DrawText(Label((view.BaseOffset + start).ToString("X" + AddressDigits, CultureInfo.InvariantCulture), muted), new Point(8, y + 2));
-            drawingContext.DrawText(Label(HexRun(data, start, Math.Min(8, count)), ink), new Point(HexX(0, c), y + 2));
+            int warningStart = warning is null ? 0 : Math.Max(0, warning.Start - start);
+            int warningEnd = warning is null ? 0 : Math.Min(count, warning.Start + warning.Length - start);
+            if (warningStart < warningEnd)
+            {
+                var fill = Ink("WarningFill", SystemColors.WindowBrush);
+                drawingContext.DrawRectangle(fill, warningOutline, new Rect(HexX(warningStart, c) - 1, y + 1,
+                    HexX(warningEnd - 1, c) - HexX(warningStart, c) + 2 * c + 2, RowHeight - 2));
+                drawingContext.DrawRectangle(fill, warningOutline, new Rect(ascii + warningStart * c, y + 1,
+                    (warningEnd - warningStart) * c, RowHeight - 2));
+                if (selected >= warningStart && selected < warningEnd)
+                    drawingContext.DrawLine(outline, new Point(HexX(selected, c), y + RowHeight - 2),
+                        new Point(HexX(selected, c) + 2 * c, y + RowHeight - 2));
+            }
+            DrawHex(0, Math.Min(8, count));
             if (count > 8)
-                drawingContext.DrawText(Label(HexRun(data, start + 8, count - 8), ink), new Point(HexX(8, c), y + 2));
-            drawingContext.DrawText(Label(AsciiRun(data, start, count), ink), new Point(ascii, y + 2));
+                DrawHex(8, count - 8);
+            var text = Label(AsciiRun(data, start, count), ink);
+            if (warningStart < warningEnd)
+                text.SetForegroundBrush(warningInk, warningStart, warningEnd - warningStart);
+            drawingContext.DrawText(text, new Point(ascii, y + 2));
+
+            void DrawHex(int column, int length)
+            {
+                var run = Label(HexRun(data, start + column, length), ink);
+                int low = Math.Max(column, warningStart), high = Math.Min(column + length, warningEnd);
+                if (low < high)
+                    run.SetForegroundBrush(warningInk, (low - column) * 3, (high - low) * 3 - 1);
+                drawingContext.DrawText(run, new Point(HexX(column, c), y + 2));
+            }
         }
     }
     private sealed class HexPeer(HexStrip owner) : FrameworkElementAutomationPeer(owner), IRangeValueProvider

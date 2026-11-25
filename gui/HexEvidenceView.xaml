@@ -9,8 +9,9 @@
     <Grid.RowDefinitions><RowDefinition Height="21"/><RowDefinition/></Grid.RowDefinitions>
     <Border Background="{DynamicResource Desk.Inset}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1" ClipToBounds="True">
      <Grid>
+      <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="{x:Static local:HexEvidenceView.CopyGutterWidth}"/></Grid.ColumnDefinitions>
       <Border ClipToBounds="True"><local:HexStrip x:Name="Columns" Header="True" HorizontalAlignment="Left" Foreground="{DynamicResource Desk.Muted}"/></Border>
-      <Grid HorizontalAlignment="Right" Width="24" Background="{DynamicResource Desk.Inset}">
+      <Grid Grid.Column="1" Background="{DynamicResource Desk.Inset}">
        <Grid.Style><Style TargetType="Grid">
         <Setter Property="Visibility" Value="Hidden"/>
         <Style.Triggers>
@@ -23,7 +24,7 @@
       </Grid>
      </Grid>
     </Border>
-    <ScrollViewer x:Name="Viewport" Grid.Row="1" Focusable="False" CanContentScroll="False"
+    <ScrollViewer x:Name="Viewport" Grid.Row="1" Margin="0,0,24,0" Focusable="False" CanContentScroll="False"
                   HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" ScrollChanged="ViewportChanged">
      <local:HexStrip x:Name="Body" Focusable="True" FocusVisualStyle="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top"
        AutomationProperties.Name="{loc:Ui HexByteTable}" AutomationProperties.AutomationId="HexByteGrid"
@@ -59,7 +60,7 @@
       <Setter Property="ToolTip" Value="{Binding Text,RelativeSource={RelativeSource Self}}"/>
      </Style>
     </Border.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Focusable="False">
+    <ScrollViewer x:Name="InspectorScroll" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Focusable="False">
      <Grid x:Name="InspectorLayout" VerticalAlignment="Top">
       <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition x:Name="SecondaryColumn" Width="0"/></Grid.ColumnDefinitions>
       <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>

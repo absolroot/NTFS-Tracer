@@ -83,7 +83,7 @@ internal static class DiskLayout
     {
         for (int i = 0; i < 4; i++)
         {
-            int at = 446 + i * 16;
+            int at = 446 + (i * 16);
             byte type = sector[at + 4];
             uint start = U32(sector.AsSpan(at + 8)), size = U32(sector.AsSpan(at + 12));
             if (type != 0 && start != 0 && size != 0)

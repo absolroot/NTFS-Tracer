@@ -6,15 +6,15 @@
    <Setter Property="Foreground" Value="{DynamicResource Desk.Muted}"/><Setter Property="Margin" Value="0,1,10,1"/><Setter Property="VerticalAlignment" Value="Top"/><Setter Property="TextWrapping" Value="Wrap"/>
   </Style>
  </Window.Resources>
- <TabControl Style="{DynamicResource Desk.InspectorTabs}" Margin="10,6" AutomationProperties.Name="{loc:Ui SourceInformationLabel}">
+ <TabControl ItemContainerStyle="{StaticResource Desk.CanvasInspectorTab}" Style="{DynamicResource Desk.InspectorTabs}" Margin="10,6" AutomationProperties.Name="{loc:Ui SourceInformationLabel}">
   <TabItem Header="{loc:Ui AttachedSources}"><DockPanel>
-  <Border DockPanel.Dock="Bottom" Padding="10,4" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0">
-   <DockPanel><Button x:Name="Copy" DockPanel.Dock="Right" Click="CopyInfo" Style="{DynamicResource Desk.IconButton}" Content="&#xE8C8;" ToolTip="{loc:Ui CopySourceInformation}" AutomationProperties.Name="{loc:Ui CopySourceInformation}"/>
+  <Border DockPanel.Dock="Top" Padding="10,4">
+   <DockPanel><Button x:Name="Copy" DockPanel.Dock="Right" Click="CopyInfo" Style="{StaticResource Desk.FormButton}" Content="{loc:Ui CopySourceInformation}" ToolTip="{loc:Ui CopySourceInformation}" AutomationProperties.Name="{loc:Ui CopySourceInformation}"/>
     <TextBlock x:Name="Feedback" VerticalAlignment="Center" AutomationProperties.LiveSetting="Polite" Foreground="{DynamicResource Desk.Muted}"/></DockPanel>
   </Border>
   <ScrollViewer VerticalScrollBarVisibility="Auto"><StackPanel Margin="10,8" Grid.IsSharedSizeScope="True">
    <ItemsControl x:Name="Sources"><ItemsControl.ItemTemplate><DataTemplate>
-    <Border BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1" Padding="0,6,0,8">
+    <Border Padding="0,6,0,8">
      <StackPanel><local:CopyText Text="{Binding Title,Mode=OneWay}" FontWeight="SemiBold" FontSize="16" Margin="0,0,0,5"/>
       <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="Auto" MaxWidth="155" SharedSizeGroup="SourceField"/><ColumnDefinition/></Grid.ColumnDefinitions>
        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>

@@ -122,7 +122,7 @@ internal sealed class TrackerResult : IDisposable
             while (r.Read())
                 names.Add(r.GetString(0));
         }
-        if (names.Count == 0 || names.Count == 1 && names[0].Equals("SignatureTable", StringComparison.OrdinalIgnoreCase))
+        if (names.Count == 0 || (names.Count == 1 && names[0].Equals("SignatureTable", StringComparison.OrdinalIgnoreCase)))
             throw new InvalidDataException(L.T("분석 결과 테이블을 찾지 못했습니다. Tracker에서 저장한 결과 DB 또는 CSV를 선택해 주세요.", "No analysis tables found. Select a results database or CSV saved by Tracker."));
         var tables = new List<TrackerTable>();
         foreach (string name in names)

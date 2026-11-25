@@ -19,17 +19,17 @@ internal static class ShellIcons
     [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
     private static extern IntPtr SHGetFileInfo(string path, uint attributes, out Info info, uint size, uint flags);
     [DllImport("user32.dll")] private static extern bool DestroyIcon(IntPtr hIcon);
-    private static readonly Dictionary<(string, bool), ImageSource?> Cache = new();
-    public static ImageSource? For(string name, bool folder)
+    private static readonly Dictionary<(string Extension, bool Folder, bool Small), ImageSource?> Cache = new();
+    public static ImageSource? For(string name, bool folder, bool small = false)
     {
         var ext = Path.GetExtension(name);
         // Ask for the registered type only. Never resolve an evidence path or shell shortcut.
         if (ext.Length > 32 || ext.Any(c => !char.IsLetterOrDigit(c) && c != '.'))
             ext = "";
-        var key = (folder ? "" : ext.ToLowerInvariant(), folder);
+        var key = (folder ? "" : ext.ToLowerInvariant(), folder, small);
         if (Cache.TryGetValue(key, out var image))
             return image;
-        SHGetFileInfo(folder ? "folder" : "file" + ext, folder ? 16u : 128u, out var info, (uint)Marshal.SizeOf<Info>(), 0x100 | 0x10);
+        SHGetFileInfo(folder ? "folder" : "file" + ext, folder ? 16u : 128u, out var info, (uint)Marshal.SizeOf<Info>(), 0x100u | 0x10u | (small ? 1u : 0u));
         if (info.Icon != IntPtr.Zero)
         {
             try

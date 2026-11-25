@@ -21,7 +21,7 @@ public sealed partial class GlobalLogQuery
                 await BuildPathOrdersAsync(filter, resolve, token, progress).ConfigureAwait(false);
             using var source = OpenImmutableIndex(dbPath);
             using var mft = mftIndexPath == null ? null : OpenImmutableIndex(mftIndexPath);
-            if (source == null || mftIndexPath != null && mft == null)
+            if (source == null || (mftIndexPath != null && mft == null))
                 return await Build().ConfigureAwait(false);
 
             string? sourceDirectory = Path.GetDirectoryName(Path.GetFullPath(dbPath));

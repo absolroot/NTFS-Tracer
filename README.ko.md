@@ -25,7 +25,7 @@
 
 ### 앱에서 조사하기
 
-64비트 Windows에서는 x64 ZIP을, 32비트 Windows에서는 x86 ZIP을 내려받으세요. 압축을 풀고 `NtfsTracer.exe`를 실행하세요. 경량판에는 ZIP과 같은 아키텍처(x64 또는 x86)의 .NET 10 Windows Desktop Runtime이 필요합니다.
+64비트 Windows에서는 x64 ZIP을, 32비트 Windows에서는 x86 ZIP을 내려받으세요. 압축을 풀고 `NtfsTracer.exe`를 실행하세요. 일반판에는 실행에 필요한 .NET이 포함되어 있습니다. 경량판(`shared-runtime`)에는 ZIP과 같은 아키텍처의 .NET 10 Windows Desktop Runtime이 필요합니다.
 
 1. 처음 실행하면 **설정** 창이 열립니다. 자료에 맞는 방법으로 분석을 시작하세요.
    - **이미 추출한 자료가 있으면** `$J`, `$MFT`, `$LogFile` 또는 이 파일들이 들어 있는 폴더를 선택하고 **분석 시작**을 누르세요. 개별 파일이나 폴더를 창에 끌어 놓을 수도 있습니다.
@@ -58,24 +58,30 @@
 
 ## 어떤 자료를 열 수 있나요?
 
-| 자료 | 확인할 수 있는 내용 |
-| --- | --- |
-| `$J` | USN 변경 기록과 파일별 이력을 확인합니다. 파일 이력은 `$J`만 있어도 볼 수 있습니다. |
-| `$MFT` | 같은 볼륨에서 추출한 `$J` 또는 `$LogFile`과 함께 열면 파일과 폴더의 경로를 보완할 수 있습니다. |
-| `$LogFile` | 트랜잭션 기록, 로그 순서 번호(LSN), Redo·Undo 정보를 확인합니다. |
-| NTFS Log Tracker의 SQLite DB·CSV·TSV | **파일** 메뉴에서 기존 결과를 읽기 전용으로 열어 검색할 수 있습니다. TSV 파일을 고를 때는 파일 선택 창에서 **모든 파일**을 선택하세요. |
+### 디스크 및 증거 이미지
 
-| 이미지 형식 | 지원 범위 |
-| --- | --- |
-| RAW | 단일 NTFS 볼륨, MBR·GPT 디스크, `.000`이나 `.001`부터 번호가 이어지는 분할 이미지 |
-| E01·Ex01 | 물리 디스크 이미지. 분할 이미지에서는 첫 파일을 선택하세요. 암호화되었거나 bzip2로 압축된 이미지는 열 수 없습니다. |
-| L01·Lx01 | 논리 증거 이미지. 수집된 목록에서 분석할 NTFS 파일을 선택하세요. |
-| QCOW·QCOW2 | 독립형 QCOW1과 표준 L2 테이블을 사용하는 QCOW2 v2·v3 |
-| VHD·VHDX | 고정·동적 VHD와 독립형 VHDX |
-| VMDK | 단일 희소(sparse) 이미지, 스트림 최적화 이미지, 같은 폴더의 FLAT 파일을 참조하는 디스크 설명자 |
-| AFF1 | 무압축 페이지, zlib 압축 페이지 또는 0으로 채운 페이지를 담은 단일 이미지 |
+| 형식 | 확장자 | 지원 |
+| --- | --- | :---: |
+| RAW | `.raw`, `.img`, `.dd`, `.000` / `.001` | ✓ |
+| 물리 EWF | `.e01`, `.ex01` | ✓ |
+| 논리 EWF | `.l01`, `.lx01` | ✓ |
+| QCOW / QCOW2 | `.qcow`, `.qcow2`, `.qcow3` | ✓ |
+| VHD / VHDX | `.vhd`, `.vhdx` | ✓ |
+| VMDK | `.vmdk` | ✓ |
+| AFF1 | `.aff` | ✓ |
 
-잠겨 있는 BitLocker 볼륨은 외부 도구에서 잠금을 해제한 뒤 열 수 있습니다. 이미지 형식별 세부 조건은 [이미지 모듈 안내](modules/EvidenceImage/README.md)에서 확인할 수 있습니다.
+물리 이미지에는 읽을 수 있는 NTFS 볼륨이 필요합니다. 분할 이미지는 첫 파일을 선택하고, BitLocker 볼륨은 먼저 잠금을 해제하세요. [이미지 형식별 지원 조건](modules/EvidenceImage/README.md)
+
+### 추출한 자료와 기존 결과
+
+| 자료 | 지원 |
+| --- | :---: |
+| `$J` / `$UsnJrnl:$J` | ✓ |
+| `$MFT` | ✓ |
+| `$LogFile` | ✓ |
+| NTFS Log Tracker `.db`, `.sqlite`, `.sqlite3`, `.csv`, `.tsv` | ✓ |
+
+경로를 보완하려면 같은 볼륨에서 추출한 `$MFT`를 `$J` 또는 `$LogFile`과 함께 여세요. TSV는 파일 선택 창에서 **모든 파일**을 선택하면 열 수 있습니다.
 
 앱은 원본을 읽기 전용으로 열고 추출 파일과 SQLite 색인을 별도 경로에 저장합니다. 기본 저장 위치는 `%LOCALAPPDATA%\NtfsTracer`입니다. 기존 JournalDesk에서 사용한 설정과 색인도 이어서 사용할 수 있습니다.
 
@@ -117,6 +123,8 @@ dotnet publish gui/NtfsTracer.csproj -c Release -p:PublishProfile=Portable -o ar
 ```
 
 EWF 이미지를 열 수 있는 배포본을 만들려면 `NtfsTracer.libewf.dll`을 빌드한 뒤 `modules/EvidenceImage/Logical/Native/`에 두고 다시 게시하세요. [libewf 빌드 방법](modules/EvidenceImage/Logical/Native/README.md)
+
+[릴리스 ZIP 만들기](README.md#package-a-release)에서 실행 파일 ZIP, libewf 소스 ZIP, SHA-256 체크섬을 함께 생성하는 방법을 확인할 수 있습니다.
 
 ## 표시 언어
 

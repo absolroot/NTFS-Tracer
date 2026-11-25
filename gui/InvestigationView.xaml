@@ -8,7 +8,7 @@
   </Style>
  </UserControl.Resources>
  <DockPanel>
-  <Border DockPanel.Dock="Bottom" Padding="10,3" Background="{DynamicResource Desk.Panel}" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource Desk.Rule}">
+  <Border DockPanel.Dock="Bottom" Padding="10,3" Style="{StaticResource Desk.StatusBar}">
    <DockPanel>
     <local:CopyText x:Name="SourceLabel" DockPanel.Dock="Right" Margin="12,0,0,0" MaxWidth="250" Foreground="{DynamicResource Desk.Muted}"/>
     <TextBlock x:Name="Status" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" FontSize="12"
@@ -63,7 +63,7 @@
      </DockPanel>
     </Border>
    </Grid>
-   <GridSplitter Grid.Row="2" Style="{DynamicResource Desk.RowSplitter}" Height="4" HorizontalAlignment="Stretch"
+   <loc:PaneSplitter Grid.Row="2" Style="{DynamicResource Desk.RowSplitter}" Height="4" HorizontalAlignment="Stretch"
     ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
    <DockPanel Grid.Row="3">
    <DockPanel DockPanel.Dock="Top" Margin="10,2,8,3">

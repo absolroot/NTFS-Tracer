@@ -110,7 +110,7 @@ internal sealed class Media : IDisposable
         string directory = SourceIdentity.ResolvedDirectory(descriptor);
         foreach (string line in content.Split('\n').Select(s => s.Trim()))
         {
-            if (line.Length == 0 || line.StartsWith('#') || line.Contains('=') && !Regex.IsMatch(line, "^(RW|RDONLY|NOACCESS)\\s"))
+            if (line.Length == 0 || line.StartsWith('#') || (line.Contains('=') && !Regex.IsMatch(line, "^(RW|RDONLY|NOACCESS)\\s")))
                 continue;
             var match = Regex.Match(line, """^(?:RW|RDONLY)\s+(\d+)\s+FLAT\s+"([^"]+)"(?:\s+(\d+))?$""");
             if (!match.Success)

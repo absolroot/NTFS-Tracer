@@ -4,8 +4,6 @@ using System.Text;
 
 namespace JournalDesk;
 
-public sealed record HexField(int Start, int Length, string Label, string Value);
-
 public static class UsnHexFields
 {
     public const string FileNameLabel = "FileName";
@@ -41,7 +39,7 @@ public static class UsnHexFields
             return fields;
 
         int idWidth = version == 2 ? 8 : 16;
-        int usnAt = 8 + 2 * idWidth;
+        int usnAt = 8 + (2 * idWidth);
         int headerLength = version == 4 ? 64 : usnAt + 36;
         if (size < headerLength)
             return fields;
@@ -157,7 +155,7 @@ public static class UsnHexFields
             return;
         for (int i = 0; i < count; i++)
         {
-            int start = 64 + i * stride;
+            int start = 64 + (i * stride);
             fields.Add(new(start, 8, $"Extents[{i}].Offset", L.T("{0}바이트", "{0} bytes", I64(bytes, start))));
             fields.Add(new(start + 8, 8, $"Extents[{i}].Length", L.T("{0}바이트", "{0} bytes", I64(bytes, start + 8))));
         }

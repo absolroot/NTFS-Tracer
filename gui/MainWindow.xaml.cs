@@ -410,7 +410,7 @@ public partial class MainWindow : Window
             return;
         if (HistoryTab.IsSelected && EvidencePaneNavigation.MoveFocus(e, Events, Inspector, EvidenceTabs))
             return;
-        if ((e.Key == Key.Left || e.Key == Key.System && e.SystemKey == Key.Left) && Keyboard.Modifiers == ModifierKeys.Alt && HistoryTab.IsSelected && (!busy || showingIndexResults))
+        if ((e.Key == Key.Left || (e.Key == Key.System && e.SystemKey == Key.Left)) && Keyboard.Modifiers == ModifierKeys.Alt && HistoryTab.IsSelected && (!busy || showingIndexResults))
         {
             if (BackToLeads.Visibility == Visibility.Visible)
             {
@@ -502,7 +502,7 @@ public partial class MainWindow : Window
         {
             tab.MinWidth = Math.Min(102, limit);
             tab.MaxWidth = limit;
-            tab.Padding = new Thickness(Views.ActualWidth < 880 ? 9 : 16, 4, Views.ActualWidth < 880 ? 9 : 16, 4);
+            tab.Padding = new Thickness(Views.ActualWidth < 880 ? 4 : 11, 4, Views.ActualWidth < 880 ? 4 : 11, 4);
         }
     }
 
@@ -620,7 +620,7 @@ public partial class MainWindow : Window
 
     private async Task GoToRecord(byte[] id, long? position, bool fromGlobal, bool fromLeads = false, bool openHex = false)
     {
-        if (busy && !showingIndexResults || journal is not { } j)
+        if ((busy && !showingIndexResults) || journal is not { } j)
             return;
         int ticket = ++jumpVersion;
         try
@@ -642,7 +642,7 @@ public partial class MainWindow : Window
                 });
             }
             if (closed || ticket != jumpVersion || j != journal || linked != mft || (fromGlobal && (!GlobalTab.IsSelected || position != GlobalView.SelectedPosition)) ||
-                (fromLeads && !LeadsTab.IsSelected) || busy && !showingIndexResults)
+                (fromLeads && !LeadsTab.IsSelected) || (busy && !showingIndexResults))
                 return;
             if (target == null)
             {
@@ -991,7 +991,7 @@ public partial class MainWindow : Window
     }
     private async void FileSearchKeyDown(object sender, KeyEventArgs e)
     {
-        if (composingSearch || e.Key is not (Key.Enter or Key.Down) || Keyboard.Modifiers != ModifierKeys.None || busy && !showingIndexResults || journal == null)
+        if (composingSearch || e.Key is not (Key.Enter or Key.Down) || Keyboard.Modifiers != ModifierKeys.None || (busy && !showingIndexResults) || journal == null)
             return;
         e.Handled = true;
         if (listedVersion == queryVersion)

@@ -1,4 +1,8 @@
+#if MAIL_VIEWER
+namespace MailViewer.App;
+#else
 namespace JournalDesk;
+#endif
 
 internal static class SortCycle
 {

@@ -189,13 +189,12 @@ public partial class IntakeSettings : UserControl
         {
             pickingFirstSource = empty;
             if (empty)
-                ChooseSourcesButton.SetResourceReference(StyleProperty, "IntakePrimaryButton");
+                ChooseSourcesButton.SetResourceReference(StyleProperty, "Desk.FormPrimary");
             else
-                ChooseSourcesButton.SetResourceReference(StyleProperty, "IntakeButton");
+                ChooseSourcesButton.SetResourceReference(StyleProperty, "Desk.FormButton");
         }
         bool assigning = pending != null;
         StartAnalysis.Visibility = assigning ? Visibility.Collapsed : Visibility.Visible;
-        AssignmentActions.Visibility = assigning ? Visibility.Visible : Visibility.Collapsed;
         AnalysisOptionsPanel.IsEnabled = !applying && !assigning;
         if (assigning)
         {

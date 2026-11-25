@@ -80,7 +80,7 @@ internal sealed class AffMedia : Stream
             if (!tail[..4].SequenceEqual("ATT\0"u8) || U32(tail[4..]) != 24L + nameSize + stored)
                 throw new InvalidDataException("Invalid AFF segment trailer.");
         }
-        if (pageSize == 0 || size <= 0 || pages.Count != 1 + (size - 1) / pageSize ||
+        if (pageSize == 0 || size <= 0 || pages.Count != 1 + ((size - 1) / pageSize) ||
             pages.Keys.Any(p => p > (size - 1) / pageSize))
             throw new InvalidDataException("Incomplete AFF image or missing size metadata.");
     }
@@ -98,7 +98,7 @@ internal sealed class AffMedia : Stream
             return;
         cachedIndex = -1;
         var page = pages[number];
-        int expected = (int)Math.Min(pageSize, size - number * pageSize);
+        int expected = (int)Math.Min(pageSize, size - (number * pageSize));
         if (cached.Length != expected)
             cached = new byte[expected];
         file.Position = page.Offset;

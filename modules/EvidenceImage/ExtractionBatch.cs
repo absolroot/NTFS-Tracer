@@ -118,7 +118,12 @@ internal sealed class ExtractionBatch : IDisposable
         hashes.Add(manifestPath, Convert.ToHexStringLower(SHA256.HashData(manifestBytes)));
         Directory.Move(staging, destination);
         committed = true;
-        return new(new(files, manifestPath), hashes);
+        var result = new ArtifactResult(files, manifestPath)
+        {
+            Sha256ByKey = new System.Collections.ObjectModel.ReadOnlyDictionary<string, string>(
+                artifacts.ToDictionary(entry => entry.Key, entry => entry.Value.Sha256))
+        };
+        return new(result, hashes);
     }
 
     public void Dispose()

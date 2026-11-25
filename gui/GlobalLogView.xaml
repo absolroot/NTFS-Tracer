@@ -151,8 +151,8 @@
    <TextBlock x:Name="ExportStatus" Margin="8,0" VerticalAlignment="Center" Visibility="Collapsed" Foreground="{DynamicResource Desk.Link}" AutomationProperties.LiveSetting="Polite" TextTrimming="CharacterEllipsis" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
   </DockPanel></Border>
   </Grid>
-  <GridSplitter Grid.Row="2" x:Name="Split" Style="{DynamicResource Desk.RowSplitter}" Visibility="Collapsed" Height="4" Background="{DynamicResource Desk.Rule}" HorizontalAlignment="Stretch" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
-  <Border Grid.Row="3" x:Name="Inspector" Visibility="Collapsed" Padding="10,3" Background="{DynamicResource Desk.Panel}" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource Desk.Rule}">
+  <loc:PaneSplitter Grid.Row="2" x:Name="Split" Style="{DynamicResource Desk.PaneSplitter}" Visibility="Collapsed" Height="4" HorizontalAlignment="Stretch" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
+  <Border Grid.Row="3" x:Name="Inspector" Style="{StaticResource Desk.WorkspacePane}" Visibility="Collapsed" Padding="10,3">
    <DockPanel>
     <DockPanel DockPanel.Dock="Top" Margin="2,0,0,1">
      <Button x:Name="CloseInspector" Style="{DynamicResource Desk.IconButton}" DockPanel.Dock="Right" Content="&#xE711;" ToolTip="{loc:Ui CollapseSelectedRecordEsc}" AutomationProperties.Name="{loc:Ui CollapseSelectedRecord}" Click="CloseClick"/>
@@ -172,6 +172,7 @@
       </DockPanel></TabItem>
       <TabItem x:Name="JsonTab" Header="JSON">
        <loc:CopyText x:Name="RecordJson" AutomationProperties.Name="JSON" FontFamily="Consolas" FontSize="13"
+        Template="{StaticResource Desk.CopyDocument}" Padding="8,4,16,4"
         TextWrapping="Wrap" VerticalAlignment="Stretch" VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Margin="4,3"/>
       </TabItem>
     </TabControl>

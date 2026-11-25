@@ -222,9 +222,9 @@ public sealed class PathResolver
         int lo = 0, hi = rows.Count;
         while (lo < hi)
         {
-            int mid = lo + (hi - lo) / 2;
+            int mid = lo + ((hi - lo) / 2);
             var row = rows[mid];
-            if (row.Usn < entry.Usn || row.Usn == entry.Usn && row.Pos <= entry.Position)
+            if (row.Usn < entry.Usn || (row.Usn == entry.Usn && row.Pos <= entry.Position))
                 lo = mid + 1;
             else
                 hi = mid;

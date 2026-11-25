@@ -90,7 +90,7 @@ internal static class UsnEvidence
     private static bool MatchesIndex(ReadOnlySpan<byte> data, Entry entry, byte[]? expectedFileId)
     {
         int idWidth = entry.Version == 2 ? 8 : 16;
-        int usnAt = 8 + 2 * idWidth;
+        int usnAt = 8 + (2 * idWidth);
         int reasonAt = usnAt + (entry.Version == 4 ? 8 : 16);
         int minimum = entry.Version == 4 ? 64 : usnAt + 36;
         if (entry.Version is not (2 or 3 or 4) || data.Length < minimum || data.Length % 8 != 0 ||
@@ -120,7 +120,7 @@ internal static class UsnEvidence
         int stride = BinaryPrimitives.ReadUInt16LittleEndian(data[62..]);
         if ((entry.Remaining is long remaining && BinaryPrimitives.ReadUInt32LittleEndian(data[56..]) != remaining) ||
             (entry.ExtentStride is int stored && stored != stride) || stride < 16 ||
-            count > (data.Length - 64) / stride || data.Length - 64 - count * stride >= 8)
+            count > (data.Length - 64) / stride || data.Length - 64 - (count * stride) >= 8)
             return false;
         ReadOnlySpan<char> indexed = entry.Extents;
         for (int i = 0; i < count; i++)
@@ -128,7 +128,7 @@ internal static class UsnEvidence
             int next = indexed.IndexOf("; ", StringComparison.Ordinal);
             var extent = next < 0 ? indexed : indexed[..next];
             int plus = extent.IndexOf(" + ", StringComparison.Ordinal);
-            var raw = data[(64 + i * stride)..];
+            var raw = data[(64 + (i * stride))..];
             if (plus < 0 || !long.TryParse(extent[..plus], NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out long offset) ||
                 !long.TryParse(extent[(plus + 3)..], NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out long length) ||
                 BinaryPrimitives.ReadInt64LittleEndian(raw) != offset || BinaryPrimitives.ReadInt64LittleEndian(raw[8..]) != length ||

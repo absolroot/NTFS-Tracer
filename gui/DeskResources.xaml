@@ -21,25 +21,6 @@
     </ControlTemplate.Triggers>
    </ControlTemplate></Setter.Value></Setter>
   </Style>
-  <Style x:Key="Desk.IconButton" TargetType="Button">
-   <Setter Property="FocusVisualStyle" Value="{StaticResource Desk.KeyboardOutline}"/>
-   <Setter Property="FontSize" Value="14"/>
-   <Setter Property="Width" Value="30"/>
-   <Setter Property="Height" Value="27"/>
-   <Setter Property="Foreground" Value="{DynamicResource Desk.Text}"/>
-   <Setter Property="VerticalAlignment" Value="Center"/>
-   <Setter Property="ToolTipService.ShowOnDisabled" Value="True"/>
-   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
-    <Border x:Name="Hit" Background="Transparent" BorderThickness="1" CornerRadius="3" BorderBrush="Transparent">
-     <TextBlock Text="{TemplateBinding Content}" FontFamily="Segoe MDL2 Assets" FontSize="{TemplateBinding FontSize}"
-       Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-    </Border>
-    <ControlTemplate.Triggers>
-     <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Hit" Property="Background" Value="{DynamicResource Desk.Hover}"/></Trigger>
-     <Trigger Property="IsPressed" Value="True"><Setter TargetName="Hit" Property="Background" Value="{DynamicResource Desk.Pressed}"/></Trigger>
-    </ControlTemplate.Triggers>
-   </ControlTemplate></Setter.Value></Setter>
-  </Style>
   <Style x:Key="Desk.CriteriaToolTip" TargetType="ToolTip">
    <Setter Property="ShowsToolTipOnKeyboardFocus" Value="True"/>
    <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ToolTip">
@@ -161,27 +142,6 @@
     </ControlTemplate.Triggers>
    </ControlTemplate></Setter.Value></Setter>
   </Style>
-  <Style x:Key="Desk.PathEvidence" TargetType="Expander">
-   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Expander">
-    <StackPanel>
-     <ToggleButton x:Name="HeaderSite" HorizontalAlignment="Left" MinHeight="24" MaxWidth="{Binding ActualWidth,RelativeSource={RelativeSource TemplatedParent}}" IsChecked="{Binding IsExpanded,RelativeSource={RelativeSource TemplatedParent},Mode=TwoWay}" Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" Foreground="{DynamicResource Desk.Link}" FocusVisualStyle="{StaticResource Desk.KeyboardOutline}">
-      <ToggleButton.Template><ControlTemplate TargetType="ToggleButton">
-       <Border x:Name="Hit" BorderThickness="1" BorderBrush="Transparent" Background="Transparent" Padding="2,0">
-        <DockPanel><TextBlock x:Name="Arrow" Text="&#xE76C;" DockPanel.Dock="Left" FontFamily="Segoe MDL2 Assets" FontSize="9" Margin="0,0,5,0" VerticalAlignment="Center" Foreground="{TemplateBinding Foreground}"/>
-         <ContentPresenter RecognizesAccessKey="True" VerticalAlignment="Center" TextElement.FontSize="12" TextElement.Foreground="{TemplateBinding Foreground}"/>
-        </DockPanel>
-       </Border><ControlTemplate.Triggers>
-        <Trigger Property="IsChecked" Value="True"><Setter TargetName="Arrow" Property="Text" Value="&#xE70D;"/></Trigger>
-        <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Hit" Property="Background" Value="{DynamicResource Desk.Hover}"/></Trigger>
-       </ControlTemplate.Triggers>
-      </ControlTemplate></ToggleButton.Template>
-     </ToggleButton>
-     <ContentPresenter x:Name="Details" Visibility="Collapsed"/>
-    </StackPanel><ControlTemplate.Triggers>
-     <Trigger Property="IsExpanded" Value="True"><Setter TargetName="Details" Property="Visibility" Value="Visible"/></Trigger>
-    </ControlTemplate.Triggers>
-   </ControlTemplate></Setter.Value></Setter>
-  </Style>
   <Style x:Key="Desk.RowSplitter" TargetType="GridSplitter">
    <Setter Property="Cursor" Value="SizeNS"/>
    <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="GridSplitter">
@@ -192,31 +152,36 @@
     </ControlTemplate.Triggers>
    </ControlTemplate></Setter.Value></Setter>
   </Style>
-  <Style x:Key="Desk.InspectorTab" TargetType="TabItem">
-   <Setter Property="Foreground" Value="{DynamicResource Desk.Muted}"/>
-   <Setter Property="Padding" Value="9,0"/>
+  <Style x:Key="Desk.InspectorTab" TargetType="TabItem" BasedOn="{StaticResource Desk.ConnectedTab}">
+   <Setter Property="Background" Value="{DynamicResource Desk.Panel}"/>
+   <Setter Property="Padding" Value="8,0"/>
+   <Setter Property="MinWidth" Value="52"/>
    <Setter Property="MinHeight" Value="24"/>
-   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TabItem">
-    <Grid x:Name="RailItem" Background="Transparent">
-     <ContentPresenter x:Name="TabLabel" ContentSource="Header" RecognizesAccessKey="True" VerticalAlignment="Center" Margin="{TemplateBinding Padding}" TextElement.Foreground="{TemplateBinding Foreground}"/>
-     <Border x:Name="Underline" VerticalAlignment="Bottom" Height="2" Margin="7,0" Background="Transparent"/>
-    </Grid>
-    <ControlTemplate.Triggers>
-     <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="RailItem" Property="Background" Value="{DynamicResource Desk.Hover}"/></Trigger>
-     <Trigger Property="IsSelected" Value="True"><Setter Property="Foreground" Value="{DynamicResource Desk.Text}"/><Setter TargetName="TabLabel" Property="TextElement.FontWeight" Value="SemiBold"/><Setter TargetName="Underline" Property="Background" Value="{DynamicResource Desk.Accent}"/></Trigger>
-     <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="RailItem" Property="Background" Value="{DynamicResource Desk.Selected}"/></Trigger>
-    </ControlTemplate.Triggers>
-   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <Style x:Key="Desk.CanvasInspectorTab" TargetType="TabItem" BasedOn="{StaticResource Desk.InspectorTab}">
+   <Setter Property="Background" Value="{DynamicResource Desk.Canvas}"/>
   </Style>
   <Style x:Key="Desk.InspectorTabs" TargetType="TabControl">
    <Setter Property="ItemContainerStyle" Value="{StaticResource Desk.InspectorTab}"/>
    <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TabControl">
     <Grid KeyboardNavigation.TabNavigation="Local">
      <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
-     <Border BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1"/>
+     <Border Background="{DynamicResource Desk.TabRail}" BorderBrush="{DynamicResource Desk.TabRule}"
+             BorderThickness="0,0,0,1" CornerRadius="5,5,0,0" SnapsToDevicePixels="True"/>
      <TabPanel IsItemsHost="True" KeyboardNavigation.TabIndex="1" KeyboardNavigation.TabNavigation="Once"/>
-     <ContentPresenter Grid.Row="1" x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" Margin="0,2,0,0"/>
+     <ContentPresenter Grid.Row="1" x:Name="PART_SelectedContentHost" ContentSource="SelectedContent"/>
     </Grid>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <Style x:Key="Desk.LeadSourceTabs" TargetType="TabControl">
+   <Setter Property="ItemContainerStyle" Value="{StaticResource Desk.SecondaryTab}"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TabControl">
+    <DockPanel Background="{DynamicResource Desk.Canvas}" KeyboardNavigation.TabNavigation="Local">
+     <Border DockPanel.Dock="Top" BorderBrush="{DynamicResource Desk.TabRule}" BorderThickness="0,0,0,1">
+      <TabPanel IsItemsHost="True" Margin="4,0" KeyboardNavigation.TabNavigation="Once"/>
+     </Border>
+     <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent"/>
+    </DockPanel>
    </ControlTemplate></Setter.Value></Setter>
   </Style>
   <Style x:Key="Desk.EvidenceLink" TargetType="Button">

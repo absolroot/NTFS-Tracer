@@ -2,7 +2,7 @@
 
 NTFS Tracer uses a separate replaceable DLL (x64 or x86) built from the unmodified libewf-python 20260924 source distribution. The application uses its C API. The DLL uses the bundled libyal dependencies and statically linked zlib 1.4 for deflate and Adler-32. The Python extension, bzip2 and the command-line tools are excluded. Encrypted EWF is unsupported.
 
-libewf is copyright Joachim Metz and contributors. The package declares LGPL-3.0-or-later. Consult the source file notices and the included COPYING and COPYING.LESSER for license terms. This directory includes the complete original source distribution and the CMake build recipe used for the DLL.
+libewf is copyright Joachim Metz and contributors. The package declares LGPL-3.0-or-later. Consult the source file notices and the included COPYING and COPYING.LESSER for license terms. The source repository and the `*-libewf-source.zip` asset contain the complete original source distribution and the CMake build recipe used for the DLL.
 
 - [Upstream code and documentation](https://github.com/libyal/libewf)
 - [Pinned source distribution](https://pypi.org/project/libewf-python/20260924/#files)
@@ -10,7 +10,7 @@ libewf is copyright Joachim Metz and contributors. The package declares LGPL-3.0
 - [zlib 1.4 source release](https://github.com/madler/zlib/releases/tag/v1.4) by Jean-loup Gailly and Mark Adler. The original source and the zlib license are included as `zlib-1.4.tar.gz` and `COPYING.zlib`.
 - zlib source archive SHA-256: `02dd159783677a749c04adbdd02b55b8a2bcc7e054f51b76b549199a916ad584`
 
-To rebuild on Windows with Visual Studio 2022 C++ Build Tools for the target architecture and CMake, run the following from this notices directory. Install a rebuilt DLL by copying it next to NtfsTracer.exe under the name `NtfsTracer.libewf.dll`. Keep the original ABI when replacing the library.
+If you downloaded a Windows ZIP, get `NTFS-Tracer-v<version>-libewf-source.zip` from the same [release](https://github.com/absolroot/NTFS-Tracer/releases) and extract it. To rebuild on Windows with Visual Studio 2022 C++ Build Tools and CMake, run the following from the directory containing `CMakeLists.txt` and both source archives. Install a rebuilt DLL by copying it next to `NtfsTracer.exe` under the name `NtfsTracer.libewf.dll`. Keep the original ABI when replacing the library.
 
 ```powershell
 tar -xf libewf_python-20260924.tar.gz

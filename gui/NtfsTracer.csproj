@@ -12,7 +12,7 @@
     <ApplicationIcon>Assets/NtfsTracer.ico</ApplicationIcon>
     <JournalIndexPath Condition="'$(JournalIndexPath)' == '' and '$(RuntimeIdentifier)' == 'win-x86'">../engine/target/i686-pc-windows-msvc/release/ntfstracer-cli.exe</JournalIndexPath>
     <JournalIndexPath Condition="'$(JournalIndexPath)' == ''">../engine/target/release/ntfstracer-cli.exe</JournalIndexPath>
-    <Version>0.9.2</Version>
+    <Version>0.9.3</Version>
     <PublishSingleFile>true</PublishSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <DebugType>embedded</DebugType>
@@ -24,19 +24,13 @@
     <Resource Include="$(ApplicationIcon)"/>
     <None Update="Notices/Fluent-System-Icons.txt" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
     <None Update="Notices/licenses/**/*" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
-    <None Include="../THIRD-PARTY-NOTICES.md" Link="THIRD-PARTY-NOTICES.md" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
-    <None Include="../LICENSE" Link="LICENSE" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
-    <None Include="../README.md" Link="README.md" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
-    <None Include="../README.en.md" Link="README.en.md" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
-    <None Include="../README.ja.md" Link="README.ja.md" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
-    <None Include="../README.ko.md" Link="README.ko.md" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
-    <None Include="../docs/performance.md" Link="docs/performance.md" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
-    <None Include="../docs/media/*" Link="docs/media/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
+    <None Include="../THIRD-PARTY-NOTICES.md" Link="Notices/THIRD-PARTY-NOTICES.md" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
+    <None Include="../LICENSE" Link="Notices/LICENSE" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
     <InternalsVisibleTo Include="TrackerFields" />
     <InternalsVisibleTo Include="PathResolution" />
     <InternalsVisibleTo Include="GlobalLog" />
     <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.11" />
     <None Include="$(JournalIndexPath)" Link="ntfstracer-cli.exe" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
-    <None Include="../engine/sootmark-LICENSE.txt" Link="sootmark-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
+    <None Include="../engine/sootmark-LICENSE.txt" Link="Notices/sootmark-LICENSE.txt" CopyToOutputDirectory="PreserveNewest" ExcludeFromSingleFile="true"/>
   </ItemGroup>
 </Project>

@@ -16,22 +16,6 @@
     <DataTrigger Binding="{Binding IsSelected,RelativeSource={RelativeSource AncestorType=DataGridRow}}" Value="True"><Setter Property="Foreground" Value="{DynamicResource Desk.Text}"/></DataTrigger>
    </Style.Triggers>
   </Style>
-  <Style x:Key="ModeTab" TargetType="TabItem">
-   <Setter Property="Foreground" Value="{DynamicResource Desk.Text}"/>
-   <Setter Property="MinWidth" Value="102"/><Setter Property="Padding" Value="16,4"/>
-   <Setter Property="HeaderTemplate"><Setter.Value><DataTemplate><TextBlock Text="{Binding}" TextTrimming="CharacterEllipsis"
-    Foreground="{Binding Path=(TextElement.Foreground),RelativeSource={RelativeSource AncestorType=ContentPresenter}}"/></DataTemplate></Setter.Value></Setter>
-   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TabItem">
-    <Grid><Border x:Name="Plate" Background="{DynamicResource Desk.Panel}" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource Desk.Rule}"/>
-     <ContentPresenter x:Name="TabTitle" ContentSource="Header" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}" TextElement.Foreground="{TemplateBinding Foreground}" RecognizesAccessKey="True"/>
-     <Border x:Name="Accent" Height="2" VerticalAlignment="Top" Background="Transparent"/></Grid>
-    <ControlTemplate.Triggers>
-     <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Plate" Property="Background" Value="{DynamicResource Desk.Hover}"/></Trigger>
-     <Trigger Property="IsSelected" Value="True"><Setter TargetName="Accent" Property="Background" Value="{DynamicResource Desk.Accent}"/><Setter TargetName="Plate" Property="Background" Value="{DynamicResource Desk.Canvas}"/><Setter TargetName="TabTitle" Property="TextElement.FontWeight" Value="SemiBold"/></Trigger>
-     <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Plate" Property="BorderBrush" Value="{DynamicResource Desk.Accent}"/><Setter TargetName="Plate" Property="BorderThickness" Value="1"/></Trigger>
-     <Trigger Property="IsEnabled" Value="False"><Setter TargetName="TabTitle" Property="TextElement.Foreground" Value="{DynamicResource Desk.Disabled}"/></Trigger>
-    </ControlTemplate.Triggers></ControlTemplate></Setter.Value></Setter>
-  </Style>
   <Style x:Key="Heading" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}"><Setter Property="FontSize" Value="16"/><Setter Property="FontWeight" Value="SemiBold"/></Style>
   <Style x:Key="Value" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}"><Setter Property="TextWrapping" Value="Wrap"/><Setter Property="Margin" Value="0,3,0,14"/></Style>
   <Style x:Key="PathValue" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}"><Setter Property="TextWrapping" Value="Wrap"/></Style>
@@ -96,29 +80,31 @@
     </MenuItem>
    </Menu>
   </Border>
-  <Border x:Name="JournalStatus" DockPanel.Dock="Bottom" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0" Background="{DynamicResource Desk.Panel}" Padding="10,5"><DockPanel><Button x:Name="CancelButton" DockPanel.Dock="Right" Style="{DynamicResource Desk.IconButton}" Content="&#xE71A;" Visibility="Collapsed" AutomationProperties.Name="{loc:Ui CancelAnalysis}" ToolTip="{loc:Ui CancelAnalysis}" Click="Cancel"/><TextBlock x:Name="Status" Style="{StaticResource Sub}" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite"/></DockPanel></Border>
+  <Border x:Name="JournalStatus" DockPanel.Dock="Bottom" Style="{StaticResource Desk.StatusBar}"><DockPanel><Button x:Name="CancelButton" DockPanel.Dock="Right" Style="{DynamicResource Desk.IconButton}" Content="&#xE71A;" Visibility="Collapsed" AutomationProperties.Name="{loc:Ui CancelAnalysis}" ToolTip="{loc:Ui CancelAnalysis}" Click="Cancel"/><TextBlock x:Name="Status" Style="{StaticResource Desk.StatusText}" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite"/></DockPanel></Border>
   <Border x:Name="PairNoticeBorder" DockPanel.Dock="Top" Visibility="Collapsed" Padding="16,7" Background="{DynamicResource Desk.Warn}" BorderBrush="{DynamicResource Desk.WarnRule}" BorderThickness="0,0,0,1">
    <TextBlock x:Name="PairNotice" TextWrapping="Wrap" Foreground="{DynamicResource Desk.WarnText}" AutomationProperties.LiveSetting="Polite"/>
   </Border>
   <Grid>
   <TabControl x:Name="Views" SelectionChanged="ChangeMode" SizeChanged="FitWorkspaceTabs" BorderThickness="0" Background="{DynamicResource Desk.Canvas}">
    <TabControl.Template><ControlTemplate TargetType="TabControl"><DockPanel>
-    <Border DockPanel.Dock="Top" Background="{DynamicResource Desk.Inset}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1"><Grid Grid.IsSharedSizeScope="True"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto" SharedSizeGroup="PathPreferenceWidth"/><ColumnDefinition Width="Auto" SharedSizeGroup="SettingsWidth"/></Grid.ColumnDefinitions>
+    <Grid DockPanel.Dock="Top" Grid.IsSharedSizeScope="True"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto" SharedSizeGroup="PathPreferenceWidth"/><ColumnDefinition Width="Auto" SharedSizeGroup="SettingsWidth"/></Grid.ColumnDefinitions>
+     <Border Grid.ColumnSpan="3" Background="{DynamicResource Desk.TabRail}" BorderBrush="{DynamicResource Desk.TabRule}"
+             BorderThickness="0,0,0,1" CornerRadius="5,5,0,0" SnapsToDevicePixels="True"/>
      <Grid Grid.ColumnSpan="3" IsItemsHost="True" KeyboardNavigation.TabNavigation="Local">
      <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto" SharedSizeGroup="PathPreferenceWidth"/><ColumnDefinition Width="Auto" SharedSizeGroup="SettingsWidth"/></Grid.ColumnDefinitions>
      </Grid>
      <CheckBox x:Name="WorkspaceFullPaths" Grid.Column="1" SizeChanged="FitWorkspaceTabs" Style="{StaticResource Desk.CompactCheck}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="8,0,12,0" IsChecked="{Binding Enabled,Source={x:Static local:JournalPathPreference.Current},Mode=TwoWay}" Content="{loc:Ui FullPaths}" ToolTip="{loc:Ui FullPathsTooltip}"/>
-    </Grid></Border>
+    </Grid>
     <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent"/>
    </DockPanel></ControlTemplate></TabControl.Template>
-   <TabItem x:Name="GlobalTab" Header="{loc:Ui AllRecords}" Style="{StaticResource ModeTab}" ToolTip="{loc:Ui AllRecordsCtrl1}" IsEnabled="False">
+   <TabItem x:Name="GlobalTab" Header="{loc:Ui AllRecords}" Style="{StaticResource Desk.WorkspaceTab}" ToolTip="{loc:Ui AllRecordsCtrl1}" IsEnabled="False">
     <local:GlobalLogView x:Name="GlobalView"/>
    </TabItem>
-   <TabItem x:Name="HistoryTab" Grid.Column="1" Header="{loc:Ui FileHistory}" Style="{StaticResource ModeTab}" ToolTip="{loc:Ui FileHistoryCtrl2}">
+   <TabItem x:Name="HistoryTab" Grid.Column="1" Header="{loc:Ui FileHistory}" Style="{StaticResource Desk.WorkspaceTab}" ToolTip="{loc:Ui FileHistoryCtrl2}">
    <Grid x:Name="Workspace">
    <Grid.RowDefinitions><RowDefinition Height="*" MinHeight="185"/><RowDefinition Height="Auto"/><RowDefinition x:Name="EvidenceRow" Height="0"/></Grid.RowDefinitions>
    <Grid.ColumnDefinitions><ColumnDefinition Width="0.95*" MinWidth="185" MaxWidth="640"/><ColumnDefinition Width="5"/><ColumnDefinition Width="2.55*" MinWidth="335"/></Grid.ColumnDefinitions>
-   <Border Grid.Column="0" Grid.RowSpan="3" Background="{DynamicResource Desk.Panel}" Padding="8,8,7,5">
+   <Border Grid.Column="0" Grid.RowSpan="3" Style="{StaticResource Desk.WorkspacePane}" Padding="8,8,7,5">
     <DockPanel><StackPanel DockPanel.Dock="Top" Margin="3,0,3,6">
      <Grid><loc:HintTextBox x:Name="Search" Hint="{loc:Ui SearchFileNames}" Style="{DynamicResource Desk.LogSearchInput}" TextChanged="SearchChanged" PreviewKeyDown="FileSearchKeyDown" AutomationProperties.Name="{loc:Ui SearchFileNames}" ToolTip="{loc:Ui SearchCurrentAndPreviousNamesCtrlF}"/>
       <Button FontSize="12" ToolTip="{loc:Ui ClearFileSearch}" AutomationProperties.Name="{loc:Ui ClearFileNameSearch}" Click="ClearFileSearch">
@@ -130,8 +116,9 @@
       <ListBox.ItemTemplate><DataTemplate><DockPanel><Image Source="{Binding Icon}" Style="{StaticResource Desk.RecordIcon}" Width="20" Height="20" Margin="1,0,8,0" DockPanel.Dock="Left"/><StackPanel><TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Name}"/><local:JournalPathText Record="{Binding LastNamedRecord}" FileId="{Binding Id}" ShortText="{Binding Subtitle}" Style="{StaticResource Sub}" TextTrimming="CharacterEllipsis" Padding="0,0,22,0" ToolTipService.ShowDuration="20000"/><TextBlock Text="{Binding Disambiguator}" TextTrimming="CharacterEllipsis" ToolTip="{Binding Disambiguator}"><TextBlock.Style><Style TargetType="TextBlock" BasedOn="{StaticResource Sub}"><Style.Triggers><DataTrigger Binding="{Binding Disambiguator}" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></TextBlock.Style></TextBlock></StackPanel></DockPanel></DataTemplate></ListBox.ItemTemplate></ListBox>
      <TextBlock x:Name="FileSearchEmpty" Text="{loc:Ui NoMatchingFiles}" Visibility="Collapsed" VerticalAlignment="Top" Margin="8,6" Style="{StaticResource Sub}" AutomationProperties.LiveSetting="Polite"/></Grid>
     </DockPanel></Border>
-   <GridSplitter Grid.Column="1" Grid.RowSpan="3" Width="5" HorizontalAlignment="Stretch" Background="{DynamicResource Desk.Inset}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,1,0" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeFileList}"/>
-   <DockPanel Grid.Column="2" Visibility="{Binding ElementName=FileList,Path=HasItems,Converter={StaticResource BoolVis}}">
+   <loc:PaneSplitter Grid.Column="1" Grid.RowSpan="3" Width="5" HorizontalAlignment="Stretch" Style="{DynamicResource Desk.PaneSplitter}" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeFileList}"/>
+   <Border Grid.Column="2" Background="{DynamicResource Desk.Canvas}" Style="{StaticResource Desk.WorkspacePane}" Visibility="{Binding ElementName=FileList,Path=HasItems,Converter={StaticResource BoolVis}}">
+    <DockPanel>
     <Border DockPanel.Dock="Top" Padding="12,7,10,6" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1">
      <StackPanel><DockPanel><Menu DockPanel.Dock="Right" IsMainMenu="False" Background="Transparent" Padding="0" VerticalAlignment="Center">
        <Menu.Resources><ResourceDictionary Source="CompactMenu.xaml"/></Menu.Resources>
@@ -191,9 +178,9 @@
           <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition/></Grid.ColumnDefinitions>
           <Grid.RowDefinitions><RowDefinition Height="Auto" SharedSizeGroup="BeforePath"/><RowDefinition Height="Auto" SharedSizeGroup="AfterPath"/></Grid.RowDefinitions>
           <TextBlock x:Name="BeforeLabel" Text="{loc:Ui PreviousName}" Style="{StaticResource Sub}" Margin="0,0,7,0"/>
-          <local:JournalPathText TextTrimming="CharacterEllipsis" Padding="0,0,22,0" Grid.Column="1" Record="{Binding Records[0]}" ShortText="{Binding Records[0].Name}" FileId="{Binding Tag,RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+          <local:JournalPathText KeepPathEnd="True" TextTrimming="CharacterEllipsis" Padding="0,0,22,0" Grid.Column="1" Record="{Binding Records[0]}" ShortText="{Binding Records[0].Name}" FileId="{Binding Tag,RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
           <TextBlock x:Name="AfterLabel" Grid.Row="1" Text="{loc:Ui NewName}" Style="{StaticResource Sub}" Margin="0,0,7,0"/>
-          <local:JournalPathText TextTrimming="CharacterEllipsis" Padding="0,0,22,0" Grid.Row="1" Grid.Column="1" Record="{Binding PairedName}" ShortText="{Binding PairedName.Name}" FileId="{Binding Tag,RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+          <local:JournalPathText KeepPathEnd="True" TextTrimming="CharacterEllipsis" Padding="0,0,22,0" Grid.Row="1" Grid.Column="1" Record="{Binding PairedName}" ShortText="{Binding PairedName.Name}" FileId="{Binding Tag,RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
          </Grid><DataTemplate.Triggers>
           <DataTrigger Binding="{Binding Moved}" Value="True"><Setter TargetName="BeforeLabel" Property="Text" Value="{loc:Ui From}"/><Setter TargetName="AfterLabel" Property="Text" Value="{loc:Ui To}"/></DataTrigger>
          </DataTemplate.Triggers>
@@ -220,8 +207,9 @@
      </DataGrid.Columns>
     </DataGrid>
    </DockPanel>
-   <GridSplitter Grid.Column="2" Grid.Row="1" x:Name="ProofSplitter" Style="{DynamicResource Desk.RowSplitter}" Height="5" Background="{DynamicResource Desk.Rule}" HorizontalAlignment="Stretch" Visibility="Collapsed" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeEvidencePane}"/>
-   <Border Grid.Column="2" Grid.Row="2" x:Name="Inspector" Visibility="Collapsed" Background="{DynamicResource Desk.Panel}" Padding="10,2,10,3">
+   </Border>
+   <loc:PaneSplitter Grid.Column="2" Grid.Row="1" x:Name="ProofSplitter" Style="{DynamicResource Desk.PaneSplitter}" Height="5" HorizontalAlignment="Stretch" Visibility="Collapsed" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeEvidencePane}"/>
+   <Border Grid.Column="2" Grid.Row="2" x:Name="Inspector" Style="{StaticResource Desk.WorkspacePane}" Visibility="Collapsed" Padding="10,2,10,3">
     <DockPanel><DockPanel DockPanel.Dock="Top" Margin="0,0,0,2">
      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Top">
       <Button x:Name="NearbyHistory" Content="{loc:Ui NearbyRecords}" IsEnabled="False" Click="OpenNeighborhood" Style="{DynamicResource Desk.EvidenceLink}" MinHeight="24" ToolTip="{loc:Ui InspectChangesToOtherFilesAroundTheSelected}"/>
@@ -299,12 +287,13 @@
       </DockPanel></TabItem>
       <TabItem x:Name="JsonTab" Header="JSON">
        <loc:CopyText x:Name="RecordJson" AutomationProperties.Name="JSON" FontFamily="Consolas" FontSize="13"
+        Template="{StaticResource Desk.CopyDocument}" Padding="8,4,16,4"
         TextWrapping="Wrap" VerticalAlignment="Stretch" VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Margin="4,3"/>
       </TabItem>
      </TabControl></DockPanel></Border>
    <Border x:Name="Welcome" Grid.RowSpan="3" Grid.ColumnSpan="3" Background="{DynamicResource Desk.Canvas}"><StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="440" Margin="24"><Button Content="{loc:Ui OpenUsnJournalJ}" Click="Pick" HorizontalAlignment="Left"/></StackPanel></Border>
    </Grid></TabItem>
-   <TabItem x:Name="TransactionTab" Grid.Column="2" Header="{loc:Ui NtfsTransactions}" Style="{StaticResource ModeTab}" ToolTip="{loc:Ui NtfsTransactionsCtrl3}">
+   <TabItem x:Name="TransactionTab" Grid.Column="2" Header="{loc:Ui NtfsTransactions}" Style="{StaticResource Desk.WorkspaceTab}" ToolTip="{loc:Ui NtfsTransactionsCtrl3}">
     <DockPanel>
      <Button x:Name="BackToTimestampLeads" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="8,2"
              Content="{loc:Ui InvestigationTab}" Style="{DynamicResource Desk.EvidenceLink}"
@@ -312,13 +301,13 @@
      <local:TransactionView x:Name="Transactions"/>
     </DockPanel>
    </TabItem>
-   <TabItem x:Name="LeadsTab" Grid.Column="3" Header="{loc:Ui InvestigationTab}" Style="{StaticResource ModeTab}" ToolTip="{loc:Ui InvestigationTabShortcut}" IsEnabled="False">
-    <TabControl x:Name="LeadSources" Style="{DynamicResource Desk.InspectorTabs}" BorderThickness="0">
+   <TabItem x:Name="LeadsTab" Grid.Column="3" Header="{loc:Ui InvestigationTab}" Style="{StaticResource Desk.WorkspaceTab}" ToolTip="{loc:Ui InvestigationTabShortcut}" IsEnabled="False">
+    <TabControl x:Name="LeadSources" Style="{StaticResource Desk.LeadSourceTabs}">
      <TabItem x:Name="UsnLeads" Header="$UsnJrnl" IsEnabled="False"/>
      <TabItem x:Name="LogLeads" Header="$LogFile" IsEnabled="False"/>
     </TabControl>
    </TabItem>
-   <TabItem x:Name="SettingsTab" Grid.Column="6" SizeChanged="FitWorkspaceTabs" Header="{loc:Ui IntakeSettingsTab}" MinWidth="84" Style="{StaticResource ModeTab}" ToolTip="{loc:Ui IntakeSettingsShortcut}" AutomationProperties.Name="{loc:Ui IntakeSettingsTab}">
+   <TabItem x:Name="SettingsTab" Grid.Column="6" SizeChanged="FitWorkspaceTabs" Header="{loc:Ui IntakeSettingsTab}" MinWidth="84" Style="{StaticResource Desk.WorkspaceTab}" ToolTip="{loc:Ui IntakeSettingsShortcut}" AutomationProperties.Name="{loc:Ui IntakeSettingsTab}">
     <TabItem.HeaderTemplate><DataTemplate><StackPanel Orientation="Horizontal"><TextBlock Text="&#xE713;" FontFamily="Segoe MDL2 Assets" FontSize="14" VerticalAlignment="Center" Margin="0,0,7,0"/><TextBlock Text="{Binding}" VerticalAlignment="Center"/></StackPanel></DataTemplate></TabItem.HeaderTemplate>
     <local:IntakeSettings x:Name="Setup"/>
    </TabItem>

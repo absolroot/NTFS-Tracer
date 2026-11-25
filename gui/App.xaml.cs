@@ -20,10 +20,11 @@ public partial class App : Application
 
     private static readonly (string Key, string Light, string Dark)[] Palette = [
         ("Canvas","#FFFFFF","#1F1F1F"),("Panel","#F8F8F8","#181818"),
-        ("Inset","#F3F3F3","#242424"),("Rule","#DADADA","#383838"),
+        ("Inset","#F3F3F3","#242424"),("TabRail","#ECEEF1","#232527"),("TabRule","#CED2D7","#36393C"),("Rule","#DADADA","#383838"),
         ("Hairline","#EEEEEE","#2C2C2C"),("LogAlternate","#F7F7F7","#252525"),("Text","#242424","#D7D7D7"),
         ("Muted","#565C63","#C1C4C8"),("Disabled","#777777","#989898"),
         ("Accent","#005FB8","#3794FF"),("AccentText","#FFFFFF","#101820"),("Hover","#EBEDF0","#2A2D2E"),
+        ("TabHover","#EBEDF0","#2D3033"),("TabHoverText","#242424","#D7D7D7"),
         ("Pressed","#DDDFE2","#373A3C"),("Selected","#DCEAF6","#264F78"),
         ("FieldHighlight","#D7EAF7","#273F50"),("Link","#245681","#8AC4FF"),("Warn","#FFF5DF","#382E1B"),
         ("WarnRule","#DFC899","#806331"),("WarnText","#704100","#F1D39A")
@@ -163,7 +164,9 @@ public partial class App : Application
 #pragma warning restore WPF0001
         foreach (var (key, light, night) in Palette)
         {
-            var brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(dark ? night : light));
+            var brush = SystemParameters.HighContrast && key is ("TabRail" or "TabRule")
+                ? (key == "TabRail" ? SystemColors.WindowBrush : SystemColors.WindowTextBrush)
+                : new SolidColorBrush((Color)ColorConverter.ConvertFromString(dark ? night : light));
             brush.Freeze();
             Current.Resources["Desk." + key] = brush;
         }

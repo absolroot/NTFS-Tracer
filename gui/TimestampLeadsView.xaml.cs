@@ -78,6 +78,21 @@ public partial class TimestampLeadsView : UserControl
         RefreshLanguage();
     }
 
+    private void CandidateTableSizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        if (!e.WidthChanged)
+            return;
+
+        double availableWidth = e.NewSize.Width - SystemParameters.VerticalScrollBarWidth;
+        double requiredWidth = Candidates.Columns.Sum(column => column.MinWidth);
+        var visibility = availableWidth >= requiredWidth ? Visibility.Visible : Visibility.Collapsed;
+        CandidateLsnColumn.Visibility = visibility;
+        CandidateMftColumn.Visibility = visibility;
+        double fixedWidth = Candidates.Columns.Where(column => column != FieldColumn && column.Visibility == Visibility.Visible)
+            .Sum(column => column.MinWidth);
+        FieldColumn.MaxWidth = Math.Max(FieldColumn.MinWidth, availableWidth - fixedWidth);
+    }
+
     internal void SetSource(TransactionQuery? backend, string? source, string? digest)
     {
         if (path == source && hash == digest && (query == null) == (backend == null))

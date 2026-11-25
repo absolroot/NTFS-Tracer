@@ -203,7 +203,7 @@ public partial class IntakeSettings
         var selected = pending.Where(item => item.Role != Role.Skip).ToList();
         string issue = AssignmentIssue(selected);
         ConfirmAssignments.IsEnabled = issue.Length == 0;
-        ShowError(issue);
+        AssignmentNotice.Text = issue;
         return issue.Length == 0 ? selected : null;
     }
 

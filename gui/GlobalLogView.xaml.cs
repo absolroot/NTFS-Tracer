@@ -945,68 +945,15 @@ public partial class GlobalLogView : UserControl
         try
         {
             var (filter, invalid, error) = Filter();
-            if (filter == null && invalid != null)
-            {
-                invalidFilter = invalid;
-                invalid.SetResourceReference(Control.BorderBrushProperty, "Desk.WarnText");
-                AutomationProperties.SetHelpText(invalid, error);
-                Empty.Text = error;
-                string field = invalid == StartDate ? L.T("시작일", "Start date") : invalid == EndDate ? L.T("종료일", "End date") : invalid == StartTime ? L.T("시작 시각", "Start time") : invalid == EndTime ? L.T("종료 시각", "End time") : "USN";
-                OfferRecovery(L.T("{0} 수정", "Edit {0}", field));
-                return;
-            }
             if (filter == null)
             {
-                Empty.Text = PageStatus.Text = "";
+                if (invalid != null)
+                    ShowFilterError(invalid, error);
+                else
+                    Empty.Text = PageStatus.Text = "";
                 return;
             }
-            IReadOnlyList<long>? order = null;
-            if (sort is not (JournalSort.Time or JournalSort.Usn))
-            {
-                if (sorted is { } prior && prior.Filter == filter && prior.Sort == sort)
-                    order = prior.Order;
-                else
-                {
-                    var key = sort;
-                    QueryStatus(L.T("검색 결과 전체를 정렬하고 있습니다…", "Sorting all matching records…"));
-                    if (key is JournalSort.Path or JournalSort.PathSource)
-                    {
-                        if (pathOrders is not { } cache || cache.Filter != filter)
-                        {
-                            var journal = source!;
-                            var resolver = paths;
-                            var warning = pairWarning;
-                            bool carved = IsCarvedSource;
-                            var progress = new Progress<int>(count =>
-                            {
-                                if (ReferenceEquals(request, active) && !active.IsCancellationRequested && displayedFilter == null)
-                                    QueryStatus(L.T("경로 확인 중 · {0:N0}건", "Resolving paths · {0:N0} records", count));
-                            });
-                            var pair = allPathOrders is { } all
-                                ? filter.IsAllRecords ? all : await backend.FilterPathOrdersAsync(filter, all, active.Token)
-                                : await backend.ReusablePathOrdersAsync(filter,
-                                    row => journal.ResolveListValues(row.Record, row.FileId, row.Name, resolver, warning, carved),
-                                    resolver?.MftIndexPath, carved, warning != null, active.Token, progress);
-                            active.Token.ThrowIfCancellationRequested();
-                            if (filter.IsAllRecords)
-                                allPathOrders = pair;
-                            cache = (filter, pair.Paths, pair.Sources);
-                            pathOrders = cache;
-                        }
-                        order = key == JournalSort.Path ? cache.Paths : cache.Sources;
-                    }
-                    else if (labelOrders.TryGetValue(key, out var cached) && cached.Filter == filter)
-                        order = cached.Order;
-                    else
-                    {
-                        order = await backend.BuildLabelOrderAsync(filter, key == JournalSort.Reason, active.Token);
-                        active.Token.ThrowIfCancellationRequested();
-                        labelOrders[key] = (filter, order);
-                    }
-                    active.Token.ThrowIfCancellationRequested();
-                    sorted = (filter, key, order);
-                }
-            }
+            var order = await ResolvePageOrderAsync(backend, filter, sort, active);
             if (anchor != null)
                 anchor = selected;
             if ((savedPosition ?? anchor?.Position) is long position)
@@ -1027,38 +974,7 @@ public partial class GlobalLogView : UserControl
                 ReloadSort();
                 return;
             }
-            displayedFilter = filter;
-            next = page.Next;
-            if (requestedUtc != utc)
-                page = page with
-                {
-                    Items = page.Items.Select(row => row with { TimeZone = utc }).ToList()
-                };
-            var restorePosition = savedPosition ?? anchor?.Position;
-            var restore = restorePosition == null ? null : page.Items.FirstOrDefault(row => row.Position == restorePosition);
-            restoringSort = restore != null && selected?.Position == restore.Position;
-            try
-            {
-                Records.ItemsSource = page.Items;
-                if (restore != null)
-                    Records.SelectedItem = restore;
-            }
-            finally { restoringSort = false; }
-            int n = page.Items.Count;
-            Empty.Text = n != 0 ? "" : L.T("검색 조건에 맞는 기록이 없습니다.", "No records match your search.");
-            if (n == 0 && !filter.IsAllRecords)
-                OfferRecovery(filter.Name.Length != 0 ? L.T("파일 이름 검색 지우기", "Clear file name search") : L.T("필터 초기화", "Clear filters"));
-            long first = (long)previous.Count * pageSize + 1;
-            PageStatus.Text = n == 0 ? "" : previous.Count == 0 && next == null ? L.T("{0:N0}건", "Records: {0:N0}", n) : L.T("{0:N0}–{1:N0}번째 기록", "Records {0:N0}–{1:N0}", first, first + n - 1);
-            if (n != 0)
-            {
-                if ((filter.Usn.HasValue || !filter.RecordFields.IsEmpty) && n == 1 && previous.Count == 0 && next == null)
-                    Records.SelectedItem = page.Items[0];
-                if (focusPending && QueryText.IsKeyboardFocusWithin)
-                    FocusSelectedRecord();
-                else
-                    Records.ScrollIntoView(restore ?? page.Items[0]);
-            }
+            ShowPage(page, filter, requestedUtc, savedPosition ?? anchor?.Position);
         }
         catch (OperationCanceledException) when (active.IsCancellationRequested) { }
         catch (Exception ex)
@@ -1076,6 +992,119 @@ public partial class GlobalLogView : UserControl
                 Buttons();
             }
         }
+    }
+
+    private void ShowFilterError(Control invalid, string error)
+    {
+        invalidFilter = invalid;
+        invalid.SetResourceReference(Control.BorderBrushProperty, "Desk.WarnText");
+        AutomationProperties.SetHelpText(invalid, error);
+        Empty.Text = error;
+        string field = invalid switch
+        {
+            _ when invalid == StartDate => L.T("시작일", "Start date"),
+            _ when invalid == EndDate => L.T("종료일", "End date"),
+            _ when invalid == StartTime => L.T("시작 시각", "Start time"),
+            _ when invalid == EndTime => L.T("종료 시각", "End time"),
+            _ => "USN"
+        };
+        OfferRecovery(L.T("{0} 수정", "Edit {0}", field));
+    }
+
+    private async Task<IReadOnlyList<long>?> ResolvePageOrderAsync(GlobalLogQuery backend, GlobalLogFilter filter,
+        JournalSort key, CancellationTokenSource active)
+    {
+        if (key is JournalSort.Time or JournalSort.Usn)
+            return null;
+        if (sorted is { } prior && prior.Filter == filter && prior.Sort == key)
+            return prior.Order;
+
+        QueryStatus(L.T("검색 결과 전체를 정렬하고 있습니다…", "Sorting all matching records…"));
+        IReadOnlyList<long> order;
+        if (key is JournalSort.Path or JournalSort.PathSource)
+        {
+            var paths = await ResolvePathOrdersAsync(backend, filter, active);
+            order = key == JournalSort.Path ? paths.Paths : paths.Sources;
+        }
+        else if (labelOrders.TryGetValue(key, out var cached) && cached.Filter == filter)
+            order = cached.Order;
+        else
+        {
+            order = await backend.BuildLabelOrderAsync(filter, key == JournalSort.Reason, active.Token);
+            active.Token.ThrowIfCancellationRequested();
+            labelOrders[key] = (filter, order);
+        }
+        active.Token.ThrowIfCancellationRequested();
+        sorted = (filter, key, order);
+        return order;
+    }
+
+    private async Task<(IReadOnlyList<long> Paths, IReadOnlyList<long> Sources)> ResolvePathOrdersAsync(
+        GlobalLogQuery backend, GlobalLogFilter filter, CancellationTokenSource active)
+    {
+        if (pathOrders is { } cached && cached.Filter == filter)
+            return (cached.Paths, cached.Sources);
+
+        (IReadOnlyList<long> Paths, IReadOnlyList<long> Sources) pair;
+        if (allPathOrders is { } all)
+            pair = filter.IsAllRecords ? all : await backend.FilterPathOrdersAsync(filter, all, active.Token);
+        else
+        {
+            var journal = source!;
+            var resolver = paths;
+            var warning = pairWarning;
+            bool carved = IsCarvedSource;
+            var progress = new Progress<int>(count =>
+            {
+                if (ReferenceEquals(request, active) && !active.IsCancellationRequested && displayedFilter == null)
+                    QueryStatus(L.T("경로 확인 중 · {0:N0}건", "Resolving paths · {0:N0} records", count));
+            });
+            pair = await backend.ReusablePathOrdersAsync(filter,
+                row => journal.ResolveListValues(row.Record, row.FileId, row.Name, resolver, warning, carved),
+                resolver?.MftIndexPath, carved, warning != null, active.Token, progress);
+        }
+        active.Token.ThrowIfCancellationRequested();
+        if (filter.IsAllRecords)
+            allPathOrders = pair;
+        pathOrders = (filter, pair.Paths, pair.Sources);
+        return pair;
+    }
+
+    private void ShowPage(GlobalLogPage page, GlobalLogFilter filter, JournalTimeZone requestedUtc, long? restorePosition)
+    {
+        displayedFilter = filter;
+        next = page.Next;
+        var rows = requestedUtc == utc ? page.Items : page.Items.Select(row => row with { TimeZone = utc }).ToList();
+        var restore = restorePosition == null ? null : rows.FirstOrDefault(row => row.Position == restorePosition);
+        restoringSort = restore != null && selected?.Position == restore.Position;
+        try
+        {
+            Records.ItemsSource = rows;
+            if (restore != null)
+                Records.SelectedItem = restore;
+        }
+        finally { restoringSort = false; }
+
+        if (rows.Count == 0)
+        {
+            Empty.Text = L.T("검색 조건에 맞는 기록이 없습니다.", "No records match your search.");
+            PageStatus.Text = "";
+            if (!filter.IsAllRecords)
+                OfferRecovery(filter.Name.Length != 0 ? L.T("파일 이름 검색 지우기", "Clear file name search") : L.T("필터 초기화", "Clear filters"));
+            return;
+        }
+
+        Empty.Text = "";
+        long first = ((long)previous.Count * pageSize) + 1;
+        bool onlyPage = previous.Count == 0 && next == null;
+        PageStatus.Text = onlyPage ? L.T("{0:N0}건", "Records: {0:N0}", rows.Count)
+            : L.T("{0:N0}–{1:N0}번째 기록", "Records {0:N0}–{1:N0}", first, first + rows.Count - 1);
+        if (onlyPage && rows.Count == 1 && (filter.Usn.HasValue || !filter.RecordFields.IsEmpty))
+            Records.SelectedItem = rows[0];
+        if (focusPending && QueryText.IsKeyboardFocusWithin)
+            FocusSelectedRecord();
+        else
+            Records.ScrollIntoView(restore ?? rows[0]);
     }
 
     private void ExportMessage(string text)

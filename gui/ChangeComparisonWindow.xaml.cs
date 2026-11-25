@@ -242,8 +242,8 @@ public partial class ChangeComparisonWindow : Window
     {
         if (AfterHex == null || Panes.ActualWidth <= 0)
             return;
-        double tableWidth = Math.Max(BeforeHex.Body.ByteTableWidth, AfterHex.Body.ByteTableWidth);
-        double paneInsets = BeforePanel.Margin.Left + BeforePanel.Margin.Right + SystemParameters.VerticalScrollBarWidth;
+        double tableWidth = Math.Max(BeforeHex.RequiredByteViewportWidth, AfterHex.RequiredByteViewportWidth);
+        double paneInsets = Math.Max(BeforePanel.Margin.Left + BeforePanel.Margin.Right, AfterPanel.Margin.Left + AfterPanel.Margin.Right);
         bool narrow = Panes.ActualWidth < 2 * Math.Ceiling(tableWidth + paneInsets) + 1;
         SidePicker.Visibility = narrow ? Visibility.Visible : Visibility.Collapsed;
         BeforePanel.Visibility = !narrow || ShowBefore.IsChecked == true ? Visibility.Visible : Visibility.Collapsed;

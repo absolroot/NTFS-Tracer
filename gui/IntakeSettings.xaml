@@ -18,27 +18,7 @@
     <TextBlock VerticalAlignment="Center" Text="{Binding}" Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}"/>
    </StackPanel>
   </DataTemplate>
-  <Style x:Key="SettingsSurface" TargetType="Border">
-   <Setter Property="Background" Value="{DynamicResource Desk.Panel}"/><Setter Property="BorderBrush" Value="{DynamicResource Desk.Rule}"/>
-   <Setter Property="CornerRadius" Value="4"/><Setter Property="BorderThickness" Value="1"/>
-  </Style>
-  <Style x:Key="SectionTitle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
-   <Setter Property="FontSize" Value="17"/><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="VerticalAlignment" Value="Center"/>
-  </Style>
-  <Style x:Key="PathField" TargetType="TextBox" BasedOn="{StaticResource Desk.SearchInput}">
-   <Setter Property="MinHeight" Value="30"/><Setter Property="Padding" Value="8,2"/>
-   <Setter Property="VerticalAlignment" Value="Center"/><Setter Property="ToolTip" Value="{Binding Text,RelativeSource={RelativeSource Self}}"/>
-  </Style>
-  <Style x:Key="StorageRow" TargetType="Border">
-   <Setter Property="BorderBrush" Value="{DynamicResource Desk.Rule}"/>
-   <Setter Property="BorderThickness" Value="0,0,0,1"/>
-   <Setter Property="Padding" Value="12,8"/>
-  </Style>
-  <Style x:Key="StorageBrowse" TargetType="Button">
-   <Setter Property="Background" Value="{DynamicResource Desk.Inset}"/>
-   <Setter Property="BorderBrush" Value="{DynamicResource Desk.Rule}"/>
-   <Setter Property="MinHeight" Value="30"/><Setter Property="VerticalAlignment" Value="Center"/>
-   <Setter Property="Margin" Value="8,0,0,0"/><Setter Property="Padding" Value="12,2"/>
+  <Style x:Key="IntakeBrowse" TargetType="Button" BasedOn="{StaticResource Desk.FormBrowse}">
    <Setter Property="Content" Value="{loc:Ui IntakeBrowse}"/>
   </Style>
   <Style x:Key="StorageReset" TargetType="Button" BasedOn="{StaticResource Desk.IconButton}">
@@ -70,31 +50,6 @@
    </ControlTemplate></Setter.Value></Setter>
    <Style.Triggers><Trigger Property="Content" Value="{x:Null}"><Setter Property="Visibility" Value="Collapsed"/></Trigger></Style.Triggers>
   </Style>
-  <Style x:Key="IntakeButton" TargetType="Button">
-   <Setter Property="Foreground" Value="{DynamicResource Desk.Text}"/>
-   <Setter Property="Background" Value="{DynamicResource Desk.Inset}"/>
-   <Setter Property="BorderBrush" Value="{DynamicResource Desk.Rule}"/>
-   <Setter Property="FocusVisualStyle" Value="{StaticResource Desk.KeyboardOutline}"/>
-   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
-    <Border x:Name="Plate" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="4" Padding="{TemplateBinding Padding}">
-     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
-    </Border>
-    <ControlTemplate.Triggers>
-     <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Plate" Property="BorderBrush" Value="{DynamicResource Desk.Link}"/></Trigger>
-     <Trigger Property="IsPressed" Value="True"><Setter TargetName="Plate" Property="Opacity" Value="0.85"/></Trigger>
-     <Trigger Property="IsEnabled" Value="False">
-      <Setter TargetName="Plate" Property="Background" Value="{DynamicResource Desk.Inset}"/>
-      <Setter TargetName="Plate" Property="BorderBrush" Value="{DynamicResource Desk.Rule}"/>
-      <Setter Property="Foreground" Value="{DynamicResource Desk.Disabled}"/>
-     </Trigger>
-    </ControlTemplate.Triggers>
-   </ControlTemplate></Setter.Value></Setter>
-  </Style>
-  <Style x:Key="IntakePrimaryButton" TargetType="Button" BasedOn="{StaticResource IntakeButton}">
-   <Setter Property="Background" Value="{DynamicResource Desk.Accent}"/>
-   <Setter Property="BorderBrush" Value="{DynamicResource Desk.Accent}"/>
-   <Setter Property="Foreground" Value="{DynamicResource Desk.AccentText}"/>
-  </Style>
   <Style x:Key="ClearSource" TargetType="Button" BasedOn="{StaticResource Desk.IconButton}">
    <Setter Property="Content" Value="&#xE711;"/><Setter Property="FontSize" Value="11"/><Setter Property="Width" Value="25"/><Setter Property="Height" Value="24"/>
    <Setter Property="Margin" Value="0,0,3,0"/><Setter Property="HorizontalAlignment" Value="Right"/>
@@ -104,28 +59,37 @@
  <Grid Margin="24,0" MaxWidth="1000">
   <Grid.RowDefinitions><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
   <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Focusable="False">
-   <StackPanel Margin="1,20,1,16" KeyboardNavigation.TabNavigation="Local">
-    <TextBlock Text="{loc:Ui IntakeSources}" Style="{StaticResource SectionTitle}" Margin="0,0,0,8"/>
-    <Border Style="{StaticResource SettingsSurface}">
+   <Border Style="{StaticResource Desk.SettingsScrollContent}">
+   <StackPanel Margin="1,20,1,16" KeyboardNavigation.TabNavigation="Local" Grid.IsSharedSizeScope="True">
+    <TextBlock Text="{loc:Ui IntakeSources}" Style="{StaticResource Desk.SettingsHeading}"/>
+    <Border Style="{StaticResource Desk.SettingsSurface}">
      <StackPanel>
-      <Border Padding="12,8" BorderBrush="{DynamicResource Desk.Rule}">
+      <Border Padding="{StaticResource Desk.FormRowPadding}" BorderBrush="{DynamicResource Desk.Rule}">
        <Border.Style><Style TargetType="Border"><Setter Property="BorderThickness" Value="0,0,0,1"/>
         <Style.Triggers><DataTrigger Binding="{Binding Visibility,ElementName=EmptySources}" Value="Visible"><Setter Property="BorderThickness" Value="0"/></DataTrigger></Style.Triggers>
        </Style></Border.Style>
        <StackPanel>
         <WrapPanel>
-        <Button x:Name="ChooseSourcesButton" Click="PickSources" Padding="12,3" MinHeight="30" Tag="&#xE8A5;" Margin="0,0,6,0" ContentTemplate="{StaticResource PickerCaption}"
+        <Button x:Name="ChooseSourcesButton" Style="{StaticResource Desk.FormButton}" Click="PickSources" Tag="&#xE8A5;" Margin="0,0,6,0" ContentTemplate="{StaticResource PickerCaption}"
           Content="{loc:Ui SelectEvidenceFiles}" AutomationProperties.Name="{loc:Ui SelectEvidenceFiles}" ToolTip="{loc:Ui OpenSourcesShortcut}"/>
-        <Button x:Name="ChooseInputFolder" Style="{StaticResource IntakeButton}" Click="PickInputFolder" Padding="10,3" MinHeight="30" Margin="0,0,12,0" Tag="&#xED25;" ContentTemplate="{StaticResource PickerCaption}"
+        <Button x:Name="ChooseInputFolder" Style="{StaticResource Desk.FormButton}" Click="PickInputFolder" Margin="0,0,12,0" Tag="&#xED25;" ContentTemplate="{StaticResource PickerCaption}"
           Content="{loc:Ui IntakeFromFolder}" AutomationProperties.Name="{loc:Ui IntakeFromFolder}"/>
         </WrapPanel>
         <TextBlock x:Name="EmptySources" Margin="0,10,0,2" FontSize="12" Foreground="{DynamicResource Desk.Muted}" TextWrapping="Wrap" Text="{loc:Ui IntakeDropFiles}"/>
        </StackPanel>
       </Border>
       <Grid x:Name="SourceForm" Margin="12,6" KeyboardNavigation.TabNavigation="Local">
-       <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+       <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="PathLabel"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
        <StackPanel x:Name="ResolveSources" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="1" Grid.Row="0" Grid.RowSpan="6" Grid.ColumnSpan="4" Visibility="Collapsed">
+        <TextBlock x:Name="AssignmentNotice" Style="{StaticResource StorageNotice}" Margin="0,0,0,0"/>
+        <WrapPanel Margin="0,6,0,6" HorizontalAlignment="Right">
+         <WrapPanel.Style><Style TargetType="WrapPanel">
+          <Style.Triggers><Trigger Property="IsEnabled" Value="False"><Setter Property="Visibility" Value="Collapsed"/></Trigger></Style.Triggers>
+         </Style></WrapPanel.Style>
+         <Button Style="{StaticResource Desk.FormButton}" Click="CancelAssignments" Content="{loc:Ui IntakeCancel}"/>
+         <Button x:Name="ConfirmAssignments" Click="ApplyAssignments" Content="{loc:Ui UseSelectedFiles}" Style="{StaticResource Desk.FormPrimary}" Margin="8,0,0,0"/>
+        </WrapPanel>
         <ItemsControl x:Name="SourceAssignments" Binding.SourceUpdated="AssignmentChanged"><ItemsControl.ItemTemplate><DataTemplate>
          <DockPanel Margin="0,2"><ComboBox DockPanel.Dock="Right" Width="158" ItemsSource="{Binding Choices}" DisplayMemberPath="Label" SelectedValuePath="Role"
            SelectedValue="{Binding Role,Mode=TwoWay,NotifyOnSourceUpdated=True}" AutomationProperties.Name="{Binding FileName}" AutomationProperties.HelpText="{Binding Path}"/>
@@ -139,27 +103,27 @@
         </DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
        </StackPanel>
        <Label x:Name="JournalLabel" ContentTemplate="{StaticResource FileCaption}" Tag="{Binding Text,ElementName=JournalPath}" Height="36" Grid.Row="0" Target="{Binding ElementName=JournalPath}" Content="USN Journal ($J)"/>
-       <Grid Grid.Row="0" Grid.Column="1" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="2"><loc:HintTextBox Hint="{loc:Ui JournalPurpose}" x:Name="JournalPath" Padding="8,2,30,2" AutomationProperties.LabeledBy="{Binding ElementName=JournalLabel}" Style="{StaticResource PathField}" TextChanged="PathEdited"/>
+       <Grid Grid.Row="0" Grid.Column="1" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="2"><loc:HintTextBox Hint="{loc:Ui JournalPurpose}" x:Name="JournalPath" Padding="8,2,30,2" AutomationProperties.LabeledBy="{Binding ElementName=JournalLabel}" Style="{StaticResource Desk.FormPath}" TextChanged="PathEdited"/>
         <Button Tag="{Binding ElementName=JournalPath}" Style="{StaticResource ClearSource}" Click="ClearSource" AutomationProperties.Name="{loc:Ui ClearIntakeJournal}" ToolTip="{loc:Ui ClearIntakeJournal}"/></Grid>
        <TextBlock Grid.Row="0" Grid.Column="2" Style="{StaticResource CompanionNote}" Text="{Binding (AutomationProperties.HelpText), ElementName=JournalPath}"/>
-       <Button KeyboardNavigation.TabIndex="3" Grid.Row="0" Grid.Column="3" Content="{loc:Ui IntakeBrowse}" Margin="8,0,0,0" VerticalAlignment="Center" MinHeight="30" Padding="12,2" Tag="journal" Click="BrowseSource" AutomationProperties.Name="{loc:Ui IntakePickJournal}"/>
+       <Button KeyboardNavigation.TabIndex="3" Grid.Row="0" Grid.Column="3" Style="{StaticResource IntakeBrowse}" Tag="journal" Click="BrowseSource" AutomationProperties.Name="{loc:Ui IntakePickJournal}"/>
        <ContentControl x:Name="JournalHash" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource VerifiedHashLine}" Tag="$J SHA-256"/>
        <Label x:Name="MftLabel" ContentTemplate="{StaticResource FileCaption}" Tag="{Binding Text,ElementName=MftPath}" Height="36" Grid.Row="2" Target="{Binding ElementName=MftPath}" Content="{loc:Ui IntakeMft}"/>
-       <Grid Grid.Row="2" Grid.Column="1" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="4"><loc:HintTextBox Hint="{loc:Ui MftPurpose}" x:Name="MftPath" Padding="8,2,30,2" AutomationProperties.LabeledBy="{Binding ElementName=MftLabel}" Style="{StaticResource PathField}" TextChanged="PathEdited"/>
+       <Grid Grid.Row="2" Grid.Column="1" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="4"><loc:HintTextBox Hint="{loc:Ui MftPurpose}" x:Name="MftPath" Padding="8,2,30,2" AutomationProperties.LabeledBy="{Binding ElementName=MftLabel}" Style="{StaticResource Desk.FormPath}" TextChanged="PathEdited"/>
         <Button Tag="{Binding ElementName=MftPath}" Style="{StaticResource ClearSource}" Click="ClearSource" AutomationProperties.Name="{loc:Ui ClearIntakeMft}" ToolTip="{loc:Ui ClearIntakeMft}"/></Grid>
        <TextBlock Grid.Row="2" Grid.Column="2" Style="{StaticResource CompanionNote}" Text="{Binding (AutomationProperties.HelpText), ElementName=MftPath}"/>
-       <Button KeyboardNavigation.TabIndex="5" Grid.Row="2" Grid.Column="3" Content="{loc:Ui IntakeBrowse}" Margin="8,0,0,0" VerticalAlignment="Center" MinHeight="30" Padding="12,2" Tag="mft" Click="BrowseSource" AutomationProperties.Name="{loc:Ui IntakePickMft}"/>
+       <Button KeyboardNavigation.TabIndex="5" Grid.Row="2" Grid.Column="3" Style="{StaticResource IntakeBrowse}" Tag="mft" Click="BrowseSource" AutomationProperties.Name="{loc:Ui IntakePickMft}"/>
        <ContentControl x:Name="MftHash" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource VerifiedHashLine}" Tag="$MFT SHA-256"/>
        <Label x:Name="LogLabel" ContentTemplate="{StaticResource FileCaption}" Tag="{Binding Text,ElementName=LogPath}" Height="36" Grid.Row="4" Target="{Binding ElementName=LogPath}" Content="{loc:Ui IntakeLog}"/>
-       <Grid Grid.Row="4" Grid.Column="1" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="6"><loc:HintTextBox Hint="{loc:Ui LogPurpose}" x:Name="LogPath" Padding="8,2,30,2" AutomationProperties.LabeledBy="{Binding ElementName=LogLabel}" Style="{StaticResource PathField}" TextChanged="PathEdited"/>
+       <Grid Grid.Row="4" Grid.Column="1" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="6"><loc:HintTextBox Hint="{loc:Ui LogPurpose}" x:Name="LogPath" Padding="8,2,30,2" AutomationProperties.LabeledBy="{Binding ElementName=LogLabel}" Style="{StaticResource Desk.FormPath}" TextChanged="PathEdited"/>
         <Button Tag="{Binding ElementName=LogPath}" Style="{StaticResource ClearSource}" Click="ClearSource" AutomationProperties.Name="{loc:Ui ClearIntakeLog}" ToolTip="{loc:Ui ClearIntakeLog}"/></Grid>
        <TextBlock Grid.Row="4" Grid.Column="2" Style="{StaticResource CompanionNote}" Text="{Binding (AutomationProperties.HelpText), ElementName=LogPath}"/>
-       <Button KeyboardNavigation.TabIndex="7" Grid.Row="4" Grid.Column="3" Content="{loc:Ui IntakeBrowse}" Margin="8,0,0,0" VerticalAlignment="Center" MinHeight="30" Padding="12,2" Tag="log" Click="BrowseSource" AutomationProperties.Name="{loc:Ui IntakePickLog}"/>
+       <Button KeyboardNavigation.TabIndex="7" Grid.Row="4" Grid.Column="3" Style="{StaticResource IntakeBrowse}" Tag="log" Click="BrowseSource" AutomationProperties.Name="{loc:Ui IntakePickLog}"/>
        <ContentControl x:Name="LogHash" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource VerifiedHashLine}" Tag="$LogFile SHA-256"/>
        <Label x:Name="ImageFileRowLabel" ContentTemplate="{StaticResource FileCaption}" Tag="{Binding Text,ElementName=ImageFilePath}" Visibility="Collapsed" Grid.Row="0" Target="{Binding ElementName=ImageFilePath}" Content="{loc:Ui ImageFile}"/>
        <DockPanel x:Name="ImageFileRow" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="2" Visibility="Collapsed" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" MinHeight="36">
-        <Button DockPanel.Dock="Right" Content="{loc:Ui ImageSwitchFiles}" Click="UseFiles" Padding="8,2" VerticalAlignment="Center" Margin="8,0,0,0"/>
-        <TextBox x:Name="ImageFilePath" IsReadOnly="True" AutomationProperties.Name="{loc:Ui ImageFile}" Style="{StaticResource PathField}"/>
+        <Button DockPanel.Dock="Right" Content="{loc:Ui ImageSwitchFiles}" Click="UseFiles" Style="{StaticResource Desk.FormBrowse}"/>
+        <TextBox x:Name="ImageFilePath" IsReadOnly="True" AutomationProperties.Name="{loc:Ui ImageFile}" Style="{StaticResource Desk.FormPath}"/>
        </DockPanel>
        <Label x:Name="ImageVolumeRowLabel" Visibility="Collapsed" Grid.Row="2" Padding="0,0,10,0" Target="{Binding ElementName=ImageVolumes}" Content="{loc:Ui ImageVolume}"/>
        <DockPanel x:Name="ImageVolumeRow" KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="4" Visibility="Collapsed" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" MinHeight="36">
@@ -198,14 +162,14 @@
       </Expander>
      </StackPanel>
     </Border>
-    <TextBlock Text="{loc:Ui AnalysisOptions}" Style="{StaticResource SectionTitle}" Margin="0,22,0,8"/>
-    <Border x:Name="AnalysisOptionsPanel" Style="{StaticResource SettingsSurface}">
-     <StackPanel Grid.IsSharedSizeScope="True">
-      <Border BorderThickness="0,0,0,1" BorderBrush="{DynamicResource Desk.Rule}" Padding="12,8">
-       <Grid MinHeight="30">
+    <TextBlock Text="{loc:Ui AnalysisOptions}" Style="{StaticResource Desk.SettingsHeading}" Margin="0,22,0,8"/>
+    <Border x:Name="AnalysisOptionsPanel" Style="{StaticResource Desk.SettingsSurface}">
+     <StackPanel>
+      <Border Style="{StaticResource Desk.SettingsRow}">
+       <Grid MinHeight="{StaticResource Desk.FormControlHeight}">
         <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
         <Label x:Name="IndexingLabel" Target="{Binding ElementName=IndexingChoice}" Content="{loc:Ui IndexingModeLabel}"/>
-        <ComboBox x:Name="IndexingChoice" Grid.Column="1" HorizontalAlignment="Right" MinHeight="30" MinWidth="180"
+        <ComboBox x:Name="IndexingChoice" Grid.Column="1" HorizontalAlignment="Right" MinHeight="{StaticResource Desk.FormControlHeight}" MinWidth="180"
           SelectedValuePath="Tag" AutomationProperties.LabeledBy="{Binding ElementName=IndexingLabel}"
           ToolTip="{Binding SelectedItem.ToolTip,RelativeSource={RelativeSource Self}}" AutomationProperties.HelpText="{Binding SelectedItem.ToolTip,RelativeSource={RelativeSource Self}}">
          <ComboBoxItem x:Name="AutoIndexing"/>
@@ -214,61 +178,61 @@
         </ComboBox>
        </Grid>
       </Border>
-      <Border Style="{StaticResource StorageRow}">
-       <Grid MinHeight="30">
-        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="StorageLabel"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <Border Style="{StaticResource Desk.SettingsRow}">
+       <Grid MinHeight="{StaticResource Desk.FormControlHeight}">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="PathLabel"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
         <Label x:Name="IndexLabel" Content="{loc:Ui IndexLocation}" Target="{Binding ElementName=IndexPath}"/>
-        <TextBox x:Name="IndexPath" Grid.Column="1" Style="{StaticResource PathField}" AutomationProperties.LabeledBy="{Binding ElementName=IndexLabel}"
+        <TextBox x:Name="IndexPath" Grid.Column="1" Style="{StaticResource Desk.FormPath}" AutomationProperties.LabeledBy="{Binding ElementName=IndexLabel}"
           LostKeyboardFocus="FinishStorageEdit" KeyDown="StorageKeyDown"/>
         <StackPanel Grid.Column="2" Orientation="Horizontal">
-         <Button Tag="{Binding ElementName=IndexPath}" Style="{StaticResource StorageBrowse}" Click="PickStorageFolder" AutomationProperties.Name="{loc:Ui IndexChooseFolder}"/>
          <Button x:Name="ResetIndexFolder" Tag="{Binding ElementName=IndexPath}" Style="{StaticResource StorageReset}"
            ToolTip="{loc:Ui IndexResetFolder}" AutomationProperties.Name="{loc:Ui IndexResetFolder}" Click="ResetStorageFolder"/>
+         <Button Tag="{Binding ElementName=IndexPath}" Style="{StaticResource IntakeBrowse}" Click="PickStorageFolder" AutomationProperties.Name="{loc:Ui IndexChooseFolder}"/>
         </StackPanel>
         <TextBlock Grid.Row="1" Grid.Column="1" x:Name="IndexNotice" Style="{StaticResource StorageNotice}"/>
        </Grid>
       </Border>
-      <Border x:Name="ExtractionSettings" Style="{StaticResource StorageRow}" Visibility="Collapsed">
-       <Grid MinHeight="30">
-        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="StorageLabel"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <Border x:Name="ExtractionSettings" Style="{StaticResource Desk.SettingsRow}" Visibility="Collapsed">
+       <Grid MinHeight="{StaticResource Desk.FormControlHeight}">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="PathLabel"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
         <Label x:Name="ExtractionLabel" Content="{loc:Ui ExtractionFolder}" Target="{Binding ElementName=ExtractionPath}"/>
-        <TextBox x:Name="ExtractionPath" Grid.Column="1" Style="{StaticResource PathField}" AutomationProperties.LabeledBy="{Binding ElementName=ExtractionLabel}"
+        <TextBox x:Name="ExtractionPath" Grid.Column="1" Style="{StaticResource Desk.FormPath}" AutomationProperties.LabeledBy="{Binding ElementName=ExtractionLabel}"
           LostKeyboardFocus="FinishStorageEdit" KeyDown="StorageKeyDown"/>
         <StackPanel Grid.Column="2" Orientation="Horizontal">
-         <Button Tag="{Binding ElementName=ExtractionPath}" Style="{StaticResource StorageBrowse}" Click="PickStorageFolder" AutomationProperties.Name="{loc:Ui ChooseExtractionFolder}"/>
          <Button x:Name="ResetExtractionFolder" Tag="{Binding ElementName=ExtractionPath}" Style="{StaticResource StorageReset}"
            ToolTip="{loc:Ui IndexResetFolder}" AutomationProperties.Name="{loc:Ui IndexResetFolder}" Click="ResetStorageFolder"/>
+         <Button Tag="{Binding ElementName=ExtractionPath}" Style="{StaticResource IntakeBrowse}" Click="PickStorageFolder" AutomationProperties.Name="{loc:Ui ChooseExtractionFolder}"/>
         </StackPanel>
         <TextBlock Grid.Row="1" Grid.Column="1" x:Name="ExtractionNotice" Style="{StaticResource StorageNotice}"/>
        </Grid>
       </Border>
-      <Border Style="{StaticResource StorageRow}" BorderThickness="0">
-       <Grid MinHeight="30">
-        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="StorageLabel"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+      <Border Style="{StaticResource Desk.SettingsRow}" BorderThickness="0">
+       <Grid MinHeight="{StaticResource Desk.FormControlHeight}">
+        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" SharedSizeGroup="PathLabel"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
         <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
         <Label x:Name="OutputLabel" Content="{loc:Ui CsvSaveLocation}" Target="{Binding ElementName=OutputPath}"/>
-        <TextBox x:Name="OutputPath" Grid.Column="1" Style="{StaticResource PathField}" AutomationProperties.LabeledBy="{Binding ElementName=OutputLabel}"
+        <TextBox x:Name="OutputPath" Grid.Column="1" Style="{StaticResource Desk.FormPath}" AutomationProperties.LabeledBy="{Binding ElementName=OutputLabel}"
           LostKeyboardFocus="FinishStorageEdit" KeyDown="StorageKeyDown"/>
         <StackPanel Grid.Column="2" Orientation="Horizontal">
-         <Button Tag="{Binding ElementName=OutputPath}" Style="{StaticResource StorageBrowse}" Click="PickStorageFolder" AutomationProperties.Name="{loc:Ui IntakeChooseOutput}"/>
          <Button x:Name="ResetOutputFolder" Tag="{Binding ElementName=OutputPath}" Style="{StaticResource StorageReset}"
            ToolTip="{loc:Ui IntakeReset}" AutomationProperties.Name="{loc:Ui IntakeReset}" Click="ResetStorageFolder"/>
+         <Button Tag="{Binding ElementName=OutputPath}" Style="{StaticResource IntakeBrowse}" Click="PickStorageFolder" AutomationProperties.Name="{loc:Ui IntakeChooseOutput}"/>
         </StackPanel>
         <TextBlock Grid.Row="1" Grid.Column="1" x:Name="OutputNotice" Style="{StaticResource StorageNotice}"/>
        </Grid>
       </Border>
      </StackPanel>
     </Border>
-    <TextBlock Text="{loc:Ui DisplayOptions}" Style="{StaticResource SectionTitle}" Margin="0,20,0,8"/>
-    <Border Style="{StaticResource SettingsSurface}">
-     <StackPanel Grid.IsSharedSizeScope="True">
-      <Border Style="{StaticResource StorageRow}">
-       <Grid MinHeight="30">
+    <TextBlock Text="{loc:Ui DisplayOptions}" Style="{StaticResource Desk.SettingsHeading}" Margin="0,20,0,8"/>
+    <Border Style="{StaticResource Desk.SettingsSurface}">
+     <StackPanel>
+      <Border Style="{StaticResource Desk.SettingsRow}">
+       <Grid MinHeight="{StaticResource Desk.FormControlHeight}">
         <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto" SharedSizeGroup="DisplayChoice"/></Grid.ColumnDefinitions>
         <Label x:Name="AppearanceLabel" Target="{Binding ElementName=AppearanceChoice}" Content="{loc:Ui AppearanceTheme}"/>
-        <ComboBox Grid.Column="1" x:Name="AppearanceChoice" MinWidth="180" MinHeight="30" SelectedValuePath="Tag"
+        <ComboBox Grid.Column="1" x:Name="AppearanceChoice" MinWidth="180" MinHeight="{StaticResource Desk.FormControlHeight}" SelectedValuePath="Tag"
           AutomationProperties.LabeledBy="{Binding ElementName=AppearanceLabel}">
          <ComboBoxItem x:Name="WindowsAppearance" Content="{loc:Ui WindowsSetting}"/>
          <ComboBoxItem x:Name="LightAppearance" Content="{loc:Ui LightTheme}"/>
@@ -276,11 +240,11 @@
         </ComboBox>
        </Grid>
       </Border>
-      <Border Style="{StaticResource StorageRow}" BorderThickness="0">
-       <Grid MinHeight="30">
+      <Border Style="{StaticResource Desk.SettingsRow}" BorderThickness="0">
+       <Grid MinHeight="{StaticResource Desk.FormControlHeight}">
         <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto" SharedSizeGroup="DisplayChoice"/></Grid.ColumnDefinitions>
         <Label x:Name="DisplayTimeZoneLabel" Target="{Binding ElementName=ZonePreference}" Content="{loc:Ui TimeZone}"/>
-        <ComboBox Grid.Column="1" x:Name="ZonePreference" MinHeight="30" MinWidth="180" AutomationProperties.LabeledBy="{Binding ElementName=DisplayTimeZoneLabel}"
+        <ComboBox Grid.Column="1" x:Name="ZonePreference" MinHeight="{StaticResource Desk.FormControlHeight}" MinWidth="180" AutomationProperties.LabeledBy="{Binding ElementName=DisplayTimeZoneLabel}"
          ToolTip="{Binding SelectedItem.WindowsZoneName,RelativeSource={RelativeSource Self}}"
          ItemsSource="{x:Static loc:DisplayTimeZone.Choices}" DisplayMemberPath="Caption" SelectedValuePath="Code" SelectedValue="{Binding Code,Source={x:Static loc:DisplayTimeZone.Current},Mode=TwoWay}"/>
        </Grid>
@@ -288,8 +252,9 @@
      </StackPanel>
     </Border>
    </StackPanel>
+   </Border>
   </ScrollViewer>
-  <Border Grid.Row="1" BorderThickness="0,1,0,0" BorderBrush="{DynamicResource Desk.Rule}" Padding="1,12,1,16">
+  <Border Grid.Row="1" Padding="1,12,1,16">
    <Grid><Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
     <StackPanel VerticalAlignment="Center" Margin="0,0,12,0">
      <WrapPanel Visibility="{Binding Visibility, ElementName=CloseSettingsButton}">
@@ -301,16 +266,12 @@
      <TextBlock x:Name="StartHint" TextWrapping="Wrap" Foreground="{DynamicResource Desk.Muted}"/>
     </StackPanel>
     <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-     <Button x:Name="CloseSettingsButton" Visibility="Collapsed" Margin="0,0,8,0" MinHeight="32" Padding="12,3"
+     <Button x:Name="CloseSettingsButton" Style="{StaticResource Desk.FormButton}" Visibility="Collapsed" Margin="0,0,8,0" MinHeight="32" Padding="12,3"
        Content="{loc:Ui CloseSettings}" Click="DismissSettings"/>
      <Grid>
-      <Button x:Name="StartAnalysis" Style="{StaticResource IntakePrimaryButton}" HorizontalAlignment="Right" MinWidth="100" MinHeight="32" Padding="14,3" IsEnabled="False" Content="{loc:Ui IntakeStart}" Click="Start">
+      <Button x:Name="StartAnalysis" Style="{StaticResource Desk.FormPrimary}" HorizontalAlignment="Right" MinWidth="100" MinHeight="32" Padding="14,3" IsEnabled="False" Content="{loc:Ui IntakeStart}" Click="Start">
      <Button.ContentTemplate><DataTemplate><TextBlock Text="{Binding}" Foreground="{Binding Foreground,RelativeSource={RelativeSource AncestorType=Button}}"/></DataTemplate></Button.ContentTemplate>
     </Button>
-      <StackPanel x:Name="AssignmentActions" Visibility="Collapsed" Orientation="Horizontal">
-     <Button Click="CancelAssignments" Content="{loc:Ui IntakeCancel}" Padding="12,3" MinHeight="32"/>
-     <Button x:Name="ConfirmAssignments" Click="ApplyAssignments" Content="{loc:Ui UseSelectedFiles}" Style="{StaticResource IntakePrimaryButton}" Margin="8,0,0,0" Padding="14,3" MinHeight="32"/>
-      </StackPanel>
      </Grid>
     </StackPanel>
    </Grid>
