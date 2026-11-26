@@ -61,6 +61,7 @@ public partial class TransactionView : UserControl
     public TransactionView()
     {
         InitializeComponent();
+        Layout.Connect(Inspector, Splitter, 1, 500, FitDetail);
         Identifiers.SearchRequested += SearchRecordId;
         PropertyChangedEventManager.AddHandler(DisplayTimeZone.Current, (_, _) =>
         {
@@ -72,7 +73,7 @@ public partial class TransactionView : UserControl
         UpdatePathColumn();
         Splitter.DragCompleted += (_, e) =>
         {
-            if (!e.Canceled && DetailHeight.Height.IsAbsolute)
+            if (!Layout.IsRight && !e.Canceled && DetailHeight.Height.IsAbsolute)
                 preferredDetailHeight = DetailHeight.Height.Value;
         };
         Layout.SizeChanged += (_, e) => { if (e.HeightChanged && Inspector.Visibility == Visibility.Visible) FitDetail(); };
@@ -802,9 +803,11 @@ public partial class TransactionView : UserControl
     }
     private void FitDetail()
     {
+        if (Layout.IsRight || Inspector.Visibility != Visibility.Visible)
+            return;
         double available = Math.Max(90, Layout.ActualHeight - Layout.RowDefinitions[0].ActualHeight - Layout.RowDefinitions[1].MinHeight - Splitter.Height - Layout.RowDefinitions[4].ActualHeight);
         DetailHeight.MaxHeight = available;
-        DetailHeight.MinHeight = 90;
+        DetailHeight.MinHeight = Math.Min(205, available);
         DetailHeight.Height = new(Math.Min(preferredDetailHeight ?? Math.Clamp(available * 0.55, 300, 520), available));
     }
     private void OpenDetail()

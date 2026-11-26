@@ -13,7 +13,7 @@
    </Style>
   </ResourceDictionary>
  </UserControl.Resources>
- <Grid x:Name="Layout">
+ <loc:EvidenceDock x:Name="Layout">
   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*" MinHeight="62"/><RowDefinition Height="Auto"/><RowDefinition x:Name="DetailHeight" Height="0"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
   <Border x:Name="TransactionCommands" Background="{DynamicResource Desk.Canvas}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1" Style="{DynamicResource Desk.LogToolbar}">
    <StackPanel>
@@ -27,7 +27,8 @@
    <local:RecordSearchFields x:Name="RecordFields" Changed="RecordFieldsChanged"/>
    </StackPanel>
   </Border>
-  <Grid x:Name="Results" Grid.Row="1">
+  <Border x:Name="ResultFrame" Grid.Row="1" Style="{StaticResource Desk.WorkspaceTablePane}">
+   <Grid x:Name="Results">
    <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
   <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Rows" Grid.Row="0" Style="{StaticResource Desk.StripedLogTable}" IsReadOnly="True" CanUserAddRows="False" CanUserSortColumns="True" Sorting="SortRows"
             SelectionUnit="FullRow" SelectionMode="Single" AutoGenerateColumns="False" SelectionChanged="Selected" AutomationProperties.Name="{loc:Ui NtfsTransactionRecords}">
@@ -60,6 +61,7 @@
    <Border/>
   </DockPanel></Border>
   </Grid>
+  </Border>
   <loc:PaneSplitter x:Name="Splitter" Grid.Row="2" Height="4" Visibility="Collapsed" Style="{DynamicResource Desk.PaneSplitter}" HorizontalAlignment="Stretch" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
   <Border Grid.Row="3" x:Name="Inspector" Style="{StaticResource Desk.WorkspacePane}" Visibility="Collapsed" Padding="10,3"><DockPanel>
    <DockPanel DockPanel.Dock="Top" Margin="2,0,0,1">
@@ -193,5 +195,5 @@
     <Button x:Name="StopLog" DockPanel.Dock="Right" Click="Stop" Visibility="Collapsed" Style="{DynamicResource Desk.IconButton}" Content="&#xE71A;" ToolTip="{loc:Ui CancelOpeningTransactionLog}" AutomationProperties.Name="{loc:Ui CancelOpeningTransactionLog}"/>
     <TextBlock x:Name="State" VerticalAlignment="Center" FontSize="12" Foreground="{DynamicResource Desk.Muted}" TextTrimming="CharacterEllipsis" AutomationProperties.LiveSetting="Polite" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/></DockPanel>
   </Border>
- </Grid>
+ </loc:EvidenceDock>
 </UserControl>

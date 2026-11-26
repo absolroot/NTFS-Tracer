@@ -4,6 +4,15 @@
  Background="{DynamicResource Desk.Canvas}" AllowDrop="True" PreviewDragEnter="SourceDragOver" PreviewDragOver="SourceDragOver" PreviewDragLeave="SourceDragLeave" PreviewDrop="DropFile" PreviewKeyDown="Shortcuts">
  <Window.Resources>
   <BooleanToVisibilityConverter x:Key="BoolVis"/>
+  <Style x:Key="HistoryWorkspacePane" TargetType="Border" BasedOn="{StaticResource Desk.WorkspacePane}">
+   <Style.Triggers>
+    <Trigger Property="Grid.Row" Value="0">
+     <Setter Property="Background" Value="{DynamicResource Desk.Canvas}"/>
+     <Setter Property="BorderThickness" Value="1,0,1,1"/>
+     <Setter Property="CornerRadius" Value="0,0,7,7"/>
+    </Trigger>
+   </Style.Triggers>
+  </Style>
   <Style x:Key="Sub" TargetType="TextBlock"><Setter Property="Foreground" Value="{DynamicResource Desk.Muted}"/><Setter Property="FontSize" Value="12"/></Style>
   <Style x:Key="RecordCountLink" TargetType="Button" BasedOn="{StaticResource Desk.EvidenceLink}">
    <Setter Property="Foreground" Value="{DynamicResource Desk.Muted}"/>
@@ -62,6 +71,10 @@
      <MenuItem x:Name="ShowLeadsItem" Header="{loc:Ui InvestigationTab}" InputGestureText="Ctrl+4" IsEnabled="{Binding IsEnabled, ElementName=LeadsTab}" IsChecked="{Binding IsSelected, ElementName=LeadsTab, Mode=OneWay}" Click="SelectWorkspace"/>
      <MenuItem x:Name="ShowSettingsItem" Header="{loc:Ui IntakeSettingsTab}" InputGestureText="Ctrl+," IsChecked="{Binding IsSelected, ElementName=SettingsTab, Mode=OneWay}" Click="SelectWorkspace"/>
      <Separator/>
+     <MenuItem Header="{loc:Ui DetailsPosition}">
+      <MenuItem x:Name="DetailsBottom" Header="{loc:Ui DetailsPositionBottom}" IsCheckable="True" Click="ChooseDetailsPosition"/>
+      <MenuItem x:Name="DetailsRight" Header="{loc:Ui DetailsPositionRight}" IsCheckable="True" Click="ChooseDetailsPosition"/>
+     </MenuItem>
      <MenuItem x:Name="MenuFullPaths" Header="{loc:Ui FullPaths}" ToolTip="{loc:Ui FullPathsTooltip}" IsCheckable="True" IsChecked="{Binding Enabled,Source={x:Static local:JournalPathPreference.Current},Mode=TwoWay}"/>
      <MenuItem x:Name="DarkTheme" Header="{loc:Ui DarkTheme}" IsCheckable="True" Click="ChangeTheme"/>
      <MenuItem x:Name="LanguageMenu" SubmenuOpened="ShowLanguageChoices" Header="{loc:Ui DisplayLanguage}">
@@ -86,7 +99,7 @@
   </Border>
   <Grid>
   <TabControl x:Name="Views" SelectionChanged="ChangeMode" SizeChanged="FitWorkspaceTabs" BorderThickness="0" Background="{DynamicResource Desk.Canvas}">
-   <TabControl.Template><ControlTemplate TargetType="TabControl"><DockPanel>
+   <TabControl.Template><ControlTemplate TargetType="TabControl"><DockPanel Background="{TemplateBinding Background}">
     <Grid DockPanel.Dock="Top" Grid.IsSharedSizeScope="True"><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto" SharedSizeGroup="PathPreferenceWidth"/><ColumnDefinition Width="Auto" SharedSizeGroup="SettingsWidth"/></Grid.ColumnDefinitions>
      <Border Grid.ColumnSpan="3" Background="{DynamicResource Desk.TabRail}" BorderBrush="{DynamicResource Desk.TabRule}"
              BorderThickness="0,0,0,1" CornerRadius="5,5,0,0" SnapsToDevicePixels="True"/>
@@ -101,10 +114,10 @@
     <local:GlobalLogView x:Name="GlobalView"/>
    </TabItem>
    <TabItem x:Name="HistoryTab" Grid.Column="1" Header="{loc:Ui FileHistory}" Style="{StaticResource Desk.WorkspaceTab}" ToolTip="{loc:Ui FileHistoryCtrl2}">
-   <Grid x:Name="Workspace">
+   <loc:EvidenceDock x:Name="Workspace">
    <Grid.RowDefinitions><RowDefinition Height="*" MinHeight="185"/><RowDefinition Height="Auto"/><RowDefinition x:Name="EvidenceRow" Height="0"/></Grid.RowDefinitions>
    <Grid.ColumnDefinitions><ColumnDefinition Width="0.95*" MinWidth="185" MaxWidth="640"/><ColumnDefinition Width="5"/><ColumnDefinition Width="2.55*" MinWidth="335"/></Grid.ColumnDefinitions>
-   <Border Grid.Column="0" Grid.RowSpan="3" Style="{StaticResource Desk.WorkspacePane}" Padding="8,8,7,5">
+   <Border Grid.Column="0" Grid.RowSpan="3" Style="{StaticResource HistoryWorkspacePane}" Padding="8,8,7,5">
     <DockPanel><StackPanel DockPanel.Dock="Top" Margin="3,0,3,6">
      <Grid><loc:HintTextBox x:Name="Search" Hint="{loc:Ui SearchFileNames}" Style="{DynamicResource Desk.LogSearchInput}" TextChanged="SearchChanged" PreviewKeyDown="FileSearchKeyDown" AutomationProperties.Name="{loc:Ui SearchFileNames}" ToolTip="{loc:Ui SearchCurrentAndPreviousNamesCtrlF}"/>
       <Button FontSize="12" ToolTip="{loc:Ui ClearFileSearch}" AutomationProperties.Name="{loc:Ui ClearFileNameSearch}" Click="ClearFileSearch">
@@ -117,7 +130,7 @@
      <TextBlock x:Name="FileSearchEmpty" Text="{loc:Ui NoMatchingFiles}" Visibility="Collapsed" VerticalAlignment="Top" Margin="8,6" Style="{StaticResource Sub}" AutomationProperties.LiveSetting="Polite"/></Grid>
     </DockPanel></Border>
    <loc:PaneSplitter Grid.Column="1" Grid.RowSpan="3" Width="5" HorizontalAlignment="Stretch" Style="{DynamicResource Desk.PaneSplitter}" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeFileList}"/>
-   <Border Grid.Column="2" Background="{DynamicResource Desk.Canvas}" Style="{StaticResource Desk.WorkspacePane}" Visibility="{Binding ElementName=FileList,Path=HasItems,Converter={StaticResource BoolVis}}">
+   <Border Grid.Column="2" Style="{StaticResource HistoryWorkspacePane}" Visibility="{Binding ElementName=FileList,Path=HasItems,Converter={StaticResource BoolVis}}">
     <DockPanel>
     <Border DockPanel.Dock="Top" Padding="12,7,10,6" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1">
      <StackPanel><DockPanel><Menu DockPanel.Dock="Right" IsMainMenu="False" Background="Transparent" Padding="0" VerticalAlignment="Center">
@@ -209,7 +222,7 @@
    </DockPanel>
    </Border>
    <loc:PaneSplitter Grid.Column="2" Grid.Row="1" x:Name="ProofSplitter" Style="{DynamicResource Desk.PaneSplitter}" Height="5" HorizontalAlignment="Stretch" Visibility="Collapsed" ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeEvidencePane}"/>
-   <Border Grid.Column="2" Grid.Row="2" x:Name="Inspector" Style="{StaticResource Desk.WorkspacePane}" Visibility="Collapsed" Padding="10,2,10,3">
+   <Border Grid.Column="2" Grid.Row="2" x:Name="Inspector" Style="{StaticResource HistoryWorkspacePane}" Visibility="Collapsed" Padding="10,2,10,3">
     <DockPanel><DockPanel DockPanel.Dock="Top" Margin="0,0,0,2">
      <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Top">
       <Button x:Name="NearbyHistory" Content="{loc:Ui NearbyRecords}" IsEnabled="False" Click="OpenNeighborhood" Style="{DynamicResource Desk.EvidenceLink}" MinHeight="24" ToolTip="{loc:Ui InspectChangesToOtherFilesAroundTheSelected}"/>
@@ -292,7 +305,7 @@
       </TabItem>
      </TabControl></DockPanel></Border>
    <Border x:Name="Welcome" Grid.RowSpan="3" Grid.ColumnSpan="3" Background="{DynamicResource Desk.Canvas}"><StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" MaxWidth="440" Margin="24"><Button Content="{loc:Ui OpenUsnJournalJ}" Click="Pick" HorizontalAlignment="Left"/></StackPanel></Border>
-   </Grid></TabItem>
+   </loc:EvidenceDock></TabItem>
    <TabItem x:Name="TransactionTab" Grid.Column="2" Header="{loc:Ui NtfsTransactions}" Style="{StaticResource Desk.WorkspaceTab}" ToolTip="{loc:Ui NtfsTransactionsCtrl3}">
     <DockPanel>
      <Button x:Name="BackToTimestampLeads" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="8,2"

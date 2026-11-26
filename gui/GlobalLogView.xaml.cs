@@ -47,10 +47,11 @@ public partial class GlobalLogView : UserControl
     private byte[]? rawData;
     private void FitDetail()
     {
-        if (Inspector.Visibility != Visibility.Visible)
+        if (Layout.IsRight || Inspector.Visibility != Visibility.Visible)
             return;
         var grid = (Grid)Split.Parent;
         double available = Math.Max(90, grid.ActualHeight - grid.RowDefinitions[0].ActualHeight - grid.RowDefinitions[1].MinHeight - Split.Height);
+        DetailHeight.MinHeight = Math.Min(205, available);
         DetailHeight.MaxHeight = available;
         DetailHeight.Height = new(Math.Min(preferredDetailHeight, available));
     }
@@ -65,6 +66,17 @@ public partial class GlobalLogView : UserControl
     public GlobalLogView()
     {
         InitializeComponent();
+        Layout.Connect(Inspector, Split, 1, 510, FitDetail);
+        Inspector.SizeChanged += (_, e) =>
+        {
+            if (!e.WidthChanged)
+                return;
+            bool compact = e.NewSize.Width < 620;
+            Grid.SetColumnSpan(InspectorTitle, compact ? 2 : 1);
+            Grid.SetRow(InspectorCommands, compact ? 1 : 0);
+            Grid.SetColumn(InspectorCommands, compact ? 0 : 1);
+            Grid.SetColumnSpan(InspectorCommands, compact ? 3 : 1);
+        };
         OverviewPanel.Identifiers.SearchRequested += SearchRecordId;
         utc = DisplayTimeZone.Current.Zone;
         PropertyChangedEventManager.AddHandler(DisplayTimeZone.Current, ZoneChanged, nameof(DisplayTimeZone.Code));
@@ -103,7 +115,7 @@ public partial class GlobalLogView : UserControl
         ready = true;
         Split.DragCompleted += (_, e) =>
         {
-            if (!e.Canceled && DetailHeight.Height.IsAbsolute)
+            if (!Layout.IsRight && !e.Canceled && DetailHeight.Height.IsAbsolute)
                 preferredDetailHeight = DetailHeight.Height.Value;
         };
         FilterPanel.SizeChanged += (_, e) => { if (e.HeightChanged) FitDetail(); };
@@ -1203,7 +1215,6 @@ public partial class GlobalLogView : UserControl
         if (Inspector.Visibility != Visibility.Visible)
         {
             Inspector.Visibility = Split.Visibility = Visibility.Visible;
-            DetailHeight.MinHeight = 90;
             FitDetail();
             _ = Dispatcher.BeginInvoke(DispatcherPriority.Loaded, () =>
             {
@@ -1344,7 +1355,6 @@ public partial class GlobalLogView : UserControl
     private void RevealRecord()
     {
         Inspector.Visibility = Split.Visibility = Visibility.Visible;
-        DetailHeight.MinHeight = 90;
         FitDetail();
     }
     private void OpenFile(object sender, RoutedEventArgs e)

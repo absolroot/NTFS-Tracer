@@ -31,6 +31,9 @@ public partial class InvestigationView : UserControl
     public InvestigationView(Journal journal, string originalPath, Action<byte[], long, bool> navigate)
     {
         InitializeComponent();
+        Layout.Connect(EvidencePane, EvidenceSplitter, 1, 500, FitEvidence);
+        Layout.SizeChanged += (_, e) => { if (e.HeightChanged) FitEvidence(); };
+        LeadToolbar.SizeChanged += (_, e) => { if (e.HeightChanged) FitEvidence(); };
         UpdateHexLabel();
         PropertyChangedEventManager.AddHandler(DisplayTimeZone.Current, (_, _) =>
         {
@@ -50,6 +53,21 @@ public partial class InvestigationView : UserControl
             started = true;
             await Scan();
         };
+    }
+
+    private void FitEvidence()
+    {
+        if (Layout.IsRight || Layout.ActualHeight <= 0)
+            return;
+        double available = Math.Max(0, Layout.ActualHeight - Layout.RowDefinitions[0].ActualHeight
+            - Layout.RowDefinitions[1].MinHeight - EvidenceSplitter.Height);
+        double minimum = Math.Min(175, available);
+        if (EvidenceHeight.MinHeight != minimum)
+            EvidenceHeight.MinHeight = minimum;
+        if (EvidenceHeight.MaxHeight != available)
+            EvidenceHeight.MaxHeight = available;
+        if (EvidenceHeight.Height.Value > available)
+            EvidenceHeight.Height = new(available);
     }
 
     internal void CloseWithOwner()

@@ -162,6 +162,9 @@
    <Setter Property="CornerRadius" Value="7"/>
    <Setter Property="SnapsToDevicePixels" Value="True"/>
   </Style>
+  <Style x:Key="Desk.WorkspaceTablePane" TargetType="Border" BasedOn="{StaticResource Desk.WorkspacePane}">
+   <Setter Property="Padding" Value="3"/>
+  </Style>
   <Style x:Key="Desk.SashDot" TargetType="Ellipse">
    <Setter Property="Width" Value="2"/>
    <Setter Property="Height" Value="2"/>

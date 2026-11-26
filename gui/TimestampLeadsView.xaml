@@ -18,8 +18,8 @@
    <Setter Property="Padding" Value="7,0,5,0"/>
   </Style>
  </UserControl.Resources>
- <Grid>
-  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*" MinHeight="72"/><RowDefinition Height="Auto"/><RowDefinition Height="4"/><RowDefinition Height="*" MinHeight="112"/></Grid.RowDefinitions>
+ <loc:EvidenceDock x:Name="Layout">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*" MinHeight="88"/><RowDefinition Height="Auto"/><RowDefinition Height="*" MinHeight="205"/></Grid.RowDefinitions>
   <Border Style="{DynamicResource Desk.LogToolbar}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1">
    <StackPanel Orientation="Horizontal">
     <TextBlock Text="{loc:Ui LeadType}" VerticalAlignment="Center" Margin="0,0,8,0"/>
@@ -29,7 +29,10 @@
       </ContentControl>
    </StackPanel>
   </Border>
-   <DataGrid Grid.Row="1" x:Name="Candidates" ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" SelectionChanged="CandidateChanged" SizeChanged="CandidateTableSizeChanged">
+  <Border x:Name="ResultFrame" Grid.Row="1" Style="{StaticResource Desk.WorkspaceTablePane}">
+   <Grid>
+    <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+   <DataGrid x:Name="Candidates" ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" SelectionChanged="CandidateChanged" SizeChanged="CandidateTableSizeChanged">
    <DataGrid.Columns>
     <DataGridTextColumn x:Name="CandidateLsnColumn" Header="LSN" Binding="{Binding LsnText}" Width="146" MinWidth="146" ElementStyle="{StaticResource TimestampMono}"/>
     <DataGridTextColumn x:Name="CandidateMftColumn" Header="MFT" Binding="{Binding Slot}" Width="63" MinWidth="63" ElementStyle="{StaticResource TimestampMono}"/>
@@ -39,9 +42,9 @@
     <DataGridTextColumn x:Name="DifferenceColumn" Binding="{Binding Difference}" Width="124" MinWidth="124" ElementStyle="{StaticResource TimestampMono}"/>
    </DataGrid.Columns>
   </DataGrid>
-  <TextBlock Grid.Row="1" x:Name="Empty" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="18"
+  <TextBlock x:Name="Empty" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Margin="18"
              Foreground="{DynamicResource Desk.Muted}" IsHitTestVisible="False"/>
-  <Border Grid.Row="2" Padding="8,2" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0">
+  <Border Grid.Row="1" Padding="8,2" Background="{DynamicResource Desk.Panel}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,1,0,0">
    <DockPanel>
     <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
      <TextBlock x:Name="Range" VerticalAlignment="Center" Margin="0,0,8,0"/>
@@ -51,9 +54,12 @@
     <loc:CopyText x:Name="Source" Margin="0,0,8,0" TextWrapping="NoWrap" Foreground="{DynamicResource Desk.Muted}"/>
    </DockPanel>
   </Border>
-  <loc:PaneSplitter Grid.Row="3" Style="{DynamicResource Desk.RowSplitter}" HorizontalAlignment="Stretch"
+   </Grid>
+  </Border>
+  <loc:PaneSplitter x:Name="EvidenceSplitter" Grid.Row="2" Height="4" Style="{DynamicResource Desk.PaneSplitter}" HorizontalAlignment="Stretch"
                 ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
-  <DockPanel Grid.Row="4">
+  <Border x:Name="EvidencePane" Grid.Row="3" Style="{StaticResource Desk.WorkspaceTablePane}">
+   <DockPanel>
    <DockPanel DockPanel.Dock="Top" Margin="8,3">
     <Button x:Name="OpenHex" DockPanel.Dock="Right" Click="OpenHexClick" Padding="8,3" Margin="4,0,0,0"/>
     <Button x:Name="OpenLsn" DockPanel.Dock="Right" Click="OpenLsnClick" Padding="8,3"/>
@@ -74,5 +80,6 @@
    </DockPanel>
    <loc:HexEvidenceView x:Name="Raw"/>
     </DockPanel>
- </Grid>
+  </Border>
+ </loc:EvidenceDock>
 </UserControl>

@@ -43,6 +43,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        Workspace.Connect(Inspector, ProofSplitter, 0, 650, FitInspector);
+        ApplyDetailsPosition(ReadDetailsPosition());
         PropertyChangedEventManager.AddHandler(DisplayTimeZone.Current, (_, _) =>
         {
             foreach (var activity in activities)
@@ -80,7 +82,7 @@ public partial class MainWindow : Window
         };
         ProofSplitter.DragCompleted += (_, e) =>
         {
-            if (!e.Canceled && EvidenceRow.Height.IsAbsolute)
+            if (!Workspace.IsRight && !e.Canceled && EvidenceRow.Height.IsAbsolute)
                 preferredEvidenceHeight = EvidenceRow.Height.Value;
         };
         Inspector.SizeChanged += (_, e) =>
@@ -1181,11 +1183,45 @@ public partial class MainWindow : Window
     private byte[]? rawData;
     private void FitInspector()
     {
+        if (Workspace.IsRight || Inspector.Visibility != Visibility.Visible)
+            return;
         double available = Math.Max(90, Workspace.ActualHeight - Workspace.RowDefinitions[0].MinHeight - ProofSplitter.Height);
+        EvidenceRow.MinHeight = Math.Min(235, available);
         EvidenceRow.MaxHeight = available;
         double height = preferredEvidenceHeight ?? Math.Clamp(Workspace.ActualHeight * 0.48, 264, 352);
         EvidenceRow.Height = new GridLength(Math.Min(height, available));
     }
+    private const string DetailsPositionFile = "details-position.txt";
+
+    private static bool ReadDetailsPosition()
+    {
+        try
+        {
+            return DeskSettings.Read(DetailsPositionFile) != "bottom";
+        }
+        catch (IOException) { return true; }
+        catch (UnauthorizedAccessException) { return true; }
+    }
+
+    private void ApplyDetailsPosition(bool right)
+    {
+        DetailsRight.IsChecked = right;
+        DetailsBottom.IsChecked = !right;
+        EvidenceDock.SetPreferRight(Views, right);
+    }
+
+    private void ChooseDetailsPosition(object sender, RoutedEventArgs e)
+    {
+        bool right = ReferenceEquals(sender, DetailsRight);
+        ApplyDetailsPosition(right);
+        try
+        {
+            DeskSettings.Write(DetailsPositionFile, right ? "right" : "bottom");
+        }
+        catch (IOException) { }
+        catch (UnauthorizedAccessException) { }
+    }
+
     private void EvidenceTabChanged(object sender, SelectionChangedEventArgs e)
     {
         if (!ReferenceEquals(e.OriginalSource, EvidenceTabs) || Inspector?.IsVisible != true)
@@ -1235,11 +1271,11 @@ public partial class MainWindow : Window
             return;
         Inspector.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
         ProofSplitter.Visibility = Inspector.Visibility;
-        EvidenceRow.MinHeight = visible ? 90 : 0;
         if (visible)
             FitInspector();
         else
         {
+            EvidenceRow.MinHeight = 0;
             EvidenceRow.MaxHeight = double.PositiveInfinity;
             EvidenceRow.Height = new GridLength(0);
         }

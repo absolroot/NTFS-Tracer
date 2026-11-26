@@ -442,4 +442,7 @@
   <data name="TxPathUnavailable" xml:space="preserve"><value>Path unavailable</value></data>
   <data name="TxFileTimesNotEvent" xml:space="preserve"><value>These values come from the file attributes. The record does not contain the time of the operation.</value></data>
   <data name="TxFileTimesInferred" xml:space="preserve"><value>The timestamp attribute is inferred from its location and values. The record does not contain the time of the operation.</value></data>
+  <data name="DetailsPosition" xml:space="preserve"><value>Details pane position</value></data>
+  <data name="DetailsPositionBottom" xml:space="preserve"><value>Bottom</value></data>
+  <data name="DetailsPositionRight" xml:space="preserve"><value>Right</value></data>
 </root>

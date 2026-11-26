@@ -12,7 +12,7 @@
     <ApplicationIcon>Assets/NtfsTracer.ico</ApplicationIcon>
     <JournalIndexPath Condition="'$(JournalIndexPath)' == '' and '$(RuntimeIdentifier)' == 'win-x86'">../engine/target/i686-pc-windows-msvc/release/ntfstracer-cli.exe</JournalIndexPath>
     <JournalIndexPath Condition="'$(JournalIndexPath)' == ''">../engine/target/release/ntfstracer-cli.exe</JournalIndexPath>
-    <Version>0.9.3</Version>
+    <Version>0.9.4</Version>
     <PublishSingleFile>true</PublishSingleFile>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <DebugType>embedded</DebugType>

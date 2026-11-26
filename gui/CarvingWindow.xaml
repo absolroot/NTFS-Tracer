@@ -16,7 +16,7 @@
   </Border>
   <Grid>
   <Grid><Grid.Style><Style TargetType="Grid"><Style.Triggers><DataTrigger Binding="{Binding HasItems,ElementName=Sources}" Value="False"><Setter Property="Visibility" Value="Collapsed"/></DataTrigger></Style.Triggers></Style></Grid.Style>
-   <Grid.ColumnDefinitions><ColumnDefinition Width="235" MinWidth="145"/><ColumnDefinition Width="4"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+   <Grid.ColumnDefinitions><ColumnDefinition Width="235" MinWidth="145"/><ColumnDefinition Width="4"/><ColumnDefinition Width="*" MinWidth="350"/></Grid.ColumnDefinitions>
    <DockPanel Background="{DynamicResource Desk.Panel}">
     <TextBlock DockPanel.Dock="Top" Margin="10,8" Text="{loc:Ui ScannedSources}" FontWeight="SemiBold"/>
     <Expander x:Name="SourceMetadata" DockPanel.Dock="Bottom" Header="{loc:Ui SourceInformationLabel}" Style="{DynamicResource Desk.PathEvidence}" Margin="8,4" Visibility="Collapsed">

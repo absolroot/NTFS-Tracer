@@ -2,8 +2,8 @@
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:loc="clr-namespace:JournalDesk" HorizontalContentAlignment="Stretch">
  <UserControl.Resources>
   <DataTemplate x:Key="RecordId">
-   <StackPanel Orientation="Horizontal" Margin="0,0,10,1">
-    <loc:CopyText Text="{Binding Value,Mode=OneWay}" FontFamily="Consolas" MinWidth="170" VerticalAlignment="Center"
+   <WrapPanel Orientation="Horizontal" Margin="0,0,0,1" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ItemsControl}}">
+    <loc:CopyText Text="{Binding Value,Mode=OneWay}" FontFamily="Consolas" VerticalAlignment="Center"
      AutomationProperties.Name="{Binding Value}" />
     <Button Style="{DynamicResource Desk.EvidenceLink}" Content="{loc:Ui SearchThisId}" Padding="5,2" Click="SearchClick"
      ToolTip="{loc:Ui SearchThisIdHelp}" AutomationProperties.Name="{loc:Ui SearchThisId}">
@@ -14,7 +14,7 @@
       </StackPanel>
      </DataTemplate></Button.ContentTemplate>
     </Button>
-   </StackPanel>
+   </WrapPanel>
   </DataTemplate>
   <ItemsPanelTemplate x:Key="IdsPanel"><WrapPanel/></ItemsPanelTemplate>
  </UserControl.Resources>

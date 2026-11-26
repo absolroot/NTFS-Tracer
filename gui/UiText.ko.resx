@@ -442,4 +442,7 @@
   <data name="TxPathUnavailable" xml:space="preserve"><value>경로 확인 불가</value></data>
   <data name="TxFileTimesNotEvent" xml:space="preserve"><value>파일 속성에 저장된 값입니다. 작업이 일어난 시각은 이 레코드에 없습니다.</value></data>
   <data name="TxFileTimesInferred" xml:space="preserve"><value>기록 위치와 값으로 시각 속성을 추정했습니다. 작업이 일어난 시각은 이 레코드에 없습니다.</value></data>
+  <data name="DetailsPosition" xml:space="preserve"><value>상세 패널 위치</value></data>
+  <data name="DetailsPositionBottom" xml:space="preserve"><value>아래쪽</value></data>
+  <data name="DetailsPositionRight" xml:space="preserve"><value>오른쪽</value></data>
 </root>

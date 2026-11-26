@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup><TargetFramework>net10.0-windows</TargetFramework><UseWPF>true</UseWPF><EnableDefaultItems>false</EnableDefaultItems><OutputType>Exe</OutputType><ImplicitUsings>enable</ImplicitUsings></PropertyGroup>
+<ItemGroup><Compile Include="Program.cs" /><ProjectReference Include="../../gui/NtfsTracer.csproj"/></ItemGroup>
+</Project>

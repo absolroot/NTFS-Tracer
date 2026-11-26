@@ -73,6 +73,7 @@ public partial class TimestampLeadsView : UserControl
     {
         this.openLsn = openLsn;
         InitializeComponent();
+        Layout.Connect(EvidencePane, EvidenceSplitter, 1, 500);
         Loaded += (_, _) => DisplayTimeZone.Current.PropertyChanged += TimeZoneChanged;
         Unloaded += (_, _) => DisplayTimeZone.Current.PropertyChanged -= TimeZoneChanged;
         RefreshLanguage();

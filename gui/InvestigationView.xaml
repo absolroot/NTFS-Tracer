@@ -15,11 +15,11 @@
      Foreground="{DynamicResource Desk.Muted}" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}" AutomationProperties.LiveSetting="Polite"/>
    </DockPanel>
   </Border>
-  <Grid><Grid.RowDefinitions>
+  <loc:EvidenceDock x:Name="Layout"><Grid.RowDefinitions>
    <RowDefinition Height="Auto"/><RowDefinition Height="*" MinHeight="88"/><RowDefinition Height="Auto"/>
-   <RowDefinition x:Name="EvidenceHeight" Height="205" MinHeight="56"/>
+   <RowDefinition x:Name="EvidenceHeight" Height="205" MinHeight="175"/>
   </Grid.RowDefinitions>
-   <Border Style="{DynamicResource Desk.LogToolbar}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1">
+   <Border x:Name="LeadToolbar" Style="{DynamicResource Desk.LogToolbar}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1">
     <StackPanel>
      <DockPanel>
       <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
@@ -37,7 +37,8 @@
      </DockPanel>
     </StackPanel>
    </Border>
-   <Grid Grid.Row="1">
+   <Border x:Name="ResultFrame" Grid.Row="1" Style="{StaticResource Desk.WorkspaceTablePane}">
+   <Grid>
     <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
     <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Leads" CanUserSortColumns="True" Sorting="SortLeads" AutomationProperties.Name="{loc:Ui InvestigationLeads}" SelectionChanged="LeadChanged" MouseDoubleClick="LeadDoubleClick" PreviewKeyDown="OpenFromGrid">
      <DataGrid.Columns>
@@ -63,9 +64,11 @@
      </DockPanel>
     </Border>
    </Grid>
-   <loc:PaneSplitter Grid.Row="2" Style="{DynamicResource Desk.RowSplitter}" Height="4" HorizontalAlignment="Stretch"
+  </Border>
+   <loc:PaneSplitter x:Name="EvidenceSplitter" Grid.Row="2" Style="{DynamicResource Desk.PaneSplitter}" Height="4" HorizontalAlignment="Stretch"
     ResizeDirection="Rows" ResizeBehavior="PreviousAndNext" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
-   <DockPanel Grid.Row="3">
+   <Border x:Name="EvidencePane" Grid.Row="3" Style="{StaticResource Desk.WorkspaceTablePane}">
+   <DockPanel>
    <DockPanel DockPanel.Dock="Top" Margin="10,2,8,3">
     <Button DockPanel.Dock="Right" x:Name="GoHex" IsEnabled="False" Click="GoHexClick" Margin="4,0,0,0" Padding="8,3" MinHeight="26"/>
     <Button DockPanel.Dock="Right" x:Name="Go" Content="{loc:Ui OpenLeadEvidence}" IsEnabled="False" Click="GoClick" Padding="8,3" MinHeight="26"/>
@@ -85,7 +88,8 @@
     </DataGrid.Columns>
    </DataGrid>
      </DockPanel>
-  </Grid>
+   </Border>
+  </loc:EvidenceDock>
  </DockPanel>
 </UserControl>
 

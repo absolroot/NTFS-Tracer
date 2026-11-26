@@ -23,7 +23,7 @@
   <Style x:Key="Caption" TargetType="TextBlock"><Setter Property="Foreground" Value="{DynamicResource Desk.Muted}"/><Setter Property="FontSize" Value="12"/></Style>
   </ResourceDictionary>
  </UserControl.Resources>
- <Grid>
+ <loc:EvidenceDock x:Name="Layout">
   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*" MinHeight="116"/><RowDefinition Height="Auto"/><RowDefinition x:Name="DetailHeight" Height="0"/></Grid.RowDefinitions>
   <Border Background="{DynamicResource Desk.Canvas}" BorderBrush="{DynamicResource Desk.Rule}" BorderThickness="0,0,0,1" Style="{DynamicResource Desk.LogToolbar}">
    <StackPanel x:Name="FilterPanel">
@@ -99,7 +99,8 @@
     <local:RecordSearchFields x:Name="PathFilters" Changed="RecordFieldsChanged" Margin="0,4,0,0"/>
    </StackPanel>
   </Border>
-  <Grid Grid.Row="1">
+  <Border x:Name="ResultFrame" Grid.Row="1" Style="{StaticResource Desk.WorkspaceTablePane}">
+   <Grid>
    <Grid.RowDefinitions><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
    <DataGrid ColumnHeaderStyle="{DynamicResource Desk.LogHeader}" x:Name="Records" Style="{StaticResource Desk.StripedLogTable}" IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False"
     CanUserSortColumns="True" Sorting="SortRecords" CanUserReorderColumns="True" FrozenColumnCount="1" SelectionUnit="FullRow" SelectionMode="Single" EnableRowVirtualization="True"
@@ -151,17 +152,24 @@
    <TextBlock x:Name="ExportStatus" Margin="8,0" VerticalAlignment="Center" Visibility="Collapsed" Foreground="{DynamicResource Desk.Link}" AutomationProperties.LiveSetting="Polite" TextTrimming="CharacterEllipsis" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
   </DockPanel></Border>
   </Grid>
+  </Border>
   <loc:PaneSplitter Grid.Row="2" x:Name="Split" Style="{DynamicResource Desk.PaneSplitter}" Visibility="Collapsed" Height="4" HorizontalAlignment="Stretch" ResizeBehavior="PreviousAndNext" ResizeDirection="Rows" AutomationProperties.Name="{loc:Ui ResizeSelectedRecordDetails}"/>
   <Border Grid.Row="3" x:Name="Inspector" Style="{StaticResource Desk.WorkspacePane}" Visibility="Collapsed" Padding="10,3">
    <DockPanel>
-    <DockPanel DockPanel.Dock="Top" Margin="2,0,0,1">
-     <Button x:Name="CloseInspector" Style="{DynamicResource Desk.IconButton}" DockPanel.Dock="Right" Content="&#xE711;" ToolTip="{loc:Ui CollapseSelectedRecordEsc}" AutomationProperties.Name="{loc:Ui CollapseSelectedRecord}" Click="CloseClick"/>
-     <Button x:Name="NearbyGlobal" Style="{DynamicResource Desk.EvidenceLink}" DockPanel.Dock="Right" Content="{loc:Ui NearbyRecords}" Margin="0,0,6,0" ToolTip="{loc:Ui InspectRecordsFromOtherFilesAroundTheSelected}" Click="OpenNeighborhood"/>
-     <Button DockPanel.Dock="Right" x:Name="GoFile" Style="{DynamicResource Desk.EvidenceLink}" Content="{loc:Ui OpenFileHistory}" Margin="4,0,10,0" ToolTip="{loc:Ui OpenThisRecordInFileHistoryEnter}" Click="OpenFile"/>
-     <ContentControl DockPanel.Dock="Right" Focusable="False" Content="{Binding SelectedItem.Record,ElementName=Records}" ContentTemplate="{StaticResource Desk.RecordUsn}"/>
-     <Image DockPanel.Dock="Left" Source="{Binding SelectedItem.Icon,ElementName=Records}" Style="{StaticResource Desk.RecordIcon}"/>
-     <local:CopyTextValue x:Name="RecordTitle" VerticalAlignment="Center" FontWeight="SemiBold" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
-    </DockPanel>
+    <Grid DockPanel.Dock="Top" Margin="2,0,0,1">
+     <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+     <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+     <DockPanel x:Name="InspectorTitle">
+      <Image DockPanel.Dock="Left" Source="{Binding SelectedItem.Icon,ElementName=Records}" Style="{StaticResource Desk.RecordIcon}"/>
+      <local:CopyTextValue x:Name="RecordTitle" VerticalAlignment="Center" FontWeight="SemiBold" ToolTip="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+     </DockPanel>
+     <StackPanel x:Name="InspectorCommands" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+      <ContentControl Focusable="False" Content="{Binding SelectedItem.Record,ElementName=Records}" ContentTemplate="{StaticResource Desk.RecordUsn}"/>
+      <Button x:Name="GoFile" Style="{DynamicResource Desk.EvidenceLink}" Content="{loc:Ui OpenFileHistory}" Margin="4,0,10,0" ToolTip="{loc:Ui OpenThisRecordInFileHistoryEnter}" Click="OpenFile"/>
+      <Button x:Name="NearbyGlobal" Style="{DynamicResource Desk.EvidenceLink}" Content="{loc:Ui NearbyRecords}" Margin="0,0,6,0" ToolTip="{loc:Ui InspectRecordsFromOtherFilesAroundTheSelected}" Click="OpenNeighborhood"/>
+     </StackPanel>
+     <Button x:Name="CloseInspector" Grid.Column="2" Style="{DynamicResource Desk.IconButton}" Content="&#xE711;" ToolTip="{loc:Ui CollapseSelectedRecordEsc}" AutomationProperties.Name="{loc:Ui CollapseSelectedRecord}" Click="CloseClick"/>
+    </Grid>
     <TabControl Style="{DynamicResource Desk.InspectorTabs}" x:Name="Evidence" Background="Transparent" BorderThickness="0" SelectionChanged="EvidenceTabChanged">
      <TabItem Header="{loc:Ui Overview}"><local:RecordOverviewView x:Name="OverviewPanel"/></TabItem>
       <TabItem x:Name="DetailsTab" Header="{loc:Ui RecordDetails}"><local:RecordDetailsView x:Name="RecordFields" AutomationProperties.Name="{loc:Ui JournalRecordFields}"/></TabItem>
@@ -178,5 +186,5 @@
     </TabControl>
    </DockPanel>
   </Border>
- </Grid>
+ </loc:EvidenceDock>
 </UserControl>
