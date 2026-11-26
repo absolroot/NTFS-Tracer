@@ -442,4 +442,7 @@
   <data name="TxPathUnavailable" xml:space="preserve"><value>パスを確認できません</value></data>
   <data name="TxFileTimesNotEvent" xml:space="preserve"><value>ファイル属性に保存された値です。このレコードには操作時刻がありません。</value></data>
   <data name="TxFileTimesInferred" xml:space="preserve"><value>記録位置と値から時刻属性を推定しています。このレコードには操作時刻がありません。</value></data>
+  <data name="DetailsPosition" xml:space="preserve"><value>詳細パネルの位置</value></data>
+  <data name="DetailsPositionBottom" xml:space="preserve"><value>下</value></data>
+  <data name="DetailsPositionRight" xml:space="preserve"><value>右</value></data>
 </root>
