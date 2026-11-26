@@ -138,6 +138,16 @@ dotnet publish gui/NtfsTracer.csproj -c Release -r win-x86 -p:PublishProfile=Por
 
 For EWF support, build `NtfsTracer.libewf.dll` using the [libewf instructions](modules/EvidenceImage/Logical/Native/README.md) before publishing.
 
+### Package a release
+
+Build both libewf DLLs and install Python 3.11 or later before packaging. The Rust toolchain needs the x86 target and the `rust-docs` component for its license notices.
+
+```powershell
+python scripts/package-windows.py artifacts/windows-release --runtime-version 10.0.11
+```
+
+Upload the four Windows ZIPs, the matching `libewf-source.zip`, and `SHA256SUMS.txt` to the same release.
+
 ## Display language
 
 Choose from 16 interface languages under **View → Display language**. Changes apply immediately.
@@ -149,13 +159,3 @@ English · 한국어 · 日本語 · Deutsch · Español · Français · Bahasa 
 Project-owned code is licensed under the [Apache License 2.0](LICENSE).
 
 Third-party components retain their own terms and may be used under those terms. See [third-party notices](THIRD-PARTY-NOTICES.md), including the terms and replacement instructions for libewf.
-
-### Package a release
-
-Build both libewf DLLs and install Python 3.11 or later before packaging. The Rust toolchain needs the x86 target and the `rust-docs` component for its license notices.
-
-```powershell
-python scripts/package-windows.py artifacts/windows-release --runtime-version 10.0.11
-```
-
-Upload the four Windows ZIPs, the matching `libewf-source.zip`, and `SHA256SUMS.txt` to the same release.
