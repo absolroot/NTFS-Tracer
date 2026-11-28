@@ -275,6 +275,15 @@ static partial class Program
                     Require(periodLabel.Text.Contains(startDate.Text) && !periodLabel.Text.Contains('~') &&
                         periodButton.ToolTip.ToString()!.Contains(target.Usn.ToString(CultureInfo.InvariantCulture)), "collapsed single-day and USN filters do not identify their values");
                     periodButton.IsChecked = true;
+                    var clearUsn = Find<Button>("ClearUsn");
+                    Require(clearUsn.IsVisible && new ButtonAutomationPeer(clearUsn).GetName() == "USN 필터 지우기",
+                        "USN clear command missing or unlabeled");
+                    ((IInvokeProvider)new ButtonAutomationPeer(clearUsn).GetPattern(PatternInterface.Invoke)).Invoke();
+                    await Until(() => exact.Text.Length == 0 && clearUsn.Visibility == Visibility.Collapsed);
+                    Require(startDate.SelectedDate == localTarget.Date && endDate.SelectedDate == localTarget.Date,
+                        "clearing USN changed the date range");
+                    exact.Text = target.Usn.ToString(CultureInfo.InvariantCulture);
+                    await Until(() => view.SelectedPosition == target.Position);
                     DisplayTimeZone.Current.Code = "UTC";
                     Require(DisplayTimeZone.Current.Utc && DeskSettings.Read("time-zone.txt") == "UTC",
                         "the date filter and saved display time zone diverged");

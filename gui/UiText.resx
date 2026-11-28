@@ -59,6 +59,7 @@
   <data name="EndTime" xml:space="preserve"><value>End time</value></data>
   <data name="ClearEndDateAndTime" xml:space="preserve"><value>Clear end date and time</value></data>
   <data name="TimeZone" xml:space="preserve"><value>Time zone</value></data>
+  <data name="ClearUsnFilter" xml:space="preserve"><value>Clear USN filter</value></data>
   <data name="ExactUsn" xml:space="preserve"><value>Exact USN</value></data>
   <data name="EnterADecimalUsnOrAHexadecimalValue" xml:space="preserve"><value>Enter a decimal USN or a hexadecimal value starting with 0x.</value></data>
   <data name="JournalRecords" xml:space="preserve"><value>Journal records</value></data>

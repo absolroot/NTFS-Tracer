@@ -508,6 +508,12 @@ public partial class GlobalLogView : UserControl
         }
         finally { editing = false; }
     }
+    private void ClearUsnClick(object sender, RoutedEventArgs e)
+    {
+        ExactUsn.Clear();
+        ExactUsn.Focus();
+    }
+
     private void ClearQueryClick(object sender, RoutedEventArgs e)
     {
         QueryText.Clear();
@@ -836,6 +842,7 @@ public partial class GlobalLogView : UserControl
         int boundCount = (hasStart ? 1 : 0) + (hasEnd ? 1 : 0)
             + (string.IsNullOrWhiteSpace(ExactUsn.Text) ? 0 : 1);
         bool hasUsn = !string.IsNullOrWhiteSpace(ExactUsn.Text);
+        ClearUsn.Visibility = ExactUsn.Text.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
         bool canReset = !string.IsNullOrWhiteSpace(QueryText.Text) || NameScope.IsChecked != true || reasonMask != 0 || boundCount > 0 || PathFilters.HasInput;
         ClearFilters.Visibility = canReset ? Visibility.Visible : Visibility.Collapsed;
         string start = (DateEditor(StartDate)?.Text ?? StartDate.Text ?? "").Trim();

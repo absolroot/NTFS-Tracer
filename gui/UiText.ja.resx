@@ -59,6 +59,7 @@
   <data name="EndTime" xml:space="preserve"><value>終了時刻</value></data>
   <data name="ClearEndDateAndTime" xml:space="preserve"><value>終了日時をクリア</value></data>
   <data name="TimeZone" xml:space="preserve"><value>タイムゾーン</value></data>
+  <data name="ClearUsnFilter" xml:space="preserve"><value>USN フィルターをクリア</value></data>
   <data name="ExactUsn" xml:space="preserve"><value>USN を指定</value></data>
   <data name="EnterADecimalUsnOrAHexadecimalValue" xml:space="preserve"><value>USN を 10 進数、または 0x で始まる 16 進数で入力してください。</value></data>
   <data name="JournalRecords" xml:space="preserve"><value>ジャーナルレコード</value></data>

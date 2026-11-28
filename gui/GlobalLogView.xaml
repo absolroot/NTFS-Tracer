@@ -93,7 +93,13 @@
         <Button x:Name="ClearEnd" Style="{DynamicResource Desk.IconButton}" Content="&#xE711;" Width="24" Height="24" Margin="2,0,0,0" Click="ClearBound" Visibility="Hidden" ToolTip="{loc:Ui ClearEndDateAndTime}" AutomationProperties.Name="{loc:Ui ClearEndDateAndTime}"/>
        </StackPanel>
       </StackPanel>
-      <StackPanel Margin="0,0,0,2"><TextBlock Text="USN" Style="{StaticResource Caption}" Margin="1,0,0,2"/><TextBox x:Name="ExactUsn" Width="136" Style="{DynamicResource Desk.SearchInput}" TextChanged="SearchChanged" AutomationProperties.Name="{loc:Ui ExactUsn}" ToolTip="{loc:Ui EnterADecimalUsnOrAHexadecimalValue}"/></StackPanel>
+      <StackPanel Margin="0,0,0,2">
+       <TextBlock Text="USN" Style="{StaticResource Caption}" Margin="1,0,0,2"/>
+       <Grid Width="136">
+        <TextBox x:Name="ExactUsn" Padding="6,2,28,2" Style="{DynamicResource Desk.SearchInput}" TextChanged="SearchChanged" AutomationProperties.Name="{loc:Ui ExactUsn}" ToolTip="{loc:Ui EnterADecimalUsnOrAHexadecimalValue}"/>
+        <Button x:Name="ClearUsn" Style="{DynamicResource Desk.ClearLogSearch}" Visibility="Collapsed" Click="ClearUsnClick" ToolTip="{loc:Ui ClearUsnFilter}" AutomationProperties.Name="{loc:Ui ClearUsnFilter}"/>
+       </Grid>
+      </StackPanel>
      </WrapPanel>
     </StackPanel>
     <local:RecordSearchFields x:Name="PathFilters" Changed="RecordFieldsChanged" Margin="0,4,0,0"/>
